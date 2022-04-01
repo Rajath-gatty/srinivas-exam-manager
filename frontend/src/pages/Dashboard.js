@@ -1,8 +1,7 @@
+const Dashboard = (props) => {
+  console.log(window.location.pathname);
 
-const  Dashboard = (props) => {
-     return(
-         <h1>Dashboard Page</h1>
-     )
-}
+  return <h1>Dashboard Page</h1>;
+};
 
 export default Dashboard;
