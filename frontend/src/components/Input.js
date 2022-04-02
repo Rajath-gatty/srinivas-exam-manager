@@ -6,7 +6,7 @@ export const TextInput =(props) => {
       </div>
     );
   }
-  
+   
   export const SelectInput = (props) => {
     var options = props.options;
     return (

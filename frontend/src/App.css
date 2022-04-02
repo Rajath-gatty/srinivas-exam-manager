@@ -2,3 +2,16 @@
   margin: 0;
   padding: 0;
 }
+
+:root {
+  --primary-gradient: linear-gradient(180deg, #2F98FF 0%, #0073E2 100%);
+  --primary-color: #1E8BF5;
+  --text-color: #8B8B8B;
+  --light-grey: #F4F4F4;
+  --dark-grey: #5B5B5B;
+  --strong-red: #E21717;
+  --strong-green:#4DC514;
+  --red:  #D54747;
+  
+  font-family: 'Lato', sans-serif;
+}
