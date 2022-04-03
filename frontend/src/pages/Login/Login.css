@@ -1,8 +1,8 @@
 :root{
-    --primary-gradient: linear-gradient(180deg, #2F98FF 0%, #0073E2 100%);
+    --primary-gradient: linear-gradient(180deg, #2F98FF 0%, #004586 100%);
     --primary-color: #1E8BF5;
     --text-color: #8B8B8B;
-    --light-grey: #F4F4F4;
+    --light-grey: #d3d3d3;
     --dark-grey: #5B5B5B;
 
 }
@@ -46,36 +46,98 @@
     color: var(--dark-grey);
     margin-bottom: 3rem;
     font-size: 2rem;
+    position:absolute;
+    top:3.5rem;
+}
+
+.form-control{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    margin: 1.5rem 0;
+}  
+
+.login-label{
+    position: relative;
+    top: 1em;
+    left:-9.5em;
+    font-size: 1em;
+    background-color: #fff;
+    width: fit-content;
+    padding: 0 6px;
+    color: var(--text-color);
+}
+
+.active .input-group{
+    border: 1px solid var(--primary-color);
+}
+
+.active label{
+    color: var(--primary-color);
+}
+
+.login-submit {
+    width: 100%;
+    font-size: 1em;
+    padding: 1em;
+}
+
+.label-pass{
+    margin-left: 1.5em;
+}
+
+.input-group input[type="text"], input[type="password"]{
+    outline:none;
+    border:none;
+    background-color: #fff;
+    padding-left: 1em;
+    width: 300px;
+    height: 50px;
+    border-radius: 4px;
+    font-size: 1em;
+    color: var(--dark-grey);
 }
 
 .login-svg {
-    background: var(--light-grey);
     padding: 10px;
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    margin-right: 0.75em;
 }
-
-.form-controls{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}  
  
 .input-group {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    border:1px solid var(--light-grey);
+    border-radius: 5px;
+    margin-top: 0.5em;
 }
 
-.input-group input[type="text"], input[type="password"]{
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid var(--text-color);
-    outline: none;
+.input-group input::placeholder {
+    color: var(--light-grey);
+}
+
+input:focus .input-group {
+border: 1px solid var(--primary-color);
 }
 
 .form-controls label {
     color: var(--text-color);
+}
+
+.forgot-pass{
+    margin: 1em 0;
+}
+
+.forgot-pass a{
+    position: relative;
+    left: 18em;
+    color: var(--primary-color);
+    font-size: 0.9em;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
 }
 
 
