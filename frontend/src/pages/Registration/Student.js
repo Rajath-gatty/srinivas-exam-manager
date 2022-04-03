@@ -1,6 +1,13 @@
+import { TextField, FormControl, Select, MenuItem, FormLabel,FormControlLabel} from "@mui/material";
+import Navbar from "../../components/Navbar/Navbar";
+import RadioInput from "../../components/UI/RadioInput";
+
 const Student = () => {
     return(
-        <h1>Student Registration</h1>
+        <div>
+            <Navbar/>
+            <RadioInput/>
+        </div>
     )
 }
 

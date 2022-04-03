@@ -1,0 +1,32 @@
+.nav {
+    background: var(--secondary-gradient);
+    padding: 1em;
+}
+.nav-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+}
+
+.header-img {
+    width: 40px;
+    margin-right: 1em;
+}
+
+.nav-links a{
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.1em;
+}

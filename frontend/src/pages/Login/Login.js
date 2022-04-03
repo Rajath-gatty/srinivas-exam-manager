@@ -1,15 +1,20 @@
-import {Link} from "react-router-dom";
-import { useState } from "react";
+import {Link, useNavigate} from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import "./Login.css";
-import "../../App.css";
 import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
 import LoginSvg from "../../Assets/undraw_login.svg";
 import LockIcon from "../../Assets/lock_icon.svg";
 import UserIcon from "../../Assets/user_icon.svg";
 
-
 const Login = () => {
+  // Redirecting
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/registration/student");
+  }, []);
+  
+
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
 

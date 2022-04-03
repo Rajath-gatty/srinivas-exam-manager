@@ -6,6 +6,7 @@
 :root 
 {
   --primary-gradient: linear-gradient(180deg, #2F98FF 0%, #004586 100%);
+  --secondary-gradient: linear-gradient(180deg, #2F98FF 0%, #016fd6 100%);
   --primary-color: #1E8BF5;
   --text-color: #8B8B8B;
   --light-grey: #d3d3d3;
@@ -28,4 +29,8 @@
   font-size: 1.2em;
   cursor: pointer;
   justify-self: left;
+}
+
+.MuiTypography-root{
+  color: var(--text-color);
 }

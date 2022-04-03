@@ -4,6 +4,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Login from './pages/Login/Login';
 import Dashboard from "./pages/Dashboard";
@@ -13,8 +14,19 @@ import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
 import Evaluator from "./pages/Registration/Evaluator";
 
+
 function App() {
+  //MUI Components Fonts
+  const theme = createTheme({
+    typography: {
+      fontFamily: [
+        'Lato'
+      ].join(','),
+    },});
+  //MUI Components Fonts
+
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
      <Browser>
        <Routes>
@@ -30,7 +42,8 @@ function App() {
        </Routes>
      </Browser>
     </div>
+    </ThemeProvider>
   );
-} 
+}
 
 export default App;
