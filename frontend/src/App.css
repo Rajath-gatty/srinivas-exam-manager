@@ -7,9 +7,10 @@
 {
   --primary-gradient: linear-gradient(180deg, #2F98FF 0%, #004586 100%);
   --secondary-gradient: linear-gradient(180deg, #2F98FF 0%, #016fd6 100%);
+  --color-secondary: '#d5d5d5';
   --primary-color: #1E8BF5;
   --text-color: #8B8B8B;
-  --light-grey: #d3d3d3;
+  --light-grey: #afafaf;
   --dark-grey: #5B5B5B;
   --strong-red: #E21717;
   --strong-green:#4DC514;

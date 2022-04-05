@@ -1,8 +1,6 @@
 import {useLocation} from "react-router-dom";
 
 const Dashboard = () => {
-  console.log(window.location.pathname);
-
   const {state} = useLocation();
   console.log(state);
 

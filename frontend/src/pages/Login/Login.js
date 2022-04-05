@@ -9,12 +9,11 @@ import UserIcon from "../../Assets/user_icon.svg";
 
 const Login = () => {
   // Redirecting
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate("/registration/student");
-  }, []);
+  // const navigate = useNavigate();   
+  // useEffect(() => {
+  //   navigate("/registration/student");
+  // }, []);
   
-
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
 
@@ -53,7 +52,7 @@ const Login = () => {
             <div className={passAct}>
               <label className="login-label label-pass">Password</label>
               <div className="input-group">
-                <input type="text" onFocus={onPassActive}  onBlur={onPassBlur} placeholder="Password" />
+                <input type="password" onFocus={onPassActive}  onBlur={onPassBlur} placeholder="Password" />
                 <img src={LockIcon} alt="" className="login-svg" />
               </div>
             </div>

@@ -1,4 +1,6 @@
 import './App.css';
+import './pages/Registration/Registration.css';
+
 import {
   BrowserRouter as Browser,
   Routes,
@@ -23,7 +25,7 @@ function App() {
         'Lato'
       ].join(','),
     },});
-  //MUI Components Fonts
+  //MUI Components Fonts[/]
 
   return (
     <ThemeProvider theme={theme}>
