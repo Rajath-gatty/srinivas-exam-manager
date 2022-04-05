@@ -1,134 +1,148 @@
-
-.login-container  {
-    min-height: 100vh;
-    display: flex;
+.login-container {
+  min-height: 100vh;
+  display: flex;
 }
 
-.login-art{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--primary-gradient);
-    width: 100%;
-    padding: 2.5em 0;
+.login-art {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--primary-gradient);
+  width: 100%;
+  padding: 2.5em 0;
 }
 
-.login-logo{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+.login-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 }
 
-.login-logo h1{
-    margin-left: 0.5em;
+.login-logo h1 {
+  margin-left: 0.5em;
 }
 
 .login-form {
-    width: 100%;
-    /* height: 100%; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-hdng {
-    color: var(--dark-grey);
-    margin-bottom: 3rem;
-    font-size: 2rem;
-    position:absolute;
-    top:3.5rem;
+  color: var(--dark-grey);
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  position: absolute;
+  top: 3.5rem;
 }
 
-.form-control{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: center;
-    margin: 1.5rem 0;
-}  
-
-.login-label{
-    position: relative;
-    top: 1em;
-    left:-9.5em;
-    font-size: 1em;
-    background-color: #fff;
-    width: fit-content;
-    padding: 0 6px;
-    color: var(--text-color);
+.form-control {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.5rem 0;
 }
 
-.active .input-group{
-    border: 1px solid var(--primary-color);
+.login-label {
+  position: relative;
+  top: 1em;
+  left: -9.5em;
+  font-size: 1em;
+  background-color: #fff;
+  width: fit-content;
+  padding: 0 6px;
+  color: var(--text-color);
 }
 
-.active label{
-    color: var(--primary-color);
+.active .input-group {
+  border: 1px solid var(--primary-color);
+}
+
+.active label {
+  color: var(--primary-color);
 }
 
 .login-submit {
-    width: 100%;
-    font-size: 1em;
-    padding: 1em;
+  width: 100%;
+  font-size: 1em;
+  padding: 1em;
 }
 
-.label-pass{
-    margin-left: 1.5em;
+.label-pass {
+  margin-left: 1.5em;
 }
 
-.input-group input[type="text"], input[type="password"]{
-    outline:none;
-    border:none;
-    background-color: #fff;
-    padding-left: 1em;
-    width: 300px;
-    border-radius: 4px;
-    font-size: 1em;
-    color: var(--dark-grey);
+.input-group input[type="text"],
+input[type="password"] {
+  outline: none;
+  border: none;
+  background-color: #fff;
+  padding-left: 1em;
+  width: 300px;
+  border-radius: 4px;
+  font-size: 1em;
+  color: var(--dark-grey);
 }
 
 .login-svg {
-    padding: 10px;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    margin-right: 0.75em;
+  padding: 10px;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-right: 0.75em;
 }
- 
+
 .input-group {
-    display: flex;
-    align-items: center;
-    border:1px solid var(--light-grey);
-    border-radius: 5px;
-    margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  margin-top: 0.5em;
 }
 
 .input-group input::placeholder {
-    color: var(--light-grey);
+  color: var(--light-grey);
 }
 
 input:focus .input-group {
-border: 1px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .form-controls label {
-    color: var(--text-color);
+  color: var(--text-color);
 }
 
-.forgot-pass{
-    margin: 1em 0;
+.forgot-pass {
+  margin: 1em 0;
 }
 
-.forgot-pass a{
-    position: relative;
-    left: 18em;
-    color: var(--primary-color);
-    font-size: 0.9em;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
+.forgot-pass a {
+  position: relative;
+  left: 18em;
+  color: var(--primary-color);
+  font-size: 0.9em;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
 }
 
+.to-register {
+  position: relative;
+  top: 3em;
+  display: flex;
+  align-items: center;
+  color: var(--dark-grey);
+}
 
+.to-register a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-left: 1em;
+}

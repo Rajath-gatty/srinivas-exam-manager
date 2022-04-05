@@ -1,4 +1,4 @@
-import {Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import "./Login.css";
@@ -8,12 +8,12 @@ import LockIcon from "../../Assets/lock_icon.svg";
 import UserIcon from "../../Assets/user_icon.svg";
 
 const Login = () => {
-  // Redirecting
-  // const navigate = useNavigate();   
+  // Redirecting while in Development
+  // const navigate = useNavigate();
   // useEffect(() => {
   //   navigate("/registration/student");
   // }, []);
-  
+
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
 
@@ -23,45 +23,65 @@ const Login = () => {
   const onEmailBlur = () => setEmailFocus(false);
   const onPassBlur = () => setPassFocus(false);
 
-  const emailAct = emailfocus ? 'form-control active': 'form-control';
-  const passAct = passfocus ? 'form-control active': 'form-control';
-  
+  const emailAct = emailfocus ? "form-control active" : "form-control";
+  const passAct = passfocus ? "form-control active" : "form-control";
+
   return (
     <div className="login-container">
-    {/* Login Side Design */}
+      {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
           <img width="50px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
-        <img className="login-vector" width="400px" src={LoginSvg} alt="Login SVG" />
+        <img
+          className="login-vector"
+          width="400px"
+          src={LoginSvg}
+          alt="Login SVG"
+        />
       </div>
 
       {/* Login Form */}
       <div className="login-form">
         <h1 className="login-hdng">LOGIN</h1>
         <form>
-            <div className={emailAct} >
-              <label className="login-label">Email</label>
-              <div className="input-group">
-                <input type="text" onFocus={onEmailActive} onBlur={onEmailBlur} placeholder="example@gmail.com" />
-                <img src={UserIcon} alt="" className="login-svg" />
-              </div>
+          <div className={emailAct}>
+            <label className="login-label">Email</label>
+            <div className="input-group">
+              <input
+                type="text"
+                onFocus={onEmailActive}
+                onBlur={onEmailBlur}
+                placeholder="example@gmail.com"
+              />
+              <img src={UserIcon} alt="" className="login-svg" />
             </div>
-            <div className={passAct}>
-              <label className="login-label label-pass">Password</label>
-              <div className="input-group">
-                <input type="password" onFocus={onPassActive}  onBlur={onPassBlur} placeholder="Password" />
-                <img src={LockIcon} alt="" className="login-svg" />
-              </div>
+          </div>
+          <div className={passAct}>
+            <label className="login-label label-pass">Password</label>
+            <div className="input-group">
+              <input
+                type="password"
+                onFocus={onPassActive}
+                onBlur={onPassBlur}
+                placeholder="Password"
+              />
+              <img src={LockIcon} alt="" className="login-svg" />
             </div>
-            <div className="forgot-pass">
-              <Link to="#">Forgot Password ?</Link>
-            </div>
-            <div className="form-controls">
-              <input type="submit" value="Login" className="login-submit btn"/>
-            </div>
+          </div>
+          <div className="forgot-pass">
+            <Link to="#">Forgot Password ?</Link>
+          </div>
+          <div className="form-controls">
+            <input type="submit" value="Login" className="login-submit btn" />
+          </div>
+
+          <div className="to-register">
+            <p>Dont have an account yet ?</p>
+            <Link to="/registration">Register</Link>
+          </div>
         </form>
       </div>
     </div>
