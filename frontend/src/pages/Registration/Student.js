@@ -18,12 +18,12 @@ import RadioInput from "../../components/UI/RadioInput";
 import SelectInput from "../../components/UI/SelectInput";
 
 const Student = () => {
+
   //Toggle Guardian Details Show/Hide
-  const GuardianToggle = () => {
-    if (document.getElementById("guardian-yes").checked)
-      document.querySelector(".show-guardian").style.display = "block";
-    else if (document.getElementById("guardian-no").checked)
-      document.querySelector(".show-guardian").style.display = "none";
+  const [showGuardian, setShowGuardian] = useState('');
+  const GuardianToggle = (e) => {
+    if(e.target.value === 'yes') setShowGuardian(true)
+    if(e.target.value === 'no') setShowGuardian(false)
   };
 
   //Switch Courses Acc to Selected Department
@@ -325,7 +325,7 @@ const Student = () => {
               </RadioGroup>
             </div>
 
-            <div className="show-guardian" style={{ display: "none" }}>
+            {showGuardian && <div className="show-guardian">
               <h3 className="sub-hdng">Guardian's Details</h3>
               <div className="sub-details student-form">
                 <TextField
@@ -358,7 +358,7 @@ const Student = () => {
                   fullWidth
                 />
               </div>
-            </div>
+            </div>}
           </div>
 
           <div className="sub-wrapper">
