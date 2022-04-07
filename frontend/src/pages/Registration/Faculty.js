@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
-  Radio,
-  RadioGroup,
-  FormLabel,
-  FormControlLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Button,
+  Button
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
-import SelectInput from "../../components/UI/SelectInput";
+// import SelectInput from "../../components/UI/SelectInput";
 
 const Faculty = () => {
     return(
@@ -53,7 +45,7 @@ const Faculty = () => {
               type="email"
               fullWidth
             />
-            
+
             <Dob />
 
             <RadioInput />
