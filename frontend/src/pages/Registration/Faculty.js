@@ -53,6 +53,7 @@ const Faculty = () => {
               type="email"
               fullWidth
             />
+            
             <Dob />
 
             <RadioInput />
