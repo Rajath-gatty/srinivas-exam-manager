@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import "./Login.css";
 import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
