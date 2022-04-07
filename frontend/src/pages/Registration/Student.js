@@ -101,6 +101,8 @@ const Student = () => {
         setCourse(Degree);
         break;
       }
+
+      default: return "Invalid"
     }
   };
 
