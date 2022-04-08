@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
-  Button,
   Select,
   InputLabel,
   MenuItem,
@@ -208,14 +207,12 @@ const Evaluator = () => {
                 />
               </div>
             </div>
-  
-            <Button className="register-btn" variant="contained">
-              Register
-            </Button>
-  
+
+            <input className="btn" type="submit" value="Register" disabled/>
+
             <div className="to-login">
               <p>Already have an account ?</p>
-              <Link to="/">Login</Link>
+              <Link to="/" className="btn-outlined">Login</Link>
             </div>
           </form>
         </div>

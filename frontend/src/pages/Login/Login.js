@@ -8,11 +8,6 @@ import LockIcon from "../../Assets/lock_icon.svg";
 import UserIcon from "../../Assets/user_icon.svg";
 
 const Login = () => {
-  // Redirecting while in Development
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   navigate("/registration/student");
-  // }, []);
 
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);

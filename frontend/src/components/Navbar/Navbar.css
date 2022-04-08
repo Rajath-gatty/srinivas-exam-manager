@@ -1,7 +1,8 @@
 .nav {
-    background: var(--secondary-gradient);
+    background: var(--primary-color);
     padding: 1em;
 }
+
 .nav-wrapper {
     display: flex;
     justify-content: space-between;

@@ -4,7 +4,7 @@
   align-items: center;
   flex-direction: column;
   margin-top: 2em;
-  padding-bottom: 10em;
+  padding-bottom: 5em;
 }
 
 .student-form {
@@ -116,10 +116,12 @@
   text-align: center;
   margin: 1em 0em;
 }
+
 .registration-container {
   max-width: 800px;
   margin: auto;
 }
+
 .registration-container .registration-wrapper {
   display: grid;
   gap: 1.5em;
@@ -149,3 +151,14 @@
   color: var(--white);
   margin-top: 0.5em;
 }
+
+.to-login{
+  display: flex;
+  align-items: center;
+}
+
+.to-login p{
+  color: var(--dark-grey);
+  margin-right: 2em;
+}
+

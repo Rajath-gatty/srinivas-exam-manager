@@ -10,7 +10,6 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  Button,
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -405,13 +404,11 @@ const Student = () => {
             </div>
           </div>
 
-          <Button className="register-btn" variant="contained">
-            Register
-          </Button>
+          <input className="btn" type="submit" value="Register" disabled/>
 
           <div className="to-login">
             <p>Already have an account ?</p>
-            <Link to="/">Login</Link>
+            <Link to="/" className="btn-outlined">Login</Link>
           </div>
         </form>
       </div>
