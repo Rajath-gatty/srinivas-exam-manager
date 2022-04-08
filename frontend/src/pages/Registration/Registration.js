@@ -1,12 +1,42 @@
 import { Link } from "react-router-dom";
+import EvaluatorSvg from "../../Assets/Registration/evaluator_reg.svg";
+import StudentSvg from "../../Assets/Registration/student_reg.svg";
+import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
+import StaffSvg from "../../Assets/Registration/staff_reg.svg";
+import Navbar from "../../components/Navbar/Navbar";
 
 const Registration = () => {
   return (
     <>
-      <h1>Registration</h1>
-      <div className="to-login">
-        <Link to="/registration/student">Go to Student Registration</Link>
-        <Link to="/registration/faculty">Go to Faculty Registration</Link>
+      <Navbar/>
+      <div className="registration-container">
+      <h1>Register</h1>
+      <div className="registration-wrapper">
+      <Link to="evaluator">
+        <div className="registration-card">
+            <img src={EvaluatorSvg} alt="Evaluator Svg" />
+            <h3>Evaluator</h3>
+        </div>
+      </Link>
+      <Link to="student">
+        <div className="registration-card">
+            <img src={StudentSvg} alt="Student Svg" />
+            <h3>Student</h3>
+        </div>
+      </Link>
+      <Link to="faculty">
+        <div className="registration-card">
+            <img src={FacultySvg} alt="Faculty Svg" />
+            <h3>Faculty</h3>
+        </div>
+      </Link>
+      <Link to="staff">
+        <div className="registration-card">
+            <img src={StaffSvg} alt="Staff Svg" />
+            <h3>Staff</h3>
+        </div>
+      </Link>
+      </div>
       </div>
     </>
   );

@@ -2,7 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
-  Button
+  Button,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormControl
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -10,6 +14,21 @@ import RadioInput from "../../components/UI/RadioInput";
 // import SelectInput from "../../components/UI/SelectInput";
 
 const Faculty = () => {
+
+  const departments = [
+    "Computer Science & Information Science",
+    "Management & Commerce",
+    "Engineering & Technology",
+    "Social Sciences & Humanities",
+    "Aviation Studies",
+    "Physiotherapy",
+    "Hotel Management & Tourism",
+    "Education",
+    "Allied Health Sciences",
+    "Nursing Science",
+  ];
+
+
     return(
         <div>
       <Navbar />
@@ -134,6 +153,21 @@ const Faculty = () => {
               fullWidth
             />
 
+              <FormControl className="SelectInput">
+                <InputLabel>Department</InputLabel>
+                <Select
+                  label="Department"
+                  defaultValue=""
+                  size="small"
+                >
+                  {departments.map((opt) => (
+                    <MenuItem key={opt} value={opt}>
+                      {opt}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
             <TextField
               label="Password"
               variant="outlined"
@@ -152,7 +186,7 @@ const Faculty = () => {
           </div>
 
           <div className="sub-wrapper">
-            <h3 className="sub-hdng">Father's Details</h3>
+            <h3 className="sub-hdng">Father/Spouse Details</h3>
             <div className="sub-details student-form">
               <TextField
                 label="Name"

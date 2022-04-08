@@ -30,14 +30,14 @@ for (var i = startYear; i <= fYear; i++) {
 }
 // console.log(year);
 
-const Dob = () => {
+const Dob = (props) => {
   return (
     <div className="dob-wrapper">
-      <InputLabel id="date" className="dob-label">
+      <InputLabel id="date" className="dob-label" required={props.required}>
         Date of Birth
       </InputLabel>
       <div className="dob-container">
-        <FormControl sx={{ minWidth: 100 }}>
+        <FormControl sx={{ minWidth: 100 }} >
           <InputLabel id="date">Date</InputLabel>
           <Select
             labelId="date"

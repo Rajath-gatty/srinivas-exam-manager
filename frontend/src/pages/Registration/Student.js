@@ -117,6 +117,7 @@ const Student = () => {
               label="First Name"
               variant="outlined"
               size="small"
+              required
               fullWidth
             />
 
@@ -131,6 +132,7 @@ const Student = () => {
               label="Phone"
               variant="outlined"
               size="small"
+              required
               fullWidth
             />
 
@@ -139,12 +141,13 @@ const Student = () => {
               variant="outlined"
               size="small"
               type="email"
+              required
               fullWidth
             />
 
-            <Dob />
+            <Dob required/>
 
-            <RadioInput />
+            <RadioInput required/>
 
             <TextField
               label="Blood Group"
