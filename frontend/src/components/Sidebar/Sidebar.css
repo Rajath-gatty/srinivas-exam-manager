@@ -1,0 +1,44 @@
+.sidebar{
+    width: 20vw;
+    min-height: 100vh;
+    flex-direction: column;
+    box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header{
+    background: var(--secondary-gradient);
+    width: 100%;
+    padding: 1.4em 0;
+}
+
+.logo h1{
+    font-size: 1.2em;
+    color: #fff;
+    margin-left: 0.5em;
+}
+
+.user-profile{
+    justify-content: space-evenly !important;
+    padding-top: 1.5em;
+    cursor: pointer;
+}
+
+.user-avatar{
+    background-color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+}
+
+.user-name{
+    color: #fff;
+    text-align: center;
+}
+
+.user-name h2{
+    font-size: 1.4em;
+}
+
+.user-name h3{
+    font-size: .8em;
+}
