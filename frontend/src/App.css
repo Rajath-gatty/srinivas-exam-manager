@@ -3,7 +3,7 @@
   padding: 0;
 }
 
-s:root {
+:root {
   --primary-gradient: linear-gradient(180deg, #2f98ff 0%, #004586 100%);
   --secondary-gradient: linear-gradient(180deg, #2f98ff 0%, #016fd6 100%);
   --color-secondary: "#d5d5d5";
