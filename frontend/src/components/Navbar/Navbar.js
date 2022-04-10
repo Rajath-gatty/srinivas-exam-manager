@@ -1,6 +1,6 @@
 import "./Navbar.css";
 import {Link} from "react-router-dom";
-import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
+import {SrinivasLogo} from "../../Assets";
 const Navbar = () => {
 return (
     <nav className="nav">

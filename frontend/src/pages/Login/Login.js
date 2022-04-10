@@ -2,10 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import "./Login.css";
-import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
-import LoginSvg from "../../Assets/undraw_login.svg";
-import LockIcon from "../../Assets/lock_icon.svg";
-import UserIcon from "../../Assets/user_icon.svg";
+import {SrinivasLogo,LoginSvg,Lock,Mail} from "../../Assets";
 
 const Login = () => {
 
@@ -51,7 +48,7 @@ const Login = () => {
                 onBlur={onEmailBlur}
                 placeholder="example@gmail.com"
               />
-              <img src={UserIcon} alt="" className="login-svg" />
+              <img src={Mail} alt="" className="login-svg" />
             </div>
           </div>
           <div className={passAct}>
@@ -63,7 +60,7 @@ const Login = () => {
                 onBlur={onPassBlur}
                 placeholder="Password"
               />
-              <img src={LockIcon} alt="" className="login-svg" />
+              <img src={Lock} alt="" className="login-svg" />
             </div>
           </div>
           <div className="forgot-pass">

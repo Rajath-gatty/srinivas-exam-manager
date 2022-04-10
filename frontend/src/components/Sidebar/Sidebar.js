@@ -2,14 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
-import Logo from "../../Assets/SrinivasLogo.svg";
-import Avatar from "../../Assets/NavIcons/Avatar.svg";
-import Arrow from "../../Assets/NavIcons/Arrow.svg";
-import Dashboard from "../../Assets/NavIcons/Dashboard.svg";
-import Register from "../../Assets/NavIcons/Register.svg";
-import Courses from "../../Assets/NavIcons/Courses.svg";
-import Users from "../../Assets/NavIcons/Users.svg";
-import Logout from "../../Assets/NavIcons/Logout.svg";
+import {SrinivasLogo,Avatar,Arrow,Dashboard,Register,Courses,Users,Logout} from "../../Assets";
 
 const Sidebar = () => {
 
@@ -59,7 +52,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-header">
         <div className="logo flex">
-          <img src={Logo} width="30px" alt="logo" />
+          <img src={SrinivasLogo} width="30px" alt="logo" />
           <h1>Srinivas Exam Manager</h1>
         </div>
         <div className="user-profile flex">
