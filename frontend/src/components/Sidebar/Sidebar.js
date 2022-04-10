@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
+
 import "./Sidebar.css";
 import Logo from "../../Assets/SrinivasLogo.svg";
 import Avatar from "../../Assets/NavIcons/Avatar.svg";
@@ -11,12 +12,16 @@ import Users from "../../Assets/NavIcons/Users.svg";
 import Logout from "../../Assets/NavIcons/Logout.svg";
 
 const Sidebar = () => {
-  const location = useLocation();
-  useEffect(() => {
-    const Dashboard = document.getElementById("dashboard");
-    const Registration = document.getElementById("register");
-    const Create = document.getElementById("create");
-    const Users = document.getElementById("users");
+
+   const setNavLinkActive = (navData) => {
+       return navData.isActive? "navlink flex active":"navlink flex";
+   }
+//   const location = useLocation();
+//   useEffect(() => {
+//     const Dashboard = document.getElementById("dashboard");
+//     const Registration = document.getElementById("register");
+//     const Create = document.getElementById("create");
+//     const Users = document.getElementById("users");
 
     //Remove Previous Active Nav
     // const links = document.querySelectorAll(".navlink");
@@ -27,28 +32,28 @@ const Sidebar = () => {
     //   }
     // });
 
-    var path = location.pathname; // get current url pathname
+    // var path = location.pathname; // get current url pathname
 
     //Change active nav acc to current pathname
-    switch (path) {
-      case "/dashboard": {
-        Dashboard.classList.add("active");
-        break;
-      }
-      case "/register": {
-        Registration.classList.add("active");
-        break;
-      }
-      case "/create": {
-        Create.classList.add("active");
-        break;
-      }
-      case "/users": {
-        Users.classList.add("active");
-        break;
-      }
-    }
-  }, [location]);
+//     switch (path) {
+//       case "/dashboard": {
+//         Dashboard.classList.add("active");
+//         break;
+//       }
+//       case "/register": {
+//         Registration.classList.add("active");
+//         break;
+//       }
+//       case "/create": {
+//         Create.classList.add("active");
+//         break;
+//       }
+//       case "/users": {
+//         Users.classList.add("active");
+//         break;
+//       }
+//     }
+//   }, [location]);
 
   return (
     <div className="sidebar">
@@ -74,28 +79,28 @@ const Sidebar = () => {
       <div className="sidebar-nav flex">
         <ul>
           <li>
-            <Link id="dashboard" to="/dashboard" className="navlink flex">
+            <NavLink to="/dashboard" className={navData =>setNavLinkActive(navData)}>
               <img src={Dashboard} alt="Dash" width="20px" />
               <span>Dashboard</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link id="register" to="/register" className="navlink flex">
+            <NavLink to="/register" className={navData =>setNavLinkActive(navData)}>
               <img src={Register} alt="Dash" width="20px" />
               <span>Registration</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link id="create" to="/create" className="navlink flex">
+            <NavLink to="/create" className={navData =>setNavLinkActive(navData)}>
               <img src={Courses} alt="Dash" width="20px" />
               <span>Courses</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link id="users" to="/users" className="navlink flex">
+            <NavLink to="/users" className={navData =>setNavLinkActive(navData)}>
               <img src={Users} alt="Dash" width="20px" />
               <span>Users</span>
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

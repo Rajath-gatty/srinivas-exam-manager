@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
 import Faculty from "./pages/Registration/Faculty";
@@ -30,19 +31,23 @@ function App() {
       <div className="App">
         <Browser>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/registration" element={<Registration />} />
             <Route path="/registration/student" element={<Student />} />
             <Route path="/registration/faculty" element={<Faculty />} />
             <Route path="/registration/staff" element={<Staff />} />
             <Route path="/registration/evaluator" element={<Evaluator />} />
 
+        {/* Protected Routes */}
+            {/* Sub Admin Routes */}
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/create" element={<Create />} />
             <Route path="/users" element={<Users />} />
 
-            {/* <Route path="/" element={<Navigate replace to="/login"/>}/> */}
+            {/* Page Not Found Route */}
+            <Route path="*" element={<PageNotFound/>}></Route>
           </Routes>
         </Browser>
       </div>

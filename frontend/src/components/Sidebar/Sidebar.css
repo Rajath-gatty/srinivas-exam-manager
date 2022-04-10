@@ -24,6 +24,7 @@
 .user-profile {
   justify-content: space-evenly !important;
   padding-top: 1.5em;
+  margin-top: 1.25em;
   cursor: pointer;
 }
 
@@ -48,13 +49,18 @@
 }
 
 .sidebar-nav {
-  margin-bottom: 13em;
+  margin-bottom: 9em;
+  margin-right: 5em;
 }
 
 .sidebar-nav ul {
   list-style: none;
   width: 100%;
   padding: 1em 0;
+}
+
+.sidebar-nav ul li {
+  margin-bottom: 0.75rem;
 }
 
 .navlink {
@@ -103,8 +109,7 @@
 
 /* Using Filter to change SVG color */
 .logout img {
-  filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
-    brightness(97%) contrast(114%);
+  filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg) brightness(97%) contrast(114%);
 }
 
 .logout span {
