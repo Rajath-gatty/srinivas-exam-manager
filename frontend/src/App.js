@@ -41,10 +41,10 @@ function App() {
 
         {/* Protected Routes */}
             {/* Sub Admin Routes */}
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/users" element={<Users />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/users" element={<Users />} />
 
             {/* Page Not Found Route */}
             <Route path="*" element={<PageNotFound/>}></Route>

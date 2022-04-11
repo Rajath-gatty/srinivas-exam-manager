@@ -2,9 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
-import {SrinivasLogo,Avatar,Arrow,Dashboard,Register,Courses,Users,Logout} from "../../Assets";
+import {SrinivasLogo,Avatar,Arrow,Logout} from "../../Assets";
+import {NavLinks} from "../../util/NavLinks";
+import {useContextData} from "../../hooks/useContextData";
+
 
 const Sidebar = () => {
+  const {role} = useContextData();
 
    const setNavLinkActive = (navData) => {
        return navData.isActive? "navlink flex active":"navlink flex";
@@ -71,30 +75,20 @@ const Sidebar = () => {
 
       <div className="sidebar-nav flex">
         <ul>
-          <li>
+          {/* <li>
             <NavLink to="/dashboard" className={navData =>setNavLinkActive(navData)}>
               <img src={Dashboard} alt="Dash" width="20px" />
               <span>Dashboard</span>
             </NavLink>
-          </li>
-          <li>
-            <NavLink to="/register" className={navData =>setNavLinkActive(navData)}>
-              <img src={Register} alt="Dash" width="20px" />
-              <span>Registration</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/create" className={navData =>setNavLinkActive(navData)}>
-              <img src={Courses} alt="Dash" width="20px" />
-              <span>Courses</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/users" className={navData =>setNavLinkActive(navData)}>
-              <img src={Users} alt="Dash" width="20px" />
-              <span>Users</span>
-            </NavLink>
-          </li>
+          </li> */}
+          {NavLinks.find(link => link.role===role).links.map(link => {
+            return <li key={link.title}>
+             <NavLink to={link.path} className={navData =>setNavLinkActive(navData)}>
+               <img src={link.icon} alt={link.title} width="20px" />
+               <span>{link.title}</span>
+             </NavLink>
+           </li>
+          })}
         </ul>
       </div>
 
