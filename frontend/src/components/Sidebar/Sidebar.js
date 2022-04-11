@@ -6,7 +6,6 @@ import {SrinivasLogo,Avatar,Arrow,Logout} from "../../Assets";
 import {NavLinks} from "../../util/NavLinks";
 import {useContextData} from "../../hooks/useContextData";
 
-
 const Sidebar = () => {
   const {role} = useContextData();
 
@@ -75,12 +74,6 @@ const Sidebar = () => {
 
       <div className="sidebar-nav flex">
         <ul>
-          {/* <li>
-            <NavLink to="/dashboard" className={navData =>setNavLinkActive(navData)}>
-              <img src={Dashboard} alt="Dash" width="20px" />
-              <span>Dashboard</span>
-            </NavLink>
-          </li> */}
           {NavLinks.find(link => link.role===role).links.map(link => {
             return <li key={link.title}>
              <NavLink to={link.path} className={navData =>setNavLinkActive(navData)}>
