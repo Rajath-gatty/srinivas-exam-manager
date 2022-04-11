@@ -30,8 +30,8 @@
 
 .user-avatar {
   background-color: #fff;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px;
 }
 
@@ -48,11 +48,6 @@
   font-size: 0.8em;
 }
 
-.sidebar-nav {
-  margin-bottom: 9em;
-  margin-right: 5em;
-}
-
 .sidebar-nav ul {
   list-style: none;
   width: 100%;
@@ -61,6 +56,7 @@
 
 .sidebar-nav ul li {
   margin-bottom: 0.75rem;
+  width: 100%;
 }
 
 .navlink {
@@ -102,13 +98,67 @@
   border-radius: 0 5px 5px 0;
 }
 
+.multiLink{
+  flex-direction: column;
+}
+
+.dropdownLink{
+  cursor: pointer;
+  padding: 0.5em 0;
+  width: 100%;
+  padding: 0.5em 0;
+  position: relative;
+}
+
+.dropdownLink span{
+  color: var(--text-color);
+  margin-left: 1em;
+  font-size: 1.1em;
+}
+
+.dropdown li{
+  margin-bottom: 0;
+}
+
+.dropdownLink img {
+  filter: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
+    brightness(90%) contrast(84%);
+}
+
+
+.dropdownArrow{
+  margin-left: 3em;
+}
+
+.aactive img {
+  filter: invert(46%) sepia(94%) saturate(2597%) hue-rotate(191deg)
+    brightness(95%) contrast(101%);
+}
+
+.aactive .dropdownArrow{
+  transform: rotate(90deg);
+}
+
+.aactive span {
+  color: var(--primary-color) !important;
+}
+
+.aactive::after {
+  content: "";
+  width: 6px;
+  height: 100%;
+  background-color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  border-radius: 0 5px 5px 0;
+}
+
 .logout {
   cursor: pointer;
   margin-bottom: 2.5em;
   position: absolute;
   top: 90%;
-  left: 20%;
-  transform: translateX(50%);
+  width: 100%;
 }
 
 /* Using Filter to change SVG color */

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
@@ -7,12 +7,18 @@ import { NavLinks } from "../../util/NavLinks";
 import { useContextData } from "../../hooks/useContextData";
 
 const Sidebar = () => {
+  const[showMenu, setShowMenu] = useState(false);
   const { role } = useContextData();
 
   const setNavLinkActive = (navData) => {
     return navData.isActive ? "navlink flex active" : "navlink flex";
   };
 
+  // const toggleDropdown = () => setShowMenu(prevState => !prevState);
+  const toggleDropdown = (evt) =>{
+    setShowMenu(prevState => !prevState);
+  }
+  
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -39,13 +45,36 @@ const Sidebar = () => {
           {NavLinks.find((link) => link.role === role).links.map((link) => {
             return (
               <li key={link.title}>
+                {link?.subMenu ? (
+                  <div className="multiLink flex">
+                    <div className="dropdownLink aactive flex" onClick={toggleDropdown}>
+                      <img src={link.icon} alt={link.title} width="20px" />
+                      <span>{link.title}</span>
+                      <img className="dropdownArrow" src={Arrow} width="20px" alt="arrow" />
+                    </div>
+                    {showMenu &&<div className="dropdown" style={{display:"block"}}>
+                      {link.subMenu.map(subLinks =>{
+                        return <NavLink
+                              key={subLinks.title}
+                              to={subLinks.path}
+                              className={(navData) => setNavLinkActive(navData)}
+                            >
+                              <span>{subLinks.title}</span>
+                            </NavLink>
+                      })}
+                    </div>}
+                  </div>
+                ) : (
                 <NavLink
                   to={link.path}
                   className={(navData) => setNavLinkActive(navData)}
                 >
                   <img src={link.icon} alt={link.title} width="20px" />
                   <span>{link.title}</span>
+
+                  {link?.subMenu && <img className="dropdownArrow" src={Arrow} width="20px" alt="arrow" />}
                 </NavLink>
+                )}
               </li>
             );
           })}

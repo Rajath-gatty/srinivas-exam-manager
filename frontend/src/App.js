@@ -13,9 +13,11 @@ import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
 import Evaluator from "./pages/Registration/Evaluator";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Register from "./components/Sidebar/Register";
-import Create from "./components/Sidebar/Create";
-import Users from "./components/Sidebar/Users";
+import Courses from "./components/Sidebar/Courses";
+import TimeTable from "./components/Sidebar/TimeTable";
 
 function App() {
   //MUI Components Fonts
@@ -40,11 +42,17 @@ function App() {
             <Route path="/registration/evaluator" element={<Evaluator />} />
 
         {/* Protected Routes */}
+        
             {/* Sub Admin Routes */}
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/create" element={<Create />} />
-              <Route path="/users" element={<Users />} />
+            <Route element={<ProtectedRoute allowedRole={['admin']}/>}>
+              <Route path="register" element={<Register />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="timetable" element={<TimeTable />} />
+            </Route>
+
+            <Route element={<ProtectedRoute allowedRole={['admin','student']}/>}>
+              <Route path="dashboard" element={<Dashboard />} />
+            </Route>
 
             {/* Page Not Found Route */}
             <Route path="*" element={<PageNotFound/>}></Route>

@@ -1,10 +1,11 @@
-import { Route } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import {useContextData} from "../hooks/useContextData";
 
-const ProtectedRoute = ({isAuth, component, ...rest }) => {
+const ProtectedRoute = ({ allowedRole, ...rest }) => {
     const {role} = useContextData();
+
     return (
-        <Route />
+           allowedRole.find(item => item===role)?<Outlet/>:<Navigate to="/notfound" replace/>
     )
 }
 
