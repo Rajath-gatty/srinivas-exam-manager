@@ -3,7 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow-y: hidden;
@@ -16,7 +16,7 @@
 }
 
 .logo h1 {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #fff;
   margin-left: 0.5em;
 }
@@ -105,11 +105,16 @@
 .logout {
   cursor: pointer;
   margin-bottom: 2.5em;
+  position: absolute;
+  top: 90%;
+  left: 20%;
+  transform: translateX(50%);
 }
 
 /* Using Filter to change SVG color */
 .logout img {
-  filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg) brightness(97%) contrast(114%);
+  filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
+    brightness(97%) contrast(114%);
 }
 
 .logout span {
