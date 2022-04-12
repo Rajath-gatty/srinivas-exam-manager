@@ -1,4 +1,4 @@
-import { Dashboard, Courses, Users, Calender } from "../Assets";
+import { Dashboard, Courses, Users, Calender, Approval } from "../Assets";
 
 export const NavLinks = [
   {
@@ -75,7 +75,7 @@ export const NavLinks = [
       },
       {
         title: "Approval",
-        icon: Users,
+        icon: Approval,
         subMenu: [
           {
             title: "Student",

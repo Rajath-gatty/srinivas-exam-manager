@@ -1,5 +1,5 @@
 .sidebar {
-  width: 20vw;
+  width: 300px;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -56,6 +56,7 @@
   list-style: none;
   width: 100%;
   padding: 1em 0;
+  margin-top: 1em;
 }
 
 .sidebar-nav ul li {
@@ -128,13 +129,18 @@
   margin-bottom: 0;
 }
 
+.dropdown span {
+  font-size: 1em;
+}
+
 .dropdownLink img {
   filter: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
     brightness(90%) contrast(84%);
 }
 
 .dropdownArrow {
-  margin-left: 3em;
+  position: absolute;
+  right: 100px;
 }
 
 .aactive img {
@@ -166,9 +172,9 @@
 
 .logout {
   cursor: pointer;
-  margin-bottom: 2.5em;
+  margin-bottom: 1em;
   position: absolute;
-  top: 90%;
+  bottom: 0px;
   width: 100%;
 }
 

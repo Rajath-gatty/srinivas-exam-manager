@@ -7,7 +7,8 @@ import { NavLinks } from "../../util/NavLinks";
 import { useContextData } from "../../hooks/useContextData";
 
 const Sidebar = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false}]);
+  
   const { role } = useContextData();
 
   const setNavLinkActive = (navData) => {
@@ -18,11 +19,19 @@ const Sidebar = () => {
     return subNav.isActive ? "navlink flex subActive" : "navlink flex";
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (evt) => {
+    const itemIndex = showMenu.findIndex(txt => txt.text === evt.target.textContent);
+
     const OtherActive = document.querySelector(".active");
     OtherActive && OtherActive.classList.remove("active");
 
-    setShowMenu(!showMenu);
+    setShowMenu(prevState => {
+    const item = prevState.find(txt => txt.text === evt.target.textContent);
+    item.state = !item.state;
+    const newState = [...prevState];
+    newState[itemIndex] = item;
+    return newState;
+    })
   };
 
   console.log(showMenu);
@@ -56,11 +65,11 @@ const Sidebar = () => {
                   <div className="multiLink flex">
                     <div
                       className={
-                        showMenu
+                        showMenu.find(item => item.text === link.title).state
                           ? "dropdownLink flex aactive"
                           : "dropdownLink flex"
                       }
-                      onClick={toggleDropdown}
+                      onClick={(evt) => toggleDropdown(evt)}
                     >
                       <img src={link.icon} alt={link.title} width="20px" />
                       <span>{link.title}</span>
@@ -69,9 +78,9 @@ const Sidebar = () => {
                         src={Arrow}
                         width="20px"
                         alt="arrow"
-                      />
+                      />                          
                     </div>
-                    {showMenu && (
+                    {showMenu.find(item => item.text === link.title).state && (
                       <div className="dropdown">
                         {link.subMenu.map((subLinks) => {
                           return (
