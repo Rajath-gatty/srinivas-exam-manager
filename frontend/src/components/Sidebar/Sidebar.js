@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./Sidebar.css";
@@ -18,7 +18,6 @@ const Sidebar = () => {
     return subNav.isActive ? "navlink flex subActive" : "navlink flex";
   };
 
-  // const toggleDropdown = () => setShowMenu(prevState => !prevState);
   const toggleDropdown = () => {
     const OtherActive = document.querySelector(".active");
     OtherActive && OtherActive.classList.remove("active");
