@@ -31,8 +31,7 @@ const Sidebar = () => {
     return newState;
     })
   };
-
-  console.log(showMenu);
+  
   return (
     <div className="sidebar">
       <div className="sidebar-header">
