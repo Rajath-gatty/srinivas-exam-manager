@@ -41,21 +41,28 @@ function App() {
             <Route path="/registration/staff" element={<Staff />} />
             <Route path="/registration/evaluator" element={<Evaluator />} />
 
-        {/* Protected Routes */}
-        
+            <Route path="/users/student" element={<TimeTable />} />
+            <Route path="/users/faculty" element={<TimeTable />} />
+            <Route path="/users/staff" element={<TimeTable />} />
+            <Route path="/users/evaluator" element={<TimeTable />} />
+
+            {/* Protected Routes */}
+
             {/* Sub Admin Routes */}
-            <Route element={<ProtectedRoute allowedRole={['admin']}/>}>
+            <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
               <Route path="register" element={<Register />} />
               <Route path="courses" element={<Courses />} />
               <Route path="timetable" element={<TimeTable />} />
             </Route>
 
-            <Route element={<ProtectedRoute allowedRole={['admin','student']}/>}>
+            <Route
+              element={<ProtectedRoute allowedRole={["admin", "student"]} />}
+            >
               <Route path="dashboard" element={<Dashboard />} />
             </Route>
 
             {/* Page Not Found Route */}
-            <Route path="*" element={<PageNotFound/>}></Route>
+            <Route path="*" element={<PageNotFound />}></Route>
           </Routes>
         </Browser>
       </div>

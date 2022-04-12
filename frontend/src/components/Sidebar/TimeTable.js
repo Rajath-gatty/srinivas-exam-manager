@@ -1,12 +1,15 @@
 import Sidebar from "./Sidebar";
+import { useLocation } from "react-router-dom";
 
 const TimeTable = () => {
-    return(
-        <div className="section">
-            <Sidebar/>
-            <h1>TimeTable Page</h1>
-        </div>
-    )
-}
+  const location = useLocation();
+  const { pathname } = location;
+  return (
+    <div className="section">
+      <Sidebar />
+      <h1>{pathname}</h1>
+    </div>
+  );
+};
 
 export default TimeTable;
