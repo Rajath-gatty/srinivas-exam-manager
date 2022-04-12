@@ -20,16 +20,19 @@ const Sidebar = () => {
   };
 
   const toggleDropdown = (evt) => {
-    const itemIndex = showMenu.findIndex(txt => txt.text === evt.target.textContent);
-    const OtherActive = document.querySelector(".active");
-    OtherActive && OtherActive.classList.remove("active");
-    setShowMenu(prevState => {
-    const item = prevState.find(txt => txt.text === evt.target.textContent);
-    item.state = !item.state;
-    const newState = [...prevState];
-    newState[itemIndex] = item;
-    return newState;
-    })
+    if(evt.target.textContent) {
+      const itemIndex = showMenu.findIndex(txt => txt.text === evt.target.textContent);
+      const OtherActive = document.querySelector(".active");
+      OtherActive && OtherActive.classList.remove("active");
+      setShowMenu(prevState => {
+      const item = prevState.find(txt => txt.text === evt.target.textContent);
+      item.state = !item.state;
+      const newState = [...prevState];
+      newState[itemIndex] = item;
+      return newState;
+      });
+    } 
+    return;
   };
   
   return (
