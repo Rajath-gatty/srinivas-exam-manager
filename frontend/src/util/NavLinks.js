@@ -16,24 +16,25 @@ export const NavLinks = [
       },
       {
         title: "Users",
-        path: "/users",
         icon: Users,
-        subMenu: [{
-            title:  "Student",
-            path: "/users/student"
+        subMenu: [
+          {
+            title: "Student",
+            path: "/users/student",
           },
           {
-            title:  "Faculty",
-            path: "/users/faculty"
+            title: "Faculty",
+            path: "/users/faculty",
           },
           {
-            title:  "Staff",
-            path: "/users/staff"
+            title: "Staff",
+            path: "/users/staff",
           },
           {
-            title:  "Evaluator",
-            path: "/users/evaluator"
-          }]
+            title: "Evaluator",
+            path: "/users/evaluator",
+          },
+        ],
       },
       {
         title: "Time Table",
@@ -43,7 +44,7 @@ export const NavLinks = [
     ],
   },
   {
-    role: "student",
+    role: "staff",
     links: [
       {
         title: "Dashboard",
@@ -51,9 +52,48 @@ export const NavLinks = [
         icon: Dashboard,
       },
       {
-        title: "Register",
-        path: "/register",
-        icon: Register,
+        title: "Users",
+        icon: Users,
+        subMenu: [
+          {
+            title: "Student",
+            path: "/users/student",
+          },
+          {
+            title: "Faculty",
+            path: "/users/faculty",
+          },
+          {
+            title: "Staff",
+            path: "/users/staff",
+          },
+          {
+            title: "Evaluator",
+            path: "/users/evaluator",
+          },
+        ],
+      },
+      {
+        title: "Approval",
+        icon: Users,
+        subMenu: [
+          {
+            title: "Student",
+            path: "/approve/student",
+          },
+          {
+            title: "Faculty",
+            path: "/approve/faculty",
+          },
+          {
+            title: "Staff",
+            path: "/approve/staff",
+          },
+          {
+            title: "Evaluator",
+            path: "/approve/evaluator",
+          },
+        ],
       },
     ],
   },

@@ -41,10 +41,17 @@ function App() {
             <Route path="/registration/staff" element={<Staff />} />
             <Route path="/registration/evaluator" element={<Evaluator />} />
 
+            {/* Testing Users/ */}
             <Route path="/users/student" element={<TimeTable />} />
             <Route path="/users/faculty" element={<TimeTable />} />
             <Route path="/users/staff" element={<TimeTable />} />
             <Route path="/users/evaluator" element={<TimeTable />} />
+
+            {/* Testing Approval/ */}
+            <Route path="/approve/student" element={<TimeTable />} />
+            <Route path="/approve/faculty" element={<TimeTable />} />
+            <Route path="/approve/staff" element={<TimeTable />} />
+            <Route path="/approve/evaluator" element={<TimeTable />} />
 
             {/* Protected Routes */}
 
@@ -56,7 +63,9 @@ function App() {
             </Route>
 
             <Route
-              element={<ProtectedRoute allowedRole={["admin", "student"]} />}
+              element={
+                <ProtectedRoute allowedRole={["admin", "student", "staff"]} />
+              }
             >
               <Route path="dashboard" element={<Dashboard />} />
             </Route>
