@@ -35,6 +35,10 @@
   border-radius: 50px;
 }
 
+.user-avatar img {
+  margin-bottom: 0.1em;
+}
+
 .user-name {
   color: #fff;
   text-align: center;
@@ -170,6 +174,7 @@
 
 /* Using Filter to change SVG color */
 .logout img {
+  transform: rotate(-90deg);
   filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
     brightness(97%) contrast(114%);
 }

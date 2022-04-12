@@ -36,7 +36,7 @@ const Sidebar = () => {
         </div>
         <div className="user-profile flex">
           <div className="user-avatar flex">
-            <img src={Avatar} width="45px" alt="avatar" />
+            <img src={Avatar} width="40px" alt="avatar" />
           </div>
 
           <div className="user-name">
