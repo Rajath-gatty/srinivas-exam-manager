@@ -21,10 +21,8 @@ const Sidebar = () => {
 
   const toggleDropdown = (evt) => {
     const itemIndex = showMenu.findIndex(txt => txt.text === evt.target.textContent);
-
     const OtherActive = document.querySelector(".active");
     OtherActive && OtherActive.classList.remove("active");
-
     setShowMenu(prevState => {
     const item = prevState.find(txt => txt.text === evt.target.textContent);
     item.state = !item.state;
@@ -49,7 +47,7 @@ const Sidebar = () => {
 
           <div className="user-name">
             <h2>John Doe</h2>
-            <h3>Administrator</h3>
+            <h3>{role.charAt(0).toUpperCase() + role.slice(1)}</h3>
           </div>
 
           <img className="user-arrow" src={Arrow} width="25px" alt="arrow" />

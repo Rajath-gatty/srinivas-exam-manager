@@ -41,33 +41,32 @@ function App() {
             <Route path="/registration/staff" element={<Staff />} />
             <Route path="/registration/evaluator" element={<Evaluator />} />
 
-            {/* Testing Users/ */}
-            <Route path="/users/student" element={<TimeTable />} />
-            <Route path="/users/faculty" element={<TimeTable />} />
-            <Route path="/users/staff" element={<TimeTable />} />
-            <Route path="/users/evaluator" element={<TimeTable />} />
-
-            {/* Testing Approval/ */}
-            <Route path="/approve/student" element={<TimeTable />} />
-            <Route path="/approve/faculty" element={<TimeTable />} />
-            <Route path="/approve/staff" element={<TimeTable />} />
-            <Route path="/approve/evaluator" element={<TimeTable />} />
-
-            {/* Protected Routes */}
-
-            {/* Sub Admin Routes */}
-            <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
-              <Route path="register" element={<Register />} />
-              <Route path="courses" element={<Courses />} />
-              <Route path="timetable" element={<TimeTable />} />
+            {/* Admin Access */}
+            <Route element={<ProtectedRoute allowedRole={['admin']} />}>
+                <Route path="register" element={<Register />} />
+                <Route path="courses" element={<Courses />} />
+                <Route path="timetable" element={<TimeTable />} />
             </Route>
 
-            <Route
-              element={
-                <ProtectedRoute allowedRole={["admin", "student", "staff"]} />
-              }
-            >
-              <Route path="dashboard" element={<Dashboard />} />
+            {/* Staff Access*/}
+            <Route element={<ProtectedRoute allowedRole={['staff']}/>}>
+                <Route path="approve/student" element={<TimeTable />} />
+                <Route path="approve/faculty" element={<TimeTable />} />
+                <Route path="approve/staff" element={<TimeTable />} />
+                <Route path="approve/evaluator" element={<TimeTable />} />
+            </Route>
+
+            {/* Admin and Staff Access */}
+            <Route element={<ProtectedRoute allowedRole={['admin','staff']}/>}>
+                <Route path="users/student" element={<TimeTable />} />
+                <Route path="users/faculty" element={<TimeTable />} />
+                <Route path="users/staff" element={<TimeTable />} />
+                <Route path="users/evaluator" element={<TimeTable />} />
+            </Route>
+
+            {/*Common Protected Routes */}
+            <Route element={<ProtectedRoute allowedRole={["admin", "student", "staff"]} />}>
+              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
 
             {/* Page Not Found Route */}
