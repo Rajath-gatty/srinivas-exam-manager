@@ -16,22 +16,25 @@ const Sidebar = () => {
   };
 
   const setSubNavActive = (subNav) => {
-    return subNav.isActive ? "navlink flex subActive" : "navlink flex";
+    return subNav.isActive ? "navlink flex subActive active" : "navlink flex";
   };
 
   const toggleDropdown = (evt) => {
     if(evt.target.textContent) {
       const itemIndex = showMenu.findIndex(txt => txt.text === evt.target.textContent);
-      const OtherActive = document.querySelector(".active");
-      OtherActive && OtherActive.classList.remove("active");
+      const anotherItemIndex  = showMenu.findIndex(txt => txt.text !== evt.target.textContent);
       setShowMenu(prevState => {
       const item = prevState.find(txt => txt.text === evt.target.textContent);
+      const anotherItem = prevState.find(txt => txt.text !== evt.target.textContent);
       item.state = !item.state;
+      if(anotherItem.state)
+      anotherItem.state=!anotherItem.state;
       const newState = [...prevState];
       newState[itemIndex] = item;
+      newState[anotherItemIndex] = anotherItem;
       return newState;
       });
-    } 
+    }
     return;
   };
   
