@@ -148,7 +148,7 @@
     brightness(95%) contrast(101%);
 }
 
-.aactive .dropdownArrow {
+.aactive .dropdownArrow, .active-arrow .dropdownArrow{
   transform: rotate(90deg);
 }
 

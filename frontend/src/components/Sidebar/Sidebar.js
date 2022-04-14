@@ -1,12 +1,10 @@
 import "./Sidebar.css";
 import { SrinivasLogo, Avatar, Arrow, Logout } from "../../Assets";
-import { NavLinks } from "../../util/NavLinks";
 import { useContextData } from "../../hooks/useContextData";
-import Menu from "./Menu/Menu";
+import SidebarNav from "./SidebarNav";
 
 const Sidebar = () => {
   const { role } = useContextData();
-  
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -26,14 +24,10 @@ const Sidebar = () => {
           <img className="user-arrow" src={Arrow} width="25px" alt="arrow" />
         </div>
       </div>
-
+    {console.log("rendering main Sidebar")}
       <div className="sidebar-nav flex">
         <ul>
-          {NavLinks.find((link) => link.role === role).links.map((link) => {
-            return (
-              <Menu key={link.title} link={link} />
-            );
-          })}
+          <SidebarNav role={role} />
         </ul>
       </div>
 

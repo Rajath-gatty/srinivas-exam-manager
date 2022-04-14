@@ -1,19 +1,14 @@
-
 import { Arrow } from "../../../../Assets";
 import { NavLink } from "react-router-dom";
 
-const SubMenu = ({title, icon, subMenu, showMenu, toggleDropdown}) => {
-
-    const setSubNavActive = (subNav) => {
-        return subNav.isActive ? "navlink flex subActive active" : "navlink flex";
-      };
-
+const SubMenu = ({title, icon, subMenu, showMenu, toggleDropdown, setSubNavActive}) => {
+  console.log("rendering Submenu...");
     return(
                 <div className="multiLink flex">
                     <div
                       className={
                         showMenu.find(item => item.text === title).state
-                          ? "dropdownLink flex aactive"
+                          ? "dropdownLink flex active-arrow"
                           : "dropdownLink flex"
                       }
                       onClick={(evt) => toggleDropdown(evt)}
