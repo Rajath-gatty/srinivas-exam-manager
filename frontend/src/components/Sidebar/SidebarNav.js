@@ -6,7 +6,7 @@ const SidebarNav = ({role}) => {
 const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false}]);
 
 const setSubNavActive = (subNav) => {
-    return subNav.isActive ? "navlink flex subActive active" : "navlink flex";
+    return subNav.isActive ? "navlink flex subActive" : "navlink flex";
 };
 
 const setNavLinkActive = (navData) => {
@@ -30,7 +30,7 @@ const toggleDropdown = useCallback((evt) => {
         });
     }
     },[showMenu]);
-    console.log("Rendering SidebarNav....")
+    // console.log("Rendering SidebarNav....")
     return(
         <>
         {NavLinks.find((link) => link.role === role).links.map((link) => {

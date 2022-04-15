@@ -85,14 +85,6 @@ export const NavLinks = [
             title: "Faculty",
             path: "/approve/faculty",
           },
-          {
-            title: "Staff",
-            path: "/approve/staff",
-          },
-          {
-            title: "Evaluator",
-            path: "/approve/evaluator",
-          },
         ],
       },
     ],

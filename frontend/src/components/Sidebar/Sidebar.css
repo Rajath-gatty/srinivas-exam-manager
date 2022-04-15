@@ -74,8 +74,7 @@
 }
 
 .navlink img {
-  filter: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
-    brightness(90%) contrast(84%);
+  filter: var(--svg-grey);
 }
 
 .navlink span {
@@ -85,8 +84,7 @@
 }
 
 .active img {
-  filter: invert(46%) sepia(94%) saturate(2597%) hue-rotate(191deg)
-    brightness(95%) contrast(101%);
+  filter: var(--svg-blue);
 }
 
 .active span {
@@ -134,8 +132,7 @@
 }
 
 .dropdownLink img {
-  filter: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
-    brightness(90%) contrast(84%);
+  filter: var(--svg-grey);
 }
 
 .dropdownArrow {
@@ -166,9 +163,17 @@
   border-radius: 0 5px 5px 0;
 }
 
+.subActive{
+  width: 100%;
+  background-color: var(--light-primary);
+  padding-right: 25%;
+  border-radius: 6px;
+}
+
 .subActive span {
   color: var(--primary-color) !important;
 }
+
 
 .logout {
   cursor: pointer;
@@ -178,15 +183,18 @@
   width: 100%;
 }
 
+.logout:hover{
+  color: var(--primary-color);
+}
+
 /* Using Filter to change SVG color */
 .logout img {
   transform: rotate(-90deg);
-  filter: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
-    brightness(97%) contrast(114%);
+  filter: var(--svg-red);
 }
 
 .logout span {
-  color: red;
+  color: var(--strong-red);
   margin-left: 0.5em;
   font-size: 1.1em;
 }

@@ -2,7 +2,7 @@ import { Arrow } from "../../../../Assets";
 import { NavLink } from "react-router-dom";
 
 const SubMenu = ({title, icon, subMenu, showMenu, toggleDropdown, setSubNavActive}) => {
-  console.log("rendering Submenu...");
+  // console.log("rendering Submenu...");
     return(
                 <div className="multiLink flex">
                     <div

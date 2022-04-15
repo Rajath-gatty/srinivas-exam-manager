@@ -15,10 +15,11 @@ import Evaluator from "./pages/Registration/Evaluator";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import Register from "./components/Sidebar/Register";
-import Courses from "./components/Sidebar/Courses";
+import Courses from "./components/Admin/Course";
 import TimeTable from "./components/Sidebar/TimeTable";
 import Layout from "./components/Layout";
+import Approval from "./components/Approval/Approval";
+import ApprovalDetailsView from "./components/Approval/ApprovalDetailsView";
 
 function App() {
   //MUI Components Fonts
@@ -45,17 +46,20 @@ function App() {
             <Route element={<Layout/>}>
                 {/* Admin Access */}
                 <Route element={<ProtectedRoute allowedRole={['admin']} />}>
-                    <Route path="register" element={<Register />} />
                     <Route path="courses" element={<Courses />} />
                     <Route path="timetable" element={<TimeTable />} />
+                    <Route path="approve/staff" element={<Approval />} />
+                    <Route path="approve/evaluator" element={<Approval />} />
+                    <Route path="approve/staff/:staffId" element={<ApprovalDetailsView />} />
+                    <Route path="approve/evaluator/:evaluatorId" element={<ApprovalDetailsView />} />
                 </Route>
 
                 {/* Staff Access*/}
                 <Route element={<ProtectedRoute allowedRole={['staff']}/>}>
-                    <Route path="approve/student" element={<TimeTable />} />
-                    <Route path="approve/faculty" element={<TimeTable />} />
-                    <Route path="approve/staff" element={<TimeTable />} />
-                    <Route path="approve/evaluator" element={<TimeTable />} />
+                    <Route path="approve/student" element={<Approval />} />
+                    <Route path="approve/faculty" element={<Approval />} />
+                    <Route path="approve/student/:studentId" element={<ApprovalDetailsView />} />
+                    <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
                 </Route>
 
                 {/* Admin and Staff Access */}
