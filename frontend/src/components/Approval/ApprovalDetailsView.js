@@ -4,18 +4,30 @@ import "./ApprovalDetailsView.css";
 
 const StudentApprovalView = () => {
   const [approve, setApprove] = useState("");
+  const [approveText, setApproveText] = useState("Approve");
+  const [rejectText, setRejectText] = useState("Reject");
   const ApproveBtn = document.querySelector(".green");
+  const ApproveSVG = document.querySelector(".green img");
   const RejectBtn = document.querySelector(".red");
+  const RejectSVG = document.querySelector(".red img");
 
   useEffect(() => {
     if (approve !== "") {
       if (approve === "Approve") {
         RejectBtn.style.display = "none";
         ApproveBtn.style.marginRight = "0px";
+        ApproveBtn.style.backgroundColor = "transparent";
+        ApproveBtn.style.color = "var(--strong-green)";
+        ApproveSVG.style.filter = "var(--svg-green)";
+        setApproveText("Approved");
       }
       if (approve === "Reject") {
         ApproveBtn.style.display = "none";
         RejectBtn.style.marginRight = "0px";
+        RejectBtn.style.backgroundColor = "transparent";
+        RejectBtn.style.color = "var(--strong-red)";
+        RejectSVG.style.filter = "var(--svg-red)";
+        setApproveText("Approved");
       }
     }
   }, [approve]);
@@ -25,10 +37,10 @@ const StudentApprovalView = () => {
       <div className="approve-user-info flex">
         <div className="approve-user-avatar flex">
           <div className="approve-avatar">
+            <img src={Avatar} width="60px" alt="avatar" />
             <div className="approve-camera">
               <img src={Camera} width="20px" alt="camera" />
             </div>
-            <img src={Avatar} width="60px" alt="avatar" />
           </div>
         </div>
 
@@ -45,7 +57,7 @@ const StudentApprovalView = () => {
             setApprove("Approve");
           }}
         >
-          <img src={Tick} alt="Tick" width="25px" /> Approve
+          <img src={Tick} alt="Tick" width="25px" /> {approveText}
         </button>
         <button
           className="approve-btn red flex"
@@ -53,7 +65,7 @@ const StudentApprovalView = () => {
             setApprove("Reject");
           }}
         >
-          <img src={Plus} alt="Times" width="25px" /> Reject
+          <img src={Plus} alt="Times" width="25px" /> {rejectText}
         </button>
       </div>
 

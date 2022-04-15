@@ -30,6 +30,12 @@
   --svg-grey: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
     brightness(90%) contrast(84%);
 
+  --svg-green: invert(61%) sepia(41%) saturate(1596%) hue-rotate(59deg)
+    brightness(97%) contrast(89%);
+
+  --svg-white: invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg)
+    brightness(106%) contrast(106%);
+
   font-family: "Lato", sans-serif;
 }
 
