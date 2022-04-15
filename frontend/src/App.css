@@ -77,12 +77,9 @@
 .section {
   display: flex;
 }
-<<<<<<< HEAD
-=======
 
 /* Margin to move conent away from sidebar */
 /* add className "content" to all main containers of evry page  */
 .content {
   margin-left: 20vw;
 }
->>>>>>> c89bf367a0fab20eea0f3531d0ce72c5874b03d8
