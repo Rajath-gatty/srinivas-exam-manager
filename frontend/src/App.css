@@ -79,6 +79,7 @@
 }
 
 /* Margin to move conent away from sidebar */
+/* add className "content" to all main containers of evry page  */
 .content {
   margin-left: 20vw;
 }
