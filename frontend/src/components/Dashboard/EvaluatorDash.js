@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const EvaluatorDash = () => {
-  return (
-    <div>EvaluatorDash</div>
-  )
-}
+  return <div className="content">EvaluatorDash</div>;
+};
 
-export default EvaluatorDash
+export default EvaluatorDash;

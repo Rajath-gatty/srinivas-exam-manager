@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const FacultyDash = () => {
-  return (
-    <div>FacultyDash</div>
-  )
-}
+  return <div className="content">FacultyDash</div>;
+};
 
-export default FacultyDash
+export default FacultyDash;

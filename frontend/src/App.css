@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Lato", sans-serif;
 }
 
 :root {
@@ -10,6 +11,7 @@
   --primary-color: #1e8bf5;
   --text-color: #8b8b8b;
   --light-grey: #afafaf;
+  --grey-bg: #f4f4f4;
   --dark-grey: #5b5b5b;
   --strong-red: #e21717;
   --strong-green: #4dc514;
@@ -17,14 +19,15 @@
   --white: #fff;
   --light-primary: rgba(31, 143, 255, 0.1);
   --light-red: rgba(226, 23, 23, 0.555);
+  --light-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
 
-  --svg-red:invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
+  --svg-red: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
     brightness(97%) contrast(114%);
 
-  --svg-blue:invert(46%) sepia(94%) saturate(2597%) hue-rotate(191deg)
+  --svg-blue: invert(46%) sepia(94%) saturate(2597%) hue-rotate(191deg)
     brightness(95%) contrast(101%);
 
-  --svg-grey:invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
+  --svg-grey: invert(60%) sepia(14%) saturate(20%) hue-rotate(337deg)
     brightness(90%) contrast(84%);
 
   font-family: "Lato", sans-serif;
@@ -73,4 +76,9 @@
 
 .section {
   display: flex;
+}
+
+/* Margin to move conent away from sidebar */
+.content {
+  margin-left: 20vw;
 }
