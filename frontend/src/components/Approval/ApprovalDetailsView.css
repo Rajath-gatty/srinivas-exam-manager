@@ -1,0 +1,99 @@
+.ApprovalDetailsView {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  /* margin-left: 300px; */
+}
+
+.approve-user-info {
+  flex-direction: column;
+}
+
+.approve-user-avatar {
+  position: relative;
+  padding: 1em;
+  padding-top: 2em;
+}
+
+.approve-avatar {
+  background-color: var(--grey-bg);
+  padding: 0.5em;
+  border-radius: 50px;
+  position: relative;
+  box-shadow: var(--light-shadow);
+}
+
+.approve-camera {
+  background-color: var(--grey-bg);
+  padding: 0.2em;
+  border-radius: 50px;
+  position: absolute;
+  top: 3.5em;
+  left: 3.1em;
+  box-shadow: var(--light-shadow);
+  cursor: pointer;
+}
+
+.approve-user-title {
+  color: var(--text-color);
+  text-align: center;
+  flex-direction: column;
+}
+
+.approve-user-name {
+  font-size: 1.5em;
+}
+
+.approve-user-data {
+  font-size: 0.8em;
+}
+
+.approve-buttons {
+  padding: 1em 0;
+  margin-top: 0.5em;
+}
+
+.approve-btn {
+  border: none;
+  outline: none;
+  margin-right: 1.5em;
+  padding: 0.1em 0.7em 0.1em 0;
+  width: 100px;
+  justify-content: space-evenly;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.approve-btn.green {
+  background-color: var(--strong-green);
+  color: #fff;
+}
+.approve-btn.red {
+  background-color: var(--strong-red);
+  color: #fff;
+}
+
+.approve-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1em;
+  column-gap: 1em;
+}
+
+.approve-form {
+  margin-top: 2em;
+  margin-bottom: 5em;
+}
+
+.approveRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--grey-bg);
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  max-width: 425px;
+}
+
+.approveRow span {
+  color: var(--text-color);
+}

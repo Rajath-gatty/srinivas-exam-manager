@@ -1,11 +1,12 @@
 .sidebar {
-  width: 300px;
+  width: 20vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
   box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.1);
   position: relative;
+  position: fixed;
   overflow: hidden;
 }
 
@@ -145,7 +146,8 @@
     brightness(95%) contrast(101%);
 }
 
-.aactive .dropdownArrow, .active-arrow .dropdownArrow{
+.aactive .dropdownArrow,
+.active-arrow .dropdownArrow {
   transform: rotate(90deg);
 }
 
@@ -163,7 +165,7 @@
   border-radius: 0 5px 5px 0;
 }
 
-.subActive{
+.subActive {
   width: 100%;
   background-color: var(--light-primary);
   padding-right: 25%;
@@ -174,7 +176,6 @@
   color: var(--primary-color) !important;
 }
 
-
 .logout {
   cursor: pointer;
   margin-bottom: 1em;
@@ -183,7 +184,7 @@
   width: 100%;
 }
 
-.logout:hover{
+.logout:hover {
   color: var(--primary-color);
 }
 

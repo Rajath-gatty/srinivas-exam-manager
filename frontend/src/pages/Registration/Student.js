@@ -17,12 +17,11 @@ import RadioInput from "../../components/UI/RadioInput";
 import SelectInput from "../../components/UI/SelectInput";
 
 const Student = () => {
-
   //Toggle Guardian Details Show/Hide
-  const [showGuardian, setShowGuardian] = useState('');
+  const [showGuardian, setShowGuardian] = useState("");
   const GuardianToggle = (e) => {
-    if(e.target.value === 'yes') setShowGuardian(true)
-    if(e.target.value === 'no') setShowGuardian(false)
+    if (e.target.value === "yes") setShowGuardian(true);
+    if (e.target.value === "no") setShowGuardian(false);
   };
 
   //Switch Courses Acc to Selected Department
@@ -101,7 +100,8 @@ const Student = () => {
         break;
       }
 
-      default: return "Invalid"
+      default:
+        return "Invalid";
     }
   };
 
@@ -144,9 +144,9 @@ const Student = () => {
               fullWidth
             />
 
-            <Dob required/>
+            <Dob required />
 
-            <RadioInput required/>
+            <RadioInput required />
 
             <TextField
               label="Blood Group"
@@ -329,40 +329,42 @@ const Student = () => {
               </RadioGroup>
             </div>
 
-            {showGuardian && <div className="show-guardian">
-              <h3 className="sub-hdng">Guardian's Details</h3>
-              <div className="sub-details student-form">
-                <TextField
-                  label="Name"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                />
+            {showGuardian && (
+              <div className="show-guardian">
+                <h3 className="sub-hdng">Guardian's Details</h3>
+                <div className="sub-details student-form">
+                  <TextField
+                    label="Name"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                  />
 
-                <TextField
-                  label="Occupation"
-                  variant="outlined"
-                  size="small"
-                  fullWidth
-                />
+                  <TextField
+                    label="Occupation"
+                    variant="outlined"
+                    size="small"
+                    fullWidth
+                  />
 
-                <TextField
-                  label="Mobile Number"
-                  variant="outlined"
-                  size="small"
-                  type="tel"
-                  fullWidth
-                />
+                  <TextField
+                    label="Mobile Number"
+                    variant="outlined"
+                    size="small"
+                    type="tel"
+                    fullWidth
+                  />
 
-                <TextField
-                  label="Email ID"
-                  variant="outlined"
-                  size="small"
-                  type="email"
-                  fullWidth
-                />
+                  <TextField
+                    label="Email ID"
+                    variant="outlined"
+                    size="small"
+                    type="email"
+                    fullWidth
+                  />
+                </div>
               </div>
-            </div>}
+            )}
           </div>
 
           <div className="sub-wrapper">
@@ -404,11 +406,13 @@ const Student = () => {
             </div>
           </div>
 
-          <input className="btn" type="submit" value="Register" disabled/>
+          <input className="btn" type="submit" value="Register" disabled />
 
           <div className="to-login">
             <p>Already have an account ?</p>
-            <Link to="/" className="btn-outlined">Login</Link>
+            <Link to="/" className="btn-outlined">
+              Login
+            </Link>
           </div>
         </form>
       </div>
