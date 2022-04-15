@@ -2,7 +2,6 @@ import {useState, useCallback} from "react";
 import { NavLinks } from "../../util/NavLinks";
 import Menu from "./Menu/Menu";
 
-
 const SidebarNav = ({role}) => {
 const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false}]);
 
