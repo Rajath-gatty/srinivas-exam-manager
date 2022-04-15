@@ -1,9 +1,24 @@
-import "./ApprovalDetailsView.css";
+import { useState, useEffect } from "react";
 import { Avatar, Camera, Tick, Plus } from "../../Assets";
-import { useContextData } from "../../hooks/useContextData";
+import "./ApprovalDetailsView.css";
 
 const StudentApprovalView = () => {
-  const { role } = useContextData();
+  const [approve, setApprove] = useState("");
+  const ApproveBtn = document.querySelector(".green");
+  const RejectBtn = document.querySelector(".red");
+
+  useEffect(() => {
+    if (approve !== "") {
+      if (approve === "Approve") {
+        RejectBtn.style.display = "none";
+        ApproveBtn.style.marginRight = "0px";
+      }
+      if (approve === "Reject") {
+        ApproveBtn.style.display = "none";
+        RejectBtn.style.marginRight = "0px";
+      }
+    }
+  }, [approve]);
 
   return (
     <div className="ApprovalDetailsView content">
@@ -24,11 +39,21 @@ const StudentApprovalView = () => {
       </div>
 
       <div className="approve-buttons flex">
-        <button className="approve-btn green flex">
+        <button
+          className="approve-btn green flex"
+          onClick={() => {
+            setApprove("Approve");
+          }}
+        >
           <img src={Tick} alt="Tick" width="25px" /> Approve
         </button>
-        <button className="approve-btn red flex">
-          <img src={Plus} alt="Tick" width="25px" /> Reject
+        <button
+          className="approve-btn red flex"
+          onClick={() => {
+            setApprove("Reject");
+          }}
+        >
+          <img src={Plus} alt="Times" width="25px" /> Reject
         </button>
       </div>
 
