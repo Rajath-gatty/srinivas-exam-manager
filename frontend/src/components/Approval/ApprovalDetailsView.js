@@ -27,7 +27,7 @@ const StudentApprovalView = () => {
         RejectBtn.style.backgroundColor = "transparent";
         RejectBtn.style.color = "var(--strong-red)";
         RejectSVG.style.filter = "var(--svg-red)";
-        setApproveText("Approved");
+        setRejectText("Rejected");
       }
     }
   }, [approve]);
