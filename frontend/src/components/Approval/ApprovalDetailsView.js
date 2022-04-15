@@ -6,6 +6,7 @@ const StudentApprovalView = () => {
   const [approve, setApprove] = useState("");
   const [approveText, setApproveText] = useState("Approve");
   const [rejectText, setRejectText] = useState("Reject");
+
   const ApproveBtn = document.querySelector(".green");
   const ApproveSVG = document.querySelector(".green img");
   const RejectBtn = document.querySelector(".red");
@@ -122,6 +123,73 @@ const StudentApprovalView = () => {
           <div className="approveRow">
             <span>Address</span> Mangalore, Karnataka, India sasda ada da sdad
             asdasdasdd
+          </div>
+        </div>
+
+        <h3>Father's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> John Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Mother's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> Jane Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Guardian's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> Jane Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Admission Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>Department</span> CCIS
+          </div>
+          <div className="approveRow">
+            <span>Course</span> BCA
+          </div>
+          <div className="approveRow">
+            <span>Joining Academic Year</span> 2005
+          </div>
+          <div className="approveRow">
+            <span>Degree Year</span> 2010
+          </div>
+          <div className="approveRow">
+            <span>Degree Batch</span> A
           </div>
         </div>
       </div>
