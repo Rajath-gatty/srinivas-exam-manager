@@ -42,13 +42,12 @@
 
 .approval-main .approve-list-wrapper td {
     padding: 0.25em;
-    /* border: 1px solid var(--grey-bg); */
     color: var(--text-color);
     font-size: 0.9em;
 }
 
-.approval-main .approve-list-wrapper tr:nth-child(odd) td{
-    background: var(--grey-bg);
+.approval-main .approve-list-wrapper .approve-table-row {
+    border: 1px solid var(--grey-bg);
 }
 
 .approval-main .approve-list-wrapper a {
