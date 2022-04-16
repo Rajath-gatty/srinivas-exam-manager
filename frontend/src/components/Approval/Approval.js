@@ -11,6 +11,7 @@ const Approval = () => {
     </div> */}
     <h1 className="approve-list-header">Student Approval</h1>
     <table className="approve-list-wrapper">
+      <thead>
       <tr>
         <th>Profile</th>
         <th>Name</th>
@@ -19,12 +20,15 @@ const Approval = () => {
         <th>Details</th>
         <th>Approval</th>
       </tr>
+      </thead>
+      <tbody>
       <ApprovaList/>
       <ApprovaList/>
       <ApprovaList/>
       <ApprovaList/>
       <ApprovaList/>
       <ApprovaList/>
+      </tbody>
     </table>
 </div>
   )

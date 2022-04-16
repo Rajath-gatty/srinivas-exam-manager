@@ -1,6 +1,6 @@
 .approval-main {
-    margin:0 auto;
     height: 100%;
+    width: 100%;
 }
 
 .approval-main .back-btn {
@@ -27,21 +27,39 @@
 
 .approval-main .approve-list-wrapper {
     border-collapse: collapse;
-    width: 1000px;
+    display: block;
+    width: 100%;
+    border-spacing: 0;
 }
 
 .approval-main .approve-list-wrapper th {
     background: var(--grey-bg);
-    padding: 0.5em;
+    font-size: 0.9em;
+    padding: 0.75em;
 }
 
 .approval-main .approve-list-wrapper td {
-    padding: 0.5em;
+    padding: 0.35em;
     border: 1px solid var(--grey-bg);
+    color: var(--text-color);
+    font-size: 0.9em;
+    
+}
+
+
+.approval-main .approve-list-wrapper a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 0.9em;
 }
 
 .approval-main .approve-list-wrapper .approve-table-row {
     text-align: center;
+}
+
+.approval-main .approve-list-wrapper .approve-table-btn-wrapper{
+    gap: 1em;
+    padding: 0.75em;
 }
 
 .approval-main .approve-list-wrapper .approve-list-avatar {

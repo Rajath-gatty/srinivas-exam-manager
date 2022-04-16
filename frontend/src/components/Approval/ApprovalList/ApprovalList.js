@@ -9,13 +9,13 @@ return(
           <td>BCA</td>
           <td>2019</td>
           <td><Link to="/approve/student/54674567">view</Link></td>
-          <td className="flex">
-          <button className="approve-btn flex green">
-            <img src={Tick} alt="Tick" width={20} />
+          <td className="flex approve-table-btn-wrapper">
+          <button className="btn-outlined-green">
+            {/* <img src={Tick} alt="Tick" width={20} /> */}
             Approve
           </button>
-          <button className="approve-btn flex red">
-          <img src={Plus} alt="Tick" width={30} />
+          <button className="btn-outlined-red">
+          {/* <img src={Plus} alt="Tick" width={30} /> */}
             Reject
           </button>
           </td>
