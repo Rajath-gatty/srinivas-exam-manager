@@ -1,19 +1,47 @@
-import "./ApprovalDetailsView.css";
+import { useState, useEffect } from "react";
 import { Avatar, Camera, Tick, Plus } from "../../Assets";
-import { useContextData } from "../../hooks/useContextData";
+import "./ApprovalDetailsView.css";
 
 const StudentApprovalView = () => {
-  const { role } = useContextData();
+  const [approve, setApprove] = useState("");
+  const [approveText, setApproveText] = useState("Approve");
+  const [rejectText, setRejectText] = useState("Reject");
+
+  const ApproveBtn = document.querySelector(".green");
+  const ApproveSVG = document.querySelector(".green img");
+  const RejectBtn = document.querySelector(".red");
+  const RejectSVG = document.querySelector(".red img");
+
+  useEffect(() => {
+    if (approve !== "") {
+      if (approve === "Approve") {
+        RejectBtn.style.display = "none";
+        ApproveBtn.style.marginRight = "0px";
+        ApproveBtn.style.backgroundColor = "transparent";
+        ApproveBtn.style.color = "var(--strong-green)";
+        ApproveSVG.style.filter = "var(--svg-green)";
+        setApproveText("Approved");
+      }
+      if (approve === "Reject") {
+        ApproveBtn.style.display = "none";
+        RejectBtn.style.marginRight = "0px";
+        RejectBtn.style.backgroundColor = "transparent";
+        RejectBtn.style.color = "var(--strong-red)";
+        RejectSVG.style.filter = "var(--svg-red)";
+        setRejectText("Rejected");
+      }
+    }
+  }, [approve]);
 
   return (
     <div className="ApprovalDetailsView content">
       <div className="approve-user-info flex">
         <div className="approve-user-avatar flex">
           <div className="approve-avatar">
+            <img src={Avatar} width="60px" alt="avatar" />
             <div className="approve-camera">
               <img src={Camera} width="20px" alt="camera" />
             </div>
-            <img src={Avatar} width="60px" alt="avatar" />
           </div>
         </div>
 
@@ -24,11 +52,21 @@ const StudentApprovalView = () => {
       </div>
 
       <div className="approve-buttons flex">
-        <button className="approve-btn green flex">
-          <img src={Tick} alt="Tick" width="25px" /> Approve
+        <button
+          className="approve-btn green flex"
+          onClick={() => {
+            setApprove("Approve");
+          }}
+        >
+          <img src={Tick} alt="Tick" width="25px" /> {approveText}
         </button>
-        <button className="approve-btn red flex">
-          <img src={Plus} alt="Tick" width="25px" /> Reject
+        <button
+          className="approve-btn red flex"
+          onClick={() => {
+            setApprove("Reject");
+          }}
+        >
+          <img src={Plus} alt="Times" width="25px" /> {rejectText}
         </button>
       </div>
 
@@ -85,6 +123,73 @@ const StudentApprovalView = () => {
           <div className="approveRow">
             <span>Address</span> Mangalore, Karnataka, India sasda ada da sdad
             asdasdasdd
+          </div>
+        </div>
+
+        <h3>Father's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> John Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Mother's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> Jane Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Guardian's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>First Name</span> Jane Doe
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> Developer
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> 9584625345
+          </div>
+          <div className="approveRow">
+            <span>Email</span> johndoe@gmail.com
+          </div>
+        </div>
+
+        <h3>Admission Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span>Department</span> CCIS
+          </div>
+          <div className="approveRow">
+            <span>Course</span> BCA
+          </div>
+          <div className="approveRow">
+            <span>Joining Academic Year</span> 2005
+          </div>
+          <div className="approveRow">
+            <span>Degree Year</span> 2010
+          </div>
+          <div className="approveRow">
+            <span>Degree Batch</span> A
           </div>
         </div>
       </div>
