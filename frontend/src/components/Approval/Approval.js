@@ -5,7 +5,7 @@ import "./Approval.css";
 
 const Approval = () => {
   return (
-    <div className="approval-main">
+    <div className="approval-main content">
     <div className="back-btn">
         <img src={Back} alt="Back" />
         <span className="back-btn-text">Back</span>
