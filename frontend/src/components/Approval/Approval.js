@@ -11,7 +11,7 @@ const Approval = () => {
     </div> */}
     <h1 className="approve-list-header">Student Approval</h1>
     <table className="approve-list-wrapper">
-      <thead>
+      <thead className="thead">
       <tr>
         <th>Profile</th>
         <th>Name</th>

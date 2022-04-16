@@ -1,6 +1,6 @@
 .approval-main {
-    height: 100%;
     width: 100%;
+    margin: 0em 3em;
 }
 
 .approval-main .back-btn {
@@ -15,7 +15,7 @@
 
 .approval-main .approve-list-header {
     color: var(--primary-color);
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     margin-top: 2em;
 }
 
@@ -27,25 +27,29 @@
 
 .approval-main .approve-list-wrapper {
     border-collapse: collapse;
-    display: block;
+    /* display: block; */
     width: 100%;
     border-spacing: 0;
 }
 
 .approval-main .approve-list-wrapper th {
-    background: var(--grey-bg);
+    /* background: var(--text-color); */
+    color: var(--black);
     font-size: 0.9em;
-    padding: 0.75em;
+    padding: 0.85em;
+    width: 20%;
 }
 
 .approval-main .approve-list-wrapper td {
-    padding: 0.35em;
-    border: 1px solid var(--grey-bg);
+    padding: 0.25em;
+    /* border: 1px solid var(--grey-bg); */
     color: var(--text-color);
     font-size: 0.9em;
-    
 }
 
+.approval-main .approve-list-wrapper tr:nth-child(odd) td{
+    background: var(--grey-bg);
+}
 
 .approval-main .approve-list-wrapper a {
     text-decoration: none;

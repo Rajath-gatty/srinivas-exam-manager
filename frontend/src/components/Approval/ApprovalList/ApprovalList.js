@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
-import {Avatar,Tick,Plus} from "../../../Assets";
+import {Avatar} from "../../../Assets";
 
 const ApprovaList = () => {
 return(
         <tr className="approve-table-row">
-          <td><img className="approve-list-avatar" src={Avatar} alt="Avatar"/></td>
+          <td className="approve-avatar-wrapper">
+            <img className="approve-list-avatar" src={Avatar} width="20px" alt="Avatar"/>
+          </td>
           <td> John</td>
           <td>BCA</td>
           <td>2019</td>
