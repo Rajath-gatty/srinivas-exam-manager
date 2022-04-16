@@ -3,6 +3,7 @@ import { Avatar, Camera, Tick, Plus } from "../../Assets";
 import "./ApprovalDetailsView.css";
 
 const StudentApprovalView = () => {
+  // const [approve, setApprove] = useState("");
   const [approve, setApprove] = useState("");
   const [approveText, setApproveText] = useState("Approve");
   const [rejectText, setRejectText] = useState("Reject");
