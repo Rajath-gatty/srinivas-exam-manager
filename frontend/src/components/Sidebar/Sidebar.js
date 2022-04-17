@@ -24,7 +24,7 @@ const Sidebar = () => {
           <img className="user-arrow" src={Arrow} width="25px" alt="arrow" />
         </div>
       </div>
-    {/* {console.log("rendering main Sidebar")} */}
+      {/* {console.log("rendering main Sidebar")} */}
       <div className="sidebar-nav flex">
         <ul>
           <SidebarNav role={role} />
@@ -32,8 +32,10 @@ const Sidebar = () => {
       </div>
 
       <div className="logout flex">
-        <img src={Logout} alt="Dash" width="20px" />
-        <span>Logout</span>
+        <div className="logout-btn flex">
+          <img src={Logout} alt="logout" width="20px" />
+          <span>Logout</span>
+        </div>
       </div>
     </div>
   );

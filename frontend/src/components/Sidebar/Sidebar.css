@@ -179,24 +179,40 @@
 
 .logout {
   cursor: pointer;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   position: absolute;
   bottom: 0px;
   width: 100%;
 }
 
-.logout:hover {
-  color: var(--primary-color);
+.logout-btn {
+  padding: 0.3em 0.5em;
+  border-radius: 5px;
+  transition: 0.2s ease-in-out;
+}
+
+.logout-btn:hover {
+  background-color: var(--strong-red);
+}
+
+.logout-btn:hover img {
+  filter: var(--svg-white);
+}
+
+.logout-btn:hover span {
+  color: var(--white);
 }
 
 /* Using Filter to change SVG color */
-.logout img {
+.logout-btn img {
   transform: rotate(-90deg);
   filter: var(--svg-red);
+  transition-delay: 0.1s;
 }
 
-.logout span {
+.logout-btn span {
   color: var(--strong-red);
   margin-left: 0.5em;
   font-size: 1.1em;
+  transition-delay: 0.1s;
 }
