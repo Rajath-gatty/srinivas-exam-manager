@@ -150,6 +150,7 @@
 .aactive .dropdownArrow,
 .active-arrow .dropdownArrow {
   transform: rotate(90deg);
+  transition: 0.2s ease-in-out;
 }
 
 .aactive span {
