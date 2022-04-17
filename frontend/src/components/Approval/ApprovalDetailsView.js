@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { Avatar, Camera, Tick, Plus } from "../../Assets";
-import "./ApprovalDetailsView.css";
+import { Avatar, Camera, Tick, Plus, Back } from "../../Assets";
 import { useContextData } from "../../hooks/useContextData";
+import { useNavigate } from "react-router-dom";
+import "./ApprovalDetailsView.css";
 
 const StudentApprovalView = () => {
+  const navigate = useNavigate();
+
   const {
     approve,
     setApprove,
@@ -48,6 +51,9 @@ const StudentApprovalView = () => {
   return (
     <div className="ApprovalDetailsView content">
       <div className="approve-user-info flex">
+        <div className="back-btn flex" onClick={() => navigate(-1)}>
+          <img src={Back} alt="back" width="30px" /> <span>Back</span>
+        </div>
         <div className="approve-user-avatar flex">
           <div className="approve-avatar">
             <img src={Avatar} width="60px" alt="avatar" />

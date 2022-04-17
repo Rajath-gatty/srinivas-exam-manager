@@ -6,6 +6,14 @@
 
 .approve-user-info {
   flex-direction: column;
+  position: relative;
+}
+
+.approve-user-info .back-btn {
+  position: absolute;
+  left: 0;
+  top: 2em;
+  cursor: pointer;
 }
 
 .approve-user-avatar {

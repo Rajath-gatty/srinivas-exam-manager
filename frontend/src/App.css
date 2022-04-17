@@ -126,3 +126,12 @@
 /* .content {
  width: 65%;
 } */
+
+.back-btn img {
+  filter: var(--svg-grey);
+}
+
+.back-btn span {
+  padding-bottom: 0.2em;
+  color: var(--light-grey);
+}
