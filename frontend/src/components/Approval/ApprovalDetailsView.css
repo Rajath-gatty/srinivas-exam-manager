@@ -91,6 +91,28 @@
   font-weight: bolder;
 }
 
+.approve-btn.green-active {
+  margin-right: 0;
+  background-color: transparent;
+  cursor: default;
+  color: var(--strong-green);
+}
+
+.approve-btn.green-active img {
+  filter: var(--svg-green);
+}
+
+.approve-btn.red-active {
+  margin-right: 0;
+  background-color: transparent;
+  cursor: default;
+  color: var(--strong-red);
+}
+
+.approve-btn.red-active img {
+  filter: var(--svg-red);
+}
+
 .approve-form {
   flex-direction: column;
 }

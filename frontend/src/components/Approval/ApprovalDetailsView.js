@@ -16,33 +16,19 @@ const StudentApprovalView = () => {
     setRejectText,
   } = useContextData();
 
-  // const [approve, setApprove] = useState("");
-  // const [approveText, setApproveText] = useState("Approve");
-  // const [rejectText, setRejectText] = useState("Reject");
-
   const ApproveBtn = document.querySelector(".green");
-  const ApproveSVG = document.querySelector(".green img");
   const RejectBtn = document.querySelector(".red");
-  const RejectSVG = document.querySelector(".red img");
 
   useEffect(() => {
     if (approve !== "") {
       if (approve === "Approve") {
         RejectBtn.style.display = "none";
-        ApproveBtn.style.marginRight = "0px";
-        ApproveBtn.style.backgroundColor = "transparent";
-        ApproveBtn.style.cursor = "default";
-        ApproveBtn.style.color = "var(--strong-green)";
-        ApproveSVG.style.filter = "var(--svg-green)";
+        ApproveBtn.classList.add("green-active");
         setApproveText("Approved");
       }
       if (approve === "Reject") {
         ApproveBtn.style.display = "none";
-        RejectBtn.style.marginRight = "0px";
-        RejectBtn.style.backgroundColor = "transparent";
-        RejectBtn.style.cursor = "default";
-        RejectBtn.style.color = "var(--strong-red)";
-        RejectSVG.style.filter = "var(--svg-red)";
+        RejectBtn.classList.add("red-active");
         setRejectText("Rejected");
       }
     }
