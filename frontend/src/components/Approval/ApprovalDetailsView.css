@@ -104,7 +104,7 @@
   margin: 1em 0;
   width: 100%;
   position: relative;
-  left: 4em;
+  /* left: 4em; */
 }
 
 .approveRow {

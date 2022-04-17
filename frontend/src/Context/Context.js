@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export const Context = React.createContext();
 
@@ -8,10 +8,20 @@ const state = {
 };
 
 const ContextProvider = (props) => {
+  const [approve, setApprove] = useState("");
+  const [approveText, setApproveText] = useState("Approve");
+  const [rejectText, setRejectText] = useState("Reject");
+
   return (
     <Context.Provider
       value={{
         ...state,
+        approve,
+        setApprove,
+        approveText,
+        setApproveText,
+        rejectText,
+        setRejectText,
       }}
     >
       {props.children}

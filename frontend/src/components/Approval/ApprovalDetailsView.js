@@ -1,12 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Avatar, Camera, Tick, Plus } from "../../Assets";
 import "./ApprovalDetailsView.css";
+import { useContextData } from "../../hooks/useContextData";
 
 const StudentApprovalView = () => {
+  const {
+    approve,
+    setApprove,
+    approveText,
+    setApproveText,
+    rejectText,
+    setRejectText,
+  } = useContextData();
+
   // const [approve, setApprove] = useState("");
-  const [approve, setApprove] = useState("");
-  const [approveText, setApproveText] = useState("Approve");
-  const [rejectText, setRejectText] = useState("Reject");
+  // const [approveText, setApproveText] = useState("Approve");
+  // const [rejectText, setRejectText] = useState("Reject");
 
   const ApproveBtn = document.querySelector(".green");
   const ApproveSVG = document.querySelector(".green img");
@@ -19,6 +28,7 @@ const StudentApprovalView = () => {
         RejectBtn.style.display = "none";
         ApproveBtn.style.marginRight = "0px";
         ApproveBtn.style.backgroundColor = "transparent";
+        ApproveBtn.style.cursor = "default";
         ApproveBtn.style.color = "var(--strong-green)";
         ApproveSVG.style.filter = "var(--svg-green)";
         setApproveText("Approved");
@@ -27,6 +37,7 @@ const StudentApprovalView = () => {
         ApproveBtn.style.display = "none";
         RejectBtn.style.marginRight = "0px";
         RejectBtn.style.backgroundColor = "transparent";
+        RejectBtn.style.cursor = "default";
         RejectBtn.style.color = "var(--strong-red)";
         RejectSVG.style.filter = "var(--svg-red)";
         setRejectText("Rejected");
@@ -40,8 +51,19 @@ const StudentApprovalView = () => {
         <div className="approve-user-avatar flex">
           <div className="approve-avatar">
             <img src={Avatar} width="60px" alt="avatar" />
-            <div className="approve-camera">
+            <div
+              className="approve-camera"
+              onClick={() => {
+                document.querySelector("#imagePicker").click();
+              }}
+            >
               <img src={Camera} width="20px" alt="camera" />
+              <input
+                type="file"
+                id="imagePicker"
+                style={{ display: "none" }}
+                accept="image/png, image/jpeg"
+              />
             </div>
           </div>
         </div>
