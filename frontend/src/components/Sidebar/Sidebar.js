@@ -1,5 +1,7 @@
 import "./Sidebar.css";
-import { SrinivasLogo, Avatar, Arrow, Logout } from "../../Assets";
+import { SrinivasLogo, Avatar } from "../../Assets";
+import {BiLogOut} from "react-icons/bi";
+import {IoIosArrowForward} from "react-icons/io";
 import { useContextData } from "../../hooks/useContextData";
 import SidebarNav from "./SidebarNav";
 
@@ -21,10 +23,10 @@ const Sidebar = () => {
             <h2>John Doe</h2>
             <h3>{role.charAt(0).toUpperCase() + role.slice(1)}</h3>
           </div>
-          <img className="user-arrow" src={Arrow} width="25px" alt="arrow" />
+          <IoIosArrowForward size={25} color="var(--white)"/>
         </div>
       </div>
-      {/* {console.log("rendering main Sidebar")} */}
+
       <div className="sidebar-nav flex">
         <ul>
           <SidebarNav role={role} />
@@ -33,7 +35,7 @@ const Sidebar = () => {
 
       <div className="logout flex">
         <div className="logout-btn flex">
-          <img src={Logout} alt="logout" width="20px" />
+        <BiLogOut size={20}/>
           <span>Logout</span>
         </div>
       </div>
