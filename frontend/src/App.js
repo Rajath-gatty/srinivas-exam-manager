@@ -20,6 +20,7 @@ import TimeTable from "./components/Sidebar/TimeTable";
 import Layout from "./components/Layout";
 import Approval from "./components/Approval/Approval";
 import ApprovalDetailsView from "./components/Approval/ApprovalDetailsView";
+import TotalUsers from "./components/Users/TotalUsers";
 
 function App() {
   //MUI Components Fonts
@@ -64,10 +65,10 @@ function App() {
 
                 {/* Admin and Staff Access */}
                 <Route element={<ProtectedRoute allowedRole={['admin','staff']}/>}>
-                    <Route path="users/student" element={<TimeTable />} />
-                    <Route path="users/faculty" element={<TimeTable />} />
-                    <Route path="users/staff" element={<TimeTable />} />
-                    <Route path="users/evaluator" element={<TimeTable />} />
+                    <Route path="users/student" element={<TotalUsers />} />
+                    <Route path="users/faculty" element={<TotalUsers />} />
+                    <Route path="users/staff" element={<TotalUsers />} />
+                    <Route path="users/evaluator" element={<TotalUsers />} />
                 </Route>
 
                 {/*Common Protected Routes */}

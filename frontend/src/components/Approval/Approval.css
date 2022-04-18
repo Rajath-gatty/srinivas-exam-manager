@@ -33,7 +33,7 @@
 }
 
 .approval-main .approve-list-wrapper th {
-    /* background: var(--text-color); */
+    background: var(--grey-bg);
     color: var(--black);
     font-size: 0.9em;
     padding: 0.85em;
