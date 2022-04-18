@@ -52,7 +52,7 @@
 .login-label {
   position: relative;
   top: 1em;
-  left: -9.5em;
+  left: -9em;
   font-size: 1em;
   background-color: #fff;
   width: fit-content;
@@ -85,6 +85,7 @@ input[type="password"] {
   background-color: #fff;
   padding-left: 1em;
   width: 300px;
+  height: 51px;
   border-radius: 4px;
   font-size: 1em;
   color: var(--dark-grey);
@@ -106,6 +107,10 @@ input[type="password"] {
   margin-top: 0.5em;
 }
 
+.input-group svg{
+  padding-right: 1em;
+}
+
 .input-group input::placeholder {
   color: var(--light-grey);
 }
@@ -124,7 +129,7 @@ input:focus .input-group {
 
 .forgot-pass a {
   position: relative;
-  left: 18em;
+  left: 17em;
   color: var(--primary-color);
   font-size: 0.9em;
   text-decoration: none;

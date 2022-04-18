@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {FiMail, FiLock} from "react-icons/fi";
 
 import "./Login.css";
-import {SrinivasLogo,LoginSvg,Lock,Mail} from "../../Assets";
+import {SrinivasLogo,LoginSvg} from "../../Assets";
 
 const Login = () => {
 
@@ -48,7 +49,7 @@ const Login = () => {
                 onBlur={onEmailBlur}
                 placeholder="example@gmail.com"
               />
-              <img src={Mail} alt="" className="login-svg" />
+              <FiMail size={30} color="var(--light-grey)"/>
             </div>
           </div>
           <div className={passAct}>
@@ -60,7 +61,7 @@ const Login = () => {
                 onBlur={onPassBlur}
                 placeholder="Password"
               />
-              <img src={Lock} alt="" className="login-svg" />
+             <FiLock size={30} color="var(--light-grey)"/>
             </div>
           </div>
           <div className="forgot-pass">

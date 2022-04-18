@@ -137,7 +137,9 @@
   filter: var(--svg-grey);
 }
 
-.dropdownArrow {
+.sidebar-arrow {
+  text-align: right;
+  color: var(--text-color);
   position: absolute;
   right: 7em;
 }
@@ -147,8 +149,8 @@
     brightness(95%) contrast(101%);
 }
 
-.aactive .dropdownArrow,
-.active-arrow .dropdownArrow {
+.aactive .sidebar-arrow,
+.active-arrow .sidebar-arrow {
   transform: rotate(90deg);
   transition: 0.2s ease-in-out;
 }
@@ -192,22 +194,23 @@
   transition: 0.2s ease-in-out;
 }
 
+.logout-btn svg {
+  color: var(--strong-red);
+}
+
 .logout-btn:hover {
   background-color: var(--strong-red);
 }
 
-.logout-btn:hover img {
-  filter: var(--svg-white);
+.logout-btn:hover svg {
+  color: var(--white);
 }
 
 .logout-btn:hover span {
   color: var(--white);
 }
 
-/* Using Filter to change SVG color */
-.logout-btn img {
-  transform: rotate(-90deg);
-  filter: var(--svg-red);
+.logout-btn svg {
   transition-delay: 0.1s;
 }
 

@@ -1,4 +1,4 @@
-import { Arrow } from "../../../../Assets";
+import {IoIosArrowForward} from "react-icons/io"
 import { NavLink } from "react-router-dom";
 
 const SubMenu = ({
@@ -22,7 +22,7 @@ const SubMenu = ({
       >
         <img src={icon} alt={title} width="20px" />
         <span>{title}</span>
-        <img className="dropdownArrow" src={Arrow} width="20px" alt="arrow" />
+        <IoIosArrowForward size={20} className="sidebar-arrow"/>
       </div>
       {showMenu.find((item) => item.text === title).state && (
         <div className="dropdown">

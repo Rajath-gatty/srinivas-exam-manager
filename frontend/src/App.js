@@ -15,7 +15,7 @@ import Evaluator from "./pages/Registration/Evaluator";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import Courses from "./components/Admin/Course";
+import Courses from "./components/Admin/Course/Course";
 import TimeTable from "./components/Sidebar/TimeTable";
 import Layout from "./components/Layout";
 import Approval from "./components/Approval/Approval";

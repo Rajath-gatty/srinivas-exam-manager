@@ -1,5 +1,7 @@
 import { useEffect } from "react";
-import { Avatar, Camera, Tick, Plus, Back } from "../../Assets";
+import {FiArrowLeft,FiCheck,FiX} from "react-icons/fi";
+import {FaUserCircle,FaCamera} from "react-icons/fa";
+
 import { useContextData } from "../../hooks/useContextData";
 import { useNavigate } from "react-router-dom";
 import "./ApprovalDetailsView.css";
@@ -32,24 +34,23 @@ const StudentApprovalView = () => {
         setRejectText("Rejected");
       }
     }
-  }, [approve]);
+  }, []);
 
   return (
     <div className="ApprovalDetailsView content">
       <div className="approve-user-info flex">
         <div className="back-btn flex" onClick={() => navigate(-1)}>
-          <img src={Back} alt="back" width="30px" /> <span>Back</span>
+        <FiArrowLeft color="var(--light-grey)" size={30}/> <span>Back</span>
         </div>
         <div className="approve-user-avatar flex">
-          <div className="approve-avatar">
-            <img src={Avatar} width="60px" alt="avatar" />
+          <FaUserCircle color="var(--light-grey)" size={70}/>
             <div
               className="approve-camera"
               onClick={() => {
                 document.querySelector("#imagePicker").click();
               }}
             >
-              <img src={Camera} width="20px" alt="camera" />
+              <FaCamera size={20} color="var(--light-grey)"/>
               <input
                 type="file"
                 id="imagePicker"
@@ -57,7 +58,6 @@ const StudentApprovalView = () => {
                 accept="image/png, image/jpeg"
               />
             </div>
-          </div>
         </div>
 
         <div className="approve-user-title flex">
@@ -73,7 +73,7 @@ const StudentApprovalView = () => {
             setApprove("Approve");
           }}
         >
-          <img src={Tick} alt="Tick" width="25px" /> {approveText}
+          <FiCheck size={20}/> {approveText}
         </button>
         <button
           className="approve-btn red flex"
@@ -81,7 +81,7 @@ const StudentApprovalView = () => {
             setApprove("Reject");
           }}
         >
-          <img src={Plus} alt="Times" width="25px" /> {rejectText}
+          <FiX size={20}/> {rejectText}
         </button>
       </div>
 

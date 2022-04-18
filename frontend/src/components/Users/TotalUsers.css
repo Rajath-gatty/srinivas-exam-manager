@@ -62,3 +62,6 @@
     color: var(--strong-red);
 }
 
+.eligible span, .not-eligible span{
+    width: 100px;
+}

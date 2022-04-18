@@ -1,4 +1,4 @@
-import { Dashboard, Courses, Users, Calender, Approval } from "../Assets";
+import { Dashboard, Users, Approval,Courses,Calender } from "../Assets";
 
 export const NavLinks = [
   {

@@ -1,16 +1,11 @@
 import { Link } from "react-router-dom";
-import { Avatar } from "../../../Assets";
+import {FaUserCircle} from "react-icons/fa";
 
 const ApprovaList = () => {
   return (
     <tr className="approve-table-row">
       <td className="approve-avatar-wrapper">
-        <img
-          className="approve-list-avatar"
-          src={Avatar}
-          width="20px"
-          alt="Avatar"
-        />
+      <FaUserCircle color="var(--light-grey)" size={30}/>
       </td>
       <td>John</td>
       <td>BCA</td>
