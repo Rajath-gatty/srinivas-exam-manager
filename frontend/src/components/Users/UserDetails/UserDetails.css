@@ -1,0 +1,109 @@
+.userinfo-container {
+  position: relative;
+  width: 100%;
+  margin-right: 2em;
+  justify-content: space-between;
+}
+
+.userinfo-profile {
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+  top: -5em;
+}
+
+.userinfo-container .back-btn {
+  position: absolute;
+  left: 2em;
+  top: 2em;
+  cursor: pointer;
+}
+
+.userinfo-avatar {
+  position: relative;
+  width: fit-content;
+}
+
+.userinfo-avatar .userinfo-camera {
+  background-color: var(--grey-bg);
+  padding: 0.2em;
+  border-radius: 50px;
+  position: absolute;
+  top: 2.7em;
+  left: 2.7em;
+  box-shadow: var(--light-shadow);
+  cursor: pointer;
+}
+
+.userinfo-title {
+  color: var(--text-color);
+  text-align: center;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.userinfo-form-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1em;
+  column-gap: 1em;
+}
+
+.userinfo-form-details .userinfo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--grey-bg);
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  width: 350px;
+}
+
+.userinfo-form-details .userinfo-row span {
+  color: var(--text-color);
+}
+
+.userinfo-buttons {
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 2.5em;
+}
+
+.userinfo-buttons .hide-btn {
+  display: none;
+}
+
+.userinfo-buttons .eligible-btn {
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: bolder;
+  text-align: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.userinfo-buttons .eligible-btn.green {
+  background-color: var(--strong-green);
+}
+
+.userinfo-buttons .eligible-btn.red {
+  background-color: var(--strong-red);
+}
+
+.userinfo-buttons .eligible-btn.active-green {
+  background-color: transparent;
+  cursor: default;
+  color: var(--strong-green);
+}
+
+.userinfo-buttons .eligible-btn.active-red {
+  background-color: transparent;
+  cursor: default;
+  color: var(--strong-red);
+}
+
+.userinfo-buttons .eligible-btn span {
+  margin-left: 0.5em;
+}
