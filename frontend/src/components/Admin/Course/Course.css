@@ -1,0 +1,65 @@
+.course-main {
+    width: 100%;
+    margin: 2em;
+}
+
+.course-main .course-search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: auto;
+    gap: 3em;
+}
+
+.course-main .course-search-wrapper form {
+    width: 100%;
+}
+
+.course-main .course-search-wrapper .course-search-input {
+    padding: 0.85em;
+    width: 100%;
+    border: none;
+    background: var(--grey-bg);
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+    color: var(--text-color);
+}
+
+.course-main .course-search-wrapper .course-search-input::placeholder {
+    color: var(--light-grey);
+}
+
+.course-main .course-list-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+.course-main .course-list-table thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.course-main .course-list-table tbody td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.course-main .course-list-table tbody tr {
+    border: 1px solid var(--grey-bg);
+}
+
+.course-main .course-list-table tbody td span {
+    font-size: 0.8em;
+}
+
+
+.course-main .course-edit-btn {
+    gap: 0.5em;
+    margin: auto;
+}

@@ -41,6 +41,10 @@
   font-family: "Lato", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .flex {
   display: flex;
   justify-content: center;

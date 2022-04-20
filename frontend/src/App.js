@@ -22,6 +22,7 @@ import Approval from "./components/Approval/Approval";
 import ApprovalDetailsView from "./components/Approval/ApprovalDetailsView";
 import TotalUsers from "./components/Users/TotalUsers";
 import UserDetails from "./components/Users/UserDetails/UserDetails";
+import Create from "./components/Admin/Course/Create/Create";
 
 function App() {
   //MUI Components Fonts
@@ -49,57 +50,38 @@ function App() {
               {/* Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
+                <Route path="courses/new-course" element={<Create />} />
                 <Route path="timetable" element={<TimeTable />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route path="approve/evaluator" element={<Approval />} />
-                <Route
-                  path="approve/staff/:staffId"
-                  element={<ApprovalDetailsView />}
-                />
-                <Route
-                  path="approve/evaluator/:evaluatorId"
-                  element={<ApprovalDetailsView />}
-                />
+                <Route path="approve/staff/:staffId" element={<ApprovalDetailsView />}/>
+                <Route path="approve/evaluator/:evaluatorId" element={<ApprovalDetailsView />}/>
               </Route>
 
               {/* Staff Access*/}
               <Route element={<ProtectedRoute allowedRole={["staff"]} />}>
                 <Route path="approve/student" element={<Approval />} />
                 <Route path="approve/faculty" element={<Approval />} />
-                <Route
-                  path="approve/student/:studentId"
-                  element={<ApprovalDetailsView />}
-                />
-                <Route
-                  path="approve/faculty/:facultyId"
-                  element={<ApprovalDetailsView />}
-                />
+                <Route path="approve/student/:studentId" element={<ApprovalDetailsView />} />
+                <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
               </Route>
 
               {/* Admin and Staff Access */}
-              <Route
-                element={<ProtectedRoute allowedRole={["admin", "staff"]} />}
-              >
+              <Route element={<ProtectedRoute allowedRole={["admin", "staff"]} />}>
                 <Route path="users/student" element={<TotalUsers />} />
                 <Route path="users/faculty" element={<TotalUsers />} />
                 <Route path="users/staff" element={<TotalUsers />} />
                 <Route path="users/evaluator" element={<TotalUsers />} />
 
-                <Route path="users/student/:UserID" element={<UserDetails />} />
-                <Route path="users/faculty/:UserID" element={<UserDetails />} />
-                <Route path="users/staff/:UserID" element={<UserDetails />} />
-                <Route
-                  path="users/evaluator/:UserID"
-                  element={<UserDetails />}
-                />
+                <Route path="users/student/:userId" element={<UserDetails />} />
+                <Route path="users/faculty/:userId" element={<UserDetails />} />
+                <Route path="users/staff/:userId" element={<UserDetails />} />
+                <Route path="users/evaluator/:userId"element={<UserDetails />}/>
               </Route>
 
               {/*Common Protected Routes */}
               <Route
-                element={
-                  <ProtectedRoute allowedRole={["admin", "student", "staff"]} />
-                }
-              >
+                element={<ProtectedRoute allowedRole={["admin", "student", "staff"]} />}>
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
             </Route>
