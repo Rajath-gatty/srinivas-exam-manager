@@ -101,3 +101,7 @@
 .create-course-main .course-submit-btn {
     margin-top: 2em;
 }
+
+.course-meta .course-duration-select .MuiInputLabel-root{
+    top: -0.5em;
+}

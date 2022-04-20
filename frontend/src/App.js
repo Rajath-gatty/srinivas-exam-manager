@@ -6,6 +6,8 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard";
+import Attendance from "./pages/Attendance";
+import TimeTable from "./pages/TimeTable";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
@@ -16,7 +18,6 @@ import Evaluator from "./pages/Registration/Evaluator";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Courses from "./components/Admin/Course/Course";
-import TimeTable from "./components/Admin/TimeTable/TimeTable";
 import Layout from "./components/Layout";
 import Approval from "./components/Approval/Approval";
 import ApprovalDetailsView from "./components/Approval/ApprovalDetailsView";
@@ -24,7 +25,14 @@ import TotalUsers from "./components/Users/TotalUsers";
 import UserDetails from "./components/Users/UserDetails/UserDetails";
 import Create from "./components/Admin/Course/Create/Create";
 import InternalMarks from "./components/Faculty/InternalMarks/InternalMark";
-import Attendance from "./components/Faculty/Attendence/Attendance";
+import IndentRegular from "./components/Staff/Indent/IndentRegular";
+import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
+import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular";
+import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater";
+import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
+import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
+
+
 
 function App() {
   //MUI Components Fonts
@@ -53,7 +61,6 @@ function App() {
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
                 <Route path="courses/new-course" element={<Create />} />
-                <Route path="timetable" element={<TimeTable />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route path="approve/evaluator" element={<Approval />} />
                 <Route path="approve/staff/:staffId" element={<ApprovalDetailsView />}/>
@@ -66,13 +73,34 @@ function App() {
                 <Route path="approve/faculty" element={<Approval />} />
                 <Route path="approve/student/:studentId" element={<ApprovalDetailsView />} />
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
+                <Route path="indent/regular" element={<IndentRegular/>} />
+                <Route path="indent/repeater" element={<IndentRepeater/>} />
+                <Route path="payment/regular" element={<PaymentsRegular/>} />
+                <Route path="payment/repeater" element={<PaymentsRepeater/>} />
               </Route>
 
-              {/* Staff Access*/}
+              {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
                 <Route path="internal" element={<InternalMarks/>} />
-                <Route path="attendance" element={<Attendance/>} />
               </Route>
+              
+              {/* Student Access*/}
+              <Route element={<ProtectedRoute allowedRole={["student"]} />}>
+                <Route path="application/regular" element={<ApplicationRegular/>} />
+                <Route path="application/repeater" element={<ApplicationRepeater/>} />
+              </Route>
+
+              {/* Faculty and Student access*/}
+              <Route element={<ProtectedRoute allowedRole={["student","faculty"]} />}>
+                <Route path="attendance" element={<Attendance/>} />
+                <Route path="timetable" element={<TimeTable/>} />
+              </Route>
+
+              {/*Admin, Student and Evaluator access*/}
+              <Route element={<ProtectedRoute allowedRole={["student","evaluator","admin"]} />}>
+                <Route path="timetable" element={<TimeTable/>} />
+              </Route>
+
 
               {/* Admin and Staff Access */}
               <Route element={<ProtectedRoute allowedRole={["admin", "staff"]} />}>

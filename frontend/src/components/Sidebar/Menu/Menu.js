@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import SubMenu from "./Submenu/Submenu";
 
 const Menu = ({link, showMenu, setSubNavActive, setNavLinkActive, toggleDropdown}) => {
-
 return (
     <li>
             {link?.subMenu ? (

@@ -10,6 +10,7 @@ import Register from "./NavIcons/Register.svg";
 import Users from "./NavIcons/Users.svg";
 import InternalMarks from "./NavIcons/InternalMarks.svg";
 import Attendance from "./NavIcons/Attendance.svg";
+import Indent from "./NavIcons/Indent.svg";
 
 import SrinivasLogo from "./SrinivasLogo.svg";
 
@@ -37,5 +38,6 @@ export {
     StudentReg,
     LoginSvg,
     InternalMarks,
-    Attendance
+    Attendance,
+    Indent
 }

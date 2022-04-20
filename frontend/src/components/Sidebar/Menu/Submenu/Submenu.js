@@ -9,7 +9,7 @@ const SubMenu = ({
   toggleDropdown,
   setSubNavActive,
 }) => {
-  // console.log("rendering Submenu...");
+  console.log(icon);
   return (
     <div className="multiLink flex">
       <div

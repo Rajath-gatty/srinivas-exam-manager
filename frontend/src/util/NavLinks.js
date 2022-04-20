@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance } from "../Assets";
+import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application} from "../Assets";
 
 export const NavLinks = [
   {
@@ -106,6 +106,68 @@ export const NavLinks = [
             path: "/approve/faculty",
           },
         ],
+      },
+      {
+        title: "Indent",
+        icon: Indent,
+        subMenu: [
+          {
+            title: "Regular",
+            path: "/indent/regular",
+          },
+          {
+            title: "Repeater",
+            path: "/indent/repeater",
+          },
+        ],
+      },
+      {
+        title: "Payments",
+        icon: Payment,
+        subMenu: [
+          {
+            title: "Regular",
+            path: "/payments/regular",
+          },
+          {
+            title: "Repeater",
+            path: "/payments/repeater",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    role: "student",
+    links: [
+      {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: Dashboard,
+      },
+      {
+        title: "Attendance",
+        path: "/attendance",
+        icon: Attendance
+      },
+      {
+        title: "Application",
+        icon: Application,
+        subMenu: [
+          {
+            title: "Regular",
+            path: "/application/regular",
+          },
+          {
+            title: "Repeater",
+            path: "/application/repeater",
+          },
+        ],
+      },
+      {
+        title: "Time Table",
+        path: "/timetable",
+        icon: Calender,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FiArrowLeft, FiCheck, FiX } from "react-icons/fi";
 import { FaUserCircle, FaCamera } from "react-icons/fa";
@@ -10,17 +10,17 @@ const UserDetails = () => {
   const [hideBtn, setHideBtn] = useState("");
 
   const location = useLocation();
-  const { eligibility } = location.state;
+  // const { eligibility } = location.state;
 
-  useEffect(() => {
-    if (eligibility) {
-      setHideBtn("NotEligibleBtn");
-      setEligible("Eligible");
-    } else {
-      setHideBtn("EligibleBtn");
-      setEligible("NotEligible");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (eligibility) {
+  //     setHideBtn("NotEligibleBtn");
+  //     setEligible("Eligible");
+  //   } else {
+  //     setHideBtn("EligibleBtn");
+  //     setEligible("NotEligible");
+  //   }
+  // }, []);
 
   return (
     <div className="userinfo-container flex">
