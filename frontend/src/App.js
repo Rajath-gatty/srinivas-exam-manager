@@ -16,13 +16,15 @@ import Evaluator from "./pages/Registration/Evaluator";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import Courses from "./components/Admin/Course/Course";
-import TimeTable from "./components/Sidebar/TimeTable";
+import TimeTable from "./components/Admin/TimeTable/TimeTable";
 import Layout from "./components/Layout";
 import Approval from "./components/Approval/Approval";
 import ApprovalDetailsView from "./components/Approval/ApprovalDetailsView";
 import TotalUsers from "./components/Users/TotalUsers";
 import UserDetails from "./components/Users/UserDetails/UserDetails";
 import Create from "./components/Admin/Course/Create/Create";
+import InternalMarks from "./components/Faculty/InternalMarks/InternalMark";
+import Attendance from "./components/Faculty/Attendence/Attendance";
 
 function App() {
   //MUI Components Fonts
@@ -66,6 +68,12 @@ function App() {
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
               </Route>
 
+              {/* Staff Access*/}
+              <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
+                <Route path="internal" element={<InternalMarks/>} />
+                <Route path="attendance" element={<Attendance/>} />
+              </Route>
+
               {/* Admin and Staff Access */}
               <Route element={<ProtectedRoute allowedRole={["admin", "staff"]} />}>
                 <Route path="users/student" element={<TotalUsers />} />
@@ -81,7 +89,7 @@ function App() {
 
               {/*Common Protected Routes */}
               <Route
-                element={<ProtectedRoute allowedRole={["admin", "student", "staff"]} />}>
+                element={<ProtectedRoute allowedRole={["admin", "student","faculty", "staff"]} />}>
                 <Route path="/dashboard" element={<Dashboard />} />
               </Route>
             </Route>

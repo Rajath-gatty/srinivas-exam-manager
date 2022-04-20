@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender } from "../Assets";
+import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance } from "../Assets";
 
 export const NavLinks = [
   {
@@ -41,6 +41,26 @@ export const NavLinks = [
         path: "/timetable",
         icon: Calender,
       },
+    ],
+  },
+  {
+    role: "faculty",
+    links: [
+      {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: Dashboard,
+      },
+      {
+        title: "Attendance",
+        path: "/attendance",
+        icon: Attendance
+      },
+      {
+        title: "Internal Marks",
+        path: "/internal",
+        icon: InternalMarks
+      }
     ],
   },
   {

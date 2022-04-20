@@ -8,6 +8,8 @@ import Dashboard from "./NavIcons/Dashboard.svg";
 import Payment from "./NavIcons/Payment.svg";
 import Register from "./NavIcons/Register.svg";
 import Users from "./NavIcons/Users.svg";
+import InternalMarks from "./NavIcons/InternalMarks.svg";
+import Attendance from "./NavIcons/Attendance.svg";
 
 import SrinivasLogo from "./SrinivasLogo.svg";
 
@@ -33,5 +35,7 @@ export {
     FacultyReg,
     StaffReg,
     StudentReg,
-    LoginSvg
+    LoginSvg,
+    InternalMarks,
+    Attendance
 }
