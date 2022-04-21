@@ -93,11 +93,10 @@ function App() {
               {/* Faculty and Student access*/}
               <Route element={<ProtectedRoute allowedRole={["student","faculty"]} />}>
                 <Route path="attendance" element={<Attendance/>} />
-                <Route path="timetable" element={<TimeTable/>} />
               </Route>
 
               {/*Admin, Student and Evaluator access*/}
-              <Route element={<ProtectedRoute allowedRole={["student","evaluator","admin"]} />}>
+              <Route element={<ProtectedRoute allowedRole={["student","evaluator","faculty","admin"]} />}>
                 <Route path="timetable" element={<TimeTable/>} />
               </Route>
 
