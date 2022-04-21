@@ -1,5 +1,7 @@
+import AdminTimeTable from "../components/Admin/TimeTable/AdminTimeTable";
+
 const  TimeTable = () => {
-     return <h1>Timetable Page</h1>
+     return <AdminTimeTable/>
 }
 
 export default TimeTable;
