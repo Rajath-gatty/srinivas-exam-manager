@@ -1,0 +1,141 @@
+.application-regular,
+.application-repeater {
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 1em 0;
+}
+
+.application-regular h2 {
+  color: var(--text-color);
+  padding: 1em 0;
+}
+
+.application-semester {
+  background-color: var(--primary-color);
+  color: var(--white);
+  width: 30em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.application-form {
+  flex-direction: column;
+  margin: 1em 0;
+  width: 30em;
+}
+
+.application-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  padding: 0.5em;
+  width: 100%;
+  border: 1px solid var(--grey-bg);
+  border-top: none;
+}
+
+.application-row.header {
+  background-color: var(--grey-bg);
+}
+
+.application-total {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+  padding: 0.5em;
+  width: 35em;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.application-submit {
+  border: none;
+  outline: none;
+  background-color: var(--primary-color);
+  padding: 0.8em 2em;
+  color: var(--white);
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 1em;
+}
+
+/* Repeater Part */
+.application-repeater {
+  min-height: 100vh;
+}
+
+.application-repeater h2 {
+  color: var(--text-color);
+  /* margin-top: -4em; */
+}
+
+.application-selector {
+  color: var(--text-color);
+  margin: 1em 0;
+}
+
+.application-selector .select-sem {
+  width: 10em;
+  margin-left: 1em;
+}
+
+.select-sem label {
+  top: -0.5em;
+}
+
+.MuiMenuItem-root {
+  justify-content: center !important;
+}
+
+.subject-checkbox {
+  position: relative;
+}
+
+.subject-checkbox .MuiCheckbox-root {
+  padding: 0;
+  width: fit-content;
+  position: absolute;
+  left: 0;
+}
+
+.selected-subjects {
+  flex-direction: column;
+  margin-top: 2em;
+}
+
+.selected-subject-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10em;
+  background-color: var(--grey-bg);
+  padding: 0.5em 1em;
+}
+
+.selected-subject-header span:nth-child(2) {
+  margin-left: 5em;
+}
+
+.selected-subject-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 15em;
+  padding: 0.25em 0;
+}
+
+.selected-subject-list span:nth-child(1) {
+  padding-left: 2em;
+  text-align: center;
+}
+.selected-subject-list span:nth-child(2) {
+  margin-left: 2em;
+}
+
+.application-repeater .application-total {
+  width: 40em;
+  margin-top: 1em;
+}
+
+.application-repeater .application-total span:nth-child(1) {
+  margin-left: 3em;
+}
