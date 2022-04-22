@@ -1,0 +1,63 @@
+.attendance-main {
+    margin: 2em;
+    width: 100%;
+}
+
+.attendance-main .filter-wrapper {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+}
+
+.select-filter {
+    width: 230px;
+}
+
+.attendance-main .filter-wrapper .search-form {
+    width: 100%;
+    margin-right: 1.5em;
+}
+
+.attendance-main .filter-wrapper .search-input {
+    width: 100%;
+    padding: 0.85em 0.75em;
+    background: var(--grey-bg);
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.attendance-main .filter-wrapper .search-input::placeholder {
+    color: var(--light-grey);
+}
+
+.attendance-table-wrapper {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+.attendance-table-wrapper .thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.attendance-table-wrapper td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.attendance-table-wrapper .attendance-table-row {
+    border: 1px solid var(--grey-bg);
+}
+
+
+
+
+
+.attendance-avatar-wrapper a {
+    cursor: pointer;
+}
