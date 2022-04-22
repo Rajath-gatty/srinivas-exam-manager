@@ -91,6 +91,7 @@ function App() {
               </Route>
 
               {/* Faculty and Student access*/}
+<<<<<<< HEAD
               <Route element={<ProtectedRoute allowedRole={["student", "faculty"]} />}>
                 <Route path="attendance" element={<Attendance />} />
                 <Route path="timetable" element={<TimeTable />} />
@@ -99,6 +100,15 @@ function App() {
               {/*Admin, Student and Evaluator access*/}
               <Route element={<ProtectedRoute allowedRole={["student", "evaluator", "admin"]} />}>
                 <Route path="timetable" element={<TimeTable />} />
+=======
+              <Route element={<ProtectedRoute allowedRole={["student","faculty"]} />}>
+                <Route path="attendance" element={<Attendance/>} />
+              </Route>
+
+              {/*Admin, Student and Evaluator access*/}
+              <Route element={<ProtectedRoute allowedRole={["student","evaluator","faculty","admin"]} />}>
+                <Route path="timetable" element={<TimeTable/>} />
+>>>>>>> 1336adc9a74297b026084764674c90b00c3ded3b
               </Route>
 
 

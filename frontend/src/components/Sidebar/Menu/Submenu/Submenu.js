@@ -1,4 +1,4 @@
-import {IoIosArrowForward} from "react-icons/io"
+import { IoIosArrowForward } from "react-icons/io";
 import { NavLink } from "react-router-dom";
 
 const SubMenu = ({
@@ -9,7 +9,6 @@ const SubMenu = ({
   toggleDropdown,
   setSubNavActive,
 }) => {
-  console.log(icon);
   return (
     <div className="multiLink flex">
       <div
@@ -22,7 +21,7 @@ const SubMenu = ({
       >
         <img src={icon} alt={title} width="20px" />
         <span>{title}</span>
-        <IoIosArrowForward size={20} className="sidebar-arrow"/>
+        <IoIosArrowForward size={20} className="sidebar-arrow" />
       </div>
       {showMenu.find((item) => item.text === title).state && (
         <div className="dropdown">

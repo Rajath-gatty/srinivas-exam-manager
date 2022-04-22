@@ -1,5 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import {useContextData} from "../hooks/useContextData";
+import PageNotFound from "../pages/PageNotFound/PageNotFound";
 
 const ProtectedRoute = ({ allowedRole }) => {
     const {role} = useContextData();
@@ -7,7 +8,7 @@ const ProtectedRoute = ({ allowedRole }) => {
     return (
            allowedRole.find(item => item===role)
            ?<Outlet/>
-           :<Navigate to="/notfound" replace state={{from: location}}/>
+           :<PageNotFound/>
     )
 }
 
