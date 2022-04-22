@@ -32,8 +32,6 @@ import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
 
-
-
 function App() {
   //MUI Components Fonts
   const theme = createTheme({
@@ -75,8 +73,8 @@ function App() {
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
                 <Route path="indent/regular" element={<IndentRegular/>} />
                 <Route path="indent/repeater" element={<IndentRepeater/>} />
-                <Route path="payment/regular" element={<PaymentsRegular/>} />
-                <Route path="payment/repeater" element={<PaymentsRepeater/>} />
+                <Route path="payments/regular" element={<PaymentsRegular/>} />
+                <Route path="payments/repeater" element={<PaymentsRepeater/>} />
               </Route>
 
               {/* Faculty Access*/}

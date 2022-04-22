@@ -10,10 +10,11 @@
 
 .modal-content-wrapper {
     position: absolute;
-    top: 40%;
-    left: 60%;
+    top: 45%;
+    left: 50%;
     transform: translate(-50%,-50%);
     padding: 2em;
     background: var(--white);
+    border-radius: 10px;
     z-index: 5;
 }

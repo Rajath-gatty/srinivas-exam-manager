@@ -29,6 +29,13 @@ const AdminTimeTable = () => {
         setFiles(newArr);
     }
 
+    const convertToMb = (bytes) => {
+        var sizes = ['Bytes', 'KB', 'MB'];
+        if (bytes === 0) return '0 Byte';
+        var i = parseInt(Math.log(bytes) / Math.log(1024));
+        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
+    }
+
     return(
         <>
         <div className="admin-timetable-main">
@@ -72,7 +79,7 @@ const AdminTimeTable = () => {
                                 </div>
                                 <div className="file-info">
                                     <h4>{file.name}</h4>
-                                    <p>{file.size}</p>
+                                    <p>{convertToMb(file.size)}</p>
                                 </div>
                                 <IoMdClose onClick={() => removeUploadedPdf(index)} className="close-icon"/>
                             </div>
