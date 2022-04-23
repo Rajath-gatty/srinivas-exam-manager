@@ -73,8 +73,8 @@ function App() {
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
-                <Route path="payment/regular" element={<PaymentsRegular />} />
-                <Route path="payment/repeater" element={<PaymentsRepeater />} />
+                <Route path="payments/regular" element={<PaymentsRegular />} />
+                <Route path="payments/repeater" element={<PaymentsRepeater />} />
               </Route>
 
               {/* Faculty Access*/}

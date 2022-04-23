@@ -9,10 +9,6 @@
     justify-content: space-between;
 }
 
-.select-filter {
-    width: 230px;
-}
-
 .attendance-main .filter-wrapper .search-form {
     width: 100%;
     margin-right: 1.5em;
@@ -42,21 +38,25 @@
 .attendance-table-wrapper .thead th {
     padding: 0.75em;
     background: var(--grey-bg);
+    width: 100%;
 }
 
 .attendance-table-wrapper td {
     padding: 0.75em;
     color: var(--text-color);
     font-size: 0.9em;
+    width: 100%;
 }
 
 .attendance-table-wrapper .attendance-table-row {
     border: 1px solid var(--grey-bg);
+    width: 100%;
 }
 
-
-
-
+.attendance-table-wrapper .attendance-table-row input {
+    border: 1px solid var(--light-grey);
+    padding: 0.5em;
+}
 
 .attendance-avatar-wrapper a {
     cursor: pointer;

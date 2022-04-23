@@ -105,3 +105,7 @@
 .course-meta .course-duration-select .MuiInputLabel-root{
     top: -0.5em;
 }
+
+.create-course-main .create-svg {
+    cursor: pointer;
+}

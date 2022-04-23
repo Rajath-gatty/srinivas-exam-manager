@@ -82,9 +82,6 @@ const InternalMarks = () => {
                     <InternalList></InternalList>
                     <InternalList></InternalList>
                     <InternalList></InternalList>
-                    <InternalList></InternalList>
-                    <InternalList></InternalList>
-
                 </tbody>
             </table>
 

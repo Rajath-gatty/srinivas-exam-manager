@@ -82,8 +82,6 @@ const AttendanceFaculty = () => {
                     <AttendanceList></AttendanceList>
                     <AttendanceList></AttendanceList>
                     <AttendanceList></AttendanceList>
-                    <AttendanceList></AttendanceList>
-
                 </tbody>
             </table>
 

@@ -9,10 +9,6 @@
     /* justify-content: space-between; */
 }
 
-.select-filter {
-    width: 430px;
-}
-
 .internal-main .filter-wrapper .search-form {
     width: 100%;
     margin-right: 1.5em;
@@ -54,8 +50,12 @@
     border: 1px solid var(--grey-bg);
 }
 
-.internal-input-row {
+ .internal-table-row input {
+    padding: 0.5em;
+    border: 1px solid var(--light-grey);
+}
 
+/* .internal-input-row {
     height: 10px;
     width: 10px;
-}
+} */
