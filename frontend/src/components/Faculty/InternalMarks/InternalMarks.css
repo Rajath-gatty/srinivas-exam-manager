@@ -9,13 +9,10 @@
   /* justify-content: space-between; */
 }
 
-<<<<<<< HEAD
-=======
 .internal-main .select-filter {
   width: 430px;
 }
 
->>>>>>> 4a09352be1a5cf5014a8d1100f6acd49380f64e2
 .internal-main .filter-wrapper .search-form {
   width: 100%;
   margin-right: 1.5em;
@@ -57,19 +54,7 @@
   border: 1px solid var(--grey-bg);
 }
 
-<<<<<<< HEAD
- .internal-table-row input {
-    padding: 0.5em;
-    border: 1px solid var(--light-grey);
-}
-
-/* .internal-input-row {
-    height: 10px;
-    width: 10px;
-} */
-=======
 .internal-input-row {
   height: 10px;
   width: 10px;
 }
->>>>>>> 4a09352be1a5cf5014a8d1100f6acd49380f64e2

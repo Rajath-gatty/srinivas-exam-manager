@@ -9,13 +9,10 @@
   /* justify-content: space-between; */
 }
 
-<<<<<<< HEAD
-=======
 .attendance-main .select-filter {
   width: 430px;
 }
 
->>>>>>> 4a09352be1a5cf5014a8d1100f6acd49380f64e2
 .attendance-main .filter-wrapper .search-form {
   width: 100%;
   margin-right: 1.5em;
@@ -43,30 +40,6 @@
 }
 
 .attendance-table-wrapper .thead th {
-<<<<<<< HEAD
-    padding: 0.75em;
-    background: var(--grey-bg);
-    width: 100%;
-}
-
-.attendance-table-wrapper td {
-    padding: 0.75em;
-    color: var(--text-color);
-    font-size: 0.9em;
-    width: 100%;
-}
-
-.attendance-table-wrapper .attendance-table-row {
-    border: 1px solid var(--grey-bg);
-    width: 100%;
-}
-
-.attendance-table-wrapper .attendance-table-row input {
-    border: 1px solid var(--light-grey);
-    padding: 0.5em;
-}
-
-=======
   padding: 0.75em;
   background: var(--grey-bg);
 }
@@ -81,7 +54,6 @@
   border: 1px solid var(--grey-bg);
 }
 
->>>>>>> 4a09352be1a5cf5014a8d1100f6acd49380f64e2
 .attendance-avatar-wrapper a {
   cursor: pointer;
 }
