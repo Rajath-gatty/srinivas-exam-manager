@@ -1,6 +1,6 @@
-import "./Course.css"
-import {Link} from "react-router-dom"
-import {AiOutlinePlus} from "react-icons/ai";
+import "./Course.css";
+import { Link } from "react-router-dom";
+import { HiPlus } from "react-icons/hi";
 import CourseList from "./CourseList";
 
 const Course = () => {
@@ -8,13 +8,17 @@ const Course = () => {
     <div className="course-main">
       <div className="course-search-wrapper">
         <form>
-          <input type="text" placeholder="Search course" className="course-search-input" />
+          <input
+            type="text"
+            placeholder="Search course"
+            className="course-search-input"
+          />
         </form>
         <Link to="/courses/new-course">
-        <button className="course-create-btn btn flex">
-          <AiOutlinePlus size={20}/>
-          <span>Create</span>
-        </button>
+          <button className="course-create-btn btn flex">
+            <HiPlus size={20} />
+            <span>Create</span>
+          </button>
         </Link>
       </div>
       <table className="course-list-table">
@@ -27,18 +31,17 @@ const Course = () => {
           </tr>
         </thead>
         <tbody>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
-          <CourseList/>
+          <CourseList />
+          <CourseList />
+          <CourseList />
+          <CourseList />
+          <CourseList />
+          <CourseList />
+          <CourseList />
+          <CourseList />
         </tbody>
       </table>
     </div>
-
   );
 };
 

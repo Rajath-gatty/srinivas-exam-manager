@@ -95,7 +95,6 @@ function App() {
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
                 <Route path="internal" element={<InternalMarks />} />
-                <Route path="test" element={<AttendanceStudent />} />
               </Route>
 
               {/* Student Access*/}
@@ -157,6 +156,9 @@ function App() {
                 }
               >
                 <Route path="/dashboard" element={<Dashboard />} />
+
+                {/* Testing Route */}
+                <Route path="testing" element={<AttendanceStudent />} />
               </Route>
             </Route>
             {/* Page Not Found Route */}
