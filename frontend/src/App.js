@@ -71,17 +71,10 @@ function App() {
                 <Route path="approve/faculty" element={<Approval />} />
                 <Route path="approve/student/:studentId" element={<ApprovalDetailsView />} />
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
-<<<<<<< HEAD
-                <Route path="indent/regular" element={<IndentRegular/>} />
-                <Route path="indent/repeater" element={<IndentRepeater/>} />
-                <Route path="payments/regular" element={<PaymentsRegular/>} />
-                <Route path="payments/repeater" element={<PaymentsRepeater/>} />
-=======
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
                 <Route path="payment/regular" element={<PaymentsRegular />} />
                 <Route path="payment/repeater" element={<PaymentsRepeater />} />
->>>>>>> 5f1d3b5f812950d687627bb19d2dd0c1b038585d
               </Route>
 
               {/* Faculty Access*/}
@@ -96,16 +89,6 @@ function App() {
               </Route>
 
               {/* Faculty and Student access*/}
-<<<<<<< HEAD
-              <Route element={<ProtectedRoute allowedRole={["student", "faculty"]} />}>
-                <Route path="attendance" element={<Attendance />} />
-                <Route path="timetable" element={<TimeTable />} />
-              </Route>
-
-              {/*Admin, Student and Evaluator access*/}
-              <Route element={<ProtectedRoute allowedRole={["student", "evaluator", "admin"]} />}>
-                <Route path="timetable" element={<TimeTable />} />
-=======
               <Route element={<ProtectedRoute allowedRole={["student","faculty"]} />}>
                 <Route path="attendance" element={<Attendance/>} />
               </Route>
@@ -113,7 +96,6 @@ function App() {
               {/*Admin, Student and Evaluator access*/}
               <Route element={<ProtectedRoute allowedRole={["student","evaluator","faculty","admin"]} />}>
                 <Route path="timetable" element={<TimeTable/>} />
->>>>>>> 1336adc9a74297b026084764674c90b00c3ded3b
               </Route>
 
 
