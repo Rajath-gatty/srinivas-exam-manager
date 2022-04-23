@@ -1,22 +1,8 @@
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import "./TotalUsers.css";
 import UserList from "./UserList";
 import FilterSearch from "../UI/FilterSearch/FilterSearch";
 
 const TotalUsers = () => {
-  const departments = [
-    "Computer Science & Information Science",
-    "Management & Commerce",
-    "Engineering & Technology",
-    "Social Sciences & Humanities",
-    "Aviation Studies",
-    "Physiotherapy",
-    "Hotel Management & Tourism",
-    "Education",
-    "Allied Health Sciences",
-    "Nursing Science",
-  ];
-
   return (
     <div className="users-main">
       <FilterSearch />
