@@ -23,7 +23,7 @@ const FilterSearch = () => {
         <input type="text" placeholder="Search" />
       </form>
       <div className="filterSearch-eligibility selectbox">
-        <FormControl className="filterSearch-SelectInput" fullWidth>
+        <FormControl className="filterSearch-SelectInput">
           <InputLabel>Filter by Eligibility</InputLabel>
           <Select
             label="Department"
@@ -40,7 +40,7 @@ const FilterSearch = () => {
         </FormControl>
       </div>
       <div className="filterSearch-course selectbox">
-        <FormControl className="filterSearch-SelectInput" fullWidth>
+        <FormControl className="filterSearch-SelectInput">
           <InputLabel>Filter by Department</InputLabel>
           <Select
             label="Department"

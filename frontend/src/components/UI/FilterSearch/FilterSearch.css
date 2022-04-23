@@ -1,22 +1,20 @@
 .filterSearch-container {
   display: flex;
-  justify-content: space-evenly;
+  gap: 1em;
   width: 100%;
   height: fit-content;
-  margin: 1.5em;
+  /* margin: 2em; */
 }
 
 .filterSearch-form {
-  position: relative;
   padding: 0.5em;
-  /* border: 1px solid #000; */
+  width: 100%;
   border-radius: 5px;
   background-color: var(--grey-bg);
 }
 
 .filterSearch-form svg {
-  position: absolute;
-  left: 0.5em;
+  margin: 0 0.5em;
 }
 
 .filterSearch-form input {
@@ -33,6 +31,16 @@
   color: var(--light-grey);
 }
 
-.filterSearch-container .selectbox {
-  width: 300px;
+.filterSearch-container .filterSearch-SelectInput {
+  width: 230px;
+}
+
+.filterSearch-container .filterSearch-SelectInput label {
+  background-color: #fff;
+  padding-right: 0.3em;
+  top: -0.5em;
+}
+
+.filterSearch-container .filterSearch-SelectInput label[data-shrink="true"] {
+  top: 0;
 }
