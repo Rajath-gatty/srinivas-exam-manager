@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import "./TotalUsers.css";
 import UserList from "./UserList";
+import FilterSearch from "../UI/FilterSearch/FilterSearch";
 
 const TotalUsers = () => {
   const departments = [
@@ -18,47 +19,8 @@ const TotalUsers = () => {
 
   return (
     <div className="users-main">
-      <div className="filter-wrapper">
-        <form className="search-form">
-          <input type="text" placeholder="Search" className="search-input" />
-        </form>
-        <div className="filter-eligibility">
-          <FormControl className="SelectInput">
-            <InputLabel>Filter by Eligibility</InputLabel>
-            <Select
-              label="Department"
-              defaultValue=""
-              placeholder="Filter by Course"
-              size="small"
-              className="select-filter"
-            >
-              {departments.map((opt) => (
-                <MenuItem key={opt} value={opt}>
-                  {opt}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-        <div className="filter-by-course">
-          <FormControl className="SelectInput">
-            <InputLabel>Filter by Department</InputLabel>
-            <Select
-              className="select-filter"
-              label="Department"
-              defaultValue=""
-              placeholder="Filter by Course"
-              size="small"
-            >
-              {departments.map((opt) => (
-                <MenuItem key={opt} value={opt}>
-                  {opt}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-      </div>
+      <FilterSearch />
+
       <table className="users-table-wrapper">
         <thead className="thead">
           <tr>

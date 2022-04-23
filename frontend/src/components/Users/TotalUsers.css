@@ -3,35 +3,6 @@
   width: 100%;
 }
 
-.users-main .filter-wrapper {
-  display: flex;
-  gap: 1em;
-  /* justify-content: space-between; */
-}
-
-.select-filter {
-  width: 230px;
-}
-
-.users-main .filter-wrapper .search-form {
-  width: 100%;
-  margin-right: 1.5em;
-}
-
-.users-main .filter-wrapper .search-input {
-  width: 100%;
-  padding: 0.85em 0.75em;
-  background: var(--grey-bg);
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.users-main .filter-wrapper .search-input::placeholder {
-  color: var(--light-grey);
-}
-
 .users-table-wrapper {
   width: 100%;
   text-align: center;
