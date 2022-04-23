@@ -1,0 +1,38 @@
+.filterSearch-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: fit-content;
+  margin: 1.5em;
+}
+
+.filterSearch-form {
+  position: relative;
+  padding: 0.5em;
+  /* border: 1px solid #000; */
+  border-radius: 5px;
+  background-color: var(--grey-bg);
+}
+
+.filterSearch-form svg {
+  position: absolute;
+  left: 0.5em;
+}
+
+.filterSearch-form input {
+  border: none;
+  outline: none;
+  background-color: var(--grey-bg);
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.filterSearch-form input::placeholder {
+  color: var(--light-grey);
+}
+
+.filterSearch-container .selectbox {
+  width: 300px;
+}

@@ -138,3 +138,8 @@ a {
   padding-bottom: 0.2em;
   color: var(--light-grey);
 }
+
+/* MUI Select Label fix */
+.MuiFormControl-root .MuiInputLabel-root {
+  background-color: var(--white) !important;
+}
