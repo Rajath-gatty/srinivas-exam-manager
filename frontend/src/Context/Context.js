@@ -4,11 +4,7 @@ export const Context = React.createContext();
 
 const state = {
   isAuth: true,
-<<<<<<< HEAD
-  role: "admin",
-=======
-  role: "faculty",
->>>>>>> 5f1d3b5f812950d687627bb19d2dd0c1b038585d
+  role: "staff",
 };
 
 const ContextProvider = (props) => {
