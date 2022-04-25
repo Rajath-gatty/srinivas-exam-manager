@@ -14,8 +14,6 @@ import SemList from "./SemList";
 import { useReducer, useState } from "react";
 
 const initialState = {
-  name: "",
-  duration: "",
   semesters: [],
 };
 
@@ -58,21 +56,23 @@ const courseDetailsReducer = (state, action) => {
       .subjects.splice(action.payload.subIndex, 1);
     return { ...state };
   }
+
   if (action.type === "SUBMIT") {
     state.totalSemesters = state.semesters.length;
     state.name = action.payload.course;
     state.duration = action.payload.duration;
-    return { ...state };
+    semCount=0;
+    return {...state};
   }
 };
 
 const Create = () => {
   const [state, dispatch] = useReducer(courseDetailsReducer, initialState);
-  const [course, setCourse] = useState();
-  const [duration, setDuration] = useState();
+  const [course, setCourse] = useState('');
+  const [duration, setDuration] = useState('');
 
   const navigate = useNavigate();
-  //   console.log(state.semesters[0].subjects);
+    console.log(state);
 
   const addSem = (e) => {
     e.preventDefault();
@@ -93,7 +93,9 @@ const Create = () => {
 
   const newCourseSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "SUBMIT", payload: { course, duration } });
+    if(course!=='' && duration!=='') {
+      dispatch({ type: "SUBMIT", payload: { course, duration } });
+    }
   };
 
   return (
@@ -137,7 +139,7 @@ const Create = () => {
               <h2>Semesters</h2>
               <button
                 className="btn-outlined new-sem-btn flex"
-                onClick={addSem}
+                onClick={(e) => addSem(e)}
               >
                 <HiPlus
                   size={20}

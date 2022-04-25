@@ -15,6 +15,11 @@ const FilterSearch = () => {
     "Allied Health Sciences",
     "Nursing Science",
   ];
+  
+  const eligibility = [
+    "Eligible",
+    "Not Eligible",
+  ];
 
   return (
     <div className="filterSearch-container">
@@ -31,7 +36,7 @@ const FilterSearch = () => {
             placeholder="Filter by Course"
             size="small"
           >
-            {departments.map((opt) => (
+            {eligibility.map((opt) => (
               <MenuItem key={opt} value={opt}>
                 {opt}
               </MenuItem>

@@ -12,13 +12,6 @@
   top: -5em;
 }
 
-.userinfo-container .back-btn {
-  position: absolute;
-  left: 2em;
-  top: 2em;
-  cursor: pointer;
-}
-
 .userinfo-avatar {
   position: relative;
   width: fit-content;

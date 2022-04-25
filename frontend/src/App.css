@@ -124,20 +124,7 @@ a {
 .section:nth-child(2) {
   flex: 1 1 0;
 }
-/* Margin to move conent away from sidebar */
-/* add className "content" to all main containers of evry page  */
-/* .content {
- width: 65%;
-} */
 
-.back-btn img {
-  filter: var(--svg-grey);
-}
-
-.back-btn span {
-  padding-bottom: 0.2em;
-  color: var(--light-grey);
-}
 
 /* MUI Select Label fix */
 .MuiFormControl-root .MuiInputLabel-root {

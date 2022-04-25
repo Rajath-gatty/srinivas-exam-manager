@@ -1,0 +1,11 @@
+.back-btn {
+    position: absolute;
+    left: 2em;
+    top: 2em;
+    cursor: pointer;
+  }
+  
+  .back-btn span {
+    padding-bottom: 0.2em;
+    color: var(--light-grey);
+  }
