@@ -1,0 +1,46 @@
+.filterSearch-container {
+  display: flex;
+  gap: 1em;
+  width: 100%;
+  height: fit-content;
+  /* margin: 2em; */
+}
+
+.filterSearch-form {
+  padding: 0.5em;
+  width: 100%;
+  border-radius: 5px;
+  background-color: var(--grey-bg);
+}
+
+.filterSearch-form svg {
+  margin: 0 0.5em;
+}
+
+.filterSearch-form input {
+  border: none;
+  outline: none;
+  background-color: var(--grey-bg);
+  font-size: 1em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.filterSearch-form input::placeholder {
+  color: var(--light-grey);
+}
+
+.filterSearch-container .filterSearch-SelectInput {
+  width: 230px;
+}
+
+.filterSearch-container .filterSearch-SelectInput label {
+  background-color: #fff;
+  padding-right: 0.3em;
+  top: -0.5em;
+}
+
+.filterSearch-container .filterSearch-SelectInput label[data-shrink="true"] {
+  top: 0;
+}

@@ -1,7 +1,7 @@
+import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+
 const AttendanceStudent = () => {
-    return(
-        <h1>AttendanceStudent Page</h1>
-    );
-}
+  return <FilterSearch />;
+};
 
 export default AttendanceStudent;

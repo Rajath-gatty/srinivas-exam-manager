@@ -1,33 +1,36 @@
 .create-course-main {
-    margin: 2em;
-    width: 100%;
+  margin: 2em;
+  width: 100%;
 }
 
 .create-course-main form {
-    width: 100%;
+  width: 100%;
 }
 
 .create-course-main .back-btn {
-    justify-content: flex-start;
-} 
+  justify-content: flex-start;
+}
 
 .create-course-main .main-hdng {
-    color: var(--primary-color);
-    font-weight: bolder;
-    font-size: 2em;
-    margin-top: 1em;
+  color: var(--primary-color);
+  font-weight: bolder;
+  font-size: 2em;
+  margin-top: 1em;
 }
 
 .create-course-main .course-details-wrapper .course-meta {
-    display: flex;
-    gap: 2em;
-    margin-top: 2em;
-    margin-bottom: 3em;
-    max-width: 600px;
+  display: flex;
+  gap: 2em;
+  margin-top: 2em;
+  margin-bottom: 3em;
+  max-width: 600px;
 }
 
-.create-course-main .course-details-wrapper .course-meta .course-duration-select {
-    width: 200px;
+.create-course-main
+  .course-details-wrapper
+  .course-meta
+  .course-duration-select {
+  width: 200px;
 }
 
 /* .create-course-main .semester-wrapper {
@@ -36,72 +39,112 @@
 } */
 
 .create-course-main .semester-wrapper .semester-header {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 .create-course-main .semester-wrapper .semester-header h2 {
-    color: var(--dark-grey);
+  color: var(--dark-grey);
 }
 
 .create-course-main .semester-wrapper .semester .semester-header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.semester .semester-header .remove-svg {
+  position: absolute;
+  right: -0.5em;
+  top: -0.5em;
+  cursor: pointer;
 }
 
 .create-course-main .semester-wrapper .semester {
-    max-width: 600px;
-    padding: 2em;
-    border: 1px solid var(--grey-bg);
-    margin-top: 2em;
-    box-shadow: 4px 3px 8px -4px rgba(145,145,145,0.5);
+  max-width: 600px;
+  padding: 1.5em;
+  border: 1px solid var(--grey-bg);
+  margin-top: 2em;
+  box-shadow: 4px 3px 8px -4px rgba(145, 145, 145, 0.5);
 }
 
 .create-course-main .semester-wrapper .semester .sem-text {
-    color: var(--text-color);
-    font-size: 1em;
-    margin-bottom: 1em;
+  color: var(--text-color);
+  font-size: 1em;
+  margin-bottom: 1em;
 }
 
 .create-course-main .semester-wrapper .semester .MuiInput-input {
-    border-bottom: none !important; 
+  border-bottom: none !important;
 }
 
 .create-course-main .subject-details-wrapper {
-    display: flex;
-    gap: 2em;
+  display: flex;
+  gap: 2em;
 }
 
 .create-course-main .add-subject-btn,
 .create-course-main .new-sem-btn {
-    gap: 0.5em;
+  gap: 0.5em;
+}
+
+.semester .subject-info-main {
+  margin-top: 1em;
 }
 
 .create-course-main .subject-info-wrapper {
-    display: inline-flex;
-    padding: 0.5em 0.75em;
-    background: var(--light-primary);
-    padding: 1em;
-    color: var(--text-color);
-    gap: 1em;
-    margin-top: 1em;
-    margin-right: 1em;
+  display: inline-flex;
+  padding: 0.5em 0.75em;
+  background: var(--light-primary);
+  /* padding: 1em; */
+  color: var(--text-color);
+  gap: 1em;
+  margin-top: 1em;
+  margin-right: 1em;
+  border-radius: 6px;
 }
 
 .create-course-main .subject-info-wrapper h3 {
-    color: var(--primary-color);
-    margin-bottom: 0.25em;
-    font-size: 1em;
+  color: var(--primary-color);
+  margin-bottom: 0.25em;
+  font-size: 1em;
 }
 
 .create-course-main .subject-info-wrapper p {
-    font-size: 0.9em;
+  font-size: 0.9em;
 }
 
 .create-course-main .course-submit-btn {
-    margin-top: 2em;
+  margin-top: 2em;
 }
 
-.course-meta .course-duration-select .MuiInputLabel-root{
-    top: -0.5em;
+.course-meta .course-duration-select .MuiInputLabel-root {
+  top: -0.5em;
+}
+
+.create-course-main .create-svg {
+  cursor: pointer;
+}
+
+.semester .subject-details-wrapper .subject-input label {
+  margin-left: 0.3em;
+}
+
+.semester .subject-details-wrapper .add-subject-btn {
+  font-size: 0.9em;
+  width: 10em;
+  height: 2.5em;
+  padding: 0 1em;
+}
+
+.semester .subject-info-wrapper .subject-info {
+  flex-direction: column;
+}
+
+.semester .subject-info-wrapper .close-svg {
+  transform: rotate(45deg);
+  position: relative;
+  top: -0.8em;
+  right: -0.4em;
+  cursor: pointer;
 }
