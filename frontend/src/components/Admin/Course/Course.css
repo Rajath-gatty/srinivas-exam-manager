@@ -55,6 +55,11 @@
   font-size: 0.9em;
 }
 
+.course-main .course-list-table tbody tr:hover td {
+  background: var(--grey-bg);
+  cursor: pointer;
+}
+
 .course-main .course-list-table tbody tr {
   border: 1px solid var(--grey-bg);
 }
@@ -66,4 +71,9 @@
 .course-main .course-edit-btn {
   gap: 0.5em;
   margin: auto;
+  background: none;
+}
+
+.course-main .course-edit-btn:hover {
+  background: var(--primary-color);
 }

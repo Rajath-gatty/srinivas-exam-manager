@@ -23,9 +23,8 @@ const SemList = (props) => {
         newArr.subjects.push({ name: subjectName, code: subjectCode });
         return newArr;
       });
+      props.addSubjectsToReducer(subjects);
     }
-
-    props.addSubjectsToReducer(subjects);
   };
   // console.log(subjects);
 

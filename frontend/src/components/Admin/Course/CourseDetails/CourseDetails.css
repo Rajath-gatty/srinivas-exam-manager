@@ -1,0 +1,65 @@
+.course-details-main {
+    margin: 0 2em;
+    width: 100%;
+    position: relative;
+}
+
+.course-details-main .course-details-header {
+    text-align: center;
+    display: flex;
+    color: var(--text-color);
+    margin: 2em 0;
+}
+
+.course-details-main .course-details-header .course-details-content {
+    /* text-align: left; */
+    margin-right: 5em;
+    flex: 1;
+}   
+
+.course-details-main .course-details-header h2 {
+    font-size: 1.8em;
+}
+
+.course-details-main .course-details-table-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+    margin-top: 2em;
+}
+
+.course-details-main .course-details-list-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.course-details-main .course-details-table {
+    max-width: 500px;
+    width: 100%;
+}
+
+.course-details-main .course-details-table p {
+    text-align: center;
+    color: var(--white);
+    background: var(--primary-color);
+    padding: 0.5em ;
+}
+  
+  .course-details-main .course-details-list-table thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+  }
+  
+  .course-details-main .course-details-list-table  tbody td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+  }
+  
+  .course-details-main .course-details-list-table  tbody tr {
+    border: 1px solid var(--grey-bg);
+  }

@@ -65,7 +65,7 @@
   padding: 1.5em;
   border: 1px solid var(--grey-bg);
   margin-top: 2em;
-  box-shadow: 4px 3px 8px -4px rgba(145, 145, 145, 0.5);
+  box-shadow: 4px 4px 4px -5px rgba(145, 145, 145, 1);
 }
 
 .create-course-main .semester-wrapper .semester .sem-text {
