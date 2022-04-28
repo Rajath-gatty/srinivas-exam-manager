@@ -1,23 +1,24 @@
-.profile-container{
-    position: relative;
-    width: 100%;
-    margin-right: 2em;
-    flex-direction: column;
+.profile-container {
+  position: relative;
+  width: 100%;
+  margin-right: 2em;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.profile-head{
-    justify-content: space-around;
-    width: 100%;
-    position: relative;
+.profile-head {
+  justify-content: space-around;
+  width: 100%;
+  position: relative;
 }
 
-.profile-avatar{
-    position: relative;
-    width: fit-content;
+.profile-avatar {
+  position: relative;
+  width: fit-content;
 }
 
-.profile-avatar .profile-camera{
-    background-color: var(--grey-bg);
+.profile-avatar .profile-camera {
+  background-color: var(--grey-bg);
   padding: 0.2em;
   border-radius: 50px;
   position: absolute;
@@ -28,38 +29,91 @@
 }
 
 .profile-title {
-    color: var(--text-color);
-    flex-direction: column;
-    margin-left: 2em;
+  color: var(--text-color);
+  flex-direction: column;
+  margin-left: 2em;
 }
 
-.profile-edit{
-    border: 1px solid var(--text-color);
+.profile-edit {
+  border: 1px solid var(--text-color);
   border-radius: 4px;
   padding: 0.3em 0.6em;
   transition: 200ms ease-in-out;
   background-color: var(--white);
-    color: var(--light-grey);
-    cursor: pointer;
+  color: var(--light-grey);
+  cursor: pointer;
 }
 
-.profile-edit:hover{
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+.profile-edit:hover {
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
-.profile-edit svg{
-    color: inherit;
+.profile-edit svg {
+  color: inherit;
 }
 
-.profile-edit span{
-    color: inherit;
-    margin-left: 0.5em;
+.profile-edit span {
+  color: inherit;
+  margin-left: 0.5em;
 }
 
-.profile-userDetails{
-    display: grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap: 1em;
-    margin-top: 2em;
+.profile-userDetails-ReadOnly,
+.profile-userDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  margin-top: 2em;
+  width: 750px;
+}
+
+.profile-row {
+  /* display: flex;
+  justify-content: space-evenly; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background-color: var(--grey-bg);
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  width: 350px;
+}
+
+.profile-row label {
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+.profile-userDetails-ReadOnly .profile-row :last-child {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: default;
+  pointer-events: none;
+  color: var(--text-color);
+  width: 100%;
+  height: 2em;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.profile-userDetails .profile-row :last-child {
+  border: none;
+  outline: none;
+  font-size: 1em;
+  height: 2em;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.profile-row.address {
+  width: 750px;
+  grid-column: span 2;
+}
+
+.profile-row.address textarea {
+  resize: none;
+  overflow: hidden;
+  min-height: 50px;
+  max-height: 100px;
 }
