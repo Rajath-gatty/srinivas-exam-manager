@@ -31,7 +31,8 @@ const Login = () => {
 
   const handleRoleSubmit = (e) => {
     e.preventDefault();
-    setRole(setInputRole.current.value);
+    const role = setInputRole.current.value;
+    setRole(role.toLowerCase());
     navigate("/dashboard");
   }
   // Temporary Code end
