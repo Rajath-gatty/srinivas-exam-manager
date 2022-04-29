@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   FormControl,
-  FormControlLabel,
   Select,
   MenuItem,
   InputLabel,

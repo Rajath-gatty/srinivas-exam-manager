@@ -17,4 +17,5 @@
     background: var(--white);
     border-radius: 10px;
     z-index: 5;
+    overflow-x: auto;
 }

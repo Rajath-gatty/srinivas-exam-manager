@@ -2,12 +2,12 @@ import React, { useState } from "react";
 
 export const Context = React.createContext();
 
-const state = {
-  isAuth: true,
-  role: "admin",
-};
-
 const ContextProvider = (props) => {
+  const state = {
+    isAuth: true,
+    role: "admin",
+  };
+
   const [approve, setApprove] = useState("");
   const [approveText, setApproveText] = useState("Approve");
   const [rejectText, setRejectText] = useState("Reject");

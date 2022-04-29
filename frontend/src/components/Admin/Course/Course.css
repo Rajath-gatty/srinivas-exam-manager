@@ -55,9 +55,8 @@
   font-size: 0.9em;
 }
 
-.course-main .course-list-table tbody tr:hover td {
-  background: var(--grey-bg);
-  cursor: pointer;
+.course-main .course-list-table tbody td a {
+  color: var(--primary-color);
 }
 
 .course-main .course-list-table tbody tr {

@@ -17,7 +17,6 @@ const IndentRegular = () => {
     return (
         <div className="indent-main">
             <div className="filter-wrapper">
-
                 <div className="filter-eligibility">
                     <FormControl className="SelectInput">
                         <InputLabel>Filter by Eligibility</InputLabel>

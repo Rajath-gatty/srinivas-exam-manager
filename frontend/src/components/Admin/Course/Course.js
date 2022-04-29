@@ -27,6 +27,7 @@ const Course = () => {
             <th>Course</th>
             <th>Duration</th>
             <th>Semesters</th>
+            <th>Details</th>
             <th></th>
           </tr>
         </thead>

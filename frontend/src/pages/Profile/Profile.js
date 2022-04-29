@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { TextField } from "@mui/material";
 import { FaUserCircle, FaCamera, FaUserEdit } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
 import "./Profile.css";
