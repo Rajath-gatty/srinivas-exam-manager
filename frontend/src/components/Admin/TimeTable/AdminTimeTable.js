@@ -6,6 +6,7 @@ import PdfIcon from "../../../Assets/pdf-icon.png";
 import "./AdminTimeTable.css";
 import Modal from "../../UI/Modal";
 import AdminTimeTableList from "./AdminTimeTableList";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const AdminTimeTable = () => {
     const [showModal, setShowModal] = useState(false);
@@ -47,6 +48,7 @@ const AdminTimeTable = () => {
                 </button>
             </div>
             <div className="admin-timetable-table-wrapper">
+                {/* <Skeleton rows={5} cols={5} profile/> */}
                 <table className="admin-timetable-table">
                     <thead>
                         <tr>
@@ -65,7 +67,7 @@ const AdminTimeTable = () => {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>  
         {showModal && <Modal onClose={hideModalHandler} width="65%">
             <div className="upload-timetable-wrapper">
                 <IoMdClose size={25} className="timetable-close-icon" onClick={hideModalHandler}/>
