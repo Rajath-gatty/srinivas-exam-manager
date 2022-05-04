@@ -65,29 +65,53 @@ function App() {
               {/* Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
-                <Route path="courses/course-details" element={<CourseDetails />} />
+                <Route
+                  path="courses/course-details"
+                  element={<CourseDetails />}
+                />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route path="approve/evaluator" element={<Approval />} />
-                <Route path="approve/staff/:staffId" element={<ApprovalDetailsView />}/>
-                <Route path="approve/evaluator/:evaluatorId"  element={<ApprovalDetailsView />} />
+                <Route
+                  path="approve/staff/:staffId"
+                  element={<ApprovalDetailsView />}
+                />
+                <Route
+                  path="approve/evaluator/:evaluatorId"
+                  element={<ApprovalDetailsView />}
+                />
               </Route>
 
               {/* Staff Access*/}
               <Route element={<ProtectedRoute allowedRole={["staff"]} />}>
                 <Route path="approve/student" element={<Approval />} />
                 <Route path="approve/faculty" element={<Approval />} />
-                <Route path="approve/student/:studentId" element={<ApprovalDetailsView />} />
-                <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
+                <Route
+                  path="approve/student/:studentId"
+                  element={<ApprovalDetailsView />}
+                />
+                <Route
+                  path="approve/faculty/:facultyId"
+                  element={<ApprovalDetailsView />}
+                />
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
                 <Route path="payments/regular" element={<PaymentsRegular />}>
-                    <Route path="pending" element={<PaymentsRegularApproval/>}/>
-                    <Route path="approved" element={<PaymentsRegularApproved/>}/>
+                  <Route path="pending" element={<PaymentsRegularApproval />} />
+                  <Route
+                    path="approved"
+                    element={<PaymentsRegularApproved />}
+                  />
                 </Route>
                 <Route path="payments/repeater" element={<PaymentsRepeater />}>
-                    <Route path="pending" element={<PaymentsRepeaterApproval/>} />
-                    <Route path="approved" element={<PaymentsRepeaterApproved/>} />
+                  <Route
+                    path="pending"
+                    element={<PaymentsRepeaterApproval />}
+                  />
+                  <Route
+                    path="approved"
+                    element={<PaymentsRepeaterApproved />}
+                  />
                 </Route>
               </Route>
 
@@ -98,18 +122,31 @@ function App() {
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
-                <Route path="application/regular" element={<ApplicationRegular />}/>
-                <Route path="application/repeater" element={<ApplicationRepeater />} />
+                <Route
+                  path="application/regular"
+                  element={<ApplicationRegular />}
+                />
+                <Route
+                  path="application/repeater"
+                  element={<ApplicationRepeater />}
+                />
               </Route>
 
               {/* Faculty and Student access*/}
-              <Route element={<ProtectedRoute allowedRole={["student", "faculty"]} /> }>
+              <Route
+                element={
+                  <ProtectedRoute allowedRole={["student", "faculty"]} />
+                }
+              >
                 <Route path="attendance" element={<Attendance />} />
               </Route>
 
               {/*Admin, Student and Evaluator access*/}
               <Route
-                element={<ProtectedRoute allowedRole={["student", "evaluator", "faculty", "admin"]}/>
+                element={
+                  <ProtectedRoute
+                    allowedRole={["student", "evaluator", "faculty", "admin"]}
+                  />
                 }
               >
                 <Route path="timetable" element={<TimeTable />} />
@@ -142,17 +179,18 @@ function App() {
                 }
               >
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="profile" element={<Profile />} />
 
                 {/* Testing Route */}
-                <Route path="profile" element={<Profile />} />
+                {/* <Route path="testing" element={<AnyTestComponent />} /> */}
               </Route>
             </Route>
             {/* Page Not Found Route */}
             <Route path="*" element={<PageNotFound />}></Route>
-          </Routes >
-        </Browser >
-      </div >
-    </ThemeProvider >
+          </Routes>
+        </Browser>
+      </div>
+    </ThemeProvider>
   );
 }
 

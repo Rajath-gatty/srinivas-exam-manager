@@ -1,9 +1,10 @@
 import "./Sidebar.css";
 import { SrinivasLogo, Avatar } from "../../Assets";
-import {BiLogOut} from "react-icons/bi";
-import {IoIosArrowForward} from "react-icons/io";
+import { BiLogOut } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
 import { useContextData } from "../../hooks/useContextData";
 import SidebarNav from "./SidebarNav";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { role } = useContextData();
@@ -14,17 +15,17 @@ const Sidebar = () => {
           <img src={SrinivasLogo} width="25px" alt="logo" />
           <h1>Srinivas Exam Manager</h1>
         </div>
-        <div className="user-profile flex">
+
+        <Link to="profile" className="user-profile flex">
           <div className="user-avatar flex">
             <img src={Avatar} width="40px" alt="avatar" />
           </div>
-
           <div className="user-name">
             <h2>John Doe</h2>
             <h3>{role.charAt(0).toUpperCase() + role.slice(1)}</h3>
           </div>
-          <IoIosArrowForward size={25} color="var(--white)"/>
-        </div>
+          <IoIosArrowForward size={25} color="var(--white)" />
+        </Link>
       </div>
 
       <div className="sidebar-nav flex">
@@ -34,10 +35,10 @@ const Sidebar = () => {
       </div>
 
       <div className="logout flex">
-        <div className="logout-btn flex">
-        <BiLogOut size={20}/>
+        <Link to="/" className="logout-btn flex">
+          <BiLogOut size={20} />
           <span>Logout</span>
-        </div>
+        </Link>
       </div>
     </div>
   );
