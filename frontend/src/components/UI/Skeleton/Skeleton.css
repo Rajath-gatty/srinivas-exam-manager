@@ -6,7 +6,8 @@
 }
 
 .skeleton-table .skeleton-table-row .skeleton-content{
-    background-image:  linear-gradient(90deg, rgb(233, 233, 233) 0px, #f5f5f5 50px, rgb(233, 233, 233) 80px);
+    /* background-image:  linear-gradient(90deg, rgb(233, 233, 233) 0px, #f5f5f5 50px, rgb(233, 233, 233) 80px); */
+    background-image:  linear-gradient(90deg, rgb(225, 225, 225) 0px, #f5f5f5 50px, rgb(225, 225, 225)  80px);
     height: 20px;
     margin: auto;
     border-radius: 4px;
@@ -15,7 +16,7 @@
 }
 
 .skeleton-table .skeleton-table-row .skeleton-circle {
-    background-image:  linear-gradient(90deg, rgb(233, 233, 233) 0px, #f5f5f5 110px, rgb(233, 233, 233) 50px);
+    background-image:  linear-gradient(90deg, rgb(225, 225, 225) 0px, #f5f5f5 110px, rgb(225, 225, 225) 50px);
     width: 35px;
     height: 35px;
     margin: auto;
@@ -50,7 +51,7 @@
 
 @keyframes animate {
     0% { opacity: 1; }
-    25% { opacity: 0.65; }
+    25% { opacity: 0.55; }
     75% { opacity: 1; }
     100% { opacity: 1; background-position: right -40px top 0;}
 }

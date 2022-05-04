@@ -125,6 +125,10 @@ a {
   flex: 1 1 0;
 }
 
+.section-content {
+  background: rgb(216, 216, 216);
+}
+
 
 /* MUI Select Label fix */
 .MuiFormControl-root .MuiInputLabel-root {

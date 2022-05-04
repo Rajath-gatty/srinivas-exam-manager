@@ -4,7 +4,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
-import  Modal  from "../../components/UI/Modal";
+import  Modal  from "../../components/UI/Modal/Modal";
 import {useContextData} from "../../hooks/useContextData";
 
 const Login = () => {
@@ -98,7 +98,14 @@ const Login = () => {
       {showModal &&<Modal width="40%" onClose={closeModal} >
         <form onSubmit={handleRoleSubmit}>
           <h3>Enter Role</h3>
-          <input type="text" ref={setInputRole} />
+          <select name="selectRole" id="selectRole" ref={setInputRole}>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="staff">Staff</option>
+            <option value="evaluator">Evaluator</option>
+          </select>
+          {/* <input type="text" ref={setInputRole} /> */}
           <input type="submit" className="btn"  />
         </form>
       </Modal>}

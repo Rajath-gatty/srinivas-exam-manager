@@ -1,33 +1,22 @@
-import "./Payments.css";
-import FilterSearch from "../../UI/FilterSearch/FilterSearch";
-import PaymentsList from "./PaymentsList";
-import Modal from "../../UI/Modal";
-import { useState } from "react";
+import PaymentsList from "../PaymentsList";
+import Modal from "../../../UI/Modal/Modal";
 import {HiDownload} from "react-icons/hi";
 import {IoMdClose} from "react-icons/io";
 
-const  PaymentsRegular = () => {
-    const [showModal, setShowModal] = useState(false);
+const  PaymentsRegularApproval = ({handleCloseModal,handleOpenModal,showModal}) => {
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    }
-
-    const  handleOpenModal = () => {
-        setShowModal(true);
-    }
-
-     return(
-         <div className="payments-regular-main">
-             <FilterSearch/>
+     return (
+         <>
             <table className="payments-wrapper">
                 <thead>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Registration</th>
-                    <th>Date of Payment</th>
-                    <th>Reciept</th>
-                </thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Registration</th>
+                        <th>Date of Payment</th>
+                        <th>Reciept</th>
+                    </tr>
+                </thead>    
                 <tbody>
                     <PaymentsList handleOpenModal={handleOpenModal}/>
                     <PaymentsList handleOpenModal={handleOpenModal}/>
@@ -74,8 +63,8 @@ const  PaymentsRegular = () => {
                     </tbody>
                 </table>
             </Modal>}
-         </div>
-     )
+         </>
+     );
 }
 
-export default PaymentsRegular;
+export default PaymentsRegularApproval;

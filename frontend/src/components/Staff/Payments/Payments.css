@@ -3,6 +3,11 @@
     width: 100%;
 }
 
+.payments-regular-main .payments-hdng{
+    color: var(--primary-color);
+    margin-top: 1em;
+}
+
 .payments-regular-main .payments-wrapper {
     width: 100%;
     border: 1px solid var(--grey-bg);
@@ -55,5 +60,51 @@
 
 .payment-content .download-btn {
     display: inline-flex;
+}
+
+/* ***** */
+
+.payment-links-wrapper {
+    width: 100%;
+    justify-content: space-evenly;
+    margin-top: 2em;
+}
+
+.payment-tab {
+    position: relative;
+}
+
+.payment-links {
+    padding: 1em 0em 1.5em 0em;
+    color: var(--text-color);
+    font-size: 1.2em;
+    width: 100%;
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: rgb(247, 247, 247);
+}
+
+.payment-active .slider {
+    position: absolute;
+	bottom: 0;
+    left: 10%;
+	width: 30%;
+	height: 3px;
+    border-radius: 5px;
+	background-color: var(--primary-color);
+	transition: left .25s;
+}
+
+ /* .payment-links-wrapper:first-child   .slider {
+    left: 0;
+} */
+
+
+.payment-active {
+    background: var(--light-primary);
+    color: var(--primary-color);
+    font-weight: bold;
+    border-bottom: 3px solid var(--primary-color);
 }
 

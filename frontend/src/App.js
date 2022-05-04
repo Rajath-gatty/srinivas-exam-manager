@@ -28,13 +28,16 @@ import CourseDetails from "./components/Admin/Course/CourseDetails/CourseDetails
 import InternalMarks from "./components/Faculty/InternalMarks/InternalMark";
 import IndentRegular from "./components/Staff/Indent/IndentRegular";
 import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
-import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular";
-import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater";
+import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/PaymentsRegular";
+import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
 
-// Testing
-import Testing from "./pages/Profile/Profile";
+import Profile from "./pages/Profile/Profile";
+import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproval";
+import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproved";
+import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
+import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
 
 function App() {
   //MUI Components Fonts
@@ -78,8 +81,14 @@ function App() {
                 <Route path="approve/faculty/:facultyId" element={<ApprovalDetailsView />} />
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
-                <Route path="payments/regular" element={<PaymentsRegular />} />
-                <Route path="payments/repeater" element={<PaymentsRepeater />} />
+                <Route path="payments/regular" element={<PaymentsRegular />}>
+                    <Route path="pending" element={<PaymentsRegularApproval/>}/>
+                    <Route path="approved" element={<PaymentsRegularApproved/>}/>
+                </Route>
+                <Route path="payments/repeater" element={<PaymentsRepeater />}>
+                    <Route path="pending" element={<PaymentsRepeaterApproval/>} />
+                    <Route path="approved" element={<PaymentsRepeaterApproved/>} />
+                </Route>
               </Route>
 
               {/* Faculty Access*/}
@@ -135,7 +144,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
 
                 {/* Testing Route */}
-                <Route path="testing" element={<Testing />} />
+                <Route path="profile" element={<Profile />} />
               </Route>
             </Route>
             {/* Page Not Found Route */}

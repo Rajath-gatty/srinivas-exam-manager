@@ -1,5 +1,5 @@
 import React from "react"
-import PaymentsRegular from "./PaymentsRegular";
+import PaymentsRegular from "../PaymentsRegular/PaymentsRegular";
 
 const  PaymentsRepeater = () => {
      return(
