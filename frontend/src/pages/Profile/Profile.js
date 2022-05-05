@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiCheck } from "react-icons/fi";
 import { FaUserCircle, FaCamera, FaUserEdit } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
 import "./Profile.css";
@@ -38,8 +39,8 @@ const Profile = () => {
           </div>
 
           <div className="profile-title flex">
-            <span className="userinfo-name">John Doe</span>
-            <span className="userinfo-data">BCA 3rd Year</span>
+            <span className="profile-name">John Doe</span>
+            <span className="profile-data">BCA 3rd Year</span>
           </div>
         </div>
 
@@ -49,8 +50,17 @@ const Profile = () => {
             setAllowEdit(!allowEdit);
           }}
         >
-          <FaUserEdit size={20} />
-          <span>Edit</span>
+          {allowEdit ? (
+            <div className="flex">
+              <FiCheck size={20} />
+              <span>Save</span>
+            </div>
+          ) : (
+            <div className="flex">
+              <FaUserEdit size={20} />
+              <span>Edit</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -79,7 +89,7 @@ const Profile = () => {
           <input type="text" defaultValue={userValues.email} />
         </div>
 
-        <div className="profile-row address">
+        {/* <div className="profile-row address">
           <label>Address</label>
           <textarea
             defaultValue={userValues.address}
@@ -88,7 +98,7 @@ const Profile = () => {
               e.target.style.height = e.scrollHeight + "px";
             }}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -34,6 +34,15 @@
   margin-left: 2em;
 }
 
+.profile-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.profile-data {
+  font-size: 0.8em;
+}
+
 .profile-edit {
   border: 1px solid var(--text-color);
   border-radius: 4px;
@@ -55,13 +64,18 @@
 
 .profile-edit span {
   color: inherit;
-  margin-left: 0.5em;
+  padding: 0 0.5em;
+  margin-bottom: 0.1em;
+  width: 20px;
 }
 
 .profile-userDetails-ReadOnly,
 .profile-userDetails {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* display: grid;
+  grid-template-columns: repeat(1, 1fr); */
   gap: 1em;
   margin-top: 2em;
   width: 750px;
@@ -76,12 +90,13 @@
   background-color: var(--grey-bg);
   padding: 0.5em 1em;
   border-radius: 5px;
-  width: 350px;
+  width: 100%;
 }
 
 .profile-row label {
   font-size: 0.9em;
   color: var(--text-color);
+  margin-left: 2em;
 }
 
 .profile-userDetails-ReadOnly .profile-row :last-child {
@@ -106,14 +121,18 @@
   border-radius: 5px;
 }
 
-.profile-row.address {
+/* .profile-row.address {
+  padding: 0.8em 1em;
   width: 750px;
   grid-column: span 2;
-}
+} */
 
-.profile-row.address textarea {
-  resize: none;
+/* .profile-row.address textarea {
+  resize: vertical;
+  margin-bottom: -1em;
+  min-height: 50px;
+  vertical-align: middle;
   overflow: hidden;
   min-height: 50px;
   max-height: 100px;
-}
+} */
