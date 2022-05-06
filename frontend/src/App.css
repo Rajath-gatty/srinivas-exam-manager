@@ -134,3 +134,22 @@ a {
 .MuiFormControl-root .MuiInputLabel-root {
   background-color: var(--white) !important;
 }
+
+.modal-link {
+  color: var(--primary-color);
+  cursor: pointer;
+  display: inline;
+}
+
+
+/* Utility Classes */
+.mt-1 {
+  margin-top: 1em;
+}
+.gap-2 {
+  gap: 2em;
+}
+
+.gap-1 {
+  gap: 1em;
+}

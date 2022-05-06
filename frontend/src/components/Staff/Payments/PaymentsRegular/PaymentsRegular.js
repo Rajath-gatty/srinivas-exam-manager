@@ -1,9 +1,14 @@
 import "../Payments.css";
-import {NavLink, Outlet} from "react-router-dom";
+import {NavLink, Outlet, useLocation} from "react-router-dom";
 import { useState } from "react";
 
 const  PaymentsRegular = () => {
     const [showModal, setShowModal] = useState(false);
+    const [showSubjectModal,setShowSubjectModal] = useState(false);
+
+    const location = useLocation();
+    console.log(location);
+    const hdngName = location.pathname==='/payments/regular/approved'? 'Payments   (Regular)': 'Payments  (Repeater)'
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -13,11 +18,19 @@ const  PaymentsRegular = () => {
         setShowModal(true);
     }
 
+    const openSubjectModal = () => {
+        setShowSubjectModal(true);
+    }
+
+    const closeSubjectModal = () => {
+        setShowSubjectModal(false);
+    }
+
      return(
          <div className="payments-regular-main">
-             <h2 className="payments-hdng">Payments (Regular)</h2>
+             <h2 className="payments-hdng">{hdngName}</h2>
              <div className="payment-tab">
-                 <div className="payment-links-wrapper flex">
+                 <ul className="payment-links-wrapper flex">
                  <NavLink 
                  className={(NavData) => NavData.isActive? 'payment-links payment-active':'payment-links' } 
                  to="approved"
@@ -29,12 +42,15 @@ const  PaymentsRegular = () => {
                  >Pending Approval</NavLink>
 
                  <div className="slider"></div>
-                 </div>
+                 </ul>
              </div>
              <Outlet 
-             handleCloseModal={handleCloseModal}
-             handleOpenModal={handleOpenModal}
-             showModal={showModal}
+             context={[handleCloseModal,
+                handleOpenModal,
+                showModal,
+                closeSubjectModal,
+                openSubjectModal,
+                showSubjectModal]}
              />
          </div>
      )
