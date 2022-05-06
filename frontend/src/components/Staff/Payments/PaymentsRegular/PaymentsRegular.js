@@ -7,9 +7,11 @@ const  PaymentsRegular = () => {
     const [showSubjectModal,setShowSubjectModal] = useState(false);
 
     const location = useLocation();
-    console.log(location);
-    const hdngName = location.pathname==='/payments/regular/approved'? 'Payments   (Regular)': 'Payments  (Repeater)'
-
+    const loc = location.pathname.split('/');
+    loc.shift();
+    loc.pop();
+    const hdngName = loc.join('/')==='payments/regular'? 'Payments   (Regular)': 'Payments  (Repeater)';
+    
     const handleCloseModal = () => {
         setShowModal(false);
     }

@@ -1,39 +1,19 @@
 .indent-main {
     width: 100%;
-    margin-left: 2em;
-    margin-top: 2em;
-}
-
-.indent-main .filter-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-}
-
-.filter-eligibility {
-    width: 50%;
-    display: inline;
-
-}
-
-.filter-by-course {
-    display: inline;
-    width: 50%;
-
+    margin: 2em;
 }
 
 .main-box {
-    width: 45%;
-    height: 45%;
-
-
+    max-width: 900px;
+    margin: auto;
 }
 
 .main-header {
     margin-top: 3em;
+    padding: 0.5em 0em;
     text-align: center;
     width: 100%;
+    color: var(--white);
     background-color: rgb(0, 140, 255);
 }
 
@@ -50,7 +30,7 @@
 }
 
 .indent-table-wrapper td {
-    padding: 0.75em;
+    padding: 1em 0em;
     color: var(--text-color);
     font-size: 0.9em;
 }
