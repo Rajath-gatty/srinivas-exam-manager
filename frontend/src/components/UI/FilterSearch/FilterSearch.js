@@ -2,7 +2,7 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import "./FilterSearch.css";
 
-const FilterSearch = () => {
+const FilterSearch = ({className='', search}) => {
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -16,27 +16,32 @@ const FilterSearch = () => {
     "Nursing Science",
   ];
   
-  const eligibility = [
-    "Eligible",
-    "Not Eligible",
+  const semesters = [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V"
   ];
 
+  const showSearch = search ? "hidden":"visible";
+
   return (
-    <div className="filterSearch-container">
-      <form className="filterSearch-form flex">
+    <div className={[className,"filterSearch-container"].join(' ')}>
+      <form style={{visibility: showSearch}} className="filterSearch-form flex">
         <FaSearch color="var(--light-grey)" size={20} />
         <input type="text" placeholder="Search" />
       </form>
       <div className="filterSearch-eligibility selectbox">
         <FormControl className="filterSearch-SelectInput">
-          <InputLabel>Filter by Eligibility</InputLabel>
+          <InputLabel>Filter by Semester</InputLabel>
           <Select
             label="Department"
             defaultValue=""
             placeholder="Filter by Course"
             size="small"
           >
-            {eligibility.map((opt) => (
+            {semesters.map((opt) => (
               <MenuItem key={opt} value={opt}>
                 {opt}
               </MenuItem>

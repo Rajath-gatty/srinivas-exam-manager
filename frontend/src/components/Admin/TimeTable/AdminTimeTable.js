@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {FiUpload} from "react-icons/fi";
 import {IoMdClose} from "react-icons/io";
+import {BsFillFileEarmarkPdfFill} from "react-icons/bs";
 
-import PdfIcon from "../../../Assets/pdf-icon.png";
 import "./AdminTimeTable.css";
-import Modal from "../../UI/Modal";
+import Modal from "../../UI/Modal/Modal";
 import AdminTimeTableList from "./AdminTimeTableList";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const AdminTimeTable = () => {
     const [showModal, setShowModal] = useState(false);
@@ -47,6 +48,7 @@ const AdminTimeTable = () => {
                 </button>
             </div>
             <div className="admin-timetable-table-wrapper">
+                <Skeleton rows={9} cols={7} profile/>
                 <table className="admin-timetable-table">
                     <thead>
                         <tr>
@@ -75,7 +77,8 @@ const AdminTimeTable = () => {
                         {files.map((file,index) => {
                             return <div key={index} className="upload-file-info">
                                 <div className="info-img">
-                                    <img src={PdfIcon} alt="" />
+                                    {/* <img src={PdfIcon} alt="" /> */}
+                                    <BsFillFileEarmarkPdfFill size={40} color={"var(--strong-red)"}/>
                                 </div>
                                 <div className="file-info">
                                     <h4>{file.name}</h4>
@@ -86,11 +89,11 @@ const AdminTimeTable = () => {
                         })}
                     </div>
                     <div className="admin-upload">
-                        <label htmlFor="timetable" className="btn-outlined timetable-upload-btn flex">
-                            <input type="file" accept="application/pdf" className="input-file" id="timetable" name="timetable" onChange={(e) => handleFileInput(e)} multiple />
+                        {files.length ===0 && <label htmlFor="timetable" className="btn-outlined timetable-upload-btn flex">
+                            <input type="file" accept="application/pdf" className="input-file" id="timetable" name="timetable" onChange={(e) => handleFileInput(e)}  />
                             <FiUpload size={20}/>
                             <span >Choose Pdf</span>
-                        </label>
+                        </label>}
                         <button className="timetable-send-btn btn">Upload</button>
                     </div>
                 </div>

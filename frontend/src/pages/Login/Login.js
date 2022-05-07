@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link,useNavigate} from "react-router-dom";
+import { useState,useRef} from "react";
 import { FiMail, FiLock } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
+import  Modal  from "../../components/UI/Modal/Modal";
+import {useContextData} from "../../hooks/useContextData";
 
 const Login = () => {
   const [emailfocus, setEmailFocus] = useState(false);
@@ -17,6 +19,23 @@ const Login = () => {
 
   const emailAct = emailfocus ? "form-control active" : "form-control";
   const passAct = passfocus ? "form-control active" : "form-control";
+
+  // Temporary Code
+  const [showModal,setShowModal] = useState(true);
+  const {setRole} = useContextData();
+  const navigate = useNavigate();
+
+  const closeModal = () => setShowModal(false);
+
+  const setInputRole = useRef();
+
+  const handleRoleSubmit = (e) => {
+    e.preventDefault();
+    const role = setInputRole.current.value;
+    setRole(role.toLowerCase());
+    navigate("/dashboard");
+  }
+  // Temporary Code end
 
   return (
     <div className="login-container">
@@ -76,6 +95,20 @@ const Login = () => {
           </div>
         </form>
       </div>
+      {showModal &&<Modal width="40%" onClose={closeModal} >
+        <form onSubmit={handleRoleSubmit}>
+          <h3>Enter Role</h3>
+          <select name="selectRole" id="selectRole" ref={setInputRole}>
+            <option value="admin">Admin</option>
+            <option value="student">Student</option>
+            <option value="faculty">Faculty</option>
+            <option value="staff">Staff</option>
+            <option value="evaluator">Evaluator</option>
+          </select>
+          {/* <input type="text" ref={setInputRole} /> */}
+          <input type="submit" className="btn"  />
+        </form>
+      </Modal>}
     </div>
   );
 };

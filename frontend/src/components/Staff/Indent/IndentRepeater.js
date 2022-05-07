@@ -1,7 +1,8 @@
-import "./IndentRepeater.css";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import "./Indent.css";
 import IndentRepeaterList from "./IndentRepeaterList";
+import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 const IndentRepeater = () => {
+<<<<<<< HEAD
      const departments = [
           "BCA",
           "BBA",
@@ -57,9 +58,14 @@ const IndentRepeater = () => {
 
                     </div>
                </div>
+=======
+     return (
+          <div className="indent-main">
+               <FilterSearch search/>
+>>>>>>> 42a830b15a74020c4be13d2176678acb0aa85b2c
                <div className="main-box">
                     <div className="main-header">
-                         <h2>SEM1</h2>
+                         <h3>SEM1</h3>
                     </div>
                     <table className="indent-table-wrapper">
                          <thead className="thead">
@@ -67,7 +73,7 @@ const IndentRepeater = () => {
                                    <th>Subject</th>
                                    <th>SubjectCode</th>
                                    <th>TotalStudents</th>
-
+                                   <th>Question Papers</th>
                               </tr>
                          </thead>
                          <tbody>

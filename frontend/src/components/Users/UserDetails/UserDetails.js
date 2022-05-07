@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiCheck, FiX } from "react-icons/fi";
 import { FaUserCircle, FaCamera } from "react-icons/fa";
 import "./UserDetails.css";
@@ -9,7 +9,6 @@ const UserDetails = () => {
   const [eligible, setEligible] = useState("");
   const [hideBtn, setHideBtn] = useState("");
 
-  const location = useLocation();
   // const { eligibility } = location.state;
 
   // useEffect(() => {

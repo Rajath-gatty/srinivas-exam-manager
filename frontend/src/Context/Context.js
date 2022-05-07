@@ -2,20 +2,18 @@ import React, { useState } from "react";
 
 export const Context = React.createContext();
 
-const state = {
-  isAuth: true,
-  role: "staff",
-};
-
 const ContextProvider = (props) => {
+
   const [approve, setApprove] = useState("");
   const [approveText, setApproveText] = useState("Approve");
   const [rejectText, setRejectText] = useState("Reject");
+  const [role, setRole] = useState('admin');
 
   return (
     <Context.Provider
       value={{
-        ...state,
+        role,
+        setRole,
         approve,
         setApprove,
         approveText,
