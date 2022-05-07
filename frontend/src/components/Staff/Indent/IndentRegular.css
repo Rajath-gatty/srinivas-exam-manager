@@ -1,31 +1,23 @@
 .indent-main {
-    width: 100%;
-    margin-left: 2em;
-    margin-top: 2em;
+    margin: 2em;
+    /* width: 100%; */
 }
 
 .indent-main .filter-wrapper {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: 1em;
+    /* justify-content: space-between; */
+}
+
+.indent-main .select-filter {
+    width: 430px;
 
 }
 
-.filter-eligibility {
-    width: 50%;
-    display: inline;
-
-}
-
-.filter-by-course {
-    display: inline;
-    width: 50%;
-
-}
 
 .main-box {
-    width: 45%;
-    height: 45%;
+    width: 100px;
+    height: 100%;
 
 
 }

@@ -3,32 +3,33 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import IndentRepeaterList from "./IndentRepeaterList";
 const IndentRepeater = () => {
      const departments = [
-          "Computer Science & Information Science",
-          "Management & Commerce",
-          "Engineering & Technology",
-          "Social Sciences & Humanities",
-          "Aviation Studies",
-          "Physiotherapy",
-          "Hotel Management & Tourism",
-          "Education",
-          "Allied Health Sciences",
-          "Nursing Science",
+          "BCA",
+          "BBA",
+          "BCOM",
+          "BHM",
+          "BPT"
      ];
+     const semeseter = [
+          "sem1",
+          "sem2",
+          "sem3",
+          "sem4",
+     ]
      return (
           <div className="indent-main">
                <div className="filter-wrapper">
 
                     <div className="filter-eligibility">
                          <FormControl className="SelectInput">
-                              <InputLabel>Filter by Eligibility</InputLabel>
+                              <InputLabel>Filter by Semeseter</InputLabel>
                               <Select
-                                   label="Department"
+                                   label="semester"
                                    defaultValue=""
-                                   placeholder="Filter by Course"
+                                   placeholder="Filter by semester"
                                    size="small"
                                    className="select-filter"
                               >
-                                   {departments.map((opt) => (
+                                   {semeseter.map((opt) => (
                                         <MenuItem key={opt} value={opt}>
                                              {opt}
                                         </MenuItem>
