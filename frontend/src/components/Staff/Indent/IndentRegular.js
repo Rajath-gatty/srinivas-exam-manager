@@ -2,7 +2,6 @@ import "./Indent.css";
 import IndentRegularList from "./IndentRegularList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 const IndentRegular = () => {
-<<<<<<< HEAD
     const departments = [
         "BCA",
         "BBA",
@@ -57,11 +56,9 @@ const IndentRegular = () => {
                     </FormControl>
                 </div>
             </div>
-=======
     return (
         <div className="indent-main">
            <FilterSearch search/>
->>>>>>> 42a830b15a74020c4be13d2176678acb0aa85b2c
             <div className="main-box">
                 <div className="main-header">
                     <h3>SEM1</h3>
@@ -82,14 +79,10 @@ const IndentRegular = () => {
                         <IndentRegularList></IndentRegularList>
                         <IndentRegularList></IndentRegularList>
                         <IndentRegularList></IndentRegularList>
-
                     </tbody>
                 </table>
             </div>
-
         </div>
-
-
     );
 };
 
