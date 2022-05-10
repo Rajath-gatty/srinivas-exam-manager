@@ -83,6 +83,7 @@ const IndentRegular = () => {
                 </table>
             </div>
         </div>
+    </div>
     );
 };
 
