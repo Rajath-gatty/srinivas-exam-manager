@@ -1,0 +1,27 @@
+.coding-main {
+    margin: 2em;
+    width: 100%;
+}
+
+.coding-table-wrapper {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+
+.coding-table-wrapper .thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.coding-table-wrapper td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.coding-table-wrapper .coding-table-row {
+    border: 1px solid var(--grey-bg);
+}

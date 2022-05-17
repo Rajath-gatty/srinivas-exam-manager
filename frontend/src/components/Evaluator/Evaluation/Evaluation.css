@@ -1,0 +1,27 @@
+.evaluation-main {
+    margin: 2em;
+    width: 100%;
+}
+
+.evaluation-table-wrapper {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+
+.evaluation-table-wrapper .thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.evaluation-table-wrapper td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.evaluation-table-wrapper .evaluation-table-row {
+    border: 1px solid var(--grey-bg);
+}

@@ -4,7 +4,7 @@ import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 const IndentRepeater = () => {
      return (
           <div className="indent-main">
-               <FilterSearch search/>
+               <FilterSearch search />
                <div className="main-box">
                     <div className="main-header">
                          <h3>SEM1</h3>
