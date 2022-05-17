@@ -167,9 +167,7 @@ function App() {
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
-                <Route
-                  path="users/evaluator/:userId"
-                  element={<UserDetails />}
+                <Route path="users/evaluator/:userId" element={<UserDetails />}
                 />
               </Route>
 

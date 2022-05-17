@@ -1,14 +1,11 @@
 .create-course-main {
   margin: 2em;
   width: 100%;
+  position: relative;
 }
 
 .create-course-main form {
   width: 100%;
-}
-
-.create-course-main .back-btn {
-  justify-content: flex-start;
 }
 
 .create-course-main .main-hdng {

@@ -2,10 +2,14 @@ import "./Course.css";
 import { Link } from "react-router-dom";
 import { HiPlus } from "react-icons/hi";
 import CourseList from "./CourseList";
+import {motion} from "framer-motion";
 
 const Course = () => {
   return (
-    <div className="course-main">
+    <motion.div 
+    initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
+    animate={{opacity:1,scale:1}}
+    className="course-main">
       <div className="course-search-wrapper">
         <form>
           <input
@@ -42,7 +46,7 @@ const Course = () => {
           <CourseList />
         </tbody>
       </table>
-    </div>
+    </motion.div>
   );
 };
 
