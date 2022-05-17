@@ -1,27 +1,4 @@
 .indent-main {
-<<<<<<< HEAD:frontend/src/components/Staff/Indent/IndentRegular.css
-    margin: 2em;
-    /* width: 100%; */
-}
-
-.indent-main .filter-wrapper {
-    display: flex;
-    gap: 1em;
-    /* justify-content: space-between; */
-}
-
-.indent-main .select-filter {
-    width: 430px;
-
-}
-
-
-.main-box {
-    width: 100px;
-    height: 100%;
-
-
-=======
     width: 100%;
     margin: 2em;
 }
@@ -29,7 +6,6 @@
 .main-box {
     max-width: 900px;
     margin: auto;
->>>>>>> 42a830b15a74020c4be13d2176678acb0aa85b2c:frontend/src/components/Staff/Indent/Indent.css
 }
 
 .main-header {
