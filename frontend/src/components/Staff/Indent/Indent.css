@@ -1,64 +1,40 @@
 .indent-main {
-<<<<<<< HEAD:frontend/src/components/Staff/Indent/IndentRegular.css
-    margin: 2em;
-    /* width: 100%; */
-}
-
-.indent-main .filter-wrapper {
-    display: flex;
-    gap: 1em;
-    /* justify-content: space-between; */
-}
-
-.indent-main .select-filter {
-    width: 430px;
-
-}
-
-
-.main-box {
-    width: 100px;
-    height: 100%;
-
-
-=======
-    width: 100%;
-    margin: 2em;
+  width: 100%;
+  margin: 2em;
 }
 
 .main-box {
-    max-width: 900px;
-    margin: auto;
->>>>>>> 42a830b15a74020c4be13d2176678acb0aa85b2c:frontend/src/components/Staff/Indent/Indent.css
+  max-width: 900px;
+  margin: auto;
 }
 
 .main-header {
-    margin-top: 3em;
-    padding: 0.5em 0em;
-    text-align: center;
-    width: 100%;
-    color: var(--white);
-    background-color: rgb(0, 140, 255);
+  margin-top: 3em;
+  padding: 0.5em 0em;
+  text-align: center;
+  width: 100%;
+  color: var(--white);
+  background-color: rgb(0, 140, 255);
 }
 
 .indent-table-wrapper {
-    width: 100%;
-    text-align: center;
-    border-collapse: collapse;
-    margin-top: 0em;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-top: 0em;
 }
 
 .indent-table-wrapper .thead th {
-    padding: 0.75em;
-    background: var(--grey-bg);
+  padding: 0.75em;
+  background: var(--grey-bg);
 }
 
 .indent-table-wrapper td {
-    padding: 1em 0em;
-    color: var(--text-color);
-    font-size: 0.9em;
+  padding: 1em 0em;
+  color: var(--text-color);
+  font-size: 0.9em;
 }
 
 .indent-table-wrapper .indent-table-row {
-    border: 1px solid var(--grey-bg);
+  border: 1px solid var(--grey-bg);
 }
