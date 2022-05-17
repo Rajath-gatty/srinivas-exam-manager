@@ -38,6 +38,9 @@ import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular
 import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproved";
 import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
 import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
+import Coding from "./components/Evaluator/Coding/Coding";
+import EvaluationOne from "./components/Evaluator/Evaluation/EvaluationOne";
+import EvaluationTwo from "./components/Evaluator/Evaluation/EvaluationTwo";
 
 function App() {
   //MUI Components Fonts
@@ -170,15 +173,21 @@ function App() {
                 />
               </Route>
 
+              <Route element={<ProtectedRoute allowedRole={["evaluator"]}/>}>
+                <Route path="coding" element={<Coding/>}/>
+                <Route path="evaluation/first" element={<EvaluationOne/>}/>
+                <Route path="evaluation/second" element={<EvaluationTwo/>}/>
+              </Route>
+
               {/*Common Protected Routes */}
               <Route
                 element={
                   <ProtectedRoute
-                    allowedRole={["admin", "student", "faculty", "staff"]}
+                    allowedRole={["admin", "student","evaluator","faculty", "staff"]}
                   />
                 }
               >
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="dashboard" element={<Dashboard />} />
                 <Route path="profile" element={<Profile />} />
 
                 {/* Testing Route */}

@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application} from "../Assets";
+import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application,Coding} from "../Assets";
 
 export const NavLinks = [
   {
@@ -161,6 +161,40 @@ export const NavLinks = [
           {
             title: "Repeater",
             path: "/application/repeater",
+          },
+        ],
+      },
+      {
+        title: "Time Table",
+        path: "/timetable",
+        icon: Calender,
+      },
+    ],
+  },
+  {
+    role: "evaluator",
+    links: [
+      {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: Dashboard,
+      },
+      {
+        title: "Coding Sheet",
+        path: "/coding",
+        icon: Coding,
+      },
+      {
+        title: "Evaluation",
+        icon: Application,
+        subMenu: [
+          {
+            title: "First",
+            path: "/evaluation/first",
+          },
+          {
+            title: "Second",
+            path: "/evaluation/second",
           },
         ],
       },

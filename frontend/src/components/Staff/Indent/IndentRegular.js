@@ -17,47 +17,6 @@ const IndentRegular = () => {
     ]
     return (
         <div className="indent-main">
-            <div className="filter-wrapper">
-
-                <div className="filter-eligibility">
-                    <FormControl className="SelectInput">
-                        <InputLabel>Filter by Semeseter</InputLabel>
-                        <Select
-                            label="semester"
-                            defaultValue=""
-                            placeholder="Filter by semester"
-                            size="small"
-                            className="select-filter"
-                        >
-                            {semeseter.map((opt) => (
-                                <MenuItem key={opt} value={opt}>
-                                    {opt}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className="filter-by-course">
-                    <FormControl className="SelectInput">
-                        <InputLabel>Filter by Department</InputLabel>
-                        <Select
-                            className="select-filter"
-                            label="Department"
-                            defaultValue=""
-                            placeholder="Filter by Course"
-                            size="small"
-                        >
-                            {departments.map((opt) => (
-                                <MenuItem key={opt} value={opt}>
-                                    {opt}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-            </div>
-    return (
-        <div className="indent-main">
            <FilterSearch search/>
             <div className="main-box">
                 <div className="main-header">
@@ -83,8 +42,8 @@ const IndentRegular = () => {
                 </table>
             </div>
         </div>
-    </div>
     );
 };
 
 export default IndentRegular;
+
