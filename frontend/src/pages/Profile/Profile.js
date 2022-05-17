@@ -1,8 +1,9 @@
+import "./Profile.css";
 import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { FaUserCircle, FaCamera, FaUserEdit } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
-import "./Profile.css";
+import {motion} from "framer-motion"; 
 
 const Profile = () => {
   const [allowEdit, setAllowEdit] = useState(false);
@@ -18,7 +19,10 @@ const Profile = () => {
     <div className="profile-container flex">
       <Back />
 
-      <div className="profile-head flex">
+      <motion.div 
+      initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
+    animate={{opacity:1,scale:1}}
+      className="profile-head flex">
         <div className="profile-userinfo flex">
           <div className="profile-avatar flex">
             <FaUserCircle color="var(--light-grey)" size={70} />
@@ -62,9 +66,11 @@ const Profile = () => {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
+      initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
+    animate={{opacity:1,scale:1}}
         className={
           allowEdit ? "profile-userDetails" : "profile-userDetails-ReadOnly"
         }
@@ -99,7 +105,7 @@ const Profile = () => {
             }}
           />
         </div> */}
-      </div>
+      </motion.div>
     </div>
   );
 };

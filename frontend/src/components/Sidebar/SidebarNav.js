@@ -3,7 +3,7 @@ import { NavLinks } from "../../util/NavLinks";
 import Menu from "./Menu/Menu";
 
 const SidebarNav = ({role}) => {
-const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false},{text: 'Payments', state: false},{text: 'Indent', state: false},{text: 'Application', state: false}]);
+const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false},{text: 'Payments', state: false},{text: 'Indent', state: false},{text: 'Application', state: false},{text: 'Evaluation', state: false}]);
 
 const setSubNavActive = (subNav) => {
     return subNav.isActive ? "navlink flex subActive" : "navlink flex";

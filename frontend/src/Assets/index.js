@@ -11,6 +11,7 @@ import Users from "./NavIcons/Users.svg";
 import InternalMarks from "./NavIcons/InternalMarks.svg";
 import Attendance from "./NavIcons/Attendance.svg";
 import Indent from "./NavIcons/Indent.svg";
+import Coding from "./NavIcons/Coding.svg";
 
 import SrinivasLogo from "./SrinivasLogo.svg";
 
@@ -39,5 +40,6 @@ export {
     LoginSvg,
     InternalMarks,
     Attendance,
-    Indent
+    Indent,
+    Coding
 }
