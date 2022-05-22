@@ -3,7 +3,7 @@ import { useState } from "react";
 import { FiCheck } from "react-icons/fi";
 import { FaUserCircle, FaCamera, FaUserEdit } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
-import {motion} from "framer-motion"; 
+import { motion } from "framer-motion";
 
 const Profile = () => {
   const [allowEdit, setAllowEdit] = useState(false);
@@ -19,10 +19,12 @@ const Profile = () => {
     <div className="profile-container flex">
       <Back />
 
-      <motion.div 
-      initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
-    animate={{opacity:1,scale:1}}
-      className="profile-head flex">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, transition: { duration: 2 } }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="profile-head flex"
+      >
+        ``
         <div className="profile-userinfo flex">
           <div className="profile-avatar flex">
             <FaUserCircle color="var(--light-grey)" size={70} />
@@ -47,7 +49,6 @@ const Profile = () => {
             <span className="profile-data">BCA 3rd Year</span>
           </div>
         </div>
-
         <div
           className="profile-edit flex"
           onClick={() => {
@@ -69,8 +70,8 @@ const Profile = () => {
       </motion.div>
 
       <motion.div
-      initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
-    animate={{opacity:1,scale:1}}
+        initial={{ opacity: 0, scale: 0.9, transition: { duration: 2 } }}
+        animate={{ opacity: 1, scale: 1 }}
         className={
           allowEdit ? "profile-userDetails" : "profile-userDetails-ReadOnly"
         }
