@@ -41,6 +41,7 @@ import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeat
 import Coding from "./components/Evaluator/Coding/Coding";
 import EvaluationOne from "./components/Evaluator/Evaluation/EvaluationOne";
 import EvaluationTwo from "./components/Evaluator/Evaluation/EvaluationTwo";
+import AttendanceStatement from "./components/Staff/AttendanceStatement/AttendanceStatement";
 
 function App() {
   //MUI Components Fonts
@@ -116,6 +117,7 @@ function App() {
                     element={<PaymentsRepeaterApproved />}
                   />
                 </Route>
+                <Route path="/attendance-statement" element={<AttendanceStatement/>}/>
               </Route>
 
               {/* Faculty Access*/}

@@ -122,6 +122,11 @@ export const NavLinks = [
         ],
       },
       {
+        title: "Attendance",
+        icon: Indent,
+        path: "/attendance-statement"
+      },
+      {
         title: "Payments",
         icon: Payment,
         subMenu: [
