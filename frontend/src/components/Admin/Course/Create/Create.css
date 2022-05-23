@@ -8,6 +8,11 @@
   width: 100%;
 }
 
+.create-course-main .back-btn {
+  top: 0;
+  left: 0;
+}
+
 .create-course-main .main-hdng {
   color: var(--primary-color);
   font-weight: bolder;
