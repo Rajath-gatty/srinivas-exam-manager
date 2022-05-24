@@ -1,5 +1,5 @@
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
-import "./AttendanceStatement.css";
+import "./ExamAttendance.css";
 const AttendanceStatement = () => {
 
 

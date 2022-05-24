@@ -124,7 +124,7 @@ export const NavLinks = [
       {
         title: "Attendance",
         icon: Indent,
-        path: "/attendance-statement"
+        path: "/exam-attendance"
       },
       {
         title: "Payments",
@@ -188,6 +188,16 @@ export const NavLinks = [
         title: "Coding Sheet",
         path: "/coding",
         icon: Coding,
+      },
+      {
+        title: "Attendance Statement",
+        path: "/attendance-statement",
+        icon: Coding,
+      },
+      {
+        title: "Evaluators",
+        path: "/evaluators",
+        icon: Users,
       },
       {
         title: "Evaluation",

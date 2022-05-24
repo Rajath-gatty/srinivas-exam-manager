@@ -41,7 +41,10 @@ import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeat
 import Coding from "./components/Evaluator/Coding/Coding";
 import EvaluationOne from "./components/Evaluator/Evaluation/EvaluationOne";
 import EvaluationTwo from "./components/Evaluator/Evaluation/EvaluationTwo";
-import AttendanceStatement from "./components/Staff/AttendanceStatement/AttendanceStatement";
+import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
+import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
+import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
+import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
 
 function App() {
   //MUI Components Fonts
@@ -117,7 +120,7 @@ function App() {
                     element={<PaymentsRepeaterApproved />}
                   />
                 </Route>
-                <Route path="/attendance-statement" element={<AttendanceStatement/>}/>
+                <Route path="/exam-attendance" element={<ExamAttendance/>}/>
               </Route>
 
               {/* Faculty Access*/}
@@ -175,6 +178,9 @@ function App() {
 
               <Route element={<ProtectedRoute allowedRole={["evaluator"]}/>}>
                 <Route path="coding" element={<Coding/>}/>
+                <Route path="/attendance-statement" element={<AttendanceStatement/>} />
+                <Route path="/evaluators" element={<Evaluators/>}/>
+                <Route path="/assign-faculty" element={<AssignFaculty/>}/>
                 <Route path="evaluation/first" element={<EvaluationOne/>}/>
                 <Route path="evaluation/second" element={<EvaluationTwo/>}/>
               </Route>
