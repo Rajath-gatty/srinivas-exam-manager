@@ -1,0 +1,38 @@
+.attendance-main {
+    width: 100%;
+}
+
+.attendance-button {
+    background-color: rgb(0, 140, 255);
+    color: aliceblue;
+    float: right;
+    width: 12%;
+    height: 2.5em;
+    border-radius: 4px;
+    font-size: 15px;
+    border-color: rgb(0, 140, 255);
+    margin-bottom: 2em;
+}
+
+.attendance-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+
+.attendance-table .attendance-thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.attendance-table td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.attendance-table .attendance-table-row {
+    border: 1px solid var(--grey-bg);
+}

@@ -39,8 +39,8 @@ import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular
 import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
 import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
 import Coding from "./components/Evaluator/Coding/Coding";
-import EvaluationOne from "./components/Evaluator/Evaluation/EvaluationOne";
-import EvaluationTwo from "./components/Evaluator/Evaluation/EvaluationTwo";
+import Evaluation from "./components/Evaluator/Evaluation/Evaluation";
+
 import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
@@ -120,7 +120,7 @@ function App() {
                     element={<PaymentsRepeaterApproved />}
                   />
                 </Route>
-                <Route path="/exam-attendance" element={<ExamAttendance/>}/>
+                <Route path="/exam-attendance" element={<ExamAttendance />} />
               </Route>
 
               {/* Faculty Access*/}
@@ -176,20 +176,19 @@ function App() {
                 />
               </Route>
 
-              <Route element={<ProtectedRoute allowedRole={["evaluator"]}/>}>
-                <Route path="coding" element={<Coding/>}/>
-                <Route path="/attendance-statement" element={<AttendanceStatement/>} />
-                <Route path="/evaluators" element={<Evaluators/>}/>
-                <Route path="/assign-faculty" element={<AssignFaculty/>}/>
-                <Route path="evaluation/first" element={<EvaluationOne/>}/>
-                <Route path="evaluation/second" element={<EvaluationTwo/>}/>
+              <Route element={<ProtectedRoute allowedRole={["evaluator"]} />}>
+                <Route path="coding" element={<Coding />} />
+                <Route path="/attendance-statement" element={<AttendanceStatement />} />
+                <Route path="/evaluators" element={<Evaluators />} />
+                <Route path="/assign-faculty" element={<AssignFaculty />} />
+                <Route path="evaluation/first" element={<Evaluation />} />
               </Route>
 
               {/*Common Protected Routes */}
               <Route
                 element={
                   <ProtectedRoute
-                    allowedRole={["admin", "student","evaluator","faculty", "staff"]}
+                    allowedRole={["admin", "student", "evaluator", "faculty", "staff"]}
                   />
                 }
               >
