@@ -172,13 +172,19 @@ function App() {
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
-                <Route path="users/evaluator/:userId" element={<UserDetails />}
+                <Route
+                  path="users/evaluator/:userId"
+                  element={<UserDetails />}
                 />
               </Route>
 
+              {/* Exam Coordinator Access */}
               <Route element={<ProtectedRoute allowedRole={["evaluator"]} />}>
                 <Route path="coding" element={<Coding />} />
-                <Route path="/attendance-statement" element={<AttendanceStatement />} />
+                <Route
+                  path="/attendance-statement"
+                  element={<AttendanceStatement />}
+                />
                 <Route path="/evaluators" element={<Evaluators />} />
                 <Route path="/assign-faculty" element={<AssignFaculty />} />
                 <Route path="evaluation/first" element={<Evaluation />} />
@@ -188,7 +194,13 @@ function App() {
               <Route
                 element={
                   <ProtectedRoute
-                    allowedRole={["admin", "student", "evaluator", "faculty", "staff"]}
+                    allowedRole={[
+                      "admin",
+                      "student",
+                      "evaluator",
+                      "faculty",
+                      "staff",
+                    ]}
                   />
                 }
               >
