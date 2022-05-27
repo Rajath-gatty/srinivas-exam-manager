@@ -131,10 +131,13 @@ a {
   background: rgb(216, 216, 216);
 }
 
-
 /* MUI Select Label fix */
 .MuiFormControl-root .MuiInputLabel-root {
   background-color: var(--white) !important;
+}
+
+.MuiFormControl-root .MuiInputLabel-root[data-shrink="true"] {
+  top: 0 !important;
 }
 
 .modal-link {
@@ -142,7 +145,6 @@ a {
   cursor: pointer;
   display: inline;
 }
-
 
 /* Utility Classes */
 .mt-1 {

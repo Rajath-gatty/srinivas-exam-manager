@@ -4,9 +4,15 @@ const SelectInput = (props) => {
   const options = props.options;
 
   return (
-    <FormControl className="SelectInput">
+    <FormControl className="SelectInput" fullWidth>
       <InputLabel>{props.label}</InputLabel>
-      <Select label={props.label} defaultValue="" size="small">
+      <Select
+        label={props.label}
+        placeholder={props.label}
+        defaultValue=""
+        size="small"
+        // fullwidth="true"
+      >
         {options.map((opt) => (
           <MenuItem key={opt} value={opt}>
             {opt}
