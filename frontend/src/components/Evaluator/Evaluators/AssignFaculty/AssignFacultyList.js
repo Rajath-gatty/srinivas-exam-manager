@@ -1,35 +1,80 @@
+import { useEffect } from "react";
+
 export const AssignFacultyList = (props) => {
-  const { setEvaluatorOrder } = props;
+  const { setEvaluatorOrder, info, occupied } = props;
 
   const ActiveOrder = (e) => {
-    var orderBtn = e.target;
     var evalOrder = e.target.textContent;
-    setEvaluatorOrder(evalOrder);
-    orderBtn.style.backgroundColor = "var(--primary-color)";
+    var evalData = {
+      order: evalOrder,
+      user: info,
+    };
+
+    var orderBtn = e.target;
+
+    //check if clicked btn is already active
+    if (orderBtn.style.backgroundColor === "var(--primary-color)") {
+      orderBtn.style.backgroundColor = "var(--light-grey)";
+    } else {
+      //remove all active btn to reassign new active btn
+      var allBtn = e.target.parentElement.childNodes;
+      allBtn.forEach((element) => {
+        element.removeAttribute("style");
+      });
+
+      setEvaluatorOrder(evalData);
+      orderBtn.style.backgroundColor = "var(--primary-color)";
+    }
   };
+
+  useEffect(() => {
+    var dataBtns = document.querySelector(".EvaluatorOrder").childNodes;
+    console.log(dataBtns);
+    dataBtns.forEach((btn) => {
+      var btnId = btn.getAttribute("data-id");
+      var btnValue = btn.getAttribute("value");
+      var btnStyle = btn.style.backgroundColor;
+
+      //Give Parent EvaluatorOrder the data-Id attribute
+
+      occupied.some((order) => {
+        if (btnId !== order.orderReg && btnValue === order.orderObj) {
+          btn.style.backgroundColor = "var(--primary-color)";
+          // return;
+        }
+        // else if (btnId === order) {
+        //   console.log("Found Dup");
+        //   console.log("Disabling");
+        //   btn.setAttribute("disabled", "true");
+        //   btn.style.backgroundColor = "var(--strong-red)";
+        // }
+      });
+    });
+  }, [occupied]);
 
   return (
     <tr className="assignFaculty-row">
       <td>
         <div className="assignFaculty-avatar">
-          <img
-            src="https://images.unsplash.com/photo-1649937479025-fc25252bb7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDAwNTB8MHwxfHNlYXJjaHwxN3x8YW5pbWV8ZW58MHwyfHx8MTY1MzU5MzI1MA&ixlib=rb-1.2.1&q=80&w=400&fm=webp"
-            alt="Avatar"
-            width="40px"
-            height="40px"
-          />
+          <img src={info.profile} alt="Avatar" width="40px" height="40px" />
         </div>
       </td>
-      <td>3SU19SA011</td>
-      <td>John Doe</td>
-      <td>BCA</td>
-      <td>V Sem</td>
-      <td>19BCA1001</td>
+      <td>{info.regno}</td>
+      <td>{info.name}</td>
+      <td>{info.course}</td>
+      <td>{info.semester}</td>
+      <td>{info.bundle}</td>
       <td>
         <div className="EvaluatorOrder">
-          <button onClick={ActiveOrder}>1</button>
-          <button onClick={ActiveOrder}>2</button>
-          <button onClick={ActiveOrder}>3</button>
+          <button data-id={info.regno} value="1" onClick={ActiveOrder}>
+            1
+          </button>
+          <button data-id={info.regno} value="2" onClick={ActiveOrder}>
+            2
+          </button>
+          <button data-id={info.regno} value="3" onClick={ActiveOrder}>
+            3
+          </button>
         </div>
       </td>
     </tr>
