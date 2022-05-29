@@ -49,18 +49,63 @@ const AssignFaculty = () => {
     },
   ];
 
-  const [evaluatorOrder, setEvaluatorOrder] = useState([]);
+  // var EvaluatorList = [
+  //   {
+  //     BCA: [],
+  //     MCA: [],
+  //     BBA: [],
+  //     MBA: [],
+  //     BCom: [],
+  //     MCom: [],
+  //   },
+  // ];
+
+  const [evaluatorOrder, setEvaluatorOrder] = useState({});
   const [assignEvaluator, setAssignEvaluator] = useState([]);
 
   useEffect(() => {
-    const TempArray = [];
-    TempArray.push(evaluatorOrder);
-    setAssignEvaluator([TempArray]);
-    // setAssignEvaluator([...assignEvaluator, evaluatorOrder]);
-  }, [evaluatorOrder]);
+    if (Object.keys(evaluatorOrder).length !== 0) {
+      var duplicateFlag = 0;
 
-  console.log(assignEvaluator);
+      //Checking & Updating existing faculty order
+      assignEvaluator.some((obj) => {
+        if (obj.user.regno === evaluatorOrder.user.regno) {
+          duplicateFlag = 1;
+          obj.order = evaluatorOrder.order;
+          return;
+        }
+      });
 
+      //Checking if Max 3 orders are occupied
+      assignEvaluator.some((obj) => {
+        //Checking & Updating existing faculty order
+        if (obj.user.regno === evaluatorOrder.user.regno) {
+          duplicateFlag = 1;
+          obj.order = evaluatorOrder.order;
+          return;
+        }
+      });
+
+      if (duplicateFlag === 0) {
+        setAssignEvaluator((prevState) => [...prevState, evaluatorOrder]);
+      }
+    }
+
+    console.table(assignEvaluator);
+    FilterOccupiedBtn();
+  }, [evaluatorOrder, assignEvaluator]);
+
+  // Occupied btn no. sent to AssignFacultyList
+  var occupied = [];
+  const FilterOccupiedBtn = () => {
+    assignEvaluator.forEach((obj) => {
+      var orderObj = obj.order;
+      var orderReg = obj.user.regno;
+      occupied.push({ orderObj, orderReg });
+    });
+  };
+
+  console.log(occupied);
   return (
     <div className="assignEvaluator-container">
       <Back />
@@ -92,9 +137,9 @@ const AssignFaculty = () => {
             return (
               <AssignFacultyList
                 setEvaluatorOrder={setEvaluatorOrder}
-                assigned={assignEvaluator}
                 info={data}
                 key={data.regno}
+                occupied={occupied}
               />
             );
           })}
