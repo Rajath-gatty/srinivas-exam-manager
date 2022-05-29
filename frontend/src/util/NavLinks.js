@@ -174,6 +174,11 @@ export const NavLinks = [
         path: "/timetable",
         icon: Calender,
       },
+      {
+        title: "Payment",
+        path: "/new-payment",
+        icon: Calender,
+      },
     ],
   },
   {

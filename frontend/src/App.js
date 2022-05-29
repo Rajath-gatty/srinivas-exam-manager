@@ -45,6 +45,7 @@ import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
+import NewPayment from "./components/Student/Payment/NewPayment";
 
 function App() {
   //MUI Components Fonts
@@ -130,14 +131,9 @@ function App() {
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
-                <Route
-                  path="application/regular"
-                  element={<ApplicationRegular />}
-                />
-                <Route
-                  path="application/repeater"
-                  element={<ApplicationRepeater />}
-                />
+                <Route path="application/regular" element={<ApplicationRegular />}/>
+                <Route path="application/repeater" element={<ApplicationRepeater />} />
+                <Route path="/new-payment" element={<NewPayment/>}/>
               </Route>
 
               {/* Faculty and Student access*/}

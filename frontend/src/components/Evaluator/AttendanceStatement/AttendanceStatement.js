@@ -18,11 +18,9 @@ const AttendanceStatement = () => {
                <AttendanceStatementList></AttendanceStatementList>
                <AttendanceStatementList></AttendanceStatementList>
                <AttendanceStatementList></AttendanceStatementList>
-
             </tbody>
          </table>
       </div>
-
    );
 }
 

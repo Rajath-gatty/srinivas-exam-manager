@@ -1,0 +1,23 @@
+.student-payment {
+    margin: 2em;
+    position: relative;
+}
+
+.student-payment h2 {
+    margin: 1em 0;
+}
+
+.payment-input-file {
+    display: none;
+}
+
+.student-payment-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+    margin-top: 1em;
+}
+
+.student-payment-form input {
+    width: 250px;
+}
