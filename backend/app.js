@@ -6,5 +6,4 @@ const publicRoutes = require('./Router/registrationRoutes');
 app.use(express.json());
 
 app.use(publicRoutes);
-
 app.listen(8080);
