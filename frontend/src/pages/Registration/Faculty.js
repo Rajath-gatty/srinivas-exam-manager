@@ -1,4 +1,4 @@
-import React from "react";
+import {useRef,useState} from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
@@ -10,10 +10,10 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
-// import SelectInput from "../../components/UI/SelectInput";
 
 const Faculty = () => {
-
+  const [gender,setGender] = useState('');
+  const [passErr,setPassErr] = useState(false);
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -27,19 +27,89 @@ const Faculty = () => {
     "Nursing Science",
   ];
 
+  const facultyIdRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const dateRef = useRef();
+  const monthRef = useRef();
+  const yearRef = useRef();
+  const dobRef = useRef({dateRef,monthRef,yearRef});
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const addressRef = useRef();
+  const bloodGroupRef = useRef();
+  const casteRef = useRef();
+  const aadharNoRef = useRef();
+  const religionRef = useRef();
+  const birthPlaceRef = useRef();
+  const birthDistrictRef = useRef();
+  const countryRef = useRef();
+  const identityMarkRef = useRef();
+  const pincodeRef = useRef();
+  const passwordRef = useRef();
+  const cPasswordRef = useRef();
+  const fatherNameRef = useRef();
+  const fatherOccupationRef = useRef();
+  const fatherPhoneRef = useRef();
+  const fatherEmailRef = useRef();
+  const teachingExpRef = useRef();
+  const departmentRef = useRef();
+  const joiningYearRef = useRef();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const studentData = {
+      facultyId : facultyIdRef.current.value,
+      firstName : firstNameRef.current.value,
+      lastName : lastNameRef.current.value,
+      dob : `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,
+      gender: gender,
+      email : emailRef.current.value,
+      phone : phoneRef.current.value,
+      address : addressRef.current.value,
+      bloodGroup : bloodGroupRef.current.value,
+      caste : casteRef.current.value,
+      aadharNo : aadharNoRef.current.value,
+      religion : religionRef.current.value,
+      birthPlace : birthPlaceRef.current.value,
+      birthDistrict : birthDistrictRef.current.value,
+      country : countryRef.current.value,
+      identityMark : identityMarkRef.current.value,
+      pincode : pincodeRef.current.value,
+      password : passwordRef.current.value,
+      cPasword : cPasswordRef.current.value,
+      fatherName : fatherNameRef.current.value,
+      fatherOccupation : fatherOccupationRef.current.value,
+      fatherPhone:  fatherPhoneRef.current.value,
+      fatherEmail : fatherEmailRef.current.value,
+      teachingExp: teachingExpRef.current.value,
+      department : departmentRef.current.value,
+      joiningYear : joiningYearRef.current.value
+    }
+
+    if(studentData.password!==studentData.cPasword) {
+      setPassErr(true);
+    } else {
+      // Sending POST Request
+      console.log(studentData);
+      setPassErr(false);
+    }
+    
+  }
 
     return(
         <div>
       <Navbar />
       <div className="form-wrapper">
         <h2>Faculty Registration</h2>
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="student-form">
             <TextField
               label="First Name"
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={firstNameRef}
             />
 
             <TextField
@@ -47,6 +117,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={lastNameRef}
             />
 
             <TextField
@@ -54,6 +125,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={phoneRef}
             />
 
             <TextField
@@ -62,17 +134,19 @@ const Faculty = () => {
               size="small"
               type="email"
               fullWidth
+              inputRef={emailRef}
             />
 
-            <Dob />
+            <Dob ref={dobRef}/>
 
-            <RadioInput />
+            <RadioInput setGender={setGender} />
 
             <TextField
               label="Blood Group"
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={bloodGroupRef}
             />
 
             <TextField
@@ -80,6 +154,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={aadharNoRef}
             />
 
             <TextField
@@ -87,6 +162,7 @@ const Faculty = () => {
               label="Address"
               rows={2}
               className="textarea"
+              inputRef={addressRef}
             />
 
             <TextField
@@ -94,6 +170,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={religionRef}
             />
 
             <TextField
@@ -101,6 +178,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={casteRef}
             />
 
             <TextField
@@ -108,6 +186,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={birthPlaceRef}
             />
 
             <TextField
@@ -115,6 +194,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={birthDistrictRef}
             />
 
             <TextField
@@ -122,6 +202,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={countryRef}
             />
 
             <TextField
@@ -129,6 +210,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={identityMarkRef}
             />
 
             <TextField
@@ -136,6 +218,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={facultyIdRef}
             />
 
             <TextField
@@ -143,6 +226,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={teachingExpRef}
             />
 
             <TextField
@@ -150,6 +234,7 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
+              inputRef={pincodeRef}
             />
 
               <FormControl className="SelectInput">
@@ -158,6 +243,7 @@ const Faculty = () => {
                   label="Department"
                   defaultValue=""
                   size="small"
+                  inputRef={departmentRef}
                 >
                   {departments.map((opt) => (
                     <MenuItem key={opt} value={opt}>
@@ -173,6 +259,7 @@ const Faculty = () => {
               type="password"
               size="small"
               fullWidth
+              inputRef={passwordRef}
             />
 
             <TextField
@@ -181,6 +268,18 @@ const Faculty = () => {
               type="password"
               size="small"
               fullWidth
+              inputRef={cPasswordRef}
+              error={passErr}
+              helperText={passErr&&'Password does not match'}
+            />
+
+            <TextField
+              label="Joining Year"
+              variant="outlined"
+              type="password"
+              size="small"
+              fullWidth
+              inputRef={joiningYearRef}
             />
           </div>
 
@@ -192,6 +291,7 @@ const Faculty = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={fatherNameRef}
               />
 
               <TextField
@@ -199,6 +299,7 @@ const Faculty = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={fatherOccupationRef}
               />
 
               <TextField
@@ -207,6 +308,7 @@ const Faculty = () => {
                 size="small"
                 type="tel"
                 fullWidth
+                inputRef={fatherPhoneRef}
               />
 
               <TextField
@@ -215,13 +317,14 @@ const Faculty = () => {
                 size="small"
                 type="email"
                 fullWidth
+                inputRef={fatherEmailRef}
               />
             </div>
           </div>
 
-          <input className="btn" type="submit" value="Register" disabled/>
+          <input className="btn mt-2 mb-1" type="submit" value="Register"/>
 
-          <div className="to-login">
+          <div className="to-login mt-1">
             <p>Already have an account ?</p>
             <Link to="/" className="btn-outlined">Login</Link>
           </div>

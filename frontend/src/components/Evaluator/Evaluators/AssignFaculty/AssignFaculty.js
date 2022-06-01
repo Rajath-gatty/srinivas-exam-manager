@@ -133,8 +133,8 @@ const AssignFaculty = () => {
       element.removeAttribute("style");
     });
 
-    // setEvaluatorOrder({ evalOrder, evalReg });
-    // currBtn.style.backgroundColor = "var(--primary-color)";
+    setEvaluatorOrder({ evalOrder, evalReg });
+    currBtn.style.backgroundColor = "var(--primary-color)";
     // }
 
     //Column duplicate check

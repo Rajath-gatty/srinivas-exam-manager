@@ -78,8 +78,8 @@
   margin-left: 1.5em;
 }
 
-.input-group input[type="text"],
-input[type="password"] {
+.login-form .input-group input[type="text"],
+.login-form  input[type="password"] {
   outline: none;
   border: none;
   background-color: #fff;
