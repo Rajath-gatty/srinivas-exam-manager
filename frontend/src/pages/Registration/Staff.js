@@ -1,6 +1,7 @@
 import {useRef,useState} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import dateFormat from "dateformat";
 import {
   TextField,
   Select,
@@ -61,7 +62,7 @@ const Staff = () => {
     const staffData = {
       firstName : firstNameRef.current.value,
       lastName : lastNameRef.current.value,
-      dob : `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,
+      dob : dateFormat(`${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,"dd-mm-yyyy"),
       gender: gender,
       email : emailRef.current.value,
       phone : phoneRef.current.value,
@@ -93,7 +94,7 @@ const Staff = () => {
         console.log(result);
        setPassErr(false);
       } catch(err) {
-        console.log(err.response.data);
+        console.log(err.response.data.err);
       }
     }
   }

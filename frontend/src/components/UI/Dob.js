@@ -67,7 +67,7 @@ const Dob = forwardRef((props,ref) => {
             defaultValue=""
           >
             {month.map((m,i) => (
-              <MenuItem key={m} value={i+1}>
+              <MenuItem key={m} value={m}>
                 {m}
               </MenuItem>
             ))}
