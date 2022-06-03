@@ -61,8 +61,13 @@ const Faculty = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
     const dobErr = dob.length > 4;
+=======
+    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
+    const dobErr = dob.length>=10;
+>>>>>>> 02fc5b381dfa6b3235617a9cc4aaa00cce930714
     const facultyData = {
       facultyId: facultyIdRef.current.value,
       firstName: firstNameRef.current.value,
@@ -97,7 +102,7 @@ const Faculty = () => {
     } else {
       try {
         const result = await axios.post(
-          "http://localhost:8080/registration/faculty",
+          "/registration/faculty",
           facultyData
         );
         console.log(result);
@@ -157,7 +162,15 @@ const Faculty = () => {
               helperText={errors.find((err) => err.param === "email")?.msg}
             />
 
+<<<<<<< HEAD
             <Dob ref={dobRef} />
+=======
+            <Dob 
+            ref={dobRef} 
+            error={errors.some(err=>err.param==='dob')}
+            helperText={errors.find(err=>err.param==='dob')?.msg}
+             />
+>>>>>>> 02fc5b381dfa6b3235617a9cc4aaa00cce930714
 
             <RadioInput
               setGender={setGender}

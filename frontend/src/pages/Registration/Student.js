@@ -192,7 +192,7 @@ const Student = () => {
     } else {
       try {
         const result = await axios.post(
-          "http://localhost:8080/registration/student",
+          "/registration/student",
           studentData
         );
         console.log(result);
@@ -255,6 +255,7 @@ const Student = () => {
               helperText={errors.find((err) => err.param === "email")?.msg}
             />
 
+<<<<<<< HEAD
             <Dob
               required
               ref={dobRef}
@@ -268,6 +269,11 @@ const Student = () => {
               error={errors.some((err) => err.param === "gender")}
               helperText={errors.find((err) => err.param === "gender")?.msg}
             />
+=======
+            <Dob ref={dobRef} />
+
+            <RadioInput setGender={setGender} />
+>>>>>>> 02fc5b381dfa6b3235617a9cc4aaa00cce930714
 
             <TextField
               label="Blood Group"
