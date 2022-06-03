@@ -1,4 +1,4 @@
-import {useRef,useState} from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import dateFormat from "dateformat";
@@ -7,16 +7,16 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormControl
+  FormControl,
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
 
 const Faculty = () => {
-  const [gender,setGender] = useState('');
-  const [passErr,setPassErr] = useState(false);
-  const [errors,setErrors] = useState([]);
+  const [gender, setGender] = useState("");
+  const [passErr, setPassErr] = useState(false);
+  const [errors, setErrors] = useState([]);
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -36,7 +36,7 @@ const Faculty = () => {
   const dateRef = useRef();
   const monthRef = useRef();
   const yearRef = useRef();
-  const dobRef = useRef({dateRef,monthRef,yearRef});
+  const dobRef = useRef({ dateRef, monthRef, yearRef });
   const emailRef = useRef();
   const phoneRef = useRef();
   const addressRef = useRef();
@@ -59,57 +59,60 @@ const Faculty = () => {
   const departmentRef = useRef();
   const joiningYearRef = useRef();
 
-  const handleFormSubmit = async(e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
-    const dobErr = dob.length>4;
+    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
+    const dobErr = dob.length > 4;
     const facultyData = {
-      facultyId : facultyIdRef.current.value,
-      firstName : firstNameRef.current.value,
-      lastName : lastNameRef.current.value,
-      dob : dobErr&&dateFormat(dob,"dd-mm-yyyy"),
+      facultyId: facultyIdRef.current.value,
+      firstName: firstNameRef.current.value,
+      lastName: lastNameRef.current.value,
+      dob: dobErr && dateFormat(dob, "dd-mm-yyyy"),
       gender: gender,
-      email : emailRef.current.value,
-      phone : phoneRef.current.value,
-      address : addressRef.current.value,
-      bloodGroup : bloodGroupRef.current.value,
-      caste : casteRef.current.value,
-      aadharNo : aadharNoRef.current.value,
-      religion : religionRef.current.value,
-      birthPlace : birthPlaceRef.current.value,
-      birthDistrict : birthDistrictRef.current.value,
-      country : countryRef.current.value,
-      identityMark : identityMarkRef.current.value,
-      pincode : pincodeRef.current.value,
-      password : passwordRef.current.value,
-      cPasword : cPasswordRef.current.value,
-      fatherName : fatherNameRef.current.value,
-      fatherOccupation : fatherOccupationRef.current.value,
-      fatherPhone:  fatherPhoneRef.current.value,
-      fatherEmail : fatherEmailRef.current.value,
+      email: emailRef.current.value,
+      phone: phoneRef.current.value,
+      address: addressRef.current.value,
+      bloodGroup: bloodGroupRef.current.value,
+      caste: casteRef.current.value,
+      aadharNo: aadharNoRef.current.value,
+      religion: religionRef.current.value,
+      birthPlace: birthPlaceRef.current.value,
+      birthDistrict: birthDistrictRef.current.value,
+      country: countryRef.current.value,
+      identityMark: identityMarkRef.current.value,
+      pincode: pincodeRef.current.value,
+      password: passwordRef.current.value,
+      cPasword: cPasswordRef.current.value,
+      fatherName: fatherNameRef.current.value,
+      fatherOccupation: fatherOccupationRef.current.value,
+      fatherPhone: fatherPhoneRef.current.value,
+      fatherEmail: fatherEmailRef.current.value,
       teachingExp: teachingExpRef.current.value,
-      department : departmentRef.current.value,
-      joiningYear : joiningYearRef.current.value
-    }
+      department: departmentRef.current.value,
+      joiningYear: joiningYearRef.current.value,
+    };
 
-    if(facultyData.password!==facultyData.cPasword) {
+    if (facultyData.password !== facultyData.cPasword) {
       setPassErr(true);
     } else {
       try {
-        const result = await axios.post('http://localhost:8080/registration/faculty',facultyData)
+        const result = await axios.post(
+          "http://localhost:8080/registration/faculty",
+          facultyData
+        );
         console.log(result);
         setErrors([]);
-       setPassErr(false);
-      } catch(err) {
+        setPassErr(false);
+      } catch (err) {
         setErrors(err.response.data.err);
         console.log(err.response.data.err);
       }
       setPassErr(false);
     }
-  }
+  };
 
-    return(
-        <div>
+  return (
+    <div>
       <Navbar />
       <div className="form-wrapper">
         <h2>Faculty Registration</h2>
@@ -120,8 +123,8 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
-              error={errors.some(err=>err.param==='firstName')}
-              helperText={errors.find(err=>err.param==='firstName')?.msg}
+              error={errors.some((err) => err.param === "firstName")}
+              helperText={errors.find((err) => err.param === "firstName")?.msg}
               inputRef={firstNameRef}
             />
 
@@ -140,8 +143,8 @@ const Faculty = () => {
               type="number"
               fullWidth
               inputRef={phoneRef}
-              error={errors.some(err=>err.param==='phone')}
-              helperText={errors.find(err=>err.param==='phone')?.msg}
+              error={errors.some((err) => err.param === "phone")}
+              helperText={errors.find((err) => err.param === "phone")?.msg}
             />
 
             <TextField
@@ -151,11 +154,11 @@ const Faculty = () => {
               type="email"
               fullWidth
               inputRef={emailRef}
-              error={errors.some(err=>err.param==='email')}
-              helperText={errors.find(err=>err.param==='email')?.msg}
+              error={errors.some((err) => err.param === "email")}
+              helperText={errors.find((err) => err.param === "email")?.msg}
             />
 
-            <Dob ref={dobRef}/>
+            <Dob ref={dobRef} />
 
             <RadioInput setGender={setGender} />
 
@@ -164,8 +167,8 @@ const Faculty = () => {
               variant="outlined"
               size="small"
               fullWidth
-              error={errors.some(err=>err.param==='bloodGroup')}
-              helperText={errors.find(err=>err.param==='bloodGroup')?.msg}
+              error={errors.some((err) => err.param === "bloodGroup")}
+              helperText={errors.find((err) => err.param === "bloodGroup")?.msg}
               inputRef={bloodGroupRef}
             />
 
@@ -175,8 +178,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={aadharNoRef}
-              error={errors.some(err=>err.param==='aadharNo')}
-              helperText={errors.find(err=>err.param==='aadharNo')?.msg}
+              error={errors.some((err) => err.param === "aadharNo")}
+              helperText={errors.find((err) => err.param === "aadharNo")?.msg}
             />
 
             <TextField
@@ -185,8 +188,8 @@ const Faculty = () => {
               rows={2}
               className="textarea"
               inputRef={addressRef}
-              error={errors.some(err=>err.param==='address')}
-              helperText={errors.find(err=>err.param==='address')?.msg}
+              error={errors.some((err) => err.param === "address")}
+              helperText={errors.find((err) => err.param === "address")?.msg}
             />
 
             <TextField
@@ -195,8 +198,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={religionRef}
-              error={errors.some(err=>err.param==='religion')}
-              helperText={errors.find(err=>err.param==='religion')?.msg}
+              error={errors.some((err) => err.param === "religion")}
+              helperText={errors.find((err) => err.param === "religion")?.msg}
             />
 
             <TextField
@@ -205,8 +208,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={casteRef}
-              error={errors.some(err=>err.param==='caste')}
-              helperText={errors.find(err=>err.param==='caste')?.msg}
+              error={errors.some((err) => err.param === "caste")}
+              helperText={errors.find((err) => err.param === "caste")?.msg}
             />
 
             <TextField
@@ -215,8 +218,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={birthPlaceRef}
-              error={errors.some(err=>err.param==='birthPlace')}
-              helperText={errors.find(err=>err.param==='birthPlace')?.msg}
+              error={errors.some((err) => err.param === "birthPlace")}
+              helperText={errors.find((err) => err.param === "birthPlace")?.msg}
             />
 
             <TextField
@@ -225,8 +228,10 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={birthDistrictRef}
-              error={errors.some(err=>err.param==='birthDistrict')}
-              helperText={errors.find(err=>err.param==='birthDistrict')?.msg}
+              error={errors.some((err) => err.param === "birthDistrict")}
+              helperText={
+                errors.find((err) => err.param === "birthDistrict")?.msg
+              }
             />
 
             <TextField
@@ -235,8 +240,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={countryRef}
-              error={errors.some(err=>err.param==='country')}
-              helperText={errors.find(err=>err.param==='country')?.msg}
+              error={errors.some((err) => err.param === "country")}
+              helperText={errors.find((err) => err.param === "country")?.msg}
             />
 
             <TextField
@@ -245,7 +250,6 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={identityMarkRef}
-
             />
 
             <TextField
@@ -254,8 +258,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={facultyIdRef}
-              error={errors.some(err=>err.param==='facultyId')}
-              helperText={errors.find(err=>err.param==='facultyId')?.msg}
+              error={errors.some((err) => err.param === "facultyId")}
+              helperText={errors.find((err) => err.param === "facultyId")?.msg}
             />
 
             <TextField
@@ -264,8 +268,10 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={teachingExpRef}
-              error={errors.some(err=>err.param==='teachingExp')}
-              helperText={errors.find(err=>err.param==='teachingExp')?.msg}
+              error={errors.some((err) => err.param === "teachingExp")}
+              helperText={
+                errors.find((err) => err.param === "teachingExp")?.msg
+              }
             />
 
             <TextField
@@ -274,27 +280,29 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={pincodeRef}
-              error={errors.some(err=>err.param==='pincode')}
-              helperText={errors.find(err=>err.param==='pincode')?.msg}
+              error={errors.some((err) => err.param === "pincode")}
+              helperText={errors.find((err) => err.param === "pincode")?.msg}
             />
 
-              <FormControl className="SelectInput">
-                <InputLabel>Department</InputLabel>
-                <Select
-                  label="Department"
-                  defaultValue=""
-                  size="small"
-                  inputRef={departmentRef}
-                  error={errors.some(err=>err.param==='department')}
-                  helperText={errors.find(err=>err.param==='department')?.msg}
-                >
-                  {departments.map((opt) => (
-                    <MenuItem key={opt} value={opt}>
-                      {opt}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+            <FormControl className="SelectInput">
+              <InputLabel>Department</InputLabel>
+              <Select
+                label="Department"
+                defaultValue=""
+                size="small"
+                inputRef={departmentRef}
+                error={errors.some((err) => err.param === "department")}
+                helperText={
+                  errors.find((err) => err.param === "department")?.msg
+                }
+              >
+                {departments.map((opt) => (
+                  <MenuItem key={opt} value={opt}>
+                    {opt}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
 
             <TextField
               label="Password"
@@ -303,8 +311,8 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={passwordRef}
-              error={errors.some(err=>err.param==='password')}
-              helperText={errors.find(err=>err.param==='password')?.msg}
+              error={errors.some((err) => err.param === "password")}
+              helperText={errors.find((err) => err.param === "password")?.msg}
             />
 
             <TextField
@@ -315,7 +323,7 @@ const Faculty = () => {
               fullWidth
               inputRef={cPasswordRef}
               error={passErr}
-              helperText={passErr&&'Password does not match'}
+              helperText={passErr && "Password does not match"}
             />
 
             <TextField
@@ -325,8 +333,10 @@ const Faculty = () => {
               size="small"
               fullWidth
               inputRef={joiningYearRef}
-              error={errors.some(err=>err.param==='joiningYear')}
-              helperText={errors.find(err=>err.param==='joiningYear')?.msg}
+              error={errors.some((err) => err.param === "joiningYear")}
+              helperText={
+                errors.find((err) => err.param === "joiningYear")?.msg
+              }
             />
           </div>
 
@@ -339,8 +349,10 @@ const Faculty = () => {
                 size="small"
                 fullWidth
                 inputRef={fatherNameRef}
-                error={errors.some(err=>err.param==='fatherName')}
-              helperText={errors.find(err=>err.param==='fatherName')?.msg}
+                error={errors.some((err) => err.param === "fatherName")}
+                helperText={
+                  errors.find((err) => err.param === "fatherName")?.msg
+                }
               />
 
               <TextField
@@ -349,8 +361,10 @@ const Faculty = () => {
                 size="small"
                 fullWidth
                 inputRef={fatherOccupationRef}
-                error={errors.some(err=>err.param==='fatherOccupation')}
-              helperText={errors.find(err=>err.param==='fatherOccupation')?.msg}
+                error={errors.some((err) => err.param === "fatherOccupation")}
+                helperText={
+                  errors.find((err) => err.param === "fatherOccupation")?.msg
+                }
               />
 
               <TextField
@@ -360,8 +374,10 @@ const Faculty = () => {
                 type="number"
                 fullWidth
                 inputRef={fatherPhoneRef}
-                error={errors.some(err=>err.param==='fatherPhone')}
-              helperText={errors.find(err=>err.param==='fatherPhone')?.msg}
+                error={errors.some((err) => err.param === "fatherPhone")}
+                helperText={
+                  errors.find((err) => err.param === "fatherPhone")?.msg
+                }
               />
 
               <TextField
@@ -371,22 +387,26 @@ const Faculty = () => {
                 type="text"
                 fullWidth
                 inputRef={fatherEmailRef}
-                error={errors.some(err=>err.param==='fatherEmail')}
-              helperText={errors.find(err=>err.param==='fatherEmail')?.msg}
+                error={errors.some((err) => err.param === "fatherEmail")}
+                helperText={
+                  errors.find((err) => err.param === "fatherEmail")?.msg
+                }
               />
             </div>
           </div>
 
-          <input className="btn mt-2 mb-1" type="submit" value="Register"/>
+          <input className="btn mt-2 mb-1" type="submit" value="Register" />
 
           <div className="to-login mt-1">
             <p>Already have an account ?</p>
-            <Link to="/" className="btn-outlined">Login</Link>
+            <Link to="/" className="btn-outlined">
+              Login
+            </Link>
           </div>
         </form>
       </div>
     </div>
-    )
-}
+  );
+};
 
 export default Faculty;
