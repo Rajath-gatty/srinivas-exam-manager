@@ -61,7 +61,6 @@ const AssignFaculty = () => {
   // ];
 
   const [evaluatorOrder, setEvaluatorOrder] = useState({});
-  // const [updatedEvaluator, setUpdatedEvaluator] = useState([]);
   const [assignEvaluator, setAssignEvaluator] = useState([]);
 
   useEffect(() => {
@@ -128,10 +127,10 @@ const AssignFaculty = () => {
     //   //   }
     //   // });
     // } else {
-    var btnGroup = parentBtn.childNodes;
-    btnGroup.forEach((element) => {
-      element.removeAttribute("style");
-    });
+    // var btnGroup = parentBtn.childNodes;
+    // btnGroup.forEach((element) => {
+    //   element.removeAttribute("style");
+    // });
 
     setEvaluatorOrder({ evalOrder, evalReg });
     currBtn.style.backgroundColor = "var(--primary-color)";
@@ -155,17 +154,76 @@ const AssignFaculty = () => {
           //Toggle off selected btn
           btn.removeAttribute("style");
           //data is still not deleted from array
-        } else if (checkReg !== obj.orderReg && checkStyle === "") {
-          console.log("Dup Grey");
+        } else if (
+          checkReg !== obj.orderReg &&
+          evalOrder === "1" &&
+          checkStyle === ""
+        ) {
           btnOne.forEach((element) => {
+            console.log("eleValue");
             element.removeAttribute("style");
           });
-          setEvaluatorOrder({ evalOrder, evalReg });
-          currBtn.style.backgroundColor = "var(--primary-color)";
         }
         console.log(checkStyle.length);
       });
     });
+
+    btnTwo.forEach((btn) => {
+      console.log(btn);
+      var checkStyle = btn.style.backgroundColor;
+      var checkReg = btn.getAttribute("[data-id]");
+
+      occupied.forEach((obj) => {
+        if (
+          checkReg === obj.orderReg &&
+          checkStyle === "var(--primary-color)"
+        ) {
+          //Toggle off selected btn
+          btn.removeAttribute("style");
+          //data is still not deleted from array
+        } else if (
+          checkReg !== obj.orderReg &&
+          evalOrder === "1" &&
+          checkStyle === ""
+        ) {
+          btnTwo.forEach((element) => {
+            console.log("eleValue");
+            element.removeAttribute("style");
+          });
+        }
+        console.log(checkStyle.length);
+      });
+    });
+
+    btnThree.forEach((btn) => {
+      console.log(btn);
+      var checkStyle = btn.style.backgroundColor;
+      var checkReg = btn.getAttribute("[data-id]");
+
+      occupied.forEach((obj) => {
+        if (
+          checkReg === obj.orderReg &&
+          checkStyle === "var(--primary-color)"
+        ) {
+          //Toggle off selected btn
+          btn.removeAttribute("style");
+          //data is still not deleted from array
+        } else if (
+          checkReg !== obj.orderReg &&
+          evalOrder === "1" &&
+          checkStyle === ""
+        ) {
+          btnThree.forEach((element) => {
+            console.log("eleValue");
+            element.removeAttribute("style");
+          });
+        }
+        console.log(checkStyle.length);
+      });
+    });
+
+    setEvaluatorOrder({ evalOrder, evalReg });
+    currBtn.style.backgroundColor = "var(--primary-color)";
 
     // //Column duplicate check
     // console.log("Goin Here");
