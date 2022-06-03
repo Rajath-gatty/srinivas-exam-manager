@@ -162,3 +162,8 @@
   margin-right: 2em;
 }
 
+.dob-container {
+  display: flex;
+  gap: 0.75em;
+}
+

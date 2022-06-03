@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   TextField,
@@ -14,9 +14,9 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
-import SelectInput from "../../components/UI/SelectInput";
 
 const Student = () => {
+  const [gender,setGender] = useState('');
   //Toggle Guardian Details Show/Hide
   const [showGuardian, setShowGuardian] = useState("");
   const GuardianToggle = (e) => {
@@ -26,7 +26,7 @@ const Student = () => {
 
   //Switch Courses Acc to Selected Department
   const [course, setCourse] = useState([]);
-
+  const [passErr,setPassErr] = useState(false);
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -105,17 +105,103 @@ const Student = () => {
     }
   };
 
+  const regnoRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const dateRef = useRef();
+  const monthRef = useRef();
+  const yearRef = useRef();
+  const dobRef = useRef({dateRef,monthRef,yearRef});
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const addressRef = useRef();
+  const bloodGroupRef = useRef();
+  const casteRef = useRef();
+  const aadharNoRef = useRef();
+  const religionRef = useRef();
+  const birthPlaceRef = useRef();
+  const birthDistrictRef = useRef();
+  const countryRef = useRef();
+  const identityMarkRef = useRef();
+  const pincodeRef = useRef();
+  const passwordRef = useRef();
+  const cPasswordRef = useRef();
+  const fatherNameRef = useRef();
+  const fatherOccupationRef = useRef();
+  const fatherPhoneRef = useRef();
+  const fatherEmailRef = useRef();
+  const motherNameRef = useRef();
+  const motherOccupationRef = useRef();
+  const motherPhoneRef = useRef();
+  const motherEmailRef = useRef();
+  const gNameRef = useRef();
+  const gOccupationRef = useRef();
+  const gPhoneRef = useRef();
+  const gEmailRef = useRef();
+  const departmentRef = useRef();
+  const courseRef = useRef();
+  const joiningYearRef = useRef();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const studentData = {
+      regno : regnoRef.current.value,
+      firstName : firstNameRef.current.value,
+      lastName : lastNameRef.current.value,
+      dob : `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,
+      gender: gender,
+      email : emailRef.current.value,
+      phone : phoneRef.current.value,
+      address : addressRef.current.value,
+      bloodGroup : bloodGroupRef.current.value,
+      caste : casteRef.current.value,
+      aadharNo : aadharNoRef.current.value,
+      religion : religionRef.current.value,
+      birthPlace : birthPlaceRef.current.value,
+      birthDistrict : birthDistrictRef.current.value,
+      country : countryRef.current.value,
+      identityMark : identityMarkRef.current.value,
+      pincode : pincodeRef.current.value,
+      password : passwordRef.current.value,
+      cPasword : cPasswordRef.current.value,
+      fatherName : fatherNameRef.current.value,
+      fatherOccupation : fatherOccupationRef.current.value,
+      fatherPhone:  fatherPhoneRef.current.value,
+      fatherEmail : fatherEmailRef.current.value,
+      motherName : motherNameRef.current.value,
+      motherOccupation : motherOccupationRef.current.value,
+      motherPhone : motherPhoneRef.current.value,
+      motherEmail : motherEmailRef.current.value,
+      gName : gNameRef.current?.value||'',
+      gOccupation: gOccupationRef.current?.value||'',
+      gPhone: gPhoneRef.current?.value||'',
+      gEmail: gEmailRef.current?.value||'',
+      department : departmentRef.current.value,
+      course : courseRef.current.value,
+      joiningYear : joiningYearRef.current.value
+    }
+
+    if(studentData.password!==studentData.cPasword) {
+      setPassErr(true);
+    } else {
+      // Sending POST Request
+      console.log(studentData);
+      setPassErr(false);
+    }
+  }
+
   return (
     <div>
       <Navbar />
       <div className="form-wrapper">
         <h2>Student Registration</h2>
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <div className="student-form">
             <TextField
               label="First Name"
               variant="outlined"
               size="small"
+              inputRef={firstNameRef}
               required
               fullWidth
             />
@@ -124,6 +210,7 @@ const Student = () => {
               label="Last Name"
               variant="outlined"
               size="small"
+              inputRef={lastNameRef}
               fullWidth
             />
 
@@ -131,6 +218,7 @@ const Student = () => {
               label="Phone"
               variant="outlined"
               size="small"
+              inputRef={phoneRef}
               required
               fullWidth
             />
@@ -140,18 +228,20 @@ const Student = () => {
               variant="outlined"
               size="small"
               type="email"
+              inputRef={emailRef}
               required
               fullWidth
             />
 
-            <Dob required />
+            <Dob required  ref={dobRef}/>
 
-            <RadioInput required />
+            <RadioInput required setGender={setGender}/>
 
             <TextField
               label="Blood Group"
               variant="outlined"
               size="small"
+              inputRef={bloodGroupRef}
               fullWidth
             />
 
@@ -159,6 +249,7 @@ const Student = () => {
               label="Aadhar Card Number"
               variant="outlined"
               size="small"
+              inputRef={aadharNoRef}
               fullWidth
             />
 
@@ -166,6 +257,7 @@ const Student = () => {
               multiline
               label="Address"
               rows={2}
+              inputRef={addressRef}
               className="textarea"
             />
 
@@ -173,6 +265,7 @@ const Student = () => {
               label="Religion"
               variant="outlined"
               size="small"
+              inputRef={religionRef}
               fullWidth
             />
 
@@ -180,6 +273,7 @@ const Student = () => {
               label="Caste"
               variant="outlined"
               size="small"
+              inputRef={casteRef}
               fullWidth
             />
 
@@ -187,6 +281,7 @@ const Student = () => {
               label="Place of Birth"
               variant="outlined"
               size="small"
+              inputRef={birthPlaceRef}
               fullWidth
             />
 
@@ -194,6 +289,7 @@ const Student = () => {
               label="District of Birth"
               variant="outlined"
               size="small"
+              inputRef={birthDistrictRef}
               fullWidth
             />
 
@@ -201,6 +297,7 @@ const Student = () => {
               label="Country of Birth"
               variant="outlined"
               size="small"
+              inputRef={countryRef}
               fullWidth
             />
 
@@ -208,6 +305,7 @@ const Student = () => {
               label="Identity Mark"
               variant="outlined"
               size="small"
+              inputRef={identityMarkRef}
               fullWidth
             />
 
@@ -215,6 +313,7 @@ const Student = () => {
               label="Registration No."
               variant="outlined"
               size="small"
+              inputRef={regnoRef}
               fullWidth
             />
 
@@ -222,6 +321,7 @@ const Student = () => {
               label="Pincode"
               variant="outlined"
               size="small"
+              inputRef={pincodeRef}
               fullWidth
             />
 
@@ -230,6 +330,7 @@ const Student = () => {
               variant="outlined"
               type="password"
               size="small"
+              inputRef={passwordRef}
               fullWidth
             />
 
@@ -238,6 +339,9 @@ const Student = () => {
               variant="outlined"
               type="password"
               size="small"
+              error={passErr}
+              helperText={passErr&&'Passwords Does not match'}
+              inputRef={cPasswordRef}
               fullWidth
             />
           </div>
@@ -249,6 +353,7 @@ const Student = () => {
                 label="Name"
                 variant="outlined"
                 size="small"
+                inputRef={fatherNameRef}
                 fullWidth
               />
 
@@ -256,6 +361,7 @@ const Student = () => {
                 label="Occupation"
                 variant="outlined"
                 size="small"
+                inputRef={fatherOccupationRef}
                 fullWidth
               />
 
@@ -264,6 +370,7 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 type="tel"
+                inputRef={fatherPhoneRef}
                 fullWidth
               />
 
@@ -272,6 +379,7 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 type="email"
+                inputRef={fatherEmailRef}
                 fullWidth
               />
             </div>
@@ -284,6 +392,7 @@ const Student = () => {
                 label="Name"
                 variant="outlined"
                 size="small"
+                inputRef={motherNameRef}
                 fullWidth
               />
 
@@ -291,6 +400,7 @@ const Student = () => {
                 label="Occupation"
                 variant="outlined"
                 size="small"
+                inputRef={motherOccupationRef}
                 fullWidth
               />
 
@@ -299,6 +409,7 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 type="tel"
+                inputRef={motherPhoneRef}
                 fullWidth
               />
 
@@ -307,6 +418,7 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 type="email"
+                inputRef={motherEmailRef}
                 fullWidth
               />
             </div>
@@ -337,6 +449,7 @@ const Student = () => {
                     label="Name"
                     variant="outlined"
                     size="small"
+                    inputRef={gNameRef}
                     fullWidth
                   />
 
@@ -344,6 +457,7 @@ const Student = () => {
                     label="Occupation"
                     variant="outlined"
                     size="small"
+                    inputRef={gOccupationRef}
                     fullWidth
                   />
 
@@ -352,6 +466,7 @@ const Student = () => {
                     variant="outlined"
                     size="small"
                     type="tel"
+                    inputRef={gPhoneRef}
                     fullWidth
                   />
 
@@ -360,6 +475,7 @@ const Student = () => {
                     variant="outlined"
                     size="small"
                     type="email"
+                    inputRef={gEmailRef}
                     fullWidth
                   />
                 </div>
@@ -378,6 +494,7 @@ const Student = () => {
                   defaultValue=""
                   size="small"
                   onChange={SwitchCourse}
+                  inputRef={departmentRef}
                 >
                   {departments.map((opt) => (
                     <MenuItem key={opt} value={opt}>
@@ -387,28 +504,50 @@ const Student = () => {
                 </Select>
               </FormControl>
 
-              <SelectInput label="Course" options={course} />
-
-              <SelectInput
-                label="Joining Academic Year"
-                options={DegreeYear}
-                fullWidth
-              />
-
-              <SelectInput label="Degree Year" options={DegreeYear} fullWidth />
-
-              <TextField
-                label="Degree Batch"
-                variant="outlined"
+              <FormControl className="SelectInput" fullWidth>
+              <InputLabel>Course</InputLabel>
+              <Select
+                label="Course"
+                placeholder="Course"
+                defaultValue=""
                 size="small"
-                fullWidth
-              />
+                inputRef={courseRef}
+                // fullwidth="true"
+              >
+              {course.map((opt) => (
+                <MenuItem key={opt} value={opt}>
+                  {opt}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
+
+
+          <FormControl className="SelectInput" fullWidth>
+              <InputLabel>Joining Academic Year</InputLabel>
+              <Select
+                label="Joining Academic Year"
+                placeholder="Joining Academic Year"
+                defaultValue=""
+                size="small"
+                inputRef={joiningYearRef}
+                // fullwidth="true"
+              >
+              {DegreeYear.map((opt) => (
+                <MenuItem key={opt} value={opt}>
+                  {opt}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+
             </div>
           </div>
 
-          <input className="btn" type="submit" value="Register" disabled />
+          <input className="btn mt-2" type="submit" value="Register" />
 
-          <div className="to-login">
+          <div className="to-login mb-1">
             <p>Already have an account ?</p>
             <Link to="/" className="btn-outlined">
               Login

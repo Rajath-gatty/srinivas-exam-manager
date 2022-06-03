@@ -1,5 +1,5 @@
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-
+import {forwardRef} from 'react';
 const date = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
   23, 24, 25, 26, 27, 28, 29, 30, 31,
@@ -30,7 +30,8 @@ for (var i = startYear; i <= fYear; i++) {
 }
 // console.log(year);
 
-const Dob = (props) => {
+const Dob = forwardRef((props,ref) => {
+  const {dateRef,monthRef,yearRef} = ref.current;
   return (
     <div className="dob-wrapper">
       <InputLabel id="date" className="dob-label" required={props.required}>
@@ -44,6 +45,7 @@ const Dob = (props) => {
             id="date"
             label="Date"
             size="small"
+            inputRef={dateRef}
             defaultValue=""
           >
             {date.map((d) => (
@@ -61,9 +63,10 @@ const Dob = (props) => {
             id="month"
             label="Month"
             size="small"
+            inputRef={monthRef}
             defaultValue=""
           >
-            {month.map((m) => (
+            {month.map((m,i) => (
               <MenuItem key={m} value={m}>
                 {m}
               </MenuItem>
@@ -77,6 +80,7 @@ const Dob = (props) => {
             id="year"
             label="Year"
             size="small"
+            inputRef={yearRef}
             defaultValue=""
           >
             {year.map((y) => (
@@ -89,6 +93,6 @@ const Dob = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default Dob;

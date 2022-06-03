@@ -1,5 +1,7 @@
-import React from "react";
+import {useRef,useState} from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import dateFormat from "dateformat";
 import {
   TextField,
   Select,
@@ -12,6 +14,9 @@ import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
 
 const Staff = () => {
+  const [gender,setGender] = useState('');
+  const [passErr,setPassErr] = useState(false);
+
     const departments = [
         "Computer Science & Information Science",
         "Management & Commerce",
@@ -24,18 +29,89 @@ const Staff = () => {
         "Allied Health Sciences",
         "Nursing Science",
       ];
+
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const dateRef = useRef();
+  const monthRef = useRef();
+  const yearRef = useRef();
+  const dobRef = useRef({dateRef,monthRef,yearRef});
+  const emailRef = useRef();
+  const phoneRef = useRef();
+  const addressRef = useRef();
+  const bloodGroupRef = useRef();
+  const casteRef = useRef();
+  const aadharNoRef = useRef();
+  const religionRef = useRef();
+  const birthPlaceRef = useRef();
+  const birthDistrictRef = useRef();
+  const countryRef = useRef();
+  const identityMarkRef = useRef();
+  const pincodeRef = useRef();
+  const passwordRef = useRef();
+  const cPasswordRef = useRef();
+  const fatherNameRef = useRef();
+  const fatherOccupationRef = useRef();
+  const fatherPhoneRef = useRef();
+  const fatherEmailRef = useRef();
+  const departmentRef = useRef();
+  const joiningYearRef = useRef();
+
+  const handleFormSubmit = async(e) => {
+    e.preventDefault();
+    const staffData = {
+      firstName : firstNameRef.current.value,
+      lastName : lastNameRef.current.value,
+      dob : dateFormat(`${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,"dd-mm-yyyy"),
+      gender: gender,
+      email : emailRef.current.value,
+      phone : phoneRef.current.value,
+      address : addressRef.current.value,
+      bloodGroup : bloodGroupRef.current.value,
+      caste : casteRef.current.value,
+      aadharNo : aadharNoRef.current.value,
+      religion : religionRef.current.value,
+      birthPlace : birthPlaceRef.current.value,
+      birthDistrict : birthDistrictRef.current.value,
+      country : countryRef.current.value,
+      identityMark : identityMarkRef.current.value,
+      pincode : pincodeRef.current.value,
+      password : passwordRef.current.value,
+      cPasword : cPasswordRef.current.value,
+      fatherName : fatherNameRef.current.value,
+      fatherOccupation : fatherOccupationRef.current.value,
+      fatherPhone:  fatherPhoneRef.current.value,
+      fatherEmail : fatherEmailRef.current.value,
+      department : departmentRef.current.value,
+      joiningYear : joiningYearRef.current.value
+    }
+
+    if(staffData.password!==staffData.cPasword) {
+      setPassErr(true);
+    } else {
+      try {
+        const result = await axios.post('http://localhost:8080/registration/staff',staffData)
+        console.log(result);
+       setPassErr(false);
+      } catch(err) {
+        console.log(err.response.data.err);
+      }
+    }
+  }
+
     return(
         <div>
         <Navbar />
         <div className="form-wrapper">
           <h2>Staff Registration</h2>
-          <form>
+          <form onSubmit={handleFormSubmit}>
             <div className="student-form">
               <TextField
                 label="First Name"
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={firstNameRef}
               />
   
               <TextField
@@ -43,6 +119,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={lastNameRef}
               />
   
               <TextField
@@ -50,6 +127,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={phoneRef}
               />
   
               <TextField
@@ -58,17 +136,19 @@ const Staff = () => {
                 size="small"
                 type="email"
                 fullWidth
+                inputRef={emailRef}
               />
   
-              <Dob />
+              <Dob ref={dobRef}/>
   
-              <RadioInput />
+              <RadioInput setGender={setGender}/>
   
               <TextField
                 label="Blood Group"
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={bloodGroupRef}
               />
   
               <TextField
@@ -76,6 +156,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={aadharNoRef}
               />
   
               <TextField
@@ -83,6 +164,7 @@ const Staff = () => {
                 label="Address"
                 rows={2}
                 className="textarea"
+                inputRef={addressRef}
               />
   
               <TextField
@@ -90,6 +172,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={religionRef}
               />
   
               <TextField
@@ -97,6 +180,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={casteRef}
               />
   
               <TextField
@@ -104,6 +188,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={birthPlaceRef}
               />
   
               <TextField
@@ -111,6 +196,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={birthDistrictRef}
               />
   
               <TextField
@@ -118,6 +204,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={countryRef}
               />
   
               <TextField
@@ -125,6 +212,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={identityMarkRef}
               />
   
               <TextField
@@ -132,6 +220,7 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={joiningYearRef}
               />
   
               <TextField
@@ -139,6 +228,28 @@ const Staff = () => {
                 variant="outlined"
                 size="small"
                 fullWidth
+                inputRef={pincodeRef}
+              />
+
+                
+              <TextField
+                label="Password"
+                variant="outlined"
+                type="password"
+                size="small"
+                fullWidth
+                inputRef={passwordRef}
+              />
+  
+              <TextField
+                label="Confirm Password"
+                variant="outlined"
+                type="password"
+                size="small"
+                error={passErr}
+                helperText={passErr&&'Passwords does not match'}
+                fullWidth
+                inputRef={cPasswordRef}
               />
   
                 <FormControl className="SelectInput">
@@ -147,6 +258,7 @@ const Staff = () => {
                     label="Department"
                     defaultValue=""
                     size="small"
+                    inputRef={departmentRef}
                   >
                     {departments.map((opt) => (
                       <MenuItem key={opt} value={opt}>
@@ -155,22 +267,7 @@ const Staff = () => {
                     ))}
                   </Select>
                 </FormControl>
-  
-              <TextField
-                label="Password"
-                variant="outlined"
-                type="password"
-                size="small"
-                fullWidth
-              />
-  
-              <TextField
-                label="Confirm Password"
-                variant="outlined"
-                type="password"
-                size="small"
-                fullWidth
-              />
+
             </div>
   
             <div className="sub-wrapper">
@@ -181,6 +278,7 @@ const Staff = () => {
                   variant="outlined"
                   size="small"
                   fullWidth
+                  inputRef={fatherNameRef}
                 />
   
                 <TextField
@@ -188,6 +286,7 @@ const Staff = () => {
                   variant="outlined"
                   size="small"
                   fullWidth
+                  inputRef={fatherOccupationRef}
                 />
   
                 <TextField
@@ -196,6 +295,7 @@ const Staff = () => {
                   size="small"
                   type="tel"
                   fullWidth
+                  inputRef={fatherPhoneRef}
                 />
   
                 <TextField
@@ -204,13 +304,14 @@ const Staff = () => {
                   size="small"
                   type="email"
                   fullWidth
+                  inputRef={fatherEmailRef}
                 />
               </div>
             </div>
   
-            <input className="btn" type="submit" value="Register" disabled/>
+            <input className="btn mt-2" type="submit" value="Register"/>
 
-            <div className="to-login">
+            <div className="to-login mt-1">
               <p>Already have an account ?</p>
               <Link to="/" className="btn-outlined">Login</Link>
             </div>
