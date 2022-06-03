@@ -1,4 +1,4 @@
-import {Radio,RadioGroup, FormControl, FormLabel,FormControlLabel} from "@mui/material";
+import {Radio,RadioGroup, FormControl, FormLabel,FormControlLabel, FormHelperText} from "@mui/material";
 const RadioInput = (props) => {
     return(
         <FormControl className="radio-container">
@@ -14,6 +14,7 @@ const RadioInput = (props) => {
           />
           <FormControlLabel onChange={(e) => props.setGender(e.target.value)} value="female" control={<Radio />} label="Female" />
         </RadioGroup>
+        <FormHelperText error>{props.helperText}</FormHelperText>
       </FormControl>
     )
 }

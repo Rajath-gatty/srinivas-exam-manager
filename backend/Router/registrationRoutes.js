@@ -11,7 +11,7 @@ body('dob').trim().isDate({format:'DD/MM/YYYY'}).withMessage('Please Enter Valid
 body('email').isEmail().withMessage('Enter valid Email ID').custom(async(value) => {
     const result = await db.execute(`SELECT email FROM student WHERE email='${value}'`);
     if(result[0].length>0) {
-        return Promise.reject('E-mail already in use');
+        return Promise.reject('This Email ID already');
     } 
 }),
 body('phone').trim().isLength({min:10,max:10}).withMessage('Enter valid phone number'),
@@ -49,7 +49,7 @@ body('dob').trim().isDate({format:'DD/MM/YYYY'}).withMessage('Please Enter Valid
 body('email').isEmail().withMessage('Enter valid Email ID').custom(async(value) => {
     const result = await db.execute(`SELECT email FROM faculty WHERE email='${value}'`);
     if(result[0].length>0) {
-        return Promise.reject('E-mail already in use');
+        return Promise.reject('This Email ID already registered');
     } 
 }),
 body('phone').trim().isLength({min:10,max:10}).withMessage('Enter valid phone number'),

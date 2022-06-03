@@ -1,4 +1,4 @@
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel, FormHelperText } from "@mui/material";
 import {forwardRef} from 'react';
 const date = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
@@ -47,6 +47,7 @@ const Dob = forwardRef((props,ref) => {
             size="small"
             inputRef={dateRef}
             defaultValue=""
+            error={props.error}
           >
             {date.map((d) => (
               <MenuItem key={d} value={d}>
@@ -65,6 +66,7 @@ const Dob = forwardRef((props,ref) => {
             size="small"
             inputRef={monthRef}
             defaultValue=""
+            error={props.error}
           >
             {month.map((m,i) => (
               <MenuItem key={m} value={m}>
@@ -82,6 +84,7 @@ const Dob = forwardRef((props,ref) => {
             size="small"
             inputRef={yearRef}
             defaultValue=""
+            error={props.error}
           >
             {year.map((y) => (
               <MenuItem key={y} value={y}>
@@ -91,6 +94,7 @@ const Dob = forwardRef((props,ref) => {
           </Select>
         </FormControl>
       </div>
+      <FormHelperText error>{props.helperText}</FormHelperText>
     </div>
   );
 });

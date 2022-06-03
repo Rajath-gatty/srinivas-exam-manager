@@ -7,7 +7,8 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormControl
+  FormControl,
+  FormHelperText
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -16,6 +17,7 @@ import RadioInput from "../../components/UI/RadioInput";
 const Staff = () => {
   const [gender,setGender] = useState('');
   const [passErr,setPassErr] = useState(false);
+  const [errors,setErrors] = useState([]);
 
     const departments = [
         "Computer Science & Information Science",
@@ -59,10 +61,12 @@ const Staff = () => {
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
+    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
+    const dobErr = dob.length>=10;
     const staffData = {
       firstName : firstNameRef.current.value,
       lastName : lastNameRef.current.value,
-      dob : dateFormat(`${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`,"dd-mm-yyyy"),
+      dob : dobErr&&dateFormat(dob,"dd-mm-yyyy"),
       gender: gender,
       email : emailRef.current.value,
       phone : phoneRef.current.value,
@@ -90,10 +94,12 @@ const Staff = () => {
       setPassErr(true);
     } else {
       try {
-        const result = await axios.post('http://localhost:8080/registration/staff',staffData)
+        const result = await axios.post('/registration/staff',staffData)
         console.log(result);
-       setPassErr(false);
+        setErrors([]);
+        setPassErr(false);
       } catch(err) {
+        setErrors(err.response.data.err);
         console.log(err.response.data.err);
       }
     }
@@ -112,6 +118,8 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={firstNameRef}
+                error={errors.some(err=>err.param==='firstName')}
+                helperText={errors.find(err=>err.param==='firstName')?.msg}
               />
   
               <TextField
@@ -126,22 +134,35 @@ const Staff = () => {
                 label="Phone"
                 variant="outlined"
                 size="small"
+                type="number"
                 fullWidth
                 inputRef={phoneRef}
+                error={errors.some(err=>err.param==='phone')}
+                helperText={errors.find(err=>err.param==='phone')?.msg}
               />
   
               <TextField
                 label="Email"
                 variant="outlined"
                 size="small"
-                type="email"
+                type="text"
                 fullWidth
                 inputRef={emailRef}
+                error={errors.some(err=>err.param==='email')}
+                helperText={errors.find(err=>err.param==='email')?.msg}
               />
   
-              <Dob ref={dobRef}/>
+              <Dob 
+              ref={dobRef}
+              error={errors.some(err=>err.param==='dob')}
+            helperText={errors.find(err=>err.param==='dob')?.msg}
+              />
   
-              <RadioInput setGender={setGender}/>
+              <RadioInput 
+              setGender={setGender}
+              error={errors.some(err=>err.param==='gender')}
+            helperText={errors.find(err=>err.param==='gender')?.msg}
+            />
   
               <TextField
                 label="Blood Group"
@@ -149,14 +170,19 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={bloodGroupRef}
+                error={errors.some(err=>err.param==='bloodGroup')}
+              helperText={errors.find(err=>err.param==='bloodGroup')?.msg}
               />
   
               <TextField
                 label="Aadhar Card Number"
                 variant="outlined"
                 size="small"
+                type="number"
                 fullWidth
                 inputRef={aadharNoRef}
+                error={errors.some(err=>err.param==='aadharNo')}
+                helperText={errors.find(err=>err.param==='aadharNo')?.msg}
               />
   
               <TextField
@@ -165,6 +191,8 @@ const Staff = () => {
                 rows={2}
                 className="textarea"
                 inputRef={addressRef}
+                error={errors.some(err=>err.param==='address')}
+                helperText={errors.find(err=>err.param==='address')?.msg}
               />
   
               <TextField
@@ -173,6 +201,8 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={religionRef}
+                error={errors.some(err=>err.param==='religion')}
+              helperText={errors.find(err=>err.param==='religion')?.msg}
               />
   
               <TextField
@@ -181,14 +211,18 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={casteRef}
+                error={errors.some(err=>err.param==='caste')}
+                helperText={errors.find(err=>err.param==='caste')?.msg}
               />
-  
+
               <TextField
                 label="Place of Birth"
                 variant="outlined"
                 size="small"
                 fullWidth
                 inputRef={birthPlaceRef}
+                error={errors.some(err=>err.param==='birthPlace')}
+              helperText={errors.find(err=>err.param==='birthPlace')?.msg}
               />
   
               <TextField
@@ -197,6 +231,8 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={birthDistrictRef}
+                error={errors.some(err=>err.param==='birthDistrict')}
+                helperText={errors.find(err=>err.param==='birthDistrict')?.msg}
               />
   
               <TextField
@@ -205,6 +241,8 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={countryRef}
+                error={errors.some(err=>err.param==='country')}
+              helperText={errors.find(err=>err.param==='country')?.msg}
               />
   
               <TextField
@@ -216,22 +254,27 @@ const Staff = () => {
               />
   
               <TextField
-                label="Date of Join"
+                label="Joining Year"
                 variant="outlined"
                 size="small"
+                type="number"
                 fullWidth
                 inputRef={joiningYearRef}
+                error={errors.some(err=>err.param==='joiningYear')}
+              helperText={errors.find(err=>err.param==='joiningYear')?.msg}
               />
   
               <TextField
                 label="Pincode"
                 variant="outlined"
                 size="small"
+                type="number"
                 fullWidth
                 inputRef={pincodeRef}
+                error={errors.some(err=>err.param==='pincode')}
+              helperText={errors.find(err=>err.param==='pincode')?.msg}
               />
 
-                
               <TextField
                 label="Password"
                 variant="outlined"
@@ -239,6 +282,8 @@ const Staff = () => {
                 size="small"
                 fullWidth
                 inputRef={passwordRef}
+                error={errors.some(err=>err.param==='password')}
+                helperText={errors.find(err=>err.param==='password')?.msg}
               />
   
               <TextField
@@ -259,6 +304,7 @@ const Staff = () => {
                     defaultValue=""
                     size="small"
                     inputRef={departmentRef}
+                    error={errors.some(err=>err.param==='department')}
                   >
                     {departments.map((opt) => (
                       <MenuItem key={opt} value={opt}>
@@ -266,8 +312,8 @@ const Staff = () => {
                       </MenuItem>
                     ))}
                   </Select>
+                  <FormHelperText error>{errors.find(err=>err.param==='department')?.msg}</FormHelperText>
                 </FormControl>
-
             </div>
   
             <div className="sub-wrapper">
@@ -279,6 +325,8 @@ const Staff = () => {
                   size="small"
                   fullWidth
                   inputRef={fatherNameRef}
+                  error={errors.some(err=>err.param==='fatherName')}
+              helperText={errors.find(err=>err.param==='fatherName')?.msg}
                 />
   
                 <TextField
@@ -287,15 +335,19 @@ const Staff = () => {
                   size="small"
                   fullWidth
                   inputRef={fatherOccupationRef}
+                  error={errors.some(err=>err.param==='fatherOccupation')}
+                  helperText={errors.find(err=>err.param==='fatherOccupation')?.msg}
                 />
   
                 <TextField
                   label="Mobile Number"
                   variant="outlined"
                   size="small"
-                  type="tel"
+                  type="number"
                   fullWidth
                   inputRef={fatherPhoneRef}
+                  error={errors.some(err=>err.param==='fatherPhone')}
+                  helperText={errors.find(err=>err.param==='fatherPhone')?.msg}
                 />
   
                 <TextField
@@ -305,6 +357,8 @@ const Staff = () => {
                   type="email"
                   fullWidth
                   inputRef={fatherEmailRef}
+                  error={errors.some(err=>err.param==='fatherEmail')}
+                  helperText={errors.find(err=>err.param==='fatherEmail')?.msg}
                 />
               </div>
             </div>

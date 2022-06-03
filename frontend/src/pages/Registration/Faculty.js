@@ -7,7 +7,8 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormControl
+  FormControl,
+  FormHelperText
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -62,7 +63,7 @@ const Faculty = () => {
   const handleFormSubmit = async(e) => {
     e.preventDefault();
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
-    const dobErr = dob.length>4;
+    const dobErr = dob.length>=10;
     const facultyData = {
       facultyId : facultyIdRef.current.value,
       firstName : firstNameRef.current.value,
@@ -99,12 +100,11 @@ const Faculty = () => {
         const result = await axios.post('http://localhost:8080/registration/faculty',facultyData)
         console.log(result);
         setErrors([]);
-       setPassErr(false);
+        setPassErr(false);
       } catch(err) {
         setErrors(err.response.data.err);
         console.log(err.response.data.err);
       }
-      setPassErr(false);
     }
   }
 
@@ -155,9 +155,16 @@ const Faculty = () => {
               helperText={errors.find(err=>err.param==='email')?.msg}
             />
 
-            <Dob ref={dobRef}/>
+            <Dob 
+            ref={dobRef} 
+            error={errors.some(err=>err.param==='dob')}
+            helperText={errors.find(err=>err.param==='dob')?.msg}/>
 
-            <RadioInput setGender={setGender} />
+            <RadioInput 
+            setGender={setGender} 
+            error={errors.some(err=>err.param==='gender')}
+            helperText={errors.find(err=>err.param==='gender')?.msg}
+            />
 
             <TextField
               label="Blood Group"
@@ -173,6 +180,7 @@ const Faculty = () => {
               label="Aadhar Card Number"
               variant="outlined"
               size="small"
+              type="number"
               fullWidth
               inputRef={aadharNoRef}
               error={errors.some(err=>err.param==='aadharNo')}
@@ -286,7 +294,6 @@ const Faculty = () => {
                   size="small"
                   inputRef={departmentRef}
                   error={errors.some(err=>err.param==='department')}
-                  helperText={errors.find(err=>err.param==='department')?.msg}
                 >
                   {departments.map((opt) => (
                     <MenuItem key={opt} value={opt}>
@@ -294,6 +301,7 @@ const Faculty = () => {
                     </MenuItem>
                   ))}
                 </Select>
+                <FormHelperText error>{errors.find(err=>err.param==='department')?.msg}</FormHelperText>
               </FormControl>
 
             <TextField
