@@ -131,9 +131,15 @@ function App() {
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
-                <Route path="application/regular" element={<ApplicationRegular />}/>
-                <Route path="application/repeater" element={<ApplicationRepeater />} />
-                <Route path="/new-payment" element={<NewPayment/>}/>
+                <Route
+                  path="application/regular"
+                  element={<ApplicationRegular />}
+                />
+                <Route
+                  path="application/repeater"
+                  element={<ApplicationRepeater />}
+                />
+                <Route path="/new-payment" element={<NewPayment />} />
               </Route>
 
               {/* Faculty and Student access*/}
@@ -182,7 +188,7 @@ function App() {
                   element={<AttendanceStatement />}
                 />
                 <Route path="/evaluators" element={<Evaluators />} />
-                <Route path="/assign-faculty" element={<AssignFaculty />} />
+                <Route path="/evaluators/assign" element={<AssignFaculty />} />
                 <Route path="evaluation/first" element={<Evaluation />} />
               </Route>
 

@@ -6,7 +6,7 @@ const Evaluators = (props) => {
     return (
 
         <div className="attendance-main">
-            <Link to="/assign-faculty">
+            <Link to="/evaluators/assign">
                 <button className="attendance-button">
                     <HiPlus size={20} />
                     <span>AssignFaculty</span>
