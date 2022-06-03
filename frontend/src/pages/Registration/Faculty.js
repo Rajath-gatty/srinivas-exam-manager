@@ -8,10 +8,6 @@ import {
   InputLabel,
   MenuItem,
   FormControl,
-<<<<<<< HEAD
-  FormHelperText
-=======
->>>>>>> 6d8ba0ce6525335a197252290d5ae3c5da878ece
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -65,13 +61,8 @@ const Faculty = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
-    const dobErr = dob.length>=10;
-=======
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
     const dobErr = dob.length > 4;
->>>>>>> 6d8ba0ce6525335a197252290d5ae3c5da878ece
     const facultyData = {
       facultyId: facultyIdRef.current.value,
       firstName: firstNameRef.current.value,
@@ -112,11 +103,7 @@ const Faculty = () => {
         console.log(result);
         setErrors([]);
         setPassErr(false);
-<<<<<<< HEAD
-      } catch(err) {
-=======
       } catch (err) {
->>>>>>> 6d8ba0ce6525335a197252290d5ae3c5da878ece
         setErrors(err.response.data.err);
         console.log(err.response.data.err);
       }
@@ -170,19 +157,12 @@ const Faculty = () => {
               helperText={errors.find((err) => err.param === "email")?.msg}
             />
 
-<<<<<<< HEAD
-            <Dob 
-            ref={dobRef} 
-            error={errors.some(err=>err.param==='dob')}
-            helperText={errors.find(err=>err.param==='dob')?.msg}/>
-=======
             <Dob ref={dobRef} />
->>>>>>> 6d8ba0ce6525335a197252290d5ae3c5da878ece
 
-            <RadioInput 
-            setGender={setGender} 
-            error={errors.some(err=>err.param==='gender')}
-            helperText={errors.find(err=>err.param==='gender')?.msg}
+            <RadioInput
+              setGender={setGender}
+              error={errors.some((err) => err.param === "gender")}
+              helperText={errors.find((err) => err.param === "gender")?.msg}
             />
 
             <TextField
@@ -308,25 +288,6 @@ const Faculty = () => {
               helperText={errors.find((err) => err.param === "pincode")?.msg}
             />
 
-<<<<<<< HEAD
-              <FormControl className="SelectInput">
-                <InputLabel>Department</InputLabel>
-                <Select
-                  label="Department"
-                  defaultValue=""
-                  size="small"
-                  inputRef={departmentRef}
-                  error={errors.some(err=>err.param==='department')}
-                >
-                  {departments.map((opt) => (
-                    <MenuItem key={opt} value={opt}>
-                      {opt}
-                    </MenuItem>
-                  ))}
-                </Select>
-                <FormHelperText error>{errors.find(err=>err.param==='department')?.msg}</FormHelperText>
-              </FormControl>
-=======
             <FormControl className="SelectInput">
               <InputLabel>Department</InputLabel>
               <Select
@@ -346,7 +307,6 @@ const Faculty = () => {
                 ))}
               </Select>
             </FormControl>
->>>>>>> 6d8ba0ce6525335a197252290d5ae3c5da878ece
 
             <TextField
               label="Password"

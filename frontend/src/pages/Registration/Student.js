@@ -255,9 +255,19 @@ const Student = () => {
               helperText={errors.find((err) => err.param === "email")?.msg}
             />
 
-            <Dob required ref={dobRef} />
+            <Dob
+              required
+              ref={dobRef}
+              error={errors.some((err) => err.param === "dob")}
+              helperText={errors.find((err) => err.param === "dob")?.msg}
+            />
 
-            <RadioInput required setGender={setGender} />
+            <RadioInput
+              required
+              setGender={setGender}
+              error={errors.some((err) => err.param === "gender")}
+              helperText={errors.find((err) => err.param === "gender")?.msg}
+            />
 
             <TextField
               label="Blood Group"
