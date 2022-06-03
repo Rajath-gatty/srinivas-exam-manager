@@ -60,179 +60,83 @@ const AssignFaculty = () => {
   //   },
   // ];
 
-  const [evaluatorOrder, setEvaluatorOrder] = useState({});
   const [assignEvaluator, setAssignEvaluator] = useState([]);
 
-  useEffect(() => {
-    if (Object.keys(evaluatorOrder).length !== 0) {
-      var duplicateFlag = 0;
-
-      //Checking & Updating existing faculty order
-      assignEvaluator.some((obj) => {
-        if (obj.evalReg === evaluatorOrder.evalReg) {
-          duplicateFlag = 1;
-          obj.evalOrder = evaluatorOrder.evalOrder;
-          return;
-        }
-      });
-
-      if (duplicateFlag === 0) {
-        setAssignEvaluator((prevState) => [...prevState, evaluatorOrder]);
-      }
-    }
-
-    // console.log(updatedEvaluator.length);
-    // if (updatedEvaluator.length > 0) {
-    //   setAssignEvaluator(updatedEvaluator);
-    //   console.log(updatedEvaluator.length);
-    //   // updatedEvaluator = [];
-    // }
-
-    console.table(assignEvaluator);
-    FilterOccupiedBtn();
-  }, [evaluatorOrder, assignEvaluator]);
-
-  // Occupied btn no. sent to AssignFacultyList
-  var occupied = [];
-  var orderObj;
-  var orderReg;
-  const FilterOccupiedBtn = () => {
-    assignEvaluator.forEach((obj) => {
-      orderObj = obj.evalOrder;
-      orderReg = obj.evalReg;
-      occupied.push({ orderObj, orderReg });
-    });
-  };
-
   const ActiveOrder = (e) => {
+    e.preventDefault();
     var currBtn = e.target;
-    var parentBtn = e.target.parentElement;
+    var currBtnParent = currBtn.parentElement;
+    var allBtns = currBtnParent.childNodes;
+    var currId = currBtn.getAttribute("data-id");
+    // console.log(allBtns[0]);
 
-    var evalOrder = currBtn.value;
-    var evalReg = currBtn.getAttribute("data-id");
-    // var evalReg = parentBtn.getAttribute("data-id");
-
-    // if (currBtn.style.backgroundColor === "var(--primary-color)") {
-    //   currBtn.style.backgroundColor = "var(--light-grey)";
-
-    //   //Delete toggled off Objects
-    //   // assignEvaluator.forEach((obj) => {
-    //   //   if (obj.evalReg === evalReg) {
-    //   //     var UpdatedArr = assignEvaluator.filter(
-    //   //       (rm) => rm.evalReg !== evalReg
-    //   //     );
-    //   //     console.table("---", UpdatedArr);
-    //   //     setUpdatedEvaluator(UpdatedArr);
-    //   //     // setAssignEvaluator(UpdatedArr);
-    //   //   }
-    //   // });
-    // } else {
-    // var btnGroup = parentBtn.childNodes;
-    // btnGroup.forEach((element) => {
-    //   element.removeAttribute("style");
-    // });
-
-    setEvaluatorOrder({ evalOrder, evalReg });
-    currBtn.style.backgroundColor = "var(--primary-color)";
-    // }
-
-    //Column duplicate check
-    var btnOne = document.querySelectorAll("[value='1']");
-    var btnTwo = document.querySelectorAll("[value='2']");
-    var btnThree = document.querySelectorAll("[value='3']");
-
-    btnOne.forEach((btn) => {
-      console.log(btn);
-      var checkStyle = btn.style.backgroundColor;
-      var checkReg = btn.getAttribute("[data-id]");
-
-      occupied.forEach((obj) => {
-        if (
-          checkReg === obj.orderReg &&
-          checkStyle === "var(--primary-color)"
-        ) {
-          //Toggle off selected btn
+    //Assign Evaluator while array is not empty
+    assignEvaluator.forEach((item) => {
+      //Toggle orders of same row
+      if (item.id === currId && item.order !== currBtn.value){
+        Array.from(allBtns).map((btn) => {
           btn.removeAttribute("style");
-          //data is still not deleted from array
-        } else if (
-          checkReg !== obj.orderReg &&
-          evalOrder === "1" &&
-          checkStyle === ""
-        ) {
-          btnOne.forEach((element) => {
-            console.log("eleValue");
-            element.removeAttribute("style");
-          });
+        });
+        console.log("orders of same row");
+
+        setAssignEvaluator(assignEvaluator.map(obj => 
+          obj.id === currId ? {...obj, order: currBtn.value} : obj 
+        ));
+        currBtn.style.backgroundColor = "var(--primary-color)";
+      }
+
+      //Toggle same order of different row
+      if(item.id !== currId && item.order === currBtn.value){
+        var similarBtn = document.querySelectorAll("[data-value=" + '"' + currBtn.value + `"` + "]");
+        similarBtn.forEach((btn) => {
+          btn.removeAttribute("style");
+        });
+
+        console.log("same order of different row");
+        //remove previous order of different row
+        setAssignEvaluator(assignEvaluator.map(obj => 
+          obj.order === currBtn.value ? {...obj, id: currId} : obj
+        ));
+
+        // setAssignEvaluator(prevState => [...prevState, {id: currId, order: currBtn.value}]);
+        currBtn.style.backgroundColor = "var(--primary-color)";
+      }
+
+      //Toggle different order of different row
+      if(item.id !== currId && item.order !== currBtn.value){
+        var similarBtn = document.querySelectorAll("[data-value=" + '"' + currBtn.value + `"` + "]");
+        similarBtn.forEach((btn) => {
+          btn.removeAttribute("style");
+        });
+        console.log("different order of different row");
+
+        setAssignEvaluator(prevState => [...prevState, {id: currId, order: currBtn.value}]);
+        currBtn.style.backgroundColor = "var(--primary-color)";
+      }
+
+      //Toggle same btn
+      if(item.id === currId && item.order === currBtn.value){
+        if(currBtn.style.backgroundColor === "var(--primary-color)"){
+          currBtn.removeAttribute("style");
         }
-        console.log(checkStyle.length);
-      });
+        else{
+        console.log("Toggle same btn");
+        setAssignEvaluator(assignEvaluator.filter(obj => obj.id !== currId));
+          currBtn.style.backgroundColor = "var(--primary-color)";
+        }
+      }
+
     });
 
-    btnTwo.forEach((btn) => {
-      console.log(btn);
-      var checkStyle = btn.style.backgroundColor;
-      var checkReg = btn.getAttribute("[data-id]");
+    //Assign evaluator to empty array
+    if(Object.keys(assignEvaluator).length === 0){
+      setAssignEvaluator(prevState => [...prevState, {id: currId, order: currBtn.value}]);
+      currBtn.style.backgroundColor = "var(--primary-color)";
+    }
+  }
+  console.table(assignEvaluator);
 
-      occupied.forEach((obj) => {
-        if (
-          checkReg === obj.orderReg &&
-          checkStyle === "var(--primary-color)"
-        ) {
-          //Toggle off selected btn
-          btn.removeAttribute("style");
-          //data is still not deleted from array
-        } else if (
-          checkReg !== obj.orderReg &&
-          evalOrder === "1" &&
-          checkStyle === ""
-        ) {
-          btnTwo.forEach((element) => {
-            console.log("eleValue");
-            element.removeAttribute("style");
-          });
-        }
-        console.log(checkStyle.length);
-      });
-    });
 
-    btnThree.forEach((btn) => {
-      console.log(btn);
-      var checkStyle = btn.style.backgroundColor;
-      var checkReg = btn.getAttribute("[data-id]");
-
-      occupied.forEach((obj) => {
-        if (
-          checkReg === obj.orderReg &&
-          checkStyle === "var(--primary-color)"
-        ) {
-          //Toggle off selected btn
-          btn.removeAttribute("style");
-          //data is still not deleted from array
-        } else if (
-          checkReg !== obj.orderReg &&
-          evalOrder === "1" &&
-          checkStyle === ""
-        ) {
-          btnThree.forEach((element) => {
-            console.log("eleValue");
-            element.removeAttribute("style");
-          });
-        }
-        console.log(checkStyle.length);
-      });
-    });
-
-    setEvaluatorOrder({ evalOrder, evalReg });
-    currBtn.style.backgroundColor = "var(--primary-color)";
-
-    // //Column duplicate check
-    // console.log("Goin Here");
-    // if (orderObj === evalOrder && orderReg !== evalReg) {
-    //   console.log("Got Duplicate");
-    // }
-  };
-
-  // console.log(occupied);
   return (
     <div className="assignEvaluator-container">
       <Back />
@@ -283,6 +187,7 @@ const AssignFaculty = () => {
                     <button
                       value="1"
                       data-id={data.regno}
+                      data-value="1"
                       onClick={ActiveOrder}
                     >
                       1
@@ -290,6 +195,7 @@ const AssignFaculty = () => {
                     <button
                       value="2"
                       data-id={data.regno}
+                      data-value="2"
                       onClick={ActiveOrder}
                     >
                       2
@@ -297,6 +203,7 @@ const AssignFaculty = () => {
                     <button
                       value="3"
                       data-id={data.regno}
+                      data-value="3"
                       onClick={ActiveOrder}
                     >
                       3
