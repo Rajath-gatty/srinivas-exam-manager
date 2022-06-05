@@ -47,6 +47,8 @@ import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
 import NewPayment from "./components/Student/Payment/NewPayment";
 
+import Admins from "./components/AdminSuper/Admins/Admins";
+
 function App() {
   //MUI Components Fonts
   const theme = createTheme({
@@ -70,6 +72,11 @@ function App() {
             <Route path="registration/evaluator" element={<Evaluator />} />
 
             <Route element={<Layout />}>
+              {/* Super Admin Access */}
+              <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
+                <Route path="admins" element={<Admins />} />
+              </Route>
+
               {/* Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
@@ -197,6 +204,7 @@ function App() {
                 element={
                   <ProtectedRoute
                     allowedRole={[
+                      "superadmin",
                       "admin",
                       "student",
                       "evaluator",

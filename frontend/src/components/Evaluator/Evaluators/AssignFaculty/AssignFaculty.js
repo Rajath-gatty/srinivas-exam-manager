@@ -83,7 +83,7 @@ const AssignFaculty = () => {
           obj.id === currId ? {...obj, order: currBtn.value} : obj 
         ));
         currBtn.style.backgroundColor = "var(--primary-color)";
-      }
+      }else
 
       //Toggle same order of different row
       if(item.id !== currId && item.order === currBtn.value){
@@ -100,7 +100,7 @@ const AssignFaculty = () => {
 
         // setAssignEvaluator(prevState => [...prevState, {id: currId, order: currBtn.value}]);
         currBtn.style.backgroundColor = "var(--primary-color)";
-      }
+      }else
 
       //Toggle different order of different row
       if(item.id !== currId && item.order !== currBtn.value){
@@ -112,17 +112,14 @@ const AssignFaculty = () => {
 
         setAssignEvaluator(prevState => [...prevState, {id: currId, order: currBtn.value}]);
         currBtn.style.backgroundColor = "var(--primary-color)";
-      }
-
+      }else
+      
       //Toggle same btn
       if(item.id === currId && item.order === currBtn.value){
         if(currBtn.style.backgroundColor === "var(--primary-color)"){
+          console.log("Toggle same btn");
           currBtn.removeAttribute("style");
-        }
-        else{
-        console.log("Toggle same btn");
-        setAssignEvaluator(assignEvaluator.filter(obj => obj.id !== currId));
-          currBtn.style.backgroundColor = "var(--primary-color)";
+          setAssignEvaluator(assignEvaluator.filter(obj => obj.id !== currId));
         }
       }
 
@@ -135,7 +132,6 @@ const AssignFaculty = () => {
     }
   }
   console.table(assignEvaluator);
-
 
   return (
     <div className="assignEvaluator-container">

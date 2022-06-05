@@ -99,6 +99,7 @@ const Login = () => {
         <form onSubmit={handleRoleSubmit}>
           <h3>Enter Role</h3>
           <select name="selectRole" id="selectRole" ref={setInputRole}>
+            <option value="superadmin">Super Admin</option>
             <option value="admin">Admin</option>
             <option value="student">Student</option>
             <option value="faculty">Faculty</option>

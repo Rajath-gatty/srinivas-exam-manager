@@ -2,6 +2,21 @@ import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Pa
 
 export const NavLinks = [
   {
+    role: "superadmin",
+    links: [
+      {
+        title: "Dashboard",
+        path: "/dashboard",
+        icon: Dashboard,
+      },
+      {
+        title: "Admins",
+        path: "/admins",
+        icon: Users,
+      },
+    ],
+  },
+  {
     role: "admin",
     links: [
       {
