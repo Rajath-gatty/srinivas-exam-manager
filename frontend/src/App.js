@@ -48,6 +48,8 @@ import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/Assig
 import NewPayment from "./components/Student/Payment/NewPayment";
 
 import Departments from "./components/AdminSuper/Departments/Departments";
+import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/NewDepartment";
+
 
 function App() {
   //MUI Components Fonts
@@ -75,6 +77,7 @@ function App() {
               {/* Super Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
                 <Route path="departments" element={<Departments />} />
+                <Route path="departments/create" element={<NewDepartment />} />
               </Route>
 
               {/* Admin Access */}
