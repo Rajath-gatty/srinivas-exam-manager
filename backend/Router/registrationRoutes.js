@@ -7,7 +7,14 @@ const { body } = require("express-validator");
 router.post(
   "/registration/student",[
     body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
-    body("regno").trim().isLength({ min: 5 }).withMessage("Enter valid Registration No."),
+    body("regno").trim().isLength({ min: 5 }).withMessage("Enter valid Registration No.").custom(async (value) => {
+      const result = await db.execute(
+        `SELECT regno FROM student WHERE regno='${value}'`
+      );
+      if (result[0].length > 0) {
+        return Promise.reject("This Register no. already registered");
+      }
+    }),
     body("gender").trim().isIn(["male", "female", "others"]).withMessage("Please specify Gender"),
     body("dob").trim().isDate({ format: "DD/MM/YYYY" }).withMessage("Please Enter Valid Date"),
     body("email").isEmail().withMessage("Enter valid Email ID").custom(async (value) => {
@@ -122,6 +129,6 @@ router.post(
   controllers.postStaff
 );
 
-router.get("/students", controllers.getStudents);
+
 
 module.exports = router;

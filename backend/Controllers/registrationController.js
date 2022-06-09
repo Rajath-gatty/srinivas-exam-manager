@@ -12,10 +12,11 @@ exports.postStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(data.password, 4);
 
     const result = await db.execute(
-      "insert into student(regno,first_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,department,course,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,department,course,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         data.regno,
         data.firstName,
+        data.lastName,
         data.gender,
         data.dob,
         data.email,
@@ -28,6 +29,7 @@ exports.postStudent = async (req, res) => {
         data.birthPlace,
         data.birthDistrict,
         data.country,
+        data.identityMark,
         data.pincode,
         hashedPassword,
         data.fatherName,
@@ -50,7 +52,6 @@ exports.postStudent = async (req, res) => {
       ]
     );
 
-    console.table(result[0]);
     res.status(200).send({ success: true, data });
   } catch (err) {
     res.status(500).send(err);
@@ -67,10 +68,11 @@ exports.postFaculty = async (req, res) => {
 
   try {
     const result = await db.execute(
-      "insert into faculty(faculty_id,first_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,department,teaching_exp,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into faculty(faculty_id,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,department,teaching_exp,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         data.facultyId,
         data.firstName,
+        data.lastName,
         data.gender,
         data.dob,
         data.email,
@@ -100,7 +102,7 @@ exports.postFaculty = async (req, res) => {
     res.status(200).send({ success: true, data: result[0] });
   } catch (err) {
     console.log(err);
-    res.status(500).send({ success: false, err: err.code });
+    res.status(500).send({ success: false, err });
   }
 };
 
@@ -114,7 +116,7 @@ exports.postStaff = async (req, res) => {
 
   try {
     const result = await db.execute(
-      "insert into staff(first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,password,department,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into staff(first_name,last_name,gender,dob,email,phone,address,country,pincode,blood_group,caste,aadhar_no,identity_mark,religion,birth_place,birth_district,password,f_name,f_occupation,f_phone,f_email,joining_year,department,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         data.firstName,
         data.lastName,
@@ -123,13 +125,21 @@ exports.postStaff = async (req, res) => {
         data.email,
         data.phone,
         data.address,
+        data.country,
+        data.pincode,
         data.bloodGroup,
         data.caste,
         data.aadharNo,
+        data.identityMark,
         data.religion,
         data.birthPlace,
         data.birthDistrict,
         hashedPassword,
+        data.fatherName,
+        data.fatherOccupation,
+        data.fatherPhone,
+        data.fatherEmail,
+        data.joiningYear,
         data.department,
         "staff",
         "pending",
@@ -137,13 +147,7 @@ exports.postStaff = async (req, res) => {
     );
     res.status(200).send({ success: true, data: result[0] });
   } catch (err) {
-    res.status(500).send({ success: false, err: err.code });
+    res.status(500).send({ success: false, err});
   }
 };
 
-exports.getStudents = async (req, res) => {
-  const result = await db.execute(
-    "select first_name,g_name,joining_year,pincode from student"
-  );
-  res.status(200).send({ success: true, data: result[0] });
-};

@@ -12,6 +12,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  FormHelperText,
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -410,7 +411,8 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 inputRef={fatherNameRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "fatherName"
                 )}
                 helperText={
@@ -423,7 +425,8 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 inputRef={fatherOccupationRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "fatherOccupation"
                 )}
                 helperText={
@@ -437,7 +440,8 @@ const Student = () => {
                 size="small"
                 type="tel"
                 inputRef={fatherPhoneRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "fatherPhone"
                 )}
                 helperText={
@@ -451,7 +455,8 @@ const Student = () => {
                 size="small"
                 type="email"
                 inputRef={fatherEmailRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "fatherEmail"
                 )}
                 helperText={
@@ -469,7 +474,8 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 inputRef={motherNameRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "motherName"
                 )}
                 helperText={
@@ -482,7 +488,8 @@ const Student = () => {
                 variant="outlined"
                 size="small"
                 inputRef={motherOccupationRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "motherOccupation"
                 )}
                 helperText={
@@ -496,7 +503,8 @@ const Student = () => {
                 size="small"
                 type="tel"
                 inputRef={motherPhoneRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "motherPhone"
                 )}
                 helperText={
@@ -510,7 +518,8 @@ const Student = () => {
                 size="small"
                 type="email"
                 inputRef={motherEmailRef}
-                fullWidtherror={errors.some(
+                fullWidth
+                error={errors.some(
                   (err) => err.param === "motherEmail"
                 )}
                 helperText={
@@ -546,7 +555,8 @@ const Student = () => {
                     variant="outlined"
                     size="small"
                     inputRef={gNameRef}
-                    fullWidtherror={errors.some(
+                    fullWidth
+                    error={errors.some(
                       (err) => err.param === "religion"
                     )}
                     helperText={
@@ -559,7 +569,8 @@ const Student = () => {
                     variant="outlined"
                     size="small"
                     inputRef={gOccupationRef}
-                    fullWidtherror={errors.some(
+                    fullWidth
+                    error={errors.some(
                       (err) => err.param === "religion"
                     )}
                     helperText={
@@ -573,7 +584,8 @@ const Student = () => {
                     size="small"
                     type="tel"
                     inputRef={gPhoneRef}
-                    fullWidtherror={errors.some(
+                    fullWidth
+                    error={errors.some(
                       (err) => err.param === "religion"
                     )}
                     helperText={
@@ -607,9 +619,6 @@ const Student = () => {
                   inputRef={departmentRef}
                   fullWidth
                   error={errors.some((err) => err.param === "department")}
-                  helperText={
-                    errors.find((err) => err.param === "department")?.msg
-                  }
                 >
                   {departments.map((opt) => (
                     <MenuItem key={opt} value={opt}>
@@ -617,6 +626,7 @@ const Student = () => {
                     </MenuItem>
                   ))}
                 </Select>
+                <FormHelperText error>{errors.find((err) => err.param === "department")?.msg}</FormHelperText>
               </FormControl>
 
               <FormControl className="SelectInput" fullWidth>
@@ -627,8 +637,8 @@ const Student = () => {
                   defaultValue=""
                   size="small"
                   inputRef={courseRef}
-                  fullWidtherror={errors.some((err) => err.param === "course")}
-                  helperText={errors.find((err) => err.param === "course")?.msg}
+                  fullWidth
+                  error={errors.some((err) => err.param === "course")}
                   // fullwidth="true"
                 >
                   {course.map((opt) => (
@@ -637,6 +647,7 @@ const Student = () => {
                     </MenuItem>
                   ))}
                 </Select>
+                <FormHelperText error>{errors.find((err) => err.param === "course")?.msg}</FormHelperText>
               </FormControl>
 
               <FormControl className="SelectInput" fullWidth>
@@ -647,12 +658,10 @@ const Student = () => {
                   defaultValue=""
                   size="small"
                   inputRef={joiningYearRef}
-                  fullWidtherror={errors.some(
+                  fullWidth
+                  error={errors.some(
                     (err) => err.param === "joiningYear"
                   )}
-                  helperText={
-                    errors.find((err) => err.param === "joiningYear")?.msg
-                  }
                   // fullwidth="true"
                 >
                   {DegreeYear.map((opt) => (
@@ -661,6 +670,7 @@ const Student = () => {
                     </MenuItem>
                   ))}
                 </Select>
+                <FormHelperText error>{errors.find((err) => err.param === "joiningYear")?.msg}</FormHelperText>
               </FormControl>
             </div>
           </div>
