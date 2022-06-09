@@ -7,13 +7,17 @@ import {
   Select,
   MenuItem,
   InputLabel,
+  FormHelperText,
 } from "@mui/material";
+import axios from "axios";
 
 import "./Create.css";
 import SemList from "./SemList";
-import { useReducer, useState } from "react";
+import { useReducer,useState} from "react";
 
 const initialState = {
+  name: '',
+  duration: '',
   semesters: [],
 };
 
@@ -57,22 +61,24 @@ const courseDetailsReducer = (state, action) => {
     return { ...state };
   }
 
-  if (action.type === "SUBMIT") {
-    state.totalSemesters = state.semesters.length;
-    state.name = action.payload.course;
-    state.duration = action.payload.duration;
-    semCount=0;
-    return {...state};
+  if (action.type === "COURSENAME") {
+    const newState = {...state};
+    newState.name = action.payload;
+    return newState;
+  }
+
+  if (action.type === "DURATION") {
+    const newState = {...state};
+    newState.duration= action.payload;
+    return newState;
   }
 };
 
 const Create = () => {
   const [state, dispatch] = useReducer(courseDetailsReducer, initialState);
-  const [course, setCourse] = useState('');
-  const [duration, setDuration] = useState('');
+  const [errors,setErrors] = useState([]);
 
   const navigate = useNavigate();
-    console.log(state);
 
   const addSem = (e) => {
     e.preventDefault();
@@ -90,14 +96,24 @@ const Create = () => {
   const removeSubject = (subIndex, semIndex) => {
     dispatch({ type: "REMOVE_SUBJECT", payload: { subIndex, semIndex } });
   };
-
-  const newCourseSubmit = (e) => {
+  const newCourseSubmit = async(e) => {
     e.preventDefault();
-    if(course!=='' && duration!=='') {
-      dispatch({ type: "SUBMIT", payload: { course, duration } });
+    try {
+      state.semesters.forEach((sem,i) => {
+        if(!sem.subjects.length>0) {
+          throw new Error('Add Subjects');
+        }
+      })
+      const result = await axios.post('/admin/new-course',state);
+      console.log(result);
+    } catch(err) {
+      if(err.response?.status===400) {
+       return setErrors(err.response.data);
+      }
+      console.log(err);
+      setErrors([]);
     }
   };
-
   return (
     <div className="create-course-main">
       <div className="back-btn flex" onClick={() => navigate(-1)}>
@@ -117,7 +133,9 @@ const Create = () => {
               variant="outlined"
               size="small"
               fullWidth
-              onChange={(e) => setCourse(e.target.value)}
+              error={errors.some((err) => err.param === "name")}
+              helperText={errors.find((err) => err.param === "name")?.msg}
+              onChange={(e) => dispatch({type:'COURSENAME',payload:e.target.value})}
             />
             <FormControl className="course-duration-select">
               <InputLabel>Duration</InputLabel>
@@ -125,13 +143,16 @@ const Create = () => {
                 label="Department"
                 defaultValue=""
                 size="small"
-                onChange={(e) => setDuration(e.target.value)}
+                type="number"
+                error={errors.some((err) => err.param === "duration")}
+                onChange={(e) => dispatch({type:'DURATION',payload:e.target.value})}
               >
                 <MenuItem value="1">1</MenuItem>
                 <MenuItem value="2">2</MenuItem>
                 <MenuItem value="3">3</MenuItem>
                 <MenuItem value="4">4</MenuItem>
               </Select>
+              <FormHelperText error>{errors.find((err) => err.param === "duration")?.msg}</FormHelperText>
             </FormControl>
           </div>
           <div className="semester-wrapper">

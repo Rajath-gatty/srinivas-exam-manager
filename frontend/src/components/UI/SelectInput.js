@@ -1,4 +1,4 @@
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import { Select, MenuItem, FormControl, InputLabel,FormHelperText } from "@mui/material";
 
 const SelectInput = (props) => {
   const options = props.options;
@@ -13,6 +13,7 @@ const SelectInput = (props) => {
           </MenuItem>
         ))}
       </Select>
+      <FormHelperText error>{props.helperText}</FormHelperText>
     </FormControl>
   );
 };

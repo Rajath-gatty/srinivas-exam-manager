@@ -8,6 +8,7 @@ import {
   InputLabel,
   MenuItem,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
@@ -104,6 +105,9 @@ const Faculty = () => {
         setErrors([]);
         setPassErr(false);
       } catch (err) {
+        if(!err.response.data) {
+          return setErrors([]);
+        }
         setErrors(err.response.data.err);
         console.log(err.response.data.err);
       }
@@ -274,6 +278,7 @@ const Faculty = () => {
               label="Teaching Experience"
               variant="outlined"
               size="small"
+              type="number"
               fullWidth
               inputRef={teachingExpRef}
               error={errors.some((err) => err.param === "teachingExp")}
@@ -300,9 +305,6 @@ const Faculty = () => {
                 size="small"
                 inputRef={departmentRef}
                 error={errors.some((err) => err.param === "department")}
-                helperText={
-                  errors.find((err) => err.param === "department")?.msg
-                }
               >
                 {departments.map((opt) => (
                   <MenuItem key={opt} value={opt}>
@@ -310,6 +312,7 @@ const Faculty = () => {
                   </MenuItem>
                 ))}
               </Select>
+              <FormHelperText>{errors.find((err) => err.param === "department")?.msg}</FormHelperText>
             </FormControl>
 
             <TextField

@@ -26,7 +26,6 @@ const SemList = (props) => {
       props.addSubjectsToReducer(subjects);
     }
   };
-  // console.log(subjects);
 
   return (
     <div className="semester">
