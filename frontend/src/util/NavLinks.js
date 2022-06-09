@@ -10,9 +10,9 @@ export const NavLinks = [
         icon: Dashboard,
       },
       {
-        title: "Admins",
-        path: "/admins",
-        icon: Users,
+        title: "Departments",
+        path: "/departments",
+        icon: Courses,
       },
     ],
   },
