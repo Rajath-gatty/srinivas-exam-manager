@@ -17,8 +17,8 @@ exports.postNewCourse = async(req,res) => {
         .then(() => {
             semesters.forEach(sem => {
                 sem.subjects.forEach(sub => {
-                    const semSql = `insert into semester(course_name,sem_name,subj_name,subj_code) values(?,?,?,?)`;
-                   return db.execute(semSql,[name,sem.semName,sub.name,sub.code])
+                    const semSql = `insert into semester(dept_id,course_name,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
+                   return db.execute(semSql,[1,name,sem.semName,sub.name,sub.code])
                 })
             })
         })
