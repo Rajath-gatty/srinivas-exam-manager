@@ -6,7 +6,7 @@ const AttendanceStudent = () => {
   return (
     <div className="attendance-filter">
       <FilterSearch />
-      <div className="main-box">
+      <div className="attendance-main-box">
         <div className="header">
           <h3>SEM1</h3>
         </div>

@@ -46,10 +46,13 @@ import AttendanceStatement from "./components/Evaluator/AttendanceStatement/Atte
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
 import PaymentRegular from "./components/Student/Application/Payment/Payment";
-import PaymentRepeater from "./components/Student/Application/Payment/Payment";
+
 
 import Departments from "./components/AdminSuper/Departments/Departments";
 import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/NewDepartment";
+
+import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
+import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 
 
 function App() {
@@ -73,25 +76,35 @@ function App() {
             <Route path="registration/faculty" element={<Faculty />} />
             <Route path="registration/staff" element={<Staff />} />
 
-
             <Route element={<Layout />}>
               {/* Super Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
                 <Route path="departments" element={<Departments />} />
                 <Route path="departments/create" element={<NewDepartment />} />
+                <Route path="examcoordinator" element={<ExamCoordinator />} />
+                <Route path="examcoordinator/create" element={<NewExamCoordinator />} />
               </Route>
 
               {/* Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
                 <Route
-                  path="courses/course-details"
+                  path="courses/course-details/:courseId"
                   element={<CourseDetails />}
                 />
                 <Route path="registration/evaluator" element={<Evaluator />} />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route path="approve/evaluator" element={<Approval />} />
+                <Route path="registration/evaluator" element={<Evaluator />} />
+                <Route
+                  path="approve/staff/:staffId"
+                  element={<ApprovalDetailsView />}
+                />
+                <Route
+                  path="approve/evaluator/:evaluatorId"
+                  element={<ApprovalDetailsView />}
+                />
               </Route>
 
               {/* Staff Access*/}

@@ -14,6 +14,11 @@ export const NavLinks = [
         path: "/departments",
         icon: Courses,
       },
+      {
+        title: "Exam Coordinator",
+        path: "/examcoordinator",
+        icon: Approval,
+      },
     ],
   },
   {

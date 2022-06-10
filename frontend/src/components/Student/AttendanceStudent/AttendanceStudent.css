@@ -3,8 +3,8 @@
     /* width: 100%; */
 }
 
-.main-box {
-    max-width: 900px;
+.attendance-main-box {
+    width: 100%;
     margin: auto;
 }
 
@@ -21,7 +21,6 @@
     width: 100%;
     text-align: center;
     border-collapse: collapse;
-    margin-top: 0em;
 }
 
 .marks-table .thead th {
@@ -33,6 +32,10 @@
     padding: 1em 0em;
     color: var(--text-color);
     font-size: 0.9em;
+}
+
+.marks-table .attendance-table td {
+    padding: 1.25em 0em;
 }
 
 .marks-table .attendance-table {

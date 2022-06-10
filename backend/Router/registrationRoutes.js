@@ -100,7 +100,7 @@ router.post(
     body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
     body("gender").trim().isIn(["male", "female", "others"]).withMessage("Please specify Gender"),
     body("dob").trim().isDate({ format: "DD/MM/YYYY" }).withMessage("Please Enter Valid Date"),
-    body("email").notEmpty().isEmail().withMessage("Enter valid Email ID")
+    body("email").trim().isEmail().withMessage("Enter valid Email ID")
       .custom(async (value) => {
         const result = await db.execute(
           `SELECT email FROM staff WHERE email='${value}'`
