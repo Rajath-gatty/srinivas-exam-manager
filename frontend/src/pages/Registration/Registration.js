@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import EvaluatorSvg from "../../Assets/Registration/evaluator_reg.svg";
+import EvaluatorSvg from "../../Assets/Registration/examcord_reg.svg";
 import StudentSvg from "../../Assets/Registration/student_reg.svg";
 import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
 import StaffSvg from "../../Assets/Registration/staff_reg.svg";
@@ -15,7 +15,7 @@ const Registration = () => {
           <Link to="evaluator">
             <div className="registration-card">
               <img src={EvaluatorSvg} alt="Evaluator Svg" />
-              <h3>Evaluator</h3>
+              <h3>Exam Coordinator</h3>
             </div>
           </Link>
           <Link to="student">

@@ -16,7 +16,7 @@ import Coding from "./NavIcons/Coding.svg";
 import SrinivasLogo from "./SrinivasLogo.svg";
 
 // Illustrations
-import EvaluatorReg from "./Registration/evaluator_reg.svg";
+import EvaluatorReg from "./Registration/examcord_reg.svg";
 import FacultyReg from "./Registration/faculty_reg.svg";
 import StaffReg from "./Registration/staff_reg.svg";
 import StudentReg from "./Registration/student_reg.svg";

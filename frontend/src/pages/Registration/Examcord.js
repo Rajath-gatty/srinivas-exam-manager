@@ -1,5 +1,6 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Examcord.css";
 import {
   TextField,
   Select,
@@ -7,11 +8,14 @@ import {
   MenuItem,
   FormControl
 } from "@mui/material";
-import Navbar from "../../components/Navbar/Navbar";
+
 
 import RadioInput from "../../components/UI/RadioInput";
 
 const Evaluator = () => {
+  const [gender, setGender] = useState("");
+  const [passErr, setPassErr] = useState(false);
+  const [errors, setErrors] = useState([]);
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -26,8 +30,8 @@ const Evaluator = () => {
   ];
   return (
     <div>
-      <Navbar />
-      <div className="form-wrapper">
+
+      <div className="cord-wrapper">
         <h2>Exam Coordinator Registration</h2>
         <form>
           <div className="student-form">
@@ -62,7 +66,11 @@ const Evaluator = () => {
 
 
 
-            <RadioInput />
+            <RadioInput
+              setGender={setGender}
+              error={errors.some((err) => err.param === "gender")}
+              helperText={errors.find((err) => err.param === "gender")?.msg}
+            />
 
 
 

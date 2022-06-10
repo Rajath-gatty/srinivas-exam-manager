@@ -7,6 +7,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import "./Application.css";
+import { Link } from "react-router-dom";
 
 const ApplicationRepeater = () => {
   const [selectedSemester, setSelectedSemester] = useState("");
@@ -127,7 +128,9 @@ const ApplicationRepeater = () => {
           <div className="application-total">
             <span>Total Amount</span> <span>Rs.{TotalFee}</span>
           </div>
-          <button className="application-submit">Apply</button>
+          <Link to="/applicationrepeater/payment">
+            <button className="application-submit">Apply</button>
+          </Link>
         </div>
       ) : null}
     </div>
