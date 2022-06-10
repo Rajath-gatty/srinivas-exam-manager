@@ -46,13 +46,15 @@ const NewDepartment = () => {
       setPassErr(true);
     } else {
       try {
-        const result = await axios.post('/registration/staff',adminData)
+        const result = await axios.post('/admin/department/new-department',adminData)
         console.log(result);
         setErrors([]);
         setPassErr(false);
       } catch(err) {
-        setErrors(err.response.data.err);
-        console.log(err.response.data.err);
+        if(err?.response?.status===400) {
+         setErrors(err.response.data.err);
+        }
+        console.log(err)
       }
     }
   }
@@ -61,7 +63,6 @@ const NewDepartment = () => {
     <div className="newdept-container">
         <Back left="0em"/>
         <h2 className="newdept-title">Create New Department</h2>
-
         <form onSubmit={handleFormSubmit}>
             <div className="newdept-deptName">
                 <TextField
@@ -70,8 +71,8 @@ const NewDepartment = () => {
                     size="small"
                     fullWidth
                     inputRef={departmentNameRef}
-                    error={errors.some(err=>err.param==='firstName')}
-                    helperText={errors.find(err=>err.param==='firstName')?.msg}
+                    error={errors.some(err=>err.param==='departmentName')}
+                    helperText={errors.find(err=>err.param==='departmentName')?.msg}
                 />
 
                 <h3>Admin Details</h3>
@@ -168,4 +169,4 @@ const NewDepartment = () => {
   )
 }
 
-export default NewDepartment
+export default NewDepartment;

@@ -60,7 +60,7 @@ const Evaluator = () => {
                 fullWidth
               />
   
-              <Dob />
+              {/* <Dob /> */}
   
               <RadioInput />
   
@@ -189,7 +189,7 @@ const Evaluator = () => {
                   size="small"
                   fullWidth
                 />
-  
+
                 <TextField
                   label="Mobile Number"
                   variant="outlined"

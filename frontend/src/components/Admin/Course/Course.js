@@ -1,15 +1,31 @@
 import "./Course.css";
+import { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
 import { HiPlus } from "react-icons/hi";
 import CourseList from "./CourseList";
-import {motion} from "framer-motion";
+import axios from "axios";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const Course = () => {
+  const [courses,setCourses] = useState([]);
+  const [loading,setLoading] = useState(true);
+
+  useEffect(() => {
+      const fetchCourses = async() => {
+          try {
+              setLoading(true);
+              const result = await axios.post('/admin/courses',{deptId:11});
+              setLoading(false);
+              setCourses(result.data);
+          } catch(err) {
+            setLoading(false);
+              console.log(err);
+          }
+      }
+      fetchCourses();
+  },[])
   return (
-    <motion.div 
-    initial={{opacity:0,scale:0.9,transition:{duration: 2}}} 
-    animate={{opacity:1,scale:1}}
-    className="course-main">
+    <div className="course-main">
       <div className="course-search-wrapper">
         <form>
           <input
@@ -25,7 +41,7 @@ const Course = () => {
           </button>
         </Link>
       </div>
-      <table className="course-list-table">
+      {!loading?<table className="course-list-table">
         <thead>
           <tr>
             <th>Course</th>
@@ -36,18 +52,19 @@ const Course = () => {
           </tr>
         </thead>
         <tbody>
-          <CourseList />
-          <CourseList />
-          <CourseList />
-          <CourseList />
-          <CourseList />
-          <CourseList />
-          <CourseList />
-          <CourseList />
+          {courses.map(course => {
+            return <CourseList 
+            key={Math.random()+Date.now()}
+            name={course.course_name} 
+            duration={course.course_duration} 
+            totalSem={course.course_sem} 
+            courseId={course.course_id}
+            />
+          })}
         </tbody>
-      </table>
-    </motion.div>
+      </table>: <Skeleton rows={3} cols={6} profile/>}
+    </div>
   );
 };
-
+{/* <div style={{marginTop:150}} className="flex"><CircularProgress/></div> */}
 export default Course;

@@ -71,8 +71,7 @@ function App() {
             <Route path="registration/student" element={<Student />} />
             <Route path="registration/faculty" element={<Faculty />} />
             <Route path="registration/staff" element={<Staff />} />
-            <Route path="registration/evaluator" element={<Evaluator />} />
-
+            
             <Route element={<Layout />}>
               {/* Super Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
@@ -84,12 +83,13 @@ function App() {
               <Route element={<ProtectedRoute allowedRole={["admin"]} />}>
                 <Route path="courses" element={<Courses />} />
                 <Route
-                  path="courses/course-details"
+                  path="courses/course-details/:courseId"
                   element={<CourseDetails />}
                 />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route path="approve/evaluator" element={<Approval />} />
+                <Route path="registration/evaluator" element={<Evaluator />} />
                 <Route
                   path="approve/staff/:staffId"
                   element={<ApprovalDetailsView />}
