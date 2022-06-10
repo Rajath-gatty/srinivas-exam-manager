@@ -2,22 +2,23 @@ import "./Departments.css";
 import { GoSettings } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const depts = [
   {
-    dptId: "SU19BCA",
+    dptId: "SU19BCA01",
     dptName: "CCIS",
     dptAdmin: "Jhon",
     dptReg: "19-09-2022",
   },
   {
-    dptId: "SU19BCA",
+    dptId: "SU19BCA02",
     dptName: "CCIS",
     dptAdmin: "Jhon",
     dptReg: "19-09-2022",
   },
   {
-    dptId: "SU19BCA",
+    dptId: "SU19BCA03",
     dptName: "CCIS",
     dptAdmin: "Jhon",
     dptReg: "19-09-2022",
@@ -33,10 +34,12 @@ const Departments = () => {
           <input type="text" placeholder="Search" />
         </form>
 
+       <Link to="/departments/create">
         <button className="create-department flex">
-          <HiPlus size={20} color="var(--primary-color) :hover{color:var(--white)}" />
-          <span>Create Department</span>
+            <HiPlus size={20} color="var(--primary-color) :hover{color:var(--white)}" />
+            <span>Create Department</span>
         </button>
+       </Link>
       </div>
 
       <table className="departments-list">
@@ -52,7 +55,7 @@ const Departments = () => {
         <tbody>
           {depts.map(item =>{
             return(
-              <tr>
+              <tr key={item.dptId}>
                 <td>{item.dptName}</td>
                 <td>{item.dptId}</td>
                 <td>{item.dptAdmin}</td>
