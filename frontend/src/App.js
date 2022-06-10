@@ -50,6 +50,9 @@ import NewPayment from "./components/Student/Payment/NewPayment";
 import Departments from "./components/AdminSuper/Departments/Departments";
 import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/NewDepartment";
 
+import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
+import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
+
 
 function App() {
   //MUI Components Fonts
@@ -77,6 +80,8 @@ function App() {
               <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
                 <Route path="departments" element={<Departments />} />
                 <Route path="departments/create" element={<NewDepartment />} />
+                <Route path="examcoordinator" element={<ExamCoordinator />} />
+                <Route path="examcoordinator/create" element={<NewExamCoordinator />} />
               </Route>
 
               {/* Admin Access */}
