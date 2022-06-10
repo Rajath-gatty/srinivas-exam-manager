@@ -10,19 +10,11 @@
 
 .newdept-title{
     color: var(--primary-color);
-    margin-top: 3em;
+    margin: 3em 0 1em 0;
 }
 
 .newdept-container form{
     margin-left: 2em;
-}
-
-.newdept-deptName{
-    display: flex;
-    flex-direction: column;
-    gap: 2em;
-    width: 500px;
-    margin-top: 1.5em;
 }
 
 .newdept-adminForm{

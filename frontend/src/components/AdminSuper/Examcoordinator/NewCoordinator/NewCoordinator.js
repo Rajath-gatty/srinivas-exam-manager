@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./NewDepartment.css"
+import "./NewCoordinator.css"
 import Back from "../../../UI/Back/Back"
 import Dob from "../../../UI/Dob";
 import RadioInput from "../../../UI/RadioInput";
@@ -7,7 +7,7 @@ import { TextField } from "@mui/material";
 import axios from "axios";
 import dateFormat from "dateformat";
 
-const NewDepartment = () => {
+const NewCoordinator = () => {
     const [gender,setGender] = useState('');
     const [passErr,setPassErr] = useState(false);
     const [errors,setErrors] = useState([]);
@@ -25,58 +25,44 @@ const NewDepartment = () => {
     const passwordRef = useRef();
     const cPasswordRef = useRef();
 
-  const handleFormSubmit = async(e) => {
-    e.preventDefault();
-    const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
-    const dobErr = dob.length>=10;
-    const adminData = {
-      departmentName : departmentNameRef.current.value,
-      firstName : firstNameRef.current.value,
-      lastName : lastNameRef.current.value,
-      dob : dobErr&&dateFormat(dob,"dd-mm-yyyy"),
-      gender: gender,
-      email : emailRef.current.value,
-      phone : phoneRef.current.value,
-      address : addressRef.current.value,
-      password : passwordRef.current.value,
-      cPasword : cPasswordRef.current.value,
-    }
-
-    if(adminData.password!==adminData.cPasword) {
-      setPassErr(true);
-    } else {
-      try {
-        const result = await axios.post('/registration/staff',adminData)
-        console.log(result);
-        setErrors([]);
-        setPassErr(false);
-      } catch(err) {
-        setErrors(err.response.data.err);
-        console.log(err.response.data.err);
+    const handleFormSubmit = async(e) => {
+        e.preventDefault();
+        const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
+        const dobErr = dob.length>=10;
+        const adminData = {
+          departmentName : departmentNameRef.current.value,
+          firstName : firstNameRef.current.value,
+          lastName : lastNameRef.current.value,
+          dob : dobErr&&dateFormat(dob,"dd-mm-yyyy"),
+          gender: gender,
+          email : emailRef.current.value,
+          phone : phoneRef.current.value,
+          address : addressRef.current.value,
+          password : passwordRef.current.value,
+          cPasword : cPasswordRef.current.value,
+        }
+    
+        if(adminData.password!==adminData.cPasword) {
+          setPassErr(true);
+        } else {
+          try {
+            const result = await axios.post('/registration/staff',adminData)
+            console.log(result);
+            setErrors([]);
+            setPassErr(false);
+          } catch(err) {
+            setErrors(err.response.data.err);
+            console.log(err.response.data.err);
+          }
+        }
       }
-    }
-  }
 
   return (
     <div className="newdept-container">
         <Back left="0em"/>
-        <h2 className="newdept-title">Create New Department</h2>
+        <h2 className="newdept-title">Exam Coordinator Registration</h2>
 
         <form onSubmit={handleFormSubmit}>
-            <div className="newdept-deptName">
-                <TextField
-                    label="Department Name"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    inputRef={departmentNameRef}
-                    error={errors.some(err=>err.param==='firstName')}
-                    helperText={errors.find(err=>err.param==='firstName')?.msg}
-                />
-
-                <h3>Admin Details</h3>
-            </div>
-
             <div className="newdept-adminForm">
               <TextField
                 label="First Name"
@@ -141,6 +127,28 @@ const NewDepartment = () => {
               />
 
               <TextField
+                label="Department"
+                variant="outlined"
+                type="text"
+                size="small"
+                fullWidth
+                inputRef={passwordRef}
+                error={errors.some(err=>err.param==='password')}
+                helperText={errors.find(err=>err.param==='password')?.msg}
+              />
+
+              <TextField
+                label="Department ID"
+                variant="outlined"
+                type="text"
+                size="small"
+                fullWidth
+                inputRef={passwordRef}
+                error={errors.some(err=>err.param==='password')}
+                helperText={errors.find(err=>err.param==='password')?.msg}
+              />
+
+              <TextField
                 label="Password"
                 variant="outlined"
                 type="password"
@@ -168,4 +176,4 @@ const NewDepartment = () => {
   )
 }
 
-export default NewDepartment
+export default NewCoordinator
