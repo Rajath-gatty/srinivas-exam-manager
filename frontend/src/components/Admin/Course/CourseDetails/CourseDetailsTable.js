@@ -2,7 +2,7 @@
 const  CourseDetailsTable = (props) => {
     const {sem} = props;
     const data = sem.value;
-    console.log("YOOO",data)
+    
      return(
          <div className="course-details-table">
              <p>{sem.semNo}</p>

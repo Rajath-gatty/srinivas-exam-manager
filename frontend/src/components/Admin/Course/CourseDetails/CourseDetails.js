@@ -22,7 +22,6 @@ const  CourseDetails = () => {
             try {
                 const result = await axios.post('/admin/course-details',reqData);
                 setResData(result.data);
-                console.log(resData);
 
                 // Get max no. of sems dynamically
                 resData.map(sems =>{
@@ -50,7 +49,7 @@ const  CourseDetails = () => {
                 }
             }
         }
-    },[maxSem])
+    },[maxSem,semDetails])
     console.log(semDetails)
 
      return(
@@ -65,7 +64,6 @@ const  CourseDetails = () => {
         <div className="course-details-table-wrapper">
             {
                 semDetails.map(obj =>{
-                    console.log(obj);
                     return (
                         <CourseDetailsTable sem={obj}/>
                     )
