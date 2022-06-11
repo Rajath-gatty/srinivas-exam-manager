@@ -3,6 +3,9 @@ import { GoSettings } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import {useState,useEffect} from "react";
+import axios from "axios";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const depts = [
   {
@@ -26,6 +29,23 @@ const depts = [
 ]
 
 const Departments = () => {
+  const [departments,setDepartments] = useState([]);
+  const [loading,setLoading] = useState(false);
+
+  useEffect(() => {
+   const fetchDepartments = async() => {
+      try {
+        setLoading(true);
+        const result = await axios.get('/admin/departments');
+        setDepartments(result.data);
+        setLoading(false);
+      } catch(err) {
+        console.log(err);
+        setLoading(false);
+      }
+   }
+   fetchDepartments();
+  },[])
   return (
     <div className="departments-container">
       <div className="departments-header">
@@ -42,24 +62,24 @@ const Departments = () => {
        </Link>
       </div>
 
-      <table className="departments-list">
+      {!loading?<table className="departments-list">
         <thead>
           <tr>
-            <th>Department</th>
             <th>Department ID</th>
+            <th>Department</th>
             <th>Admin</th>
-            <th>Registration Date</th>
+            {/* <th>Registration Date</th> */}
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {depts.map(item =>{
+          {departments.map(item =>{
             return(
-              <tr key={item.dptId}>
-                <td>{item.dptName}</td>
-                <td>{item.dptId}</td>
-                <td>{item.dptAdmin}</td>
-                <td>{item.dptReg}</td>
+              <tr key={item.dept_id}>
+                <td>{item.dept_id}</td>
+                <td>{item.dept_name}</td>
+                <td>{item.first_name}</td>
+                {/* <td>{item.dptReg}</td> */}
                 <td>
                   <div className="manage-dpt flex">
                     <GoSettings color="var(--primary-color)" size={20} />
@@ -70,7 +90,7 @@ const Departments = () => {
             )
           })}
         </tbody>
-      </table>
+      </table>:<Skeleton rows={3} cols={4}/>}
     </div>
   )
 }

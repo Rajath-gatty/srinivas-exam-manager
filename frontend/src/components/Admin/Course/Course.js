@@ -62,7 +62,7 @@ const Course = () => {
             />
           })}
         </tbody>
-      </table>: <Skeleton rows={3} cols={6} profile/>}
+      </table>: <Skeleton rows={3} cols={6} profile marginTop="2em"/>}
     </div>
   );
 };

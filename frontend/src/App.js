@@ -13,7 +13,6 @@ import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
 import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
-import Evaluator from "./pages/Registration/Evaluator";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -93,14 +92,8 @@ function App() {
                 />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
-                <Route path="approve/evaluator" element={<Approval />} />
-                <Route path="registration/evaluator" element={<Evaluator />} />
                 <Route
                   path="approve/staff/:staffId"
-                  element={<ApprovalDetailsView />}
-                />
-                <Route
-                  path="approve/evaluator/:evaluatorId"
                   element={<ApprovalDetailsView />}
                 />
               </Route>

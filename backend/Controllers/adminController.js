@@ -65,6 +65,15 @@ exports.postNewCourse = async(req,res) => {
         }
     }
 
+    exports.getDepartments = async(req,res) => {
+        try {
+          const result = await db.execute('select department.dept_id,dept_name,first_name from department JOIN admin ON department.dept_id=admin.dept_id');
+          res.send(result[0]);
+        } catch(err) {
+            res.status(500).send({success:false,err})
+        }
+    }
+
     exports.getCourses = async(req,res) => {
         try {
             const result = await db.execute(`select course_id,course_name,course_sem,course_duration from course where dept_id=${req.body.deptId}`);

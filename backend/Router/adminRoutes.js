@@ -39,4 +39,6 @@ router.post('/department/new-department',[
 router.post('/courses',adminController.getCourses);
 
 router.post('/course-details',adminController.getCourseDetails);
+
+router.get('/departments',adminController.getDepartments);
 module.exports = router;
