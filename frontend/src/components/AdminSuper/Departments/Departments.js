@@ -5,7 +5,8 @@ import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import {useState,useEffect} from "react";
 import axios from "axios";
-import Skeleton from "../../UI/Skeleton/Skeleton";
+import { CircularProgress } from "@mui/material";
+// import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const Departments = () => {
   const [departments,setDepartments] = useState([]);
@@ -69,7 +70,7 @@ const Departments = () => {
             )
           })}
         </tbody>
-      </table>:<Skeleton rows={3} cols={4}/>}
+      </table>:<div style={{marginTop:50}} className="flex"><CircularProgress thickness={4}/></div>}
     </div>
   )
 }

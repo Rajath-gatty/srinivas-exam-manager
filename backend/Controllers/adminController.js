@@ -123,7 +123,7 @@ exports.postNewCourse = async(req,res) => {
 
     exports.getExamCoordinators = async(req,res) => {
         try {
-          const result = await db.execute('select dept_name,first_name,coord_id from exam_coord join department where exam_coord.dept_id=department.dept_id');
+          const result = await db.execute('select dept_name,first_name,coord_id from exam_coord join department on exam_coord.dept_id=department.dept_id');
           res.send(result[0]);
         } catch(err) {
             console.log(err);
