@@ -2,7 +2,6 @@ import "./SemesterMarks.css";
 import SemesterMarksList from "./SemesterMarksList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 
-
 const SemesterMarks = () => {
     return (
         <div className="internal-main">

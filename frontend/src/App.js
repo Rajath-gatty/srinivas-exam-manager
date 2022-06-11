@@ -140,8 +140,6 @@ function App() {
                 <Route path="semester" element={<SemesterMarks />} />
               </Route>
 
-
-
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
                 <Route

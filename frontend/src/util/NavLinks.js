@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application,Coding} from "../Assets";
+import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application,Coding,SemMarks} from "../Assets";
 
 export const NavLinks = [
   {
@@ -80,6 +80,11 @@ export const NavLinks = [
         title: "Internal Marks",
         path: "/internal",
         icon: InternalMarks
+      },
+      {
+        title: "Semester Marks",
+        path: "/semester",
+        icon: SemMarks
       }
     ],
   },
