@@ -125,7 +125,15 @@
 .registration-container .registration-wrapper {
   display: grid;
   gap: 1.5em;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2,1fr);
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-container .registration-wrapper .staff {
+  grid-column: 1 / 3;
+  width: 390px;
+  margin: auto;
 }
 
 .registration-card {

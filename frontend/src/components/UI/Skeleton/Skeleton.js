@@ -1,10 +1,10 @@
 import "./Skeleton.css";
-const Skeleton = ({rows=4, cols=4,profile=false}) => {
+const Skeleton = ({rows=4, cols=4,profile=false,marginTop='0em'}) => {
     const rowsArr = Array(rows).fill();
     const colsArr = Array(cols).fill();
 
     return (
-        <table className="skeleton-table">
+        <table className="skeleton-table" style={{marginTop}}>
             <thead>
                 <tr className="skeleton-table-row">
                     {colsArr.map((_,i) => {

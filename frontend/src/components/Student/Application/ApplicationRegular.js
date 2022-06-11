@@ -67,7 +67,7 @@ const ApplicationRegular = () => {
       <div className="application-total">
         <span>Total Amount</span> <span>Rs.1600</span>
       </div>
-      <Link to="/applicationregular/payment">
+      <Link to="/application/regular/payment">
         <button className="application-submit">Apply</button>
       </Link>
     </div>

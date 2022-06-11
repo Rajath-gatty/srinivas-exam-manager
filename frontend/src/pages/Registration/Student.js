@@ -17,6 +17,7 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
+import { useFetchDepartment } from "../../hooks/useFetchDepartments";
 
 const Student = () => {
   const [gender, setGender] = useState("");
@@ -32,81 +33,20 @@ const Student = () => {
   const [passErr, setPassErr] = useState(false);
   const [errors, setErrors] = useState([]);
 
-  const departments = [
-    "Computer Science & Information Science",
-    "Management & Commerce",
-    "Engineering & Technology",
-    "Social Sciences & Humanities",
-    "Aviation Studies",
-    "Physiotherapy",
-    "Hotel Management & Tourism",
-    "Education",
-    "Allied Health Sciences",
-    "Nursing Science",
-  ];
-
   const DegreeYear = [
     2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016,
     2017, 2018, 2019, 2020, 2021, 2022,
   ];
 
-  const SwitchCourse = (evt) => {
+  const departments = useFetchDepartment();
+
+  const SwitchCourse = async(evt) => {
     const dept = evt.target.value;
-
-    switch (dept) {
-      case "Computer Science & Information Science": {
-        const Degree = ["BCA", "MCA"];
-        setCourse(Degree);
-        break;
-      }
-      case "Management & Commerce": {
-        const Degree = ["BBA", "B.Com", "B.Com (IT)", "B.Com (CSE)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Engineering & Technology": {
-        const Degree = ["B.Tech", "B.Tech (IT)", "B.Tech (CSE)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Social Sciences & Humanities": {
-        const Degree = ["B.A", "B.A (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Aviation Studies": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Physiotherapy": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Hotel Management & Tourism": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Education": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Allied Health Sciences": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-      case "Nursing Science": {
-        const Degree = ["B.Sc", "B.Sc (Hons)"];
-        setCourse(Degree);
-        break;
-      }
-
-      default:
-        return "Invalid";
+    try {
+      const result = await axios.post('/courses',{departmentName:dept});
+      setCourse(result.data);
+    } catch(err) {
+      console.log(err);
     }
   };
 
@@ -621,8 +561,8 @@ const Student = () => {
                   error={errors.some((err) => err.param === "department")}
                 >
                   {departments.map((opt) => (
-                    <MenuItem key={opt} value={opt}>
-                      {opt}
+                    <MenuItem key={opt.dept_id} value={opt.dept_name}>
+                      {opt.dept_name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -642,8 +582,8 @@ const Student = () => {
                   // fullwidth="true"
                 >
                   {course.map((opt) => (
-                    <MenuItem key={opt} value={opt}>
-                      {opt}
+                    <MenuItem key={opt.course_id} value={opt.course_name}>
+                      {opt.course_name}
                     </MenuItem>
                   ))}
                 </Select>

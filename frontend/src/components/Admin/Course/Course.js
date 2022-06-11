@@ -62,9 +62,9 @@ const Course = () => {
             />
           })}
         </tbody>
-      </table>: <Skeleton rows={3} cols={6} profile/>}
+      </table>: <Skeleton rows={3} cols={6} profile marginTop="2em"/>}
     </div>
   );
 };
-{/* <div style={{marginTop:150}} className="flex"><CircularProgress/></div> */}
 export default Course;
+/* <div style={{marginTop:150}} className="flex"><CircularProgress/></div> */

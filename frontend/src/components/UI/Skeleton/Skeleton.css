@@ -2,7 +2,7 @@
     width: 100%;
     text-align: center;
     border-collapse: collapse;
-    margin-top: 2.5em;
+    /* margin-top: 1em; */
 }
 
 .skeleton-table .skeleton-table-row .skeleton-content{

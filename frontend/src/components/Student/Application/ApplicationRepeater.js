@@ -128,7 +128,7 @@ const ApplicationRepeater = () => {
           <div className="application-total">
             <span>Total Amount</span> <span>Rs.{TotalFee}</span>
           </div>
-          <Link to="/applicationrepeater/payment">
+          <Link to="/application/repeater/payment">
             <button className="application-submit">Apply</button>
           </Link>
         </div>

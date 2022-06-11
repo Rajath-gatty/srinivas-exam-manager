@@ -13,24 +13,14 @@ import {
 import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
+import { useFetchDepartment } from "../../hooks/useFetchDepartments";
 
 const Staff = () => {
   const [gender,setGender] = useState('');
   const [passErr,setPassErr] = useState(false);
   const [errors,setErrors] = useState([]);
 
-    const departments = [
-        "Computer Science & Information Science",
-        "Management & Commerce",
-        "Engineering & Technology",
-        "Social Sciences & Humanities",
-        "Aviation Studies",
-        "Physiotherapy",
-        "Hotel Management & Tourism",
-        "Education",
-        "Allied Health Sciences",
-        "Nursing Science",
-      ];
+  const departments = useFetchDepartment();
 
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -307,8 +297,8 @@ const Staff = () => {
                     error={errors.some(err=>err.param==='department')}
                   >
                     {departments.map((opt) => (
-                      <MenuItem key={opt} value={opt}>
-                        {opt}
+                      <MenuItem key={opt.dept_id} value={opt.dept_name}>
+                        {opt.dept_name}
                       </MenuItem>
                     ))}
                   </Select>
