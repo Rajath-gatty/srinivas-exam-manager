@@ -49,7 +49,7 @@ const  CourseDetails = () => {
                 }
             }
         }
-    },[maxSem,semDetails])
+    },[maxSem]) //Remove & Add dependency if not loading
     console.log(semDetails)
 
      return(
