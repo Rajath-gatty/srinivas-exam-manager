@@ -1,8 +1,11 @@
 
-const  CourseDetailsTable = () => {
+const  CourseDetailsTable = (props) => {
+    const {sem} = props;
+    const data = sem.value;
+    console.log("YOOO",data)
      return(
          <div className="course-details-table">
-             <p>SEM 2</p>
+             <p>{sem.semNo}</p>
             <table className="course-details-list-table">
             <thead>
             <tr>
@@ -11,26 +14,14 @@ const  CourseDetailsTable = () => {
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>HTML</td>
-                    <td>19BCASD34</td>
-                </tr>
-                <tr>
-                    <td>C++</td>
-                    <td>19BCASD34</td>
-                </tr>
-                <tr>
-                    <td>Java</td>
-                    <td>19BCASD34</td>
-                </tr>
-                <tr>
-                    <td>Python</td>
-                    <td>19BCASD34</td>
-                </tr>
-                <tr>
-                    <td>DataStructures</td>
-                    <td>19BCASD34</td>
-                </tr>
+                {data.map(obj =>{
+                    return(
+                        <tr>
+                            <td>{obj.subj_name}</td>
+                            <td>{obj.subj_code}</td>
+                        </tr>
+                    )
+                })}
             </tbody>
         </table>
     </div>
