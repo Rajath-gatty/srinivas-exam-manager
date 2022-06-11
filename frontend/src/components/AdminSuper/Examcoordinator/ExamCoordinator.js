@@ -3,35 +3,29 @@ import { GoSettings } from "react-icons/go";
 import { FaSearch } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
-
-const userData = [
-    {
-      coordName: "Jhon",
-      coordId: "3SU19SA011",
-      dptId: "SU19BCA01",
-      dptName: "CCIS",
-    },
-    {
-      coordName: "Jhon",
-      coordId: "3SU19SA012",
-      dptId: "SU19BCA01",
-      dptName: "CCIS",
-    },
-    {
-      coordName: "Jhon",
-      coordId: "3SU19SA013",
-      dptId: "SU19BCA01",
-      dptName: "CCIS",
-    },
-    {
-      coordName: "Jhon",
-      coordId: "3SU19SA014",
-      dptId: "SU19BCA01",
-      dptName: "CCIS",
-    },
-  ]
+import { useState,useEffect } from "react";
+import axios from "axios";
+import Skeleton from "../../UI/Skeleton/Skeleton";
 
 const Examcoordinator = () => {
+  const [coordinators,setCoordinators] = useState([]);
+  const [loading,setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCoordinator = async() => {
+      try {
+        setLoading(true);
+        const result = await axios.get('admin/examcoordinators');
+        setCoordinators(result.data);
+        setLoading(false);
+        console.log(result.data);
+      } catch(err) {
+        setLoading(false);
+        console.log(err);
+      }
+    } 
+    fetchCoordinator();
+  },[])
   return (
     <div className="departments-container">
       <div className="departments-header">
@@ -48,24 +42,24 @@ const Examcoordinator = () => {
        </Link>
       </div>
 
-      <table className="departments-list">
+      {!loading?<table className="departments-list">
         <thead>
           <tr>
             <th>Coordinator Name</th>
-            <th>Coordinator ID</th>
+            {/* <th>Coordinator ID</th> */}
             <th>Department</th>
-            <th>Department ID</th>
+            {/* <th>Department ID</th> */}
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {userData.map(item =>{
+          {coordinators.map(item =>{
             return(
-              <tr key={item.coordId}>
-                <td>{item.coordName}</td>
-                <td>{item.coordId}</td>
-                <td>{item.dptName}</td>
-                <td>{item.dptId}</td>
+              <tr key={item.coord_id}>
+                <td>{item.first_name}</td>
+                {/* <td>{item.coordId}</td> */}
+                <td>{item.dept_name}</td>
+                {/* <td>{item.dptId}</td> */}
                 <td>
                   <div className="manage-dpt flex">
                     <GoSettings color="var(--primary-color)" size={20} />
@@ -76,9 +70,9 @@ const Examcoordinator = () => {
             )
           })}
         </tbody>
-      </table>
+      </table>:<Skeleton rows={3} cols={4}/>}
     </div>
   )
 }
 
-export default Examcoordinator
+export default Examcoordinator;

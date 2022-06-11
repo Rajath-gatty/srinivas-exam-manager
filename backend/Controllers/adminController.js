@@ -93,3 +93,40 @@ exports.postNewCourse = async(req,res) => {
             res.status(404).send({success:false});
         }
     }
+
+    exports.postNewCoordinator = async(req,res) => {
+        const {departmentName,firstName,lastName,dob,email,gender,address,phone,password} = req.body;
+        const err = validationResult(req).errors;
+        if(err.length>0) {
+            return res.status(400).send({success:false,err});
+        }
+        try {
+            const hashedPassword = await bcrypt.hash(password,4);
+             db.execute(`select dept_id from department where dept_name='${departmentName}'`)
+            .then(([result]) => {
+                const deptId = result[0].dept_id;
+                const coordSql = `insert into exam_coord(dept_id,first_name,last_name,gender,dob,email,address,phone,password) values(?,?,?,?,?,?,?,?,?)`;
+               return db.execute(coordSql,[deptId,firstName,lastName,gender,dob,email,address,phone,hashedPassword])
+            })
+            .then(() => {
+                res.send({success:true,msg:'Inserted Successfully'})
+            })
+            .catch(err => {
+                // console.log(err);
+                return res.status(500).send({success:false,err});
+            })
+        } catch(err) {
+            // console.log(err);
+            return res.status(500).send({success:false,err});
+        }
+    }
+
+    exports.getExamCoordinators = async(req,res) => {
+        try {
+          const result = await db.execute('select dept_name,first_name,coord_id from exam_coord join department where exam_coord.dept_id=department.dept_id');
+          res.send(result[0]);
+        } catch(err) {
+            console.log(err);
+            res.status(500).send(err);
+        }
+    }

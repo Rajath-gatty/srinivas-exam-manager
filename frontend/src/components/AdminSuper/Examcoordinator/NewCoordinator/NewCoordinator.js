@@ -3,14 +3,17 @@ import "./NewCoordinator.css"
 import Back from "../../../UI/Back/Back"
 import Dob from "../../../UI/Dob";
 import RadioInput from "../../../UI/RadioInput";
-import { TextField } from "@mui/material";
+import { TextField,FormControl,FormHelperText,Select,MenuItem,InputLabel } from "@mui/material";
 import axios from "axios";
 import dateFormat from "dateformat";
+import { useFetchDepartment } from "../../../../hooks/useFetchDepartments";
 
 const NewCoordinator = () => {
     const [gender,setGender] = useState('');
     const [passErr,setPassErr] = useState(false);
     const [errors,setErrors] = useState([]);
+
+    const departments = useFetchDepartment();
 
     const departmentNameRef = useRef();
     const firstNameRef = useRef();
@@ -29,7 +32,7 @@ const NewCoordinator = () => {
         e.preventDefault();
         const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
         const dobErr = dob.length>=10;
-        const adminData = {
+        const data = {
           departmentName : departmentNameRef.current.value,
           firstName : firstNameRef.current.value,
           lastName : lastNameRef.current.value,
@@ -42,11 +45,11 @@ const NewCoordinator = () => {
           cPasword : cPasswordRef.current.value,
         }
     
-        if(adminData.password!==adminData.cPasword) {
+        if(data.password!==data.cPasword) {
           setPassErr(true);
         } else {
           try {
-            const result = await axios.post('/registration/staff',adminData)
+            const result = await axios.post('/admin/registration/examcoordinator',data)
             console.log(result);
             setErrors([]);
             setPassErr(false);
@@ -126,27 +129,24 @@ const NewCoordinator = () => {
                 helperText={errors.find(err=>err.param==='address')?.msg}
               />
 
-              <TextField
-                label="Department"
-                variant="outlined"
-                type="text"
-                size="small"
-                fullWidth
-                inputRef={passwordRef}
-                error={errors.some(err=>err.param==='password')}
-                helperText={errors.find(err=>err.param==='password')?.msg}
-              />
+                <FormControl className="SelectInput">
+                  <InputLabel>Department</InputLabel>
+                  <Select
+                    label="Department"
+                    defaultValue=""
+                    size="small"
+                    inputRef={departmentNameRef}
+                    error={errors.some(err=>err.param==='departmentName')}
+                  >
+                    {departments.map((opt) => (
+                      <MenuItem key={opt.dept_id} value={opt.dept_name}>
+                        {opt.dept_name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  <FormHelperText error>{errors.find(err=>err.param==='departmentName')?.msg}</FormHelperText>
+                </FormControl>
 
-              <TextField
-                label="Department ID"
-                variant="outlined"
-                type="text"
-                size="small"
-                fullWidth
-                inputRef={passwordRef}
-                error={errors.some(err=>err.param==='password')}
-                helperText={errors.find(err=>err.param==='password')?.msg}
-              />
 
               <TextField
                 label="Password"

@@ -13,7 +13,6 @@ import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
 import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
-import Evaluator from "./pages/Registration/Examcord";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -92,7 +91,6 @@ function App() {
                   path="courses/course-details/:courseId"
                   element={<CourseDetails />}
                 />
-                <Route path="registration/evaluator" element={<Evaluator />} />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route
@@ -151,7 +149,9 @@ function App() {
                   element={<ApplicationRepeater />}
                 />
 
-                <Route path="/applicationregular/payment" element={<PaymentRegular />} /></Route>
+                <Route path="/application/regular/payment" element={<PaymentRegular />} />
+                <Route path="/application/repeater/payment" element={<PaymentRegular />} />
+              </Route>
 
 
 

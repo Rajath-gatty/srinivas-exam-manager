@@ -66,5 +66,5 @@ const Course = () => {
     </div>
   );
 };
-{/* <div style={{marginTop:150}} className="flex"><CircularProgress/></div> */}
 export default Course;
+/* <div style={{marginTop:150}} className="flex"><CircularProgress/></div> */

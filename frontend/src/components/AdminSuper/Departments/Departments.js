@@ -7,27 +7,6 @@ import {useState,useEffect} from "react";
 import axios from "axios";
 import Skeleton from "../../UI/Skeleton/Skeleton";
 
-const depts = [
-  {
-    dptId: "SU19BCA01",
-    dptName: "CCIS",
-    dptAdmin: "Jhon",
-    dptReg: "19-09-2022",
-  },
-  {
-    dptId: "SU19BCA02",
-    dptName: "CCIS",
-    dptAdmin: "Jhon",
-    dptReg: "19-09-2022",
-  },
-  {
-    dptId: "SU19BCA03",
-    dptName: "CCIS",
-    dptAdmin: "Jhon",
-    dptReg: "19-09-2022",
-  }
-]
-
 const Departments = () => {
   const [departments,setDepartments] = useState([]);
   const [loading,setLoading] = useState(false);
