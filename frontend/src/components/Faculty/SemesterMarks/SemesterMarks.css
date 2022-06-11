@@ -1,24 +1,24 @@
-.internal-main {
+.semester-main {
     margin: 2em;
     width: 100%;
 }
 
-.internal-main .filter-wrapper {
+.semester-main .filter-wrapper {
     display: flex;
     gap: 1em;
     /* justify-content: space-between; */
 }
 
-.internal-main .select-filter {
+.semester-main .select-filter {
     width: 430px;
 }
 
-.internal-main .filter-wrapper .search-form {
+.semester-main .filter-wrapper .search-form {
     width: 100%;
     margin-right: 1.5em;
 }
 
-.internal-main .filter-wrapper .search-input {
+.semester-main .filter-wrapper .search-input {
     width: 100%;
     padding: 0.85em 0.75em;
     background: var(--grey-bg);
@@ -28,33 +28,44 @@
     text-align: center;
 }
 
-.internal-main .filter-wrapper .search-input::placeholder {
+.semester-main .filter-wrapper .search-input::placeholder {
     color: var(--light-grey);
 }
 
-.internal-table-wrapper {
+.semester-table-wrapper {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
     margin-top: 2em;
 }
 
-.internal-table-wrapper .thead th {
+.semester-table-wrapper .thead th {
     padding: 0.75em;
     background: var(--grey-bg);
 }
 
-.internal-table-wrapper td {
+.semester-table-wrapper td {
     padding: 0.75em;
     color: var(--text-color);
     font-size: 0.9em;
 }
 
-.internal-table-wrap .internal-table-row {
+.semester-table-wrap .semester-table-row {
     border: 1px solid var(--grey-bg);
 }
 
-.internal-input-row {
+.semester-input-row {
     height: 10px;
     width: 10px;
+}
+
+.submit {
+
+    background-color: var(--primary-color);
+    padding: 0.8em 2em;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 85%;
+    margin-top: 2em;
 }
