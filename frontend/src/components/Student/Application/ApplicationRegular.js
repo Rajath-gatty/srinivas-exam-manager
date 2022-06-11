@@ -1,5 +1,7 @@
 import { Checkbox } from "@mui/material";
 import "./Application.css";
+import { Link } from "react-router-dom";
+
 
 const ApplicationRegular = () => {
   return (
@@ -65,8 +67,9 @@ const ApplicationRegular = () => {
       <div className="application-total">
         <span>Total Amount</span> <span>Rs.1600</span>
       </div>
-
-      <button className="application-submit">Apply</button>
+      <Link to="/applicationregular/payment">
+        <button className="application-submit">Apply</button>
+      </Link>
     </div>
   );
 };

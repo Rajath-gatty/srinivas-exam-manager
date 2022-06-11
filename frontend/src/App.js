@@ -13,6 +13,10 @@ import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
 import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
+<<<<<<< HEAD
+=======
+import Evaluator from "./pages/Registration/Examcord";
+>>>>>>> f7dd37d73d9ff0d4278fa4e4dd01b63620025918
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -44,7 +48,8 @@ import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
-import NewPayment from "./components/Student/Payment/NewPayment";
+import PaymentRegular from "./components/Student/Application/Payment/Payment";
+
 
 import Departments from "./components/AdminSuper/Departments/Departments";
 import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/NewDepartment";
@@ -73,7 +78,7 @@ function App() {
             <Route path="registration/student" element={<Student />} />
             <Route path="registration/faculty" element={<Faculty />} />
             <Route path="registration/staff" element={<Staff />} />
-            
+
             <Route element={<Layout />}>
               {/* Super Admin Access */}
               <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
@@ -90,6 +95,7 @@ function App() {
                   path="courses/course-details/:courseId"
                   element={<CourseDetails />}
                 />
+                <Route path="registration/evaluator" element={<Evaluator />} />
                 <Route path="courses/new-course" element={<Create />} />
                 <Route path="approve/staff" element={<Approval />} />
                 <Route
@@ -147,8 +153,10 @@ function App() {
                   path="application/repeater"
                   element={<ApplicationRepeater />}
                 />
-                <Route path="/new-payment" element={<NewPayment />} />
-              </Route>
+
+                <Route path="/applicationregular/payment" element={<PaymentRegular />} /></Route>
+
+
 
               {/* Faculty and Student access*/}
               <Route
@@ -226,8 +234,8 @@ function App() {
             <Route path="*" element={<PageNotFound />}></Route>
           </Routes>
         </Browser>
-      </div>
-    </ThemeProvider>
+      </div >
+    </ThemeProvider >
   );
 }
 
