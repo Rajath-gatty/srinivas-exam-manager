@@ -25,6 +25,7 @@ import UserDetails from "./components/Users/UserDetails/UserDetails";
 import Create from "./components/Admin/Course/Create/Create";
 import CourseDetails from "./components/Admin/Course/CourseDetails/CourseDetails";
 import InternalMarks from "./components/Faculty/InternalMarks/InternalMark";
+import SemesterMarks from "./components/Faculty/SemesterMarks/SemesterMarks";
 import IndentRegular from "./components/Staff/Indent/IndentRegular";
 import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
 import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/PaymentsRegular";
@@ -136,7 +137,10 @@ function App() {
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
                 <Route path="internal" element={<InternalMarks />} />
+                <Route path="semester" element={<SemesterMarks />} />
               </Route>
+
+
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
