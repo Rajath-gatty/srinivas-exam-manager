@@ -13,10 +13,7 @@ import Registration from "./pages/Registration/Registration";
 import Student from "./pages/Registration/Student";
 import Faculty from "./pages/Registration/Faculty";
 import Staff from "./pages/Registration/Staff";
-<<<<<<< HEAD
-=======
 import Evaluator from "./pages/Registration/Examcord";
->>>>>>> f7dd37d73d9ff0d4278fa4e4dd01b63620025918
 
 import ProtectedRoute from "./components/ProtectedRoute";
 

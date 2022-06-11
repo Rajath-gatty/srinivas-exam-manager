@@ -15,15 +15,6 @@ const Registration = () => {
       <div className="registration-container">
         <h1>Register</h1>
         <div className="registration-wrapper">
-<<<<<<< HEAD
-=======
-          <Link to="evaluator">
-            <div className="registration-card">
-              <img src={EvaluatorSvg} alt="Evaluator Svg" />
-              <h3>Exam Coordinator</h3>
-            </div>
-          </Link>
->>>>>>> f7dd37d73d9ff0d4278fa4e4dd01b63620025918
           <Link to="student">
             <div className="registration-card">
               <img src={StudentSvg} alt="Student Svg"/>
