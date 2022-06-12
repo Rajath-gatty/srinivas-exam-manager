@@ -54,7 +54,6 @@ import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/New
 import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 
-
 function App() {
   //MUI Components Fonts
   const theme = createTheme({
@@ -184,15 +183,10 @@ function App() {
                 <Route path="users/student" element={<TotalUsers />} />
                 <Route path="users/faculty" element={<TotalUsers />} />
                 <Route path="users/staff" element={<TotalUsers />} />
-                <Route path="users/evaluator" element={<TotalUsers />} />
 
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
-                <Route
-                  path="users/evaluator/:userId"
-                  element={<UserDetails />}
-                />
               </Route>
 
               {/* Exam Coordinator Access */}

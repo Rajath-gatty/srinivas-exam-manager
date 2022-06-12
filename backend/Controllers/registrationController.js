@@ -12,7 +12,7 @@ exports.postStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(data.password, 4);
 
     const result = await db.execute(
-      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,department,course,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,department,course,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         data.regno,
         data.firstName,
@@ -49,10 +49,12 @@ exports.postStudent = async (req, res) => {
         data.joiningYear,
         "student",
         "pending",
+        1,
+        false
       ]
     );
 
-    res.status(200).send({ success: true, data });
+    res.status(200).send({ success: true });
   } catch (err) {
     res.status(500).send(err);
   }
