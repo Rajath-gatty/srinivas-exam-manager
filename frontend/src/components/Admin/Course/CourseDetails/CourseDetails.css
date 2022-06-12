@@ -25,10 +25,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    justify-content: center;
-    align-items: center;
     gap: 3em;
-    margin-top: 2em;
+    margin: 3em 0;
 }
 
 .course-details-main .course-details-list-table {

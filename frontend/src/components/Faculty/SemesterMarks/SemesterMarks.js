@@ -4,19 +4,17 @@ import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 
 const SemesterMarks = () => {
     return (
-        <div className="internal-main">
+        <div className="semester-main">
             <FilterSearch />
 
-            <table className="internal-table-wrapper">
+            <table className="semester-table-wrapper">
                 <thead className="thead">
                     <tr>
-                        <th>Profile</th>
-                        <th>RegNo.</th>
-                        <th>Name</th>
+                        <th>Coding Sheet No</th>
+                        <th>Bundle No</th>
                         <th>Semester</th>
                         <th>Java</th>
-                        <th>C++</th>
-                        <th>PHP</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -26,8 +24,11 @@ const SemesterMarks = () => {
                     <SemesterMarksList></SemesterMarksList>
                     <SemesterMarksList></SemesterMarksList>
                 </tbody>
+
             </table>
+            <button className="submit">Submit</button>
         </div>
+
     );
 };
 

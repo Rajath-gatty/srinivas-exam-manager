@@ -7,31 +7,50 @@ import axios from "axios";
 
 const  CourseDetails = () => {
     const [semDetails,setSemDetails] = useState([]);
+    const [resData,setResData] = useState([]);
+    const [maxSem,setMaxSem] = useState("");
+
     const param = useParams();
     const reqData = {
         courseId: param.courseId,
         deptId: 11
     }
 
+   
     useEffect(() => {
-        const fetchCourses = async() => {
+        const fetchCourses = async () => {
             try {
                 const result = await axios.post('/admin/course-details',reqData);
-                console.log(result.data);
-                setSemDetails(result.data);
-            //    const newArr= result.data.reduce((acc,cur,i) => {
-            //       return  [{
-            //             semName:cur.sem_name,
-            //             subjects: [{subjName:cur.subj_name,subjCode:cur.subj_code}]
-            //         }]
-            //     },{})
-            //     console.log(newArr);
+                setResData(result.data);
+
+                // Get max no. of sems dynamically
+                resData.map(sems =>{
+                    var semNum = sems.sem_name.replace("SEM ","");
+                    if(semNum >= maxSem){
+                        setMaxSem(semNum)
+                    }
+                })
             } catch(err) {
                 console.log(err);
             }
         }
         fetchCourses();
-    },[])
+
+        for(var i=1; i<=maxSem; i++){
+            var semNum = "SEM " + i; 
+            var tmpArr = resData.filter(obj => obj.sem_name === semNum)
+
+            if(Object.keys(semDetails).length === 0){
+                semDetails.push({semNo:semNum, value:tmpArr})
+            } 
+            else{
+                if(semDetails[i-2].semNo !== semNum){
+                    semDetails.push({semNo:semNum, value:tmpArr})
+                }
+            }
+        }
+    },[maxSem]) //Remove & Add dependency if not loading
+    console.log(semDetails)
 
      return(
         <div className="course-details-main">
@@ -43,20 +62,16 @@ const  CourseDetails = () => {
             </div>
         </div>
         <div className="course-details-table-wrapper">
-            <CourseDetailsTable/>
-            <CourseDetailsTable/>
-            <CourseDetailsTable/>
-            <CourseDetailsTable/>
+            {
+                semDetails.map(obj =>{
+                    return (
+                        <CourseDetailsTable sem={obj}/>
+                    )
+                })
+            }
         </div>
       </div>
      )
 }
 
 export default CourseDetails;
-
-// data = [
-//     {
-//         semName: 'SEM 1',
-//         value: [{subj_name:'HTML',subj_code:'19BCASD23'},{subj_name:'HTML', subj_code:'19BCASD23'}]
-//     }
-// ]

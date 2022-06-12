@@ -1,16 +1,12 @@
-import { FaUserCircle } from "react-icons/fa";
+
 const SemesterMarksList = () => {
     return (
-        <tr className="internal-table-row">
-            <td className="internal-avatar-wrapper">
-                <FaUserCircle color="var(--light-grey)" size={25} />
-            </td>
-            <td>3SU19SA010</td>
-            <td>John</td>
+        <tr className="semester-table-row">
+
+            <td>3SU19820</td>
+            <td>1293874</td>
             <td>V</td>
-            <td className="internal-input-row"><input type="text"></input></td>
-            <td className="internal-input-row"><input type="text"></input></td>
-            <td className="internal-input-row"><input type="text"></input></td>
+            <td className="semester-input-row"><input type="text"></input></td>
         </tr>
 
     );
