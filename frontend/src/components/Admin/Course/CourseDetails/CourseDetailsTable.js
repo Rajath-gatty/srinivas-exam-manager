@@ -5,7 +5,7 @@ const  CourseDetailsTable = (props) => {
     
      return(
          <div className="course-details-table">
-             <p>{sem.semNo}</p>
+             <p>{sem.semName}</p>
             <table className="course-details-list-table">
             <thead>
             <tr>
@@ -16,9 +16,9 @@ const  CourseDetailsTable = (props) => {
             <tbody>
                 {data.map(obj =>{
                     return(
-                        <tr>
-                            <td>{obj.subj_name}</td>
-                            <td>{obj.subj_code}</td>
+                        <tr key={Math.random()+Date.now()}>
+                            <td>{obj.subName}</td>
+                            <td>{obj.subCode}</td>
                         </tr>
                     )
                 })}
