@@ -12,7 +12,7 @@ exports.postStudent = async (req, res) => {
     const hashedPassword = await bcrypt.hash(data.password, 4);
 
     const result = await db.execute(
-      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,department,course,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,dept_id,course_id,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),(select course_id from course where course_name=?),?,?,?,?,?)",
       [
         data.regno,
         data.firstName,
@@ -70,7 +70,7 @@ exports.postFaculty = async (req, res) => {
 
   try {
     const result = await db.execute(
-      "insert into faculty(faculty_id,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,department,teaching_exp,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into faculty(faculty_id,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,dept_id,teaching_exp,joining_year,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),?,?,?,?)",
       [
         data.facultyId,
         data.firstName,
@@ -118,7 +118,7 @@ exports.postStaff = async (req, res) => {
 
   try {
     const result = await db.execute(
-      "insert into staff(first_name,last_name,gender,dob,email,phone,address,country,pincode,blood_group,caste,aadhar_no,identity_mark,religion,birth_place,birth_district,password,f_name,f_occupation,f_phone,f_email,joining_year,department,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "insert into staff(first_name,last_name,gender,dob,email,phone,address,country,pincode,blood_group,caste,aadhar_no,identity_mark,religion,birth_place,birth_district,password,f_name,f_occupation,f_phone,f_email,joining_year,department,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),?,?)",
       [
         data.firstName,
         data.lastName,

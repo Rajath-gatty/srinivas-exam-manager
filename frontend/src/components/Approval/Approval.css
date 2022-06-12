@@ -3,6 +3,17 @@
     margin: 0em 3em;
 }
 
+.approval-main .approve-main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 800px;
+}
+
+.approval-main .approve-main-header .SelectInput {
+    width: 200px;
+}
+
 .approval-main .back-btn {
     display: flex;
     align-items: center;
@@ -15,8 +26,8 @@
 
 .approval-main .approve-list-header {
     color: var(--primary-color);
-    margin-bottom: 1.5em;
-    margin-top: 2em;
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 .approval-main .back-btn .back-btn-text {

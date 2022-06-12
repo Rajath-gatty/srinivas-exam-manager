@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import {FaUserCircle} from "react-icons/fa";
 
-const ApprovaList = () => {
+const ApprovaList = ({name,regno,joiningYear,courseName,type,facultyId,staffId}) => {
+  let linkAddress;
+  if(type==='student') linkAddress=regno;
+  else if(type==='faculty') linkAddress=facultyId;
+  else linkAddress=staffId;
   return (
     <tr className="approve-table-row">
-      <td className="approve-avatar-wrapper">
+      {type==='student'&&<td className="approve-avatar-wrapper">
       <FaUserCircle color="var(--light-grey)" size={30}/>
-      </td>
-      <td>John</td>
-      <td>BCA</td>
-      <td>2019</td>
+      </td>}
+      <td>{name}</td>
+      {type==='student'&&<td>{regno}</td>}
+      {type==='student'&&<td>{courseName}</td>}
+      <td>{joiningYear}</td>
       <td>
-        <Link to="/approve/student/54674567">View</Link>
+        <Link to={`/approve/${type}/${linkAddress}`}>View</Link>
       </td>
       <td className="flex approve-table-btn-wrapper">
         <button className="btn-outlined-green">Approve</button>

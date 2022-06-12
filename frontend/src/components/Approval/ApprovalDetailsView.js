@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import {FiArrowLeft,FiCheck,FiX} from "react-icons/fi";
-import {FaUserCircle,FaCamera} from "react-icons/fa";
+import {FaUserCircle} from "react-icons/fa";
 
 import { useContextData } from "../../hooks/useContextData";
 import { useNavigate } from "react-router-dom";
@@ -44,20 +44,6 @@ const StudentApprovalView = () => {
         </div>
         <div className="approve-user-avatar flex">
           <FaUserCircle color="var(--light-grey)" size={70}/>
-            <div
-              className="approve-camera"
-              onClick={() => {
-                document.querySelector("#imagePicker").click();
-              }}
-            >
-              <FaCamera size={20} color="var(--light-grey)"/>
-              <input
-                type="file"
-                id="imagePicker"
-                style={{ display: "none" }}
-                accept="image/png, image/jpeg"
-              />
-            </div>
         </div>
 
         <div className="approve-user-title flex">

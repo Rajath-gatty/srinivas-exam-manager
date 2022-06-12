@@ -92,7 +92,7 @@ function App() {
                   element={<CourseDetails />}
                 />
                 <Route path="courses/new-course" element={<Create />} />
-                <Route path="approve/staff" element={<Approval />} />
+                <Route path="approve/staff" element={<Approval role="staff"/>} />
                 <Route
                   path="approve/staff/:staffId"
                   element={<ApprovalDetailsView />}
@@ -101,8 +101,8 @@ function App() {
 
               {/* Staff Access*/}
               <Route element={<ProtectedRoute allowedRole={["staff"]} />}>
-                <Route path="approve/student" element={<Approval />} />
-                <Route path="approve/faculty" element={<Approval />} />
+                <Route path="approve/student" element={<Approval type="student" />} />
+                <Route path="approve/faculty" element={<Approval type="faculty"/>} />
                 <Route
                   path="approve/student/:studentId"
                   element={<ApprovalDetailsView />}
