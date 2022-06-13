@@ -5,6 +5,8 @@ import { BrowserRouter as Browser, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import Login from "./pages/Login/Login";
+import SpecialLogin from "./pages/Login/SpecialLogin";
+
 import Dashboard from "./pages/Dashboard";
 import Attendance from "./pages/Attendance";
 import TimeTable from "./pages/TimeTable";
@@ -70,6 +72,7 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Login />} />
+            <Route path="/special" element={<SpecialLogin />} />
             <Route path="registration" element={<Registration />} />
             <Route path="registration/student" element={<Student />} />
             <Route path="registration/faculty" element={<Faculty />} />
