@@ -45,13 +45,15 @@ const StudentApprovalView = () => {
 
   useEffect(() => {
     const type = location.search.split('=')[1];
+    const user = type==='staff'?'admin':'staff';
 
     const fetchDetails = async() => {
       try {
-        const result = await axios.get(`staff/approve/${type}/view/${params.id}`);
+        const result = await axios.get(`${user}/approve/${type}/view/${params.id}`);
+        console.log(result.data);
         const data = result.data.reduce((acc,cur) => {
           return cur;
-        });
+        },{});
         setDetails(data);
         setLoading(false);
       } catch(err) {
