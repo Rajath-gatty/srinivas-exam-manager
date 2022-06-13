@@ -152,6 +152,16 @@ input:focus .input-group {
   margin-left: 1em;
 }
 
+.login-backBtn{
+  position: absolute;
+  top: 2em;
+  left: 53%;
+  gap: 0.2em;
+  color: var(--text-color);
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
 .login-userSelect{
   display: grid;
   grid-template-columns: 1fr;

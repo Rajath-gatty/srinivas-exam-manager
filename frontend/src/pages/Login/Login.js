@@ -1,6 +1,6 @@
 import { Link,useNavigate} from "react-router-dom";
 import { useState,useRef} from "react";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
@@ -91,6 +91,11 @@ const Login = () => {
         </div>
         :
         <form>
+          <div className="login-backBtn flex" onClick={()=>{setLoginUser("")}}>
+            <FiArrowLeft color="var(--text-color)" size={25}/>
+            <span>Back</span>
+          </div>
+
           <div className={emailAct}>
             <label className="login-label">Email</label>
             <div className="input-group">
