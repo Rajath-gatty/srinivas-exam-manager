@@ -4,8 +4,6 @@ import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
-import StudentSvg from "../../Assets/Registration/student_reg.svg";
-import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
 import StaffSvg from "../../Assets/Registration/staff_reg.svg";
 
 import  Modal  from "../../components/UI/Modal/Modal";
@@ -76,7 +74,7 @@ const SpecialLogin = () => {
 
           <div className="login-userBox" onClick={()=>{setLoginUser("ExamCoord")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
-              <h3>ExamCoord</h3>
+              <h3>Exam Coord</h3>
           </div>
         </div>
         :
