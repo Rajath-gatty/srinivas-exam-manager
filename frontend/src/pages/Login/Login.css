@@ -152,6 +152,27 @@ input:focus .input-group {
   margin-left: 1em;
 }
 
+.login-userSelect{
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-evenly;
+  text-align: center;
+  gap: 2em;
+  position: relative;
+  top: 2em;
+}
+
+.login-userBox{
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  cursor: pointer;
+}
+
 /* Development Role Change */
 #selectRole{
   width: 300px;
