@@ -118,7 +118,7 @@ exports.postStaff = async (req, res) => {
 
   try {
     const result = await db.execute(
-      "insert into staff(first_name,last_name,gender,dob,email,phone,address,country,pincode,blood_group,caste,aadhar_no,identity_mark,religion,birth_place,birth_district,password,f_name,f_occupation,f_phone,f_email,joining_year,department,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),?,?)",
+      "insert into staff(first_name,last_name,gender,dob,email,phone,address,country,pincode,blood_group,caste,aadhar_no,identity_mark,religion,birth_place,birth_district,password,f_name,f_occupation,f_phone,f_email,joining_year,dept_id,role,status) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),?,?)",
       [
         data.firstName,
         data.lastName,

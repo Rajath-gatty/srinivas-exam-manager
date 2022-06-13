@@ -92,9 +92,9 @@ function App() {
                   element={<CourseDetails />}
                 />
                 <Route path="courses/new-course" element={<Create />} />
-                <Route path="approve/staff" element={<Approval role="staff"/>} />
+                <Route path="approve/staff" element={<Approval type="staff"/>} />
                 <Route
-                  path="approve/staff/:staffId"
+                  path="approve/staff/:id"
                   element={<ApprovalDetailsView />}
                 />
               </Route>

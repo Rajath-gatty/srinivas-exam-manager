@@ -6,7 +6,7 @@ const ApprovaList = (props) => {
   let id;
   if(type==='student') id=regno;
   else if(type==='faculty') id=facultyId;
-  else id=staffId;
+  else if(type==='staff') id=staffId;
 
   return (
     <tr className="approve-table-row">

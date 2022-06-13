@@ -10,12 +10,14 @@ const Approval = ({type}) => {
   const [filterCourses,setFilterCourses] = useState([]);
   const [loading,setLoading] = useState(false);
 
+  const user = type==='staff'?'admin':'staff';
   const location = useLocation();
+
   useEffect(() => {
    const fetchApproveList = async() => {
     try {
       setLoading(true);
-      const result = await axios.post(`/staff/approvelist/${type}`,{deptId:11});
+      const result = await axios.post(`/${user}/approvelist/${type}`,{deptId:11});
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
@@ -42,7 +44,7 @@ const Approval = ({type}) => {
     const courseName = e.target.value;
     try {
       setLoading(true);
-      const result = await axios.post(`/staff/approvelist/${type}`,{courseName,deptId:11});
+      const result = await axios.post(`/${user}/approvelist/${type}`,{courseName,deptId:11});
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
@@ -54,7 +56,7 @@ const Approval = ({type}) => {
   const handleApprove = async(id) => {
     try {
       setLoading(true);
-      const result = await axios.post(`/staff/approve/${type}/${id}`);
+      const result = await axios.post(`/${user}/approve/${type}/${id}`);
       if(result.data.success) {
         setApproveList(state => {
           const newState = [...state];
@@ -81,7 +83,7 @@ const Approval = ({type}) => {
   const handleReject = async(id) => {
     try {
       setLoading(true);
-      const result = await axios.post(`/staff/reject/${type}/${id}`);
+      const result = await axios.post(`/${user}/reject/${type}/${id}`);
       if(result.data.success) {
         setApproveList(state => {
           const newState = [...state];
@@ -142,12 +144,13 @@ const Approval = ({type}) => {
         {!loading &&<tbody>
         {approveList.map(item => {
          return <ApprovaList 
-         key={item.regno}
+         key={Math.random()}
          courseName={item.course_name}
          name={item.first_name+' '+item.last_name}
          joiningYear={item.joining_year}
          regno={item.regno}
          type={type}
+         staffId={item.staff_id}
          facultyId={item.faculty_id}
          handleApprove={handleApprove}
          handleReject={handleReject}

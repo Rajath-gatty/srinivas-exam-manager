@@ -61,6 +61,11 @@ export const NavLinks = [
         path: "/timetable",
         icon: Calender,
       },
+      {
+        title:"Staff Approval",
+        path: "approve/staff",
+        icon: Approval
+      }
     ],
   },
   {
