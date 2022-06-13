@@ -1,13 +1,20 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import {FiArrowLeft,FiCheck,FiX} from "react-icons/fi";
 import {FaUserCircle} from "react-icons/fa";
-
+import axios from "axios";
+import { useParams,useLocation} from "react-router-dom";
 import { useContextData } from "../../hooks/useContextData";
 import { useNavigate } from "react-router-dom";
 import "./ApprovalDetailsView.css";
+import { CircularProgress } from "@mui/material";
 
 const StudentApprovalView = () => {
+  const [details,setDetails] = useState({});
+  const [loading,setLoading] = useState(true);
+
   const navigate = useNavigate();
+  const params = useParams(); 
+  const location = useLocation();
 
   const {
     approve,
@@ -36,7 +43,26 @@ const StudentApprovalView = () => {
     }
   }, []);
 
-  return (
+  useEffect(() => {
+    const type = location.search.split('=')[1];
+
+    const fetchDetails = async() => {
+      try {
+        const result = await axios.get(`staff/approve/${type}/view/${params.id}`);
+        const data = result.data.reduce((acc,cur) => {
+          return cur;
+        });
+        setDetails(data);
+        setLoading(false);
+      } catch(err) {
+        console.log(err);
+        setLoading(false);
+      }
+    }
+    fetchDetails();
+  },[location.search,params.id])
+
+  return !loading?(
     <div className="ApprovalDetailsView content">
       <div className="approve-user-info flex">
         <div className="back-btn flex" onClick={() => navigate(-1)}>
@@ -47,8 +73,8 @@ const StudentApprovalView = () => {
         </div>
 
         <div className="approve-user-title flex">
-          <span className="approve-user-name">John Doe</span>
-          <span className="approve-user-data">BCA 3rd Year</span>
+          <span className="approve-user-name">{details.first_name+' '+details.last_name}</span>
+          <span className="approve-user-data">{details.course_name}</span>
         </div>
       </div>
 
@@ -70,80 +96,95 @@ const StudentApprovalView = () => {
           <FiX size={20}/> {rejectText}
         </button>
       </div>
-
       <div className="approve-form flex">
         <div className="approve-details">
           <div className="approveRow">
-            <span>First Name</span> John
+            <span>Name</span>{details.first_name+' '+details.last_name}
           </div>
           <div className="approveRow">
-            <span>Last Name</span> Doe
+            <span>Phone</span>{details.phone}
           </div>
           <div className="approveRow">
-            <span>Phone</span> 9584625345
+            <span>Email</span> {details.email}
+          </div>
+          {details.faculty_id&&<div className="approveRow">
+            <span>Faculty ID</span> {details.faculty_id}
+          </div>}
+          {details.regno&&<div className="approveRow">
+            <span>Registration No.</span> {details.regno}
+          </div>}
+          <div className="approveRow">
+            <span>Date of Birth</span> {details.dob}
           </div>
           <div className="approveRow">
-            <span>Email</span> johndoe@gmail.com
+            <span>Gender</span> {details.gender}
           </div>
           <div className="approveRow">
-            <span>Date of Birth</span> 15/04/2022
+            <span>Blood Group</span> {details.blood_group}
           </div>
           <div className="approveRow">
-            <span>Gender</span> Male
+            <span>Aadhar No.</span> {details.aadhar_no}
           </div>
           <div className="approveRow">
-            <span>Blood Group</span> B positive
+            <span>Religion</span> {details.religion}
           </div>
           <div className="approveRow">
-            <span>Aadhar No.</span> 1234 5678 9123 4567
+            <span>Caste</span> {details.caste}
           </div>
           <div className="approveRow">
-            <span>Religion</span> Hindu
+            <span>Place of Birth</span> {details.birth_place}
           </div>
           <div className="approveRow">
-            <span>Caste</span> GanjaGang
+            <span>District of Birth</span> {details.birth_district}
           </div>
           <div className="approveRow">
-            <span>Place of Birth</span> Mangalore
+            <span>Country of Birth</span> {details.country}
+          </div>
+          {details.identity_mark&&<div className="approveRow">
+            <span>Identity Mark</span> {details.identity_mark}
+          </div>}
+          <div className="approveRow">
+            <span>Pincode</span> {details.pincode}
           </div>
           <div className="approveRow">
-            <span>District of Birth</span> Dakshina Kannada
-          </div>
-          <div className="approveRow">
-            <span>Country of Birth</span> India
-          </div>
-          <div className="approveRow">
-            <span>Identity Mark</span> tatoo
-          </div>
-          <div className="approveRow">
-            <span>Registratoin No.</span> 3SU19SA011
-          </div>
-          <div className="approveRow">
-            <span>Pincode</span> 575028
-          </div>
-          <div className="approveRow">
-            <span>Address</span> Mangalore, Karnataka, India sasda ada da sdad
-            asdasdasdd
+            <span>Address</span> {details.address}
           </div>
         </div>
 
         <h3>Father's Details</h3>
         <div className="approve-details">
           <div className="approveRow">
-            <span>First Name</span> John Doe
+            <span>Name</span> {details.f_name}
           </div>
           <div className="approveRow">
-            <span>Occupation</span> Developer
+            <span>Occupation</span> {details.f_occupation}
           </div>
           <div className="approveRow">
-            <span>Mobile No.</span> 9584625345
+            <span>Mobile No.</span> {details.f_phone}
           </div>
-          <div className="approveRow">
-            <span>Email</span> johndoe@gmail.com
-          </div>
+          {details.f_email&&<div className="approveRow">
+            <span>Email</span> {details.f_email}
+          </div>}
         </div>
+  
+        {details.role==='student'&&<div><h3>Mother's Details</h3>
+        <div className="approve-details">
+          <div className="approveRow">
+            <span> Name</span> {details.m_name}
+          </div>
+          <div className="approveRow">
+            <span>Occupation</span> {details.m_occupation}
+          </div>
+          <div className="approveRow">
+            <span>Mobile No.</span> {details.m_phone}
+          </div>
+          <div className="approveRow">
+            <span>Email</span> {details.m_email}
+          </div>
+        </div></div>}
+        
 
-        <h3>Mother's Details</h3>
+        {details.g_name&&<><h3>Guardian's Details</h3>
         <div className="approve-details">
           <div className="approveRow">
             <span>First Name</span> Jane Doe
@@ -157,45 +198,26 @@ const StudentApprovalView = () => {
           <div className="approveRow">
             <span>Email</span> johndoe@gmail.com
           </div>
-        </div>
+        </div></>}
 
-        <h3>Guardian's Details</h3>
+        {details.role==='student'&&<h3>Admission Details</h3>}
         <div className="approve-details">
           <div className="approveRow">
-            <span>First Name</span> Jane Doe
+            <span>Department</span> {details.dept_name}
           </div>
-          <div className="approveRow">
-            <span>Occupation</span> Developer
-          </div>
-          <div className="approveRow">
-            <span>Mobile No.</span> 9584625345
-          </div>
-          <div className="approveRow">
-            <span>Email</span> johndoe@gmail.com
-          </div>
-        </div>
-
-        <h3>Admission Details</h3>
-        <div className="approve-details">
-          <div className="approveRow">
-            <span>Department</span> CCIS
-          </div>
-          <div className="approveRow">
-            <span>Course</span> BCA
-          </div>
-          <div className="approveRow">
-            <span>Joining Academic Year</span> 2005
-          </div>
-          <div className="approveRow">
-            <span>Degree Year</span> 2010
-          </div>
-          <div className="approveRow">
-            <span>Degree Batch</span> A
-          </div>
+          {details.role==='student'&&<div className="approveRow">
+            <span>Course</span> {details.course_name}
+          </div>}
+          {details.role==='student'&&<div className="approveRow">
+            <span>Joining Academic Year</span> {details.joining_year}
+          </div>}
+          {details.role!=='student'&&<div className="approveRow">
+            <span>Joining Year</span> {details.joining_year}
+          </div>}
         </div>
       </div>
     </div>
-  );
+  ):<div style={{width:'100%'}} className="flex"><CircularProgress size={50} thickness={4}/></div>;
 };
 
 export default StudentApprovalView;

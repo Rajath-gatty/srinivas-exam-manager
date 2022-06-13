@@ -104,11 +104,11 @@ function App() {
                 <Route path="approve/student" element={<Approval type="student" />} />
                 <Route path="approve/faculty" element={<Approval type="faculty"/>} />
                 <Route
-                  path="approve/student/:studentId"
+                  path="approve/student/:id"
                   element={<ApprovalDetailsView />}
                 />
                 <Route
-                  path="approve/faculty/:facultyId"
+                  path="approve/faculty/:id"
                   element={<ApprovalDetailsView />}
                 />
                 <Route path="indent/regular" element={<IndentRegular />} />

@@ -130,3 +130,48 @@ exports.postNewCourse = async(req,res) => {
             res.status(500).send(err);
         }
     }
+
+    exports.getStaffApproveList = async(req,res) => {
+        const {deptId} = req.body;
+        try {
+            const sql = `select staff_id,first_name,last_name,joining_year from staff where dept_id=${deptId} and staff.status='pending'`;
+           const result = await db.execute(sql);
+           res.send(result[0]);
+        } catch(err) {
+            res.status(500).send(err);
+            console.log(err);
+        }
+    }
+    
+    exports.getApproveStaffDetail = async(req,res) => {
+        const id = req.params.id;
+        try {
+            const result = await db.execute(`select * from staff join department on staff.dept_id=department.dept_id where staff_id='${id}'`);
+            res.status(200).send(result[0]);
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({success:false})
+        }
+    }
+    
+    exports.postApproveStaff = async(req,res) => {
+        const id = req.params.id;
+        try {
+           const result = await db.execute(`update staff set status='approved' where staff_id='${id}'`);
+            res.status(200).send({success:true,data:result});
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({success:false})
+        }
+    }
+    
+    exports.postRejectStaff = async(req,res) => {
+        const id = req.params.id;
+        try {
+            const result = await db.execute(`delete from staff where staff_id='${id}'`);
+            res.status(200).send({success:true,data:result[0]});
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({success:false})
+        }
+    }

@@ -46,7 +46,61 @@ const Approval = ({type}) => {
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
-      console.log('approve filter Course error',err);
+      console.log('approve error',err);
+      setLoading(false);
+    }
+  }
+
+  const handleApprove = async(id) => {
+    try {
+      setLoading(true);
+      const result = await axios.post(`/staff/approve/${type}/${id}`);
+      if(result.data.success) {
+        setApproveList(state => {
+          const newState = [...state];
+          return newState.filter(item => {
+            let userId=undefined;
+            if(type==='student') {
+               userId=item.regno;
+            } else if(type==='faculty') {
+               userId=item.faculty_id;
+            } else {
+               userId=item.staff_id;
+            }
+            return userId!==id
+          })
+        })
+        setLoading(false);
+      }
+    } catch(err) {
+      console.log('approve error',err);
+      setLoading(false);
+    }
+  }
+
+  const handleReject = async(id) => {
+    try {
+      setLoading(true);
+      const result = await axios.post(`/staff/reject/${type}/${id}`);
+      if(result.data.success) {
+        setApproveList(state => {
+          const newState = [...state];
+          return newState.filter(item => {
+            let userId=undefined;
+            if(type==='student') {
+               userId=item.regno;
+            } else if(type==='faculty') {
+               userId=item.faculty_id;
+            } else {
+               userId=item.staff_id;
+            }
+            return userId!==id
+          })
+        })
+        setLoading(false);
+      }
+    } catch(err) {
+      console.log('approve error',err);
       setLoading(false);
     }
   }
@@ -95,6 +149,8 @@ const Approval = ({type}) => {
          regno={item.regno}
          type={type}
          facultyId={item.faculty_id}
+         handleApprove={handleApprove}
+         handleReject={handleReject}
          />
         }) }
         </tbody>}

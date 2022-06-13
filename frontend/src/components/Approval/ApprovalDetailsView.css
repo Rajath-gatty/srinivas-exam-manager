@@ -2,11 +2,11 @@
   height: 100%;
   margin: auto;
   overflow: hidden;
+  position: relative;
 }
 
-.approve-user-info {
-  flex-direction: column;
-  position: relative;
+.ApprovalDetailsView .approve-user-info {
+  gap: 1em;
 }
 
 .approve-user-info .back-btn {
@@ -34,17 +34,6 @@
   filter: var(--svg-grey);
 }
 
-.approve-camera {
-  background-color: var(--grey-bg);
-  padding: 0.2em;
-  border-radius: 50px;
-  position: absolute;
-  top: 4.5em;
-  left: 3.5em;
-  box-shadow: var(--light-shadow);
-  cursor: pointer;
-}
-
 .approve-user-title {
   color: var(--text-color);
   text-align: center;
@@ -53,10 +42,13 @@
 
 .approve-user-name {
   font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-top: 0.5em;
 }
 
 .approve-user-data {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .approve-buttons {
@@ -140,8 +132,8 @@
 .approveRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  background-color: var(--grey-bg);
-  padding: 0.5em 1em;
+  background-color: rgb(247, 247, 247);
+  padding: 0.75em 1em;
   border-radius: 5px;
   width: 425px;
 }
