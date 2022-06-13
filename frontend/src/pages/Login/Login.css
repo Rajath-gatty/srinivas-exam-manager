@@ -163,9 +163,12 @@ input:focus .input-group {
 }
 
 .login-userSelect{
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  justify-content: space-evenly;
+  justify-content: space-evenly; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   gap: 2em;
   position: relative;
@@ -173,14 +176,20 @@ input:focus .input-group {
 }
 
 .login-userBox{
-  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
   border-radius: 10px;
-  padding: 1em;
+  padding: 1em 2em;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2em;
+  flex-direction: column;
+  gap: 1em;
+  color: var(--primary-color);
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.login-userBox:hover{
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 /* Development Role Change */
