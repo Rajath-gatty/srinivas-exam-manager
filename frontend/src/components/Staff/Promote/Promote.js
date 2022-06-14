@@ -23,7 +23,7 @@ const Promote = () => {
                     <PromoteList></PromoteList>
                 </tbody>
             </table>
-            <button className="submit">Submit</button>
+            <button className="promote-submit">Submit</button>
         </div>
     );
 }
