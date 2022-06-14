@@ -9,8 +9,7 @@ const InternalList = () => {
             <td>John</td>
             <td>V</td>
             <td className="internal-input-row"><input type="text"></input></td>
-            <td className="internal-input-row"><input type="text"></input></td>
-            <td className="internal-input-row"><input type="text"></input></td>
+
         </tr>
 
     );

@@ -1,0 +1,38 @@
+.promote-main {
+    margin: 2em;
+    width: 100%;
+}
+
+.promote-table-wrapper {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2em;
+}
+
+
+.promote-table-wrapper .thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.promote-table-wrapper td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.promote-table-wrapper .promote-table-row {
+    border: 1px solid var(--grey-bg);
+}
+
+.promote-submit {
+
+    background-color: var(--primary-color);
+    padding: 0.8em 2em;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 85%;
+    margin-top: 2em;
+}

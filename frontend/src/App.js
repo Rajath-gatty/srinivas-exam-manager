@@ -36,6 +36,7 @@ import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/Payment
 import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
+import Promote from "./components/Staff/Promote/Promote";
 
 import Profile from "./pages/Profile/Profile";
 import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproval";
@@ -43,7 +44,7 @@ import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular
 import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
 import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
 import Coding from "./components/Evaluator/Coding/Coding";
-import Evaluation from "./components/Evaluator/Evaluation/Evaluation";
+
 
 import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
@@ -156,7 +157,10 @@ function App() {
                   />
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
+                <Route path="/promote" element={<Promote />} />
+
               </Route>
+
 
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
@@ -223,7 +227,7 @@ function App() {
                 />
                 <Route path="/evaluators" element={<Evaluators />} />
                 <Route path="/evaluators/assign" element={<AssignFaculty />} />
-                <Route path="evaluation/first" element={<Evaluation />} />
+              
               </Route>
 
               {/*Common Protected Routes */}

@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application,Coding,SemMarks} from "../Assets";
+import { Dashboard, Users, Approval, Courses, Calender, InternalMarks, Attendance, Payment, Indent, Application, Coding, SemMarks } from "../Assets";
 
 export const NavLinks = [
   {
@@ -62,7 +62,7 @@ export const NavLinks = [
         icon: Calender,
       },
       {
-        title:"Staff Approval",
+        title: "Staff Approval",
         path: "approve/staff",
         icon: Approval
       }
@@ -166,6 +166,11 @@ export const NavLinks = [
           },
         ],
       },
+      {
+        title: "Promote",
+        icon: Indent,
+        path: "/promote"
+      },
     ],
   },
   {
@@ -224,20 +229,6 @@ export const NavLinks = [
         title: "Evaluators",
         path: "/evaluators",
         icon: Users,
-      },
-      {
-        title: "Evaluation",
-        icon: Application,
-        subMenu: [
-          {
-            title: "First",
-            path: "/evaluation/first",
-          },
-          {
-            title: "Second",
-            path: "/evaluation/second",
-          },
-        ],
       },
       {
         title: "Time Table",
