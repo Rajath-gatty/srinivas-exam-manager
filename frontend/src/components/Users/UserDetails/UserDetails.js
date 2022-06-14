@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiArrowLeft, FiCheck, FiX } from "react-icons/fi";
 import { FaUserCircle, FaCamera } from "react-icons/fa";
+import Back from "../../UI/Back/Back";
 import "./UserDetails.css";
 
 const UserDetails = () => {
@@ -22,65 +23,17 @@ const UserDetails = () => {
   // }, []);
 
   return (
-    <div className="userinfo-container flex">
-      <div className="back-btn flex" onClick={() => navigate(-1)}>
-        <FiArrowLeft color="var(--light-grey)" size={25} /> <span>Back</span>
-      </div>
+    <div className="userinfo-container">
+      <Back/>
+
       <div className="userinfo-profile flex">
         <div className="userinfo-avatar flex">
           <FaUserCircle color="var(--light-grey)" size={70} />
-          <div
-            className="userinfo-camera"
-            onClick={() => {
-              document.querySelector("#imagePicker").click();
-            }}
-          >
-            <FaCamera size={20} color="var(--light-grey)" />
-            <input
-              type="file"
-              id="imagePicker"
-              style={{ display: "none" }}
-              accept="image/png, image/jpeg"
-            />
-          </div>
         </div>
 
         <div className="userinfo-title flex">
           <span className="userinfo-name">John Doe</span>
           <span className="userinfo-data">BCA 3rd Year</span>
-        </div>
-
-        <div className="userinfo-buttons flex">
-          <button
-            className={
-              hideBtn === "EligibleBtn"
-                ? "hide-btn"
-                : eligible === "Eligible"
-                ? "eligible-btn active-green flex"
-                : "eligible-btn green flex"
-            }
-            onClick={() => {
-              setHideBtn("NotEligibleBtn");
-              setEligible("Eligible");
-            }}
-          >
-            <FiCheck size={20} /> <span>Eligible</span>
-          </button>
-          <button
-            className={
-              hideBtn === "NotEligibleBtn"
-                ? "hide-btn"
-                : eligible === "NotEligible"
-                ? "eligible-btn active-red flex"
-                : "eligible-btn red flex"
-            }
-            onClick={() => {
-              setHideBtn("EligibleBtn");
-              setEligible("NotEligible");
-            }}
-          >
-            <FiX size={20} /> <span>Not Eligible</span>
-          </button>
         </div>
       </div>
 

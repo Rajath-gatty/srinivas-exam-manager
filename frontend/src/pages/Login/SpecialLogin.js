@@ -4,14 +4,12 @@ import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
-import StudentSvg from "../../Assets/Registration/student_reg.svg";
-import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
 import StaffSvg from "../../Assets/Registration/staff_reg.svg";
 
 import  Modal  from "../../components/UI/Modal/Modal";
 import {useContextData} from "../../hooks/useContextData";
 
-const Login = () => {
+const SpecialLogin = () => {
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
   const [loginUser, setLoginUser] = useState("");
@@ -64,30 +62,20 @@ const Login = () => {
         <h1 className="login-hdng">{loginUser ? "Login as "+loginUser : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelect">
-          <div className="login-userBox" onClick={()=>{setLoginUser("Student")}}>
-              <img src={StudentSvg} alt="Student Svg" width="100px"/>
-              <h3>Student</h3>
-          </div>
-
-          <div className="login-userBox" onClick={()=>{setLoginUser("Faculty")}}>
-              <img src={FacultySvg} alt="Faculty Svg" width="100px"/>
-              <h3>Faculty</h3>
-          </div>
-
-          <div className="login-userBox" onClick={()=>{setLoginUser("Staff")}}>
+          <div className="login-userBox" onClick={()=>{setLoginUser("SuperAdmin")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
-              <h3>Staff</h3>
+              <h3>Super Admin</h3>
           </div>
-
-          {/* <div className="login-userBox" onClick={()=>{setLoginUser("Admin")}}>
+          
+          <div className="login-userBox" onClick={()=>{setLoginUser("Admin")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
               <h3>Admin</h3>
           </div>
 
           <div className="login-userBox" onClick={()=>{setLoginUser("ExamCoord")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
-              <h3>ExamCoord</h3>
-          </div> */}
+              <h3>Exam Coord</h3>
+          </div>
         </div>
         :
         <form>
@@ -152,4 +140,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SpecialLogin;

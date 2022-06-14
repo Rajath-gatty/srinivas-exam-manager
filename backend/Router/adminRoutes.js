@@ -62,4 +62,10 @@ router.post('/registration/examcoordinator',[
     body("address").trim().isLength({ min: 1 }).withMessage("Address cannot be empty"),
     body("password").trim().isLength({ min: 5 }).withMessage("Password must contain atleast 5 characters")
 ],adminController.postNewCoordinator);
+
+router.post('/approvelist/staff',adminController.getStaffApproveList);
+router.get('/approve/staff/view/:id',adminController.getApproveStaffDetail);
+router.post('/approve/staff/:id',adminController.postApproveStaff);
+router.post('/reject/staff/:id',adminController.postRejectStaff);
+
 module.exports = router;

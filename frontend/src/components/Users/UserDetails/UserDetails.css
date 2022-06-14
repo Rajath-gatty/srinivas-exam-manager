@@ -9,7 +9,7 @@
   flex-direction: column;
   width: 100%;
   position: relative;
-  top: -5em;
+  margin: 3em 0;
 }
 
 .userinfo-avatar {
@@ -17,22 +17,16 @@
   width: fit-content;
 }
 
-.userinfo-avatar .userinfo-camera {
-  background-color: var(--grey-bg);
-  padding: 0.2em;
-  border-radius: 50px;
-  position: absolute;
-  top: 2.7em;
-  left: 2.7em;
-  box-shadow: var(--light-shadow);
-  cursor: pointer;
-}
-
 .userinfo-title {
   color: var(--text-color);
   text-align: center;
   flex-direction: column;
   margin-top: 1em;
+}
+
+.userinfo-form{
+  margin-left: 6em;
+  margin-bottom: 3em;
 }
 
 .userinfo-form-details {

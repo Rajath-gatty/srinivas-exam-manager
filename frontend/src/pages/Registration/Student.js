@@ -141,7 +141,7 @@ const Student = () => {
         setPassErr(false);
       } catch (err) {
         setErrors(err.response.data.err);
-        console.log(err.response.data.err);
+        console.log(err);
       }
       setPassErr(false);
     }
