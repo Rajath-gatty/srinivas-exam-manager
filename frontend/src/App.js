@@ -32,6 +32,7 @@ import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/Payment
 import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
+import Promote from "./components/Staff/Promote/Promote";
 
 import Profile from "./pages/Profile/Profile";
 import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproval";
@@ -132,7 +133,10 @@ function App() {
                   />
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
+                <Route path="/promote" element={<Promote />} />
+
               </Route>
+
 
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>

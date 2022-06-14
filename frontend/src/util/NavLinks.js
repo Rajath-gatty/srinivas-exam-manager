@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval,Courses,Calender,InternalMarks,Attendance,Payment,Indent, Application,Coding,SemMarks} from "../Assets";
+import { Dashboard, Users, Approval, Courses, Calender, InternalMarks, Attendance, Payment, Indent, Application, Coding, SemMarks } from "../Assets";
 
 export const NavLinks = [
   {
@@ -164,6 +164,11 @@ export const NavLinks = [
             path: "/payments/repeater/approved",
           },
         ],
+      },
+      {
+        title: "Promote",
+        icon: Indent,
+        path: "/promote"
       },
     ],
   },
