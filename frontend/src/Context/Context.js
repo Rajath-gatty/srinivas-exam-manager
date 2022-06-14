@@ -4,22 +4,19 @@ export const Context = React.createContext();
 
 const ContextProvider = (props) => {
 
-  const [approve, setApprove] = useState("");
-  const [approveText, setApproveText] = useState("Approve");
-  const [rejectText, setRejectText] = useState("Reject");
-  const [role, setRole] = useState('admin');
-
+  const [role, setRole] = useState('');
+  const [user, setUser] = useState({});
+  const [token, setToken] = useState('');
+  
   return (
     <Context.Provider
       value={{
+        token,
+        setToken,
         role,
         setRole,
-        approve,
-        setApprove,
-        approveText,
-        setApproveText,
-        rejectText,
-        setRejectText,
+        user,
+        setUser,
       }}
     >
       {props.children}

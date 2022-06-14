@@ -23,8 +23,8 @@ const Registration = () => {
               <h3>Faculty</h3>
             </div>
           </Link>
-          <Link className="staff" to="staff">
-            <div className="registration-card staff">
+          <Link to="staff">
+            <div className="registration-card">
               <img src={StaffSvg} alt="Staff Svg" />
               <h3>Staff</h3>
             </div>

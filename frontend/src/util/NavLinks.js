@@ -6,7 +6,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {
@@ -26,7 +26,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {
@@ -51,8 +51,8 @@ export const NavLinks = [
             path: "/users/staff",
           },
           {
-            title: "Evaluator",
-            path: "/users/evaluator",
+            title: "Exam coordinator",
+            path: "/users/examcoordinator",
           },
         ],
       },
@@ -73,7 +73,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {
@@ -98,7 +98,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {
@@ -116,10 +116,6 @@ export const NavLinks = [
           {
             title: "Staff",
             path: "/users/staff",
-          },
-          {
-            title: "Evaluator",
-            path: "/users/evaluator",
           },
         ],
       },
@@ -177,7 +173,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {
@@ -203,12 +199,7 @@ export const NavLinks = [
         title: "Time Table",
         path: "/timetable",
         icon: Calender,
-      },
-      {
-        title: "Payment",
-        path: "/new-payment",
-        icon: Calender,
-      },
+      }
     ],
   },
   {
@@ -216,7 +207,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/dashboard",
+        path: "/",
         icon: Dashboard,
       },
       {

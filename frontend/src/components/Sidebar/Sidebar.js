@@ -4,9 +4,9 @@ import { BiLogOut } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import { useContextData } from "../../hooks/useContextData";
 import SidebarNav from "./SidebarNav";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {motion} from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 
 const profAvatar = {
   stop: {
@@ -29,8 +29,9 @@ const textSlide = {
 const Sidebar = () => {
   const [profAnimation,setProfAnimation] = useState(false);
 
-  const { role } = useContextData();
+  const { role, setRole, setToken, setUser } = useContextData();
   const location = useLocation();
+  const navigate = useNavigate();
   
   const handleprofileAnimation = () => {
     setProfAnimation(true);
@@ -42,7 +43,16 @@ const Sidebar = () => {
     }
   },[location.pathname])
 
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setToken('');
+    setRole('');
+    setUser({});
+    navigate("/login");
+  }
+
   return (
+    <>
     <div className="sidebar">
       <div className="sidebar-header">
         <div className="logo flex">
@@ -70,12 +80,13 @@ const Sidebar = () => {
       </div>
 
       <div className="logout flex">
-        <Link to="/" className="logout-btn flex">
+        <div onClick={handleLogout} className="logout-btn flex">
           <BiLogOut size={20} />
           <span>Logout</span>
-        </Link>
+        </div>
       </div>
     </div>
+    </>
   );
 };
 

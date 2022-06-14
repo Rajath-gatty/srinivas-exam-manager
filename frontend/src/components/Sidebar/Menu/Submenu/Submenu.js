@@ -21,7 +21,7 @@ const SubMenu = ({
       >
         <img src={icon} alt={title} width="20px" />
         <span>{title}</span>
-        <IoIosArrowForward size={20} className="sidebar-arrow" />
+        <IoIosArrowForward size={18} className="sidebar-arrow" />
       </div>
       {showMenu.find((item) => item.text === title).state && (
         <div className="dropdown">

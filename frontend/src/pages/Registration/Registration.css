@@ -120,30 +120,34 @@
 .registration-container {
   max-width: 800px;
   margin: auto;
+  height: 100%;
 }
 
 .registration-container .registration-wrapper {
-  display: grid;
-  gap: 1.5em;
-  grid-template-columns: repeat(2,1fr);
+  display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.registration-container .registration-wrapper .staff {
-  grid-column: 1 / 3;
-  width: 390px;
-  margin: auto;
+  text-align: center;
+  gap: 2em;
+  position: relative;
+  top: 2em;
 }
 
 .registration-card {
-  background: var(--secondary-gradient);
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 1em 2em;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  min-height: 200px;
+  gap: 1em;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.registration-card:hover{
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 .registration-wrapper a {
@@ -156,7 +160,6 @@
 
 .registration-wrapper .registration-card h3 {
   text-align: center;
-  color: var(--white);
   margin-top: 0.5em;
 }
 

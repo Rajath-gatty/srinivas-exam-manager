@@ -49,6 +49,10 @@
   margin: 1.5rem 0;
 }
 
+.form-control::after{
+  display: none;
+}
+
 .login-label {
   position: relative;
   top: 1em;
@@ -137,8 +141,6 @@ input:focus .input-group {
 }
 
 .to-register {
-  position: relative;
-  top: 3em;
   display: flex;
   align-items: center;
   color: var(--dark-grey);
@@ -162,10 +164,14 @@ input:focus .input-group {
   cursor: pointer;
 }
 
+.login-userSelectContain{
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 4em;
+}
+
 .login-userSelect{
-  /* display: grid;
-  grid-template-columns: 1fr;
-  justify-content: space-evenly; */
   display: flex;
   justify-content: center;
   align-items: center;
