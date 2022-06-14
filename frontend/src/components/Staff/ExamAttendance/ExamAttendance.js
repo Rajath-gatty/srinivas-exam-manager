@@ -7,6 +7,9 @@ const AttendanceStatement = () => {
         <div className="attendance-main">
             <FilterSearch />
             <div className="main-box">
+                <div className="main-box-header">
+                    <span>Attendance Statement</span>
+                </div>
                 <tr className="text-field">
                     <td>Subject Name</td>
                     <td className="input-row"><input type="text"></input></td>

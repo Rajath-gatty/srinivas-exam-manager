@@ -10,6 +10,15 @@
 
 }
 
+.main-box-header {
+    margin-top: 3em;
+    padding: 0.5em 0em;
+    text-align: center;
+    width: 100%;
+    color: var(--black);
+    background-color: rgb(223, 220, 220);
+}
+
 .main-box {
     position: static;
     margin-left: 15em;

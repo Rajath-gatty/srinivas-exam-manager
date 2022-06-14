@@ -9,8 +9,7 @@ const AttendanceList = () => {
             <td>John</td>
             <td>V</td>
             <td className="attendance-input-row"><input type="text"></input></td>
-            <td className="attendance-input-row"><input type="text"></input></td>
-            <td className="attendance-input-row"><input type="text"></input></td>
+
         </tr>
 
     )

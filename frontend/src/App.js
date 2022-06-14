@@ -42,7 +42,7 @@ import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular
 import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
 import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
 import Coding from "./components/Evaluator/Coding/Coding";
-import Evaluation from "./components/Evaluator/Evaluation/Evaluation";
+
 
 import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
@@ -205,7 +205,7 @@ function App() {
                 />
                 <Route path="/evaluators" element={<Evaluators />} />
                 <Route path="/evaluators/assign" element={<AssignFaculty />} />
-                <Route path="evaluation/first" element={<Evaluation />} />
+              
               </Route>
 
               {/*Common Protected Routes */}

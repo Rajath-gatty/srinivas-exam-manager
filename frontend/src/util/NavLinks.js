@@ -62,7 +62,7 @@ export const NavLinks = [
         icon: Calender,
       },
       {
-        title:"Staff Approval",
+        title: "Staff Approval",
         path: "approve/staff",
         icon: Approval
       }
@@ -209,11 +209,7 @@ export const NavLinks = [
         path: "/timetable",
         icon: Calender,
       },
-      {
-        title: "Payment",
-        path: "/new-payment",
-        icon: Calender,
-      },
+
     ],
   },
   {
@@ -238,20 +234,6 @@ export const NavLinks = [
         title: "Evaluators",
         path: "/evaluators",
         icon: Users,
-      },
-      {
-        title: "Evaluation",
-        icon: Application,
-        subMenu: [
-          {
-            title: "First",
-            path: "/evaluation/first",
-          },
-          {
-            title: "Second",
-            path: "/evaluation/second",
-          },
-        ],
       },
       {
         title: "Time Table",

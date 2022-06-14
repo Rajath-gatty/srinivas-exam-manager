@@ -16,8 +16,7 @@ const InternalMarks = () => {
             <th>Name</th>
             <th>Semester</th>
             <th>Java</th>
-            <th>C++</th>
-            <th>PHP</th>
+          
           </tr>
         </thead>
         <tbody>
