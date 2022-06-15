@@ -164,11 +164,19 @@ exports.postLogin = async(req,res) => {
     if(loginType==='student') {
       id = "regno";
       sql = `select regno,first_name,last_name,email,password,phone,dept_id,course_id,address,role from ${loginType} where email='${email}'`;
+    } else if(loginType==='super admin'){ 
+      id = 's_admin_id';
+      sql = `select ${id},first_name,last_name,email,password,role from ${loginType.split(' ').join('_')} where email='${email}'`;
+    } else if(loginType==='exam coord') {
+      id = "coord_id";
+      sql = `select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType.split(' ').join('_')} where email='${email}'`;
     } else {
       if(loginType==='faculty') {
         id = "faculty_id";
-      } else {
+      } else if(loginType==='staff') {
         id = "staff_id";
+      } else if(loginType==='admin') {
+        id = "admin_id";
       }
       sql=`select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}'`;
       console.log(sql);

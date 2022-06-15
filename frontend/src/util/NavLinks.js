@@ -2,7 +2,7 @@ import { Dashboard, Users, Approval, Courses, Calender, InternalMarks, Attendanc
 
 export const NavLinks = [
   {
-    role: "superadmin",
+    role: "super admin",
     links: [
       {
         title: "Dashboard",
@@ -208,7 +208,7 @@ export const NavLinks = [
     ],
   },
   {
-    role: "evaluator",
+    role: "exam coord",
     links: [
       {
         title: "Dashboard",

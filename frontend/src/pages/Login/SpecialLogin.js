@@ -1,18 +1,23 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState,useRef} from "react";
+import { useState} from "react";
 import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
 import StaffSvg from "../../Assets/Registration/staff_reg.svg";
+import axios from "axios";
 
-import  Modal  from "../../components/UI/Modal/Modal";
 import {useContextData} from "../../hooks/useContextData";
+import { CircularProgress } from "@mui/material";
 
 const SpecialLogin = () => {
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
   const [loginUser, setLoginUser] = useState("");
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const [loading,setLoading] = useState(false);
+  const [errors,setErrors] = useState('');
 
   const onEmailActive = () => setEmailFocus(true);
   const onPassActive = () => setPassFocus(true);
@@ -23,22 +28,45 @@ const SpecialLogin = () => {
   const emailAct = emailfocus ? "form-control active" : "form-control";
   const passAct = passfocus ? "form-control active" : "form-control";
 
-  // Temporary Code
-  const [showModal,setShowModal] = useState(true);
-  const {setRole} = useContextData();
+  const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
 
-  const closeModal = () => setShowModal(false);
-
-  const setInputRole = useRef();
-
-  const handleRoleSubmit = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
-    const role = setInputRole.current.value;
-    setRole(role.toLowerCase());
-    navigate("/");
+    
+    if(email===''||password==='') {
+      return;
+    }
+
+    const data = {
+      email,
+      password,
+      role:loginUser
+    }
+
+    try {
+      setLoading(true);
+      const result = await axios.post('/login',data);
+      console.log(result);
+      setRole(result.data.user.role);
+      setToken(result.data.token);
+      setUser(result.data.user);
+
+      let userData = {
+        role: result.data.user.role,
+        token:result.data.token,
+        user:result.data.user
+      }
+      localStorage.setItem("user",JSON.stringify(userData));
+      navigate('/');
+      setLoading(false);
+    } catch(err) {
+      if(err.response.status===404)
+      setErrors(err.response.data.error);
+      console.log(err);
+      setLoading(false);
+    }
   }
-  // Temporary Code end
 
   return (
     <div className="login-container">
@@ -62,23 +90,23 @@ const SpecialLogin = () => {
         <h1 className="login-hdng">{loginUser ? "Login as "+loginUser : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelect">
-          <div className="login-userBox" onClick={()=>{setLoginUser("SuperAdmin")}}>
+          <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
               <h3>Super Admin</h3>
           </div>
           
-          <div className="login-userBox" onClick={()=>{setLoginUser("Admin")}}>
+          <div className="login-userBox" onClick={()=>{setLoginUser("admin")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
               <h3>Admin</h3>
           </div>
 
-          <div className="login-userBox" onClick={()=>{setLoginUser("ExamCoord")}}>
+          <div className="login-userBox" onClick={()=>{setLoginUser("exam coord")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px"/>
               <h3>Exam Coord</h3>
           </div>
         </div>
         :
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="login-backBtn flex" onClick={()=>{setLoginUser("")}}>
             <FiArrowLeft color="var(--text-color)" size={25}/>
             <span>Back</span>
@@ -91,6 +119,7 @@ const SpecialLogin = () => {
                 type="text"
                 onFocus={onEmailActive}
                 onBlur={onEmailBlur}
+                onChange={(e) =>setEmail(e.target.value)}
                 placeholder="example@gmail.com"
               />
               <FiMail size={30} color="var(--light-grey)" />
@@ -103,39 +132,26 @@ const SpecialLogin = () => {
                 type="password"
                 onFocus={onPassActive}
                 onBlur={onPassBlur}
+                onChange={(e) =>setPassword(e.target.value)}
                 placeholder="Password"
               />
               <FiLock size={30} color="var(--light-grey)" />
             </div>
           </div>
+          {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
           <div className="forgot-pass">
             <Link to="#">Forgot Password ?</Link>
           </div>
           <div className="form-controls">
-            <input type="submit" value="Login" className="login-submit btn" />
+          <button type="submit" className="login-submit btn">{loading?<CircularProgress color="inherit" size={20}/>:'Login'}</button>
           </div>
 
-          <div className="to-register">
+          {/* <div className="to-register">
             <p>Dont have an account yet ?</p>
             <Link to="/registration">Register</Link>
-          </div>
+          </div> */}
         </form>}
       </div>
-      {showModal &&<Modal width="40%" onClose={closeModal} >
-        <form onSubmit={handleRoleSubmit}>
-          <h3>Enter Role</h3>
-          <select name="selectRole" id="selectRole" ref={setInputRole}>
-            <option value="superadmin">Super Admin</option>
-            <option value="admin">Admin</option>
-            <option value="student">Student</option>
-            <option value="faculty">Faculty</option>
-            <option value="staff">Staff</option>
-            <option value="evaluator">Evaluator</option>
-          </select>
-          {/* <input type="text" ref={setInputRole} /> */}
-          <input type="submit" className="btn"  />
-        </form>
-      </Modal>}
     </div>
   );
 };

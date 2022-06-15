@@ -29,7 +29,7 @@ const Approval = ({type}) => {
     }
   }
   fetchApproveList();
-  },[location.pathname,type])
+  },[location.pathname,type,userType])
 
   useEffect(() => {
     const fetchCourses = async() => {
@@ -41,7 +41,7 @@ const Approval = ({type}) => {
       }
     }
     fetchCourses();
-  },[])
+  },[user.deptId])
 
   const handleCourseChange = async(e) => {
     const courseName = e.target.value;
