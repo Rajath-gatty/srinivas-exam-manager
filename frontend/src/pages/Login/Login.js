@@ -61,7 +61,7 @@ const Login = () => {
       navigate('/');
       setLoading(false);
     } catch(err) {
-      if(err.response.status===401)
+      if(err.response.status===404)
       setErrors(err.response.data.error);
       console.log(err);
       setLoading(false);
