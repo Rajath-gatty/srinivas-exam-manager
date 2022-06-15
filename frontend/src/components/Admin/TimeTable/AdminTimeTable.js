@@ -84,9 +84,16 @@ const AdminTimeTable = () => {
                                         <th>Subject Code</th>
                                         <th>Exam Date</th>
                                         <th>Exam Time</th>
+                                        <th><HiPlus className="plus"
+                                                onClick={() => handleAddFields()}
+                                                variant="contained"
+                                                bgcolor="grey"
+                                                color="var(--strong-green)"
+                                                size={20} />
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody></tbody>
+                                <tbody>
                                 {inputFields.map((inputField, index) => (
                                     <tr key={Math.random()}>
                                         <td>
@@ -118,30 +125,16 @@ const AdminTimeTable = () => {
                                             />
                                         </td>
                                         <td>
-                                            <HiPlus className="plus"
-                                                onClick={() => handleAddFields()}
-                                                variant="contained"
-                                                bgcolor="grey"
-                                                color="var(--strong-green)"
-                                                size={20} />
-
                                             <HiMinus className="minus"
                                                 onClick={() => handleRemoveFields(index)}
                                                 color="var(--strong-red)"
                                                 size={20} />
                                         </td>
-
                                     </tr>
-
-
                                 ))}
-
-
-                                <tbody>
-                                    <button className="btn-submit">Submit</button>
-                                </tbody>
+                            </tbody>
                             </table>
-
+                                <button className="btn-submit">Submit</button>
                         </div>
                     </div>
                 </div>

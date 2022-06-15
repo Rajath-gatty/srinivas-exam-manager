@@ -1,5 +1,4 @@
 const db = require('../db');
-const bcrypt = require('bcrypt');
 
 exports.getDepartments = async(req,res) => {
     try {
@@ -25,4 +24,17 @@ exports.getCourses = async(req,res) => {
     } catch(err) {
         res.status(500).send(err);
     }
+}
+
+exports.getAllStudent = (req,res) => {
+  
+}
+exports.getAllFaculty = (req,res) => {
+  const deptId = req.deptId;
+}
+exports.getAllStaff = (req,res) => {
+
+}
+exports.getAllExamCoord = (req,res) => {
+
 }
