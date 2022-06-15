@@ -1,11 +1,24 @@
 import "./TotalUsers.css";
+import { useEffect, useState } from "react";
 import UserList from "./UserList";
 import FilterSearch from "../UI/FilterSearch/FilterSearch";
+import axios from "axios";
 
-const TotalUsers = () => {
+const TotalUsers = ({type}) => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async() => {
+      try {
+        const result = await axios.get(`/users/${type}`)
+      } catch(err) {
+        console.log(err);
+      }
+    }
+  },[])
   return (
     <div className="users-main">
-      <FilterSearch />
+      <FilterSearch search />
 
       <table className="users-table-wrapper">
         <thead className="thead">

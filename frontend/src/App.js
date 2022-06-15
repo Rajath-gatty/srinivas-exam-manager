@@ -1,8 +1,10 @@
 import "./App.css";
 import "./pages/Registration/Registration.css";
 
-import { BrowserRouter as Browser, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Browser, Routes, Route,Navigate} from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React,{useState,useEffect} from "react";
+import {useContextData} from "./hooks/useContextData";
 
 import Login from "./pages/Login/Login";
 import SpecialLogin from "./pages/Login/SpecialLogin";
@@ -56,8 +58,11 @@ import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/New
 
 import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
+import { CircularProgress } from "@mui/material";
 
 function App() {
+  const {setRole,setUser,setToken,token} = useContextData();
+  const [loading, setLoading] = useState(true);
   //MUI Components Fonts
   const theme = createTheme({
     typography: {
@@ -66,13 +71,29 @@ function App() {
   });
   //MUI Components Fonts[/]
 
+  useEffect(() => {
+    let prevUser = localStorage.getItem("user");
+    prevUser = JSON.parse(prevUser);
+
+    if(prevUser) {
+      setToken(prevUser.token);
+      setRole(prevUser.user.role);
+      setUser(prevUser.user);
+      setLoading(false);
+    }
+    setLoading(false);
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <Browser>
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<Login />} />
+            <Route path="/login" element={token?<Login />:<Navigate to="/"/>}/>
+            {/* {!token&&<Route path="/login" element={<Login />}/>} */}
+            {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
+            {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
             <Route path="/special" element={<SpecialLogin />} />
             <Route path="registration" element={<Registration />} />
             <Route path="registration/student" element={<Student />} />
@@ -101,6 +122,7 @@ function App() {
                   path="approve/staff/:id"
                   element={<ApprovalDetailsView />}
                 />
+                 <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
               </Route>
 
               {/* Staff Access*/}
@@ -187,9 +209,9 @@ function App() {
               <Route
                 element={<ProtectedRoute allowedRole={["admin", "staff"]} />}
               >
-                <Route path="users/student" element={<TotalUsers />} />
-                <Route path="users/faculty" element={<TotalUsers />} />
-                <Route path="users/staff" element={<TotalUsers />} />
+                <Route path="users/student" element={<TotalUsers type="student" />} />
+                <Route path="users/faculty" element={<TotalUsers type="faculty" />} />
+                <Route path="users/staff" element={<TotalUsers type="staff"/>} />
 
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
@@ -223,7 +245,12 @@ function App() {
                   />
                 }
               >
-                <Route path="dashboard" element={<Dashboard />} />
+                {/* {token?<Route path="/" element={<Dashboard />}/>:<Route path="/login" element={<Login/>}/>} */}
+                {/* {token&&<Route path="/" element={<Dashboard />}/>} */}
+                {/* <Route path="/" element={<Dashboard />}/> */}
+                {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
+
+                <Route path="/" element={token?<Dashboard />:<Navigate to="/login"/>}/>
                 <Route path="profile" element={<Profile />} />
 
                 {/* Testing Route */}
@@ -231,10 +258,10 @@ function App() {
               </Route>
             </Route>
             {/* Page Not Found Route */}
-            <Route path="*" element={<PageNotFound />}></Route>
+            <Route path="*" element={!loading?<PageNotFound />:<div style={{height:'90vh'}} className="flex"><CircularProgress size={80}/></div>}></Route>
           </Routes>
         </Browser>
-      </div >
+      </div>
     </ThemeProvider >
   );
 }

@@ -129,6 +129,7 @@ router.post(
   controllers.postStaff
 );
 
+router.post('/login',controllers.postLogin);
 
 
 module.exports = router;

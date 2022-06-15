@@ -1,4 +1,5 @@
 const db = require('../db');
+const bcrypt = require('bcrypt');
 
 exports.getDepartments = async(req,res) => {
     try {

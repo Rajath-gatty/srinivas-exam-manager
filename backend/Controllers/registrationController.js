@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const db = require("../db");
 const bcrypt = require("bcrypt");
+const jwt = require('jsonwebtoken');
 
 exports.postStudent = async (req, res) => {
   const data = req.body;
@@ -152,4 +153,60 @@ exports.postStaff = async (req, res) => {
     res.status(500).send({ success: false, err});
   }
 };
+
+exports.postLogin = async(req,res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const loginType= req.body.role;
+  try {
+    let sql;
+    let id;
+    if(loginType==='student') {
+      id = "regno";
+      sql = `select regno,first_name,last_name,email,password,phone,dept_id,course_id,address,role from ${loginType} where email='${email}'`;
+    } else {
+      if(loginType==='faculty') {
+        id = "faculty_id";
+      } else {
+        id = "staff_id";
+      }
+      sql=`select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}'`;
+      console.log(sql);
+    }
+      const [user] = await db.execute(sql);
+      // res.send({success:true});
+      if (user.length === 0) {
+          throw new Error("Invalid email or password");
+      } else {
+        const fetchedUser = user[0];
+        bcrypt.compare(password, fetchedUser.password).then((isEqual) => {
+            if (!isEqual) {
+                return res.status(401).json({
+                    error: "Invalid Email or password",
+                });
+            }
+            const token = jwt.sign(
+                { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName:fetchedUser.first_name, lastName:fetchedUser.last_name },
+                process.env.SECRET_KEY
+            );
+            res.status(200).json({
+                token: token,
+                user:{
+                  id:fetchedUser[id],
+                  first_name:fetchedUser.first_name,
+                  last_name:fetchedUser.last_name,
+                  email:fetchedUser.email,
+                  address:fetchedUser.address,
+                  phone:fetchedUser.phone,
+                  courseId:fetchedUser.course_id,
+                  deptId:fetchedUser.dept_id,
+                  role:fetchedUser.role
+                }
+            });
+        });
+      }
+  } catch (error) {
+      res.status(404).json({success:false,error: error.message });
+  }
+}
 

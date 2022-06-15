@@ -1,9 +1,12 @@
 import {useState, useCallback} from "react";
 import { NavLinks } from "../../util/NavLinks";
+import { useContextData } from "../../hooks/useContextData";
 import Menu from "./Menu/Menu";
 
 const SidebarNav = ({role}) => {
 const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false},{text: 'Payments', state: false},{text: 'Indent', state: false},{text: 'Application', state: false},{text: 'Evaluation', state: false}]);
+
+const {token} = useContextData();
 
 const setSubNavActive = (subNav) => {
     return subNav.isActive ? "navlink flex subActive" : "navlink flex";
@@ -33,7 +36,7 @@ const toggleDropdown = useCallback((evt) => {
     // console.log("Rendering SidebarNav....")
     return(
         <>
-        {NavLinks.find((link) => link.role === role).links.map((link) => {
+        {token && NavLinks.find((link) => link.role === role).links.map((link) => {
             return (
               <Menu 
               key={link.title} 

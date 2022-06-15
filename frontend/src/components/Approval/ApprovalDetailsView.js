@@ -3,7 +3,6 @@ import {FiArrowLeft,FiCheck,FiX} from "react-icons/fi";
 import {FaUserCircle} from "react-icons/fa";
 import axios from "axios";
 import { useParams,useLocation} from "react-router-dom";
-import { useContextData } from "../../hooks/useContextData";
 import { useNavigate } from "react-router-dom";
 import "./ApprovalDetailsView.css";
 import { CircularProgress } from "@mui/material";
@@ -11,19 +10,13 @@ import { CircularProgress } from "@mui/material";
 const StudentApprovalView = () => {
   const [details,setDetails] = useState({});
   const [loading,setLoading] = useState(true);
+  const [approve,setApprove] = useState('');
+  const [approveText,setApproveText] = useState('');
+  const [rejectText,setRejectText] = useState('');
 
   const navigate = useNavigate();
   const params = useParams(); 
   const location = useLocation();
-
-  const {
-    approve,
-    setApprove,
-    approveText,
-    setApproveText,
-    rejectText,
-    setRejectText,
-  } = useContextData();
 
   const ApproveBtn = document.querySelector(".green");
   const RejectBtn = document.querySelector(".red");

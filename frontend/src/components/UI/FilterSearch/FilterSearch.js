@@ -24,7 +24,7 @@ const FilterSearch = ({className='', search}) => {
     "V"
   ];
 
-  const showSearch = search ? "hidden":"visible";
+  const showSearch = search ? "visible":"hidden";
 
   return (
     <div className={[className,"filterSearch-container"].join(' ')}>
