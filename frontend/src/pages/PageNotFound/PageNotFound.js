@@ -13,10 +13,8 @@ const PageNotFound = () => {
             </div>
 
             <div className="notFound-Img flex">
-                <img src={NotFound} alt="Page NotFound" width="100%" />
-                <img src={NotFoundA} alt="Page NotFound" width="100%" />
-                <img src={NotFoundB} alt="Page NotFound" width="100%" />
-                {/* <h3>Are your Lost ?</h3> */}
+            <img src={NotFoundA} alt="Page NotFound" width="100%" />
+            {/* <h3>Are your Lost ?</h3> */}
             </div>
             
         </div>    

@@ -105,7 +105,7 @@ function App() {
 
             <Route element={<Layout />}>
               {/* Super Admin Access */}
-              <Route element={<ProtectedRoute allowedRole={["superadmin"]} />}>
+              <Route element={<ProtectedRoute allowedRole={["super admin"]} />}>
                 <Route path="departments" element={<Departments />} />
                 <Route path="departments/create" element={<NewDepartment />} />
                 <Route path="examcoordinator" element={<ExamCoordinator />} />
@@ -200,7 +200,7 @@ function App() {
               <Route
                 element={
                   <ProtectedRoute
-                    allowedRole={["student", "evaluator", "faculty", "admin"]}
+                    allowedRole={["student", "exam coord", "faculty", "admin"]}
                   />
                 }
               >
@@ -221,7 +221,7 @@ function App() {
               </Route>
 
               {/* Exam Coordinator Access */}
-              <Route element={<ProtectedRoute allowedRole={["evaluator"]} />}>
+              <Route element={<ProtectedRoute allowedRole={["exam coord"]} />}>
                 <Route path="coding" element={<Coding />} />
                 <Route
                   path="/attendance-statement"
@@ -237,10 +237,10 @@ function App() {
                 element={
                   <ProtectedRoute
                     allowedRole={[
-                      "superadmin",
+                      "super admin",
                       "admin",
                       "student",
-                      "evaluator",
+                      "exam coord",
                       "faculty",
                       "staff",
                     ]}
