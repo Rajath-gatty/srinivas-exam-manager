@@ -2,14 +2,15 @@ const router = require('express').Router();
 const db = require('../db');
 const adminController = require('../Controllers/adminController');
 const {body} = require('express-validator');
+const isAuth = require('../middleware/isAuth');
 
-router.post('/new-course',[
+router.post('/new-course',isAuth,[
     body('name').notEmpty().withMessage('Enter course name'),
     body('duration').notEmpty().withMessage('Select Duration')
 ],adminController.postNewCourse);
 
 
-router.post('/department/new-department',[
+router.post('/department/new-department',isAuth,[
     body("departmentName").trim().notEmpty().withMessage("Enter department name")
     .custom(async(value) => {
       const result = await db.execute(
@@ -36,15 +37,15 @@ router.post('/department/new-department',[
     body("password").trim().isLength({ min: 5 }).withMessage("Password must contain atleast 5 characters")
 ],adminController.postNewDepartment);
 
-router.post('/courses',adminController.getCourses);
+router.get('/courses',isAuth,adminController.getCourses);
 
-router.post('/course-details',adminController.getCourseDetails);
+router.post('/course-details',isAuth,adminController.getCourseDetails);
 
-router.get('/departments',adminController.getDepartments);
+router.get('/departments',isAuth,adminController.getDepartments);
 
-router.get('/examcoordinators',adminController.getExamCoordinators);
+router.get('/examcoordinators',isAuth,adminController.getExamCoordinators);
 
-router.post('/registration/examcoordinator',[
+router.post('/registration/examcoordinator',isAuth,[
   body("departmentName").trim().notEmpty().withMessage("Select department"),
   body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
     body("gender").trim().isIn(["male", "female", "others"]).withMessage("Please specify Gender"),
@@ -63,9 +64,9 @@ router.post('/registration/examcoordinator',[
     body("password").trim().isLength({ min: 5 }).withMessage("Password must contain atleast 5 characters")
 ],adminController.postNewCoordinator);
 
-router.post('/approvelist/staff',adminController.getStaffApproveList);
-router.get('/approve/staff/view/:id',adminController.getApproveStaffDetail);
-router.post('/approve/staff/:id',adminController.postApproveStaff);
-router.post('/reject/staff/:id',adminController.postRejectStaff);
+router.post('/approvelist/staff',isAuth,adminController.getStaffApproveList);
+router.get('/approve/staff/view/:id',isAuth,adminController.getApproveStaffDetail);
+router.post('/approve/staff/:id',isAuth,adminController.postApproveStaff);
+router.post('/reject/staff/:id',isAuth,adminController.postRejectStaff);
 
 module.exports = router;

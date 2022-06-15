@@ -4,6 +4,7 @@ const {validationResult} = require('express-validator');
 
 exports.postNewCourse = async(req,res) => {
     const {duration,name,semesters} = req.body;
+    const deptId = req.deptId;
     const err = validationResult(req).errors;
     if(err.length>0) {
         return res.status(400).send(err);
@@ -14,7 +15,7 @@ exports.postNewCourse = async(req,res) => {
            return res.status(403).send('course Already exists');
         }
         const courseSql = 'insert into course(dept_id,course_name,course_duration,course_sem) values(?,?,?,?)';
-        db.execute(courseSql,[11,name,duration,totalSemesters])
+        db.execute(courseSql,[deptId,name,duration,totalSemesters])
         .then(() => {
            return db.execute(`select course_id from course where course_name='${name}'`)
         })
@@ -22,7 +23,7 @@ exports.postNewCourse = async(req,res) => {
             semesters.forEach(sem => {
                 sem.subjects.forEach(sub => {
                     const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
-                   return db.execute(semSql,[11,result[0].course_id,sem.semName,sub.name,sub.code])
+                   return db.execute(semSql,[deptId,result[0].course_id,sem.semName,sub.name,sub.code])
                 })
             })
         })
@@ -75,8 +76,9 @@ exports.postNewCourse = async(req,res) => {
     }
 
     exports.getCourses = async(req,res) => {
+        const deptId = req.deptId;
         try {
-            const result = await db.execute(`select course_id,course_name,course_sem,course_duration from course where dept_id=${req.body.deptId}`);
+            const result = await db.execute(`select course_id,course_name,course_sem,course_duration from course where dept_id=${deptId}`);
             res.send(result[0]);
         } catch(err) {
             console.log(err);
@@ -85,8 +87,9 @@ exports.postNewCourse = async(req,res) => {
     }
 
     exports.getCourseDetails = async(req,res) => {
+        const deptId = req.deptId;
         try {
-            const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name from semester where dept_id=${req.body.deptId} AND course_id=${req.body.courseId}`);
+            const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name from semester where dept_id=${deptId} AND course_id=${req.body.courseId}`);
             res.send(result[0]);
         } catch(err) {
             console.log(err);
@@ -132,7 +135,7 @@ exports.postNewCourse = async(req,res) => {
     }
 
     exports.getStaffApproveList = async(req,res) => {
-        const {deptId} = req.body;
+        const deptId = req.deptId;
         try {
             const sql = `select staff_id,first_name,last_name,joining_year from staff where dept_id=${deptId} and staff.status='pending'`;
            const result = await db.execute(sql);

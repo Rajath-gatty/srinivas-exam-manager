@@ -1,7 +1,8 @@
 const db = require('../db');
 
 exports.getStudentApproveList = async(req,res) => {
-    const {courseName,deptId} = req.body;
+    const {courseName} = req.body;
+    const deptId = req.deptId;
     try {
         let sql;
         if(!courseName) {
@@ -51,7 +52,7 @@ exports.postRejectStudent = async(req,res) => {
 }
 
 exports.getFacultyApproveList = async(req,res) => {
-    const {deptId} = req.body;
+    const deptId = req.deptId;
     try {
         const sql = `select faculty_id,first_name,last_name,joining_year from faculty where dept_id=${deptId} and faculty.status='pending'`;
        const result = await db.execute(sql);

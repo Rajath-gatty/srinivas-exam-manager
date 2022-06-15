@@ -14,8 +14,7 @@ const  CourseDetails = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             const reqData = {
-                courseId: param.courseId,
-                deptId: 11
+                courseId: param.courseId
             }
             try {
                 setLoading(true);

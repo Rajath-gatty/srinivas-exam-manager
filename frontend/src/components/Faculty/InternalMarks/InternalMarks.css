@@ -50,11 +50,18 @@
   font-size: 0.9em;
 }
 
+.internal-table-wrapper tr {
+  border: 1px solid var(--grey-bg);
+}
+
 .internal-table-wrap .internal-table-row {
   border: 1px solid var(--grey-bg);
 }
 
-.internal-input-row {
-  height: 10px;
-  width: 10px;
+.internal-input-row input{
+  height: 25px;
+  /* width: 10px; */
+  width: 60%;
+  border: 1px solid var(--light-grey);
+  border-radius: 3px;
 }

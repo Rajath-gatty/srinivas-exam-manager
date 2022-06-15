@@ -6,6 +6,7 @@ import axios from "axios";
 
 axios.defaults.baseURL= 'http://localhost:8080';
 
+
 const rootElement = document.getElementById("root");
 const root = ReactDOMClient.createRoot(rootElement);
 

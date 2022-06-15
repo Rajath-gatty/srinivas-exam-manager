@@ -4,20 +4,23 @@ import { useState,useEffect } from 'react';
 import axios from 'axios';
 import {FormControl,Select,InputLabel,MenuItem,CircularProgress} from "@mui/material";
 import {useLocation} from "react-router-dom";
+import {useContextData} from "../../hooks/useContextData";
 
 const Approval = ({type}) => {
   const [approveList,setApproveList] = useState([]);
   const [filterCourses,setFilterCourses] = useState([]);
   const [loading,setLoading] = useState(false);
 
-  const user = type==='staff'?'admin':'staff';
+  const userType = type==='staff'?'admin':'staff';
   const location = useLocation();
+  const {user} = useContextData();
 
   useEffect(() => {
    const fetchApproveList = async() => {
     try {
       setLoading(true);
-      const result = await axios.post(`/${user}/approvelist/${type}`,{deptId:11});
+      const result = await axios.post(`/${userType}/approvelist/${type}`);
+      console.log(result);
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
@@ -31,7 +34,7 @@ const Approval = ({type}) => {
   useEffect(() => {
     const fetchCourses = async() => {
       try {
-        const result = await axios.post('/courses',{deptId:11})
+        const result = await axios.post('/courses',{deptId:user.deptId})
         setFilterCourses(result.data);
       } catch(err) {
         console.log(err)
@@ -44,7 +47,7 @@ const Approval = ({type}) => {
     const courseName = e.target.value;
     try {
       setLoading(true);
-      const result = await axios.post(`/${user}/approvelist/${type}`,{courseName,deptId:11});
+      const result = await axios.post(`/${userType}/approvelist/${type}`,{courseName,deptId:user.deptId});
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
@@ -56,7 +59,7 @@ const Approval = ({type}) => {
   const handleApprove = async(id) => {
     try {
       setLoading(true);
-      const result = await axios.post(`/${user}/approve/${type}/${id}`);
+      const result = await axios.post(`/${userType}/approve/${type}/${id}`);
       if(result.data.success) {
         setApproveList(state => {
           const newState = [...state];
@@ -83,7 +86,7 @@ const Approval = ({type}) => {
   const handleReject = async(id) => {
     try {
       setLoading(true);
-      const result = await axios.post(`/${user}/reject/${type}/${id}`);
+      const result = await axios.post(`/${userType}/reject/${type}/${id}`);
       if(result.data.success) {
         setApproveList(state => {
           const newState = [...state];
@@ -158,7 +161,7 @@ const Approval = ({type}) => {
         }) }
         </tbody>}
       </table>
-      {loading&&<td style={{marginTop:80}} className="flex"><CircularProgress size={45}/></td>}
+      {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}
     </div>
   )
 }

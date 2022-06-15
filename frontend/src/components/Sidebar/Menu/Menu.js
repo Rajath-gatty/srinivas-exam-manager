@@ -18,7 +18,7 @@ return (
                 <NavLink
                   to={link.path}
                   className={(navData) => setNavLinkActive(navData)}>
-                   <img src={link.icon} alt={link.title} width="20px" />
+                   <img src={link.icon} alt={link.title} width="17px" />
                   <span>{link.title}</span>
                 </NavLink>
             )}

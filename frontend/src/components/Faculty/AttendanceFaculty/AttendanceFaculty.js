@@ -4,10 +4,10 @@ import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 
 const AttendanceFaculty = () => {
   return (
-    <div className="attendance-main">
-      <FilterSearch />
+    <div className="faculty-attendance-main">
+      <FilterSearch search/>
 
-      <table className="attendance-table-wrapper">
+      <table className="faculty-attendance-table-wrapper">
         <thead className="thead">
           <tr>
             <th>Profile</th>
@@ -15,7 +15,6 @@ const AttendanceFaculty = () => {
             <th>Name</th>
             <th>Semester</th>
             <th>Java</th>
-
           </tr>
         </thead>
         <tbody>

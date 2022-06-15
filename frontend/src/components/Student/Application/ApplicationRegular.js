@@ -2,7 +2,6 @@ import { Checkbox } from "@mui/material";
 import "./Application.css";
 import { Link } from "react-router-dom";
 
-
 const ApplicationRegular = () => {
   return (
     <div className="application-regular flex">

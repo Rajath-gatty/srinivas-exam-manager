@@ -1,5 +1,5 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState,useEffect} from "react";
+import { useState} from "react";
 import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
@@ -9,6 +9,7 @@ import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
 import StaffSvg from "../../Assets/Registration/staff_reg.svg";
 import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
   const [emailfocus, setEmailFocus] = useState(false);
@@ -16,7 +17,8 @@ const Login = () => {
   const [loginUser, setLoginUser] = useState("");
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
-
+  const [loading,setLoading] = useState(false);
+  const [errors,setErrors] = useState('');
   const onEmailActive = () => setEmailFocus(true);
   const onPassActive = () => setPassFocus(true);
 
@@ -26,28 +28,8 @@ const Login = () => {
   const emailAct = emailfocus ? "form-control active" : "form-control";
   const passAct = passfocus ? "form-control active" : "form-control";
 
-  const {setRole,setUser,setToken,token} = useContextData();
+  const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   token && navigate('/');
-  // },[token])
-  
-  // Temporary Code
-  // const [showModal,setShowModal] = useState(true);
-  // const navigate = useNavigate();
-
-  // const closeModal = () => setShowModal(false);
-
-  // const setInputRole = useRef();
-
-  // const handleRoleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const role = setInputRole.current.value;
-  //   setRole(role.toLowerCase());
-  //   navigate("/dashboard");
-  // }
-  // Temporary Code end
 
   const handleLogin = async(e) => {
     e.preventDefault();
@@ -63,6 +45,7 @@ const Login = () => {
     }
 
     try {
+      setLoading(true);
       const result = await axios.post('/login',data);
       console.log(result);
       setRole(result.data.user.role);
@@ -74,10 +57,14 @@ const Login = () => {
         token:result.data.token,
         user:result.data.user
       }
-      localStorage.setItem("user",JSON.stringify(userData))
+      localStorage.setItem("user",JSON.stringify(userData));
       navigate('/');
+      setLoading(false);
     } catch(err) {
-      console.log(err)
+      if(err.response.status===401)
+      setErrors(err.response.data.error);
+      console.log(err);
+      setLoading(false);
     }
   }
  
@@ -158,28 +145,15 @@ const Login = () => {
               <FiLock size={30} color="var(--light-grey)" />
             </div>
           </div>
+          {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
           <div className="forgot-pass">
             <Link to="#">Forgot Password ?</Link>
           </div>
           <div className="form-controls">
-            <input type="submit" value="Login" className="login-submit btn" />
+            <button type="submit" className="login-submit btn">{loading?<CircularProgress color="inherit" size={20}/>:'Login'}</button>
           </div>
         </form>}
       </div>
-      {/* {showModal &&<Modal width="40%" onClose={closeModal} >
-        <form onSubmit={handleRoleSubmit}>
-          <h3>Enter Role</h3>
-          <select name="selectRole" id="selectRole" ref={setInputRole}>
-            <option value="superadmin">Super Admin</option>
-            <option value="admin">Admin</option>
-            <option value="student">Student</option>
-            <option value="faculty">Faculty</option>
-            <option value="staff">Staff</option>
-            <option value="evaluator">Evaluator</option>
-          </select>
-          <input type="submit" className="btn"  />
-        </form>
-      </Modal>} */}
     </div>
   );
 };

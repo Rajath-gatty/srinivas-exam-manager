@@ -186,7 +186,7 @@ exports.postLogin = async(req,res) => {
                 });
             }
             const token = jwt.sign(
-                { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName:fetchedUser.first_name, lastName:fetchedUser.last_name },
+                { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName:fetchedUser.first_name, lastName:fetchedUser.last_name, id:fetchedUser[id] },
                 process.env.SECRET_KEY
             );
             res.status(200).json({

@@ -14,7 +14,7 @@ const Course = () => {
       const fetchCourses = async() => {
           try {
               setLoading(true);
-              const result = await axios.post('/admin/courses',{deptId:11});
+              const result = await axios.get('/admin/courses');
               setLoading(false);
               setCourses(result.data);
           } catch(err) {

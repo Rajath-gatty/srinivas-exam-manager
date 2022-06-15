@@ -7,7 +7,6 @@ const registrationRoutes = require('./Router/registrationRoutes');
 const adminRoutes = require('./Router/adminRoutes');
 const staffRoutes = require('./Router/staffRoutes');
 const routes = require('./Router/routes');
-
 app.use(express.json());
 app.use(cors());
 

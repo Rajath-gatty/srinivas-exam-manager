@@ -59,10 +59,13 @@ import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/New
 import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 import { CircularProgress } from "@mui/material";
+import axios from "axios";
 
 function App() {
   const {setRole,setUser,setToken,token} = useContextData();
   const [loading, setLoading] = useState(true);
+
+  axios.defaults.headers.common['Authorization'] = token;
   //MUI Components Fonts
   const theme = createTheme({
     typography: {
@@ -82,7 +85,7 @@ function App() {
       setLoading(false);
     }
     setLoading(false);
-  }, [])
+  }, [setToken,setRole,setUser])
 
   return (
     <ThemeProvider theme={theme}>
@@ -90,15 +93,15 @@ function App() {
         <Browser>
           <Routes>
             {/* Public Routes */}
-            <Route path="/login" element={token?<Login />:<Navigate to="/"/>}/>
+            {!loading &&<Route path="/login" element={!token?<Login />:<Navigate to="/"/>}/>}
             {/* {!token&&<Route path="/login" element={<Login />}/>} */}
             {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
             {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
-            <Route path="/special" element={<SpecialLogin />} />
-            <Route path="registration" element={<Registration />} />
-            <Route path="registration/student" element={<Student />} />
-            <Route path="registration/faculty" element={<Faculty />} />
-            <Route path="registration/staff" element={<Staff />} />
+            <Route path="/special" element={!token?<SpecialLogin />:<Navigate to="/"/>} />
+            <Route path="registration" element={!token?<Registration />:<Navigate to="/"/>} />
+            <Route path="registration/student" element={!token?<Student />:<Navigate to="/"/>} />
+            <Route path="registration/faculty" element={!token?<Faculty />:<Navigate to="/"/>} />
+            <Route path="registration/staff" element={!token?<Staff />:<Navigate to="/"/>} />
 
             <Route element={<Layout />}>
               {/* Super Admin Access */}
@@ -160,7 +163,6 @@ function App() {
                 <Route path="/promote" element={<Promote />} />
 
               </Route>
-
 
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
@@ -250,7 +252,7 @@ function App() {
                 {/* <Route path="/" element={<Dashboard />}/> */}
                 {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
 
-                <Route path="/" element={token?<Dashboard />:<Navigate to="/login"/>}/>
+                <Route path="/" element={token?<Dashboard />:<PageNotFound/>}/>
                 <Route path="profile" element={<Profile />} />
 
                 {/* Testing Route */}
@@ -258,7 +260,7 @@ function App() {
               </Route>
             </Route>
             {/* Page Not Found Route */}
-            <Route path="*" element={!loading?<PageNotFound />:<div style={{height:'90vh'}} className="flex"><CircularProgress size={80}/></div>}></Route>
+            <Route path="*" element={!loading?<PageNotFound />:<div style={{height:'90v'}} className="flex"><CircularProgress size={80}/></div>}></Route>
           </Routes>
         </Browser>
       </div>
