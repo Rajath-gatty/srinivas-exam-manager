@@ -36,7 +36,7 @@ const SpecialLogin = () => {
     e.preventDefault();
     const role = setInputRole.current.value;
     setRole(role.toLowerCase());
-    navigate("/dashboard");
+    navigate("/");
   }
   // Temporary Code end
 
