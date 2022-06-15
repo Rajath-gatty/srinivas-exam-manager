@@ -106,3 +106,23 @@
     color: var(--strong-red);
     cursor: pointer;
 }
+
+.plus {
+
+    padding: 1em 1em 1em 1em;
+}
+
+.minus {
+    padding: 1em 1em 1em 1em;
+}
+
+.btn-submit {
+
+    background-color: var(--primary-color);
+    padding: 0.8em 2em;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 4px;
+
+    margin-top: 2em;
+}
