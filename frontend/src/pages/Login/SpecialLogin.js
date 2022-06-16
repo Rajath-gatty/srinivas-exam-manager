@@ -47,7 +47,6 @@ const SpecialLogin = () => {
     try {
       setLoading(true);
       const result = await axios.post('/login',data);
-      console.log(result);
       setRole(result.data.user.role);
       setToken(result.data.token);
       setUser(result.data.user);
@@ -63,7 +62,6 @@ const SpecialLogin = () => {
     } catch(err) {
       if(err.response.status===404)
       setErrors(err.response.data.error);
-      console.log(err);
       setLoading(false);
     }
   }

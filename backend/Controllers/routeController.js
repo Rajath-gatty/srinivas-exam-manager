@@ -26,15 +26,70 @@ exports.getCourses = async(req,res) => {
     }
 }
 
-exports.getAllStudent = (req,res) => {
-  
-}
-exports.getAllFaculty = (req,res) => {
+exports.getAllStudent = async (req,res) => {
   const deptId = req.deptId;
+  const courseName = req.body.courseName;
+  let sql;
+  if(courseName) {
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and student.status='approved'`;
+  } else {
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and status='approved'`;
+  }
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    res.status(500).send(err);
+  }
 }
-exports.getAllStaff = (req,res) => {
 
+exports.getAllFaculty = async(req,res) => {
+  const deptId = req.deptId;
+   let sql=`select faculty_id,email,first_name, last_name,joining_year from faculty where faculty.dept_id=${deptId} and status='approved'`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    console.log(err)
+    res.status(500).send(err);
+  }
 }
-exports.getAllExamCoord = (req,res) => {
 
+exports.getAllStaff = async(req,res) => {
+  const deptId = req.deptId;
+  let sql=`select staff_id, first_name, last_name, email, joining_year from staff where staff.dept_id=${deptId} and status='approved'`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    res.status(500).send(err);
+  }
+}
+
+exports.getAllExamCoord = async(req,res) => {
+  const deptId = req.deptId;
+  let sql=`select coord_id, first_name, last_name, email,dept_name from exam_coord join department on exam_coord.dept_id=department.dept_id where exam_coord.dept_id=${deptId}`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    console.log(err);
+    res.status(500).send(err);
+  }
+}
+
+exports.getUserDetails = async(req,res) => {
+  let type = req.body.type;
+  const userId = req.body.uid;
+  const idName = req.body.idName;
+  if(type==="examcoordinator") type = "exam_coord";
+
+  let sql=`select * from ${type} where ${idName}='${userId}'`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    console.log(err);
+    res.status(500).send(err);
+  }
 }

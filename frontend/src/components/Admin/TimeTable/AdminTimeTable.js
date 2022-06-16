@@ -1,20 +1,26 @@
-
 import { TextField } from "@mui/material";
 import { HiPlus } from "react-icons/hi";
 import { HiMinus } from "react-icons/hi";
-import { useState } from "react";
+import { useState,useRef} from "react";
 import { FiUpload } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 
 import "./AdminTimeTable.css";
 import Modal from "../../UI/Modal/Modal";
 import AdminTimeTableList from "./AdminTimeTableList";
+import Filter from "../../UI/Filter/Filter";
+import axios from "axios";
 
 const AdminTimeTable = () => {
     const [showModal, setShowModal] = useState(false);
     const [inputFields, setInputFields] = useState([
         { subjectName: '', subjectCode: '', examDate: '', examTime: '' }
     ])
+    const [courseError,setCourseError] = useState('');
+    const [semesterError,setSemesterError] = useState('');
+
+    const courseRef = useRef();
+    const semesterRef = useRef();
 
     const hideModalHandler = () => {
         setShowModal(false);
@@ -39,7 +45,33 @@ const AdminTimeTable = () => {
         values.splice(index, 1);
         setInputFields(values);
     }
-    console.log(inputFields);
+
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        const course = courseRef.current.value;
+        const semester = semesterRef.current.value;
+
+        if(course==='') {
+           return setCourseError('Select Course');
+        } else if(semester==='') {
+            setCourseError('');
+           return setSemesterError('Select Semester');
+        }
+        setSemesterError('');
+
+        const data = {
+            courseName: course,
+            semester: semester,
+            timetable: inputFields
+        }
+        try {
+            const result = axios.post('/admin/timetable/new',data);
+            console.log(result);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     return (
         <>
             <div className="admin-timetable-main">
@@ -55,17 +87,17 @@ const AdminTimeTable = () => {
                     <table className="admin-timetable-table">
                         <thead>
                             <tr>
-                                <th>Subject Name</th>
-                                <th>Subject Code</th>
-                                <th>Exam Date</th>
-                                <th>Exam Time</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th>Semester</th>
+                            <th>Approval</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <AdminTimeTableList status="approved"/>
+                            <AdminTimeTableList  status="rejected"/>
                             <AdminTimeTableList />
-                            <AdminTimeTableList />
-                            <AdminTimeTableList />
-                            <AdminTimeTableList />
+                            <AdminTimeTableList status="approved"/>
                             <AdminTimeTableList />
                         </tbody>
                     </table>
@@ -77,28 +109,50 @@ const AdminTimeTable = () => {
                     <h2 className="upload-timetable-hdng">Upload Timetable</h2>
                     <div className="upload-wrapper">
                         <div className="admin-upload">
-                            <table className="indent-table-wrapper">
+                            <form onSubmit={handleSubmit}>
+                            <div className="select-box flex">
+
+                            <Filter width="90%" 
+                            data={[{course_name:'BCA',course_id:'1'}]} 
+                            filter="course" 
+                            label="Choose Course"
+                            ref={courseRef}
+                            error={courseError&&true}
+                            helperText={courseError}
+                            />
+
+                            <Filter 
+                            width="90%" 
+                            data={[{sem_name:1,sem_id:'2'}]} 
+                            filter="semester" 
+                            label="Choose Semester"
+                            ref={semesterRef}
+                            error={semesterError&&true}
+                            helperText={semesterError}
+                            />
+                            </div>
+                            <table className="admin-form-table-wrapper">
                                 <thead className="thead">
                                     <tr>
-                                        <th>Subject Name</th>
+                                        <th >Subject Name</th>
                                         <th>Subject Code</th>
-                                        <th>Exam Date</th>
-                                        <th>Exam Time</th>
-                                        <th><HiPlus className="plus"
+                                        <th >Exam Date</th>
+                                        <th >Exam Time</th>
+                                        <th style={{background:'#fff',border:"none"}} ><HiPlus className="plus btn btn-outlined"
                                                 onClick={() => handleAddFields()}
                                                 variant="contained"
                                                 bgcolor="grey"
-                                                color="var(--strong-green)"
                                                 size={20} />
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {inputFields.map((inputField, index) => (
-                                    <tr key={Math.random()}>
+                                    <tr key={index} className="table-form-row">
                                         <td>
                                             <TextField
                                                 name="subjectName"
+                                                placeholder="Subject name"
                                                 value={inputField.subjectName}
                                                 onChange={event => handleChangeInput(index, event)}
                                             ></TextField>
@@ -106,6 +160,7 @@ const AdminTimeTable = () => {
                                         <td>
                                             <TextField
                                                 name="subjectCode"
+                                                placeholder="Subject Code"
                                                 value={inputField.subjectCode}
                                                 onChange={event => handleChangeInput(index, event)}
                                             />
@@ -113,6 +168,7 @@ const AdminTimeTable = () => {
                                         <td>
                                             <TextField
                                                 name="examDate"
+                                                placeholder="exam Date"
                                                 value={inputField.examDate}
                                                 onChange={event => handleChangeInput(index, event)}
                                             />
@@ -120,11 +176,12 @@ const AdminTimeTable = () => {
                                         <td>
                                             <TextField
                                                 name="examTime"
+                                                placeholder="exam Time"
                                                 value={inputField.examTime}
                                                 onChange={event => handleChangeInput(index, event)}
                                             />
                                         </td>
-                                        <td>
+                                        <td className="delete-row">
                                             <HiMinus className="minus"
                                                 onClick={() => handleRemoveFields(index)}
                                                 color="var(--strong-red)"
@@ -134,7 +191,8 @@ const AdminTimeTable = () => {
                                 ))}
                             </tbody>
                             </table>
-                                <button className="btn-submit">Submit</button>
+                                <button type="submit" className="btn-submit">Submit</button>
+                               </form>
                         </div>
                     </div>
                 </div>
