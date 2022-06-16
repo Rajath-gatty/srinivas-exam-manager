@@ -8,7 +8,6 @@ module.exports = (req, res, next) => {
     let decodedToken;
     try {
         decodedToken = jwt.verify(headerToken, process.env.SECRET_KEY);
-        console.log(decodedToken);
         if(decodedToken) {
             req.deptId = decodedToken.deptId;
             req.userId = decodedToken.id;

@@ -1,0 +1,20 @@
+.selectbox {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: right;
+    flex: 1;
+}
+.filter-comp .filterSearch-SelectInput {
+    width: 30%;
+    text-align: left;
+  }
+  
+  .filter-comp .filterSearch-SelectInput label {
+    background-color: #fff;
+    padding-right: 0.3em;
+    top: -0.5em;
+  }
+  
+  .filter-comp .filterSearch-SelectInput label[data-shrink="true"] {
+    top: 0;
+  }

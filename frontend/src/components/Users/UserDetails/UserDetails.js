@@ -1,98 +1,108 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom"
 import { FiArrowLeft, FiCheck, FiX } from "react-icons/fi";
 import { FaUserCircle, FaCamera } from "react-icons/fa";
+import {CircularProgress} from "@mui/material";
 import Back from "../../UI/Back/Back";
 import "./UserDetails.css";
+import axios from "axios";
 
 const UserDetails = () => {
-  const navigate = useNavigate();
-  const [eligible, setEligible] = useState("");
-  const [hideBtn, setHideBtn] = useState("");
+  const [userData,setUserData] = useState([]);
+  const [loading,setLoading] = useState(false);
+  
+  const location = useLocation();
+  const {type, userId} = location.state;
 
-  // const { eligibility } = location.state;
+  useEffect(()=>{
+    setLoading(true);
+    setUserData([]);
 
-  // useEffect(() => {
-  //   if (eligibility) {
-  //     setHideBtn("NotEligibleBtn");
-  //     setEligible("Eligible");
-  //   } else {
-  //     setHideBtn("EligibleBtn");
-  //     setEligible("NotEligible");
-  //   }
-  // }, []);
+    const fetchUsers = async() => {
+      try {
+        const result = await axios.post(`/users/details`, {type, uid:userId.uid, idName:userId.idName})
+        setUserData(result.data[0]);
+        setLoading(false);
+      } catch(err) {
+        console.log(err);
+      }
+    }
+    fetchUsers();
+  },[type,userId.uid,userId.idName])
 
   return (
     <div className="userinfo-container">
       <Back/>
 
-      <div className="userinfo-profile flex">
-        <div className="userinfo-avatar flex">
-          <FaUserCircle color="var(--light-grey)" size={70} />
+      {!loading &&<div>
+        <div className="userinfo-profile flex">
+          <div className="userinfo-avatar flex">
+            <FaUserCircle color="var(--light-grey)" size={70} />
+          </div>
+
+          <div className="userinfo-title flex">
+            <span className="userinfo-name">{userData.first_name +" "+ userData.last_name}</span>
+            <span className="userinfo-data">BCA 3rd Year</span>
+          </div>
         </div>
 
-        <div className="userinfo-title flex">
-          <span className="userinfo-name">John Doe</span>
-          <span className="userinfo-data">BCA 3rd Year</span>
-        </div>
-      </div>
-
-      <div className="userinfo-form">
-        <div className="userinfo-form-details">
-          <div className="userinfo-row">
-            <span>First Name</span> John
-          </div>
-          <div className="userinfo-row">
-            <span>Last Name</span> Doe
-          </div>
-          <div className="userinfo-row">
-            <span>Phone</span> 9584625345
-          </div>
-          <div className="userinfo-row">
-            <span>Email</span> johndoe@gmail.com
-          </div>
-          <div className="userinfo-row">
-            <span>Date of Birth</span> 15/04/2022
-          </div>
-          <div className="userinfo-row">
-            <span>Gender</span> Male
-          </div>
-          <div className="userinfo-row">
-            <span>Blood Group</span> B positive
-          </div>
-          <div className="userinfo-row">
-            <span>Aadhar No.</span> 1234 5678 9123 4567
-          </div>
-          <div className="userinfo-row">
-            <span>Religion</span> Hindu
-          </div>
-          <div className="userinfo-row">
-            <span>Caste</span> GanjaGang
-          </div>
-          <div className="userinfo-row">
-            <span>Place of Birth</span> Mangalore
-          </div>
-          <div className="userinfo-row">
-            <span>District of Birth</span> Dakshina Kannada
-          </div>
-          <div className="userinfo-row">
-            <span>Country of Birth</span> India
-          </div>
-          <div className="userinfo-row">
-            <span>Identity Mark</span> tatoo
-          </div>
-          <div className="userinfo-row">
-            <span>Registratoin No.</span> 3SU19SA011
-          </div>
-          <div className="userinfo-row">
-            <span>Pincode</span> 575028
-          </div>
-          <div className="userinfo-row">
-            <span>Address</span> Mangalore, Karnataka, India sasda ada da sdad
-            asdasdasdd
+        <div className="userinfo-form">
+          <div className="userinfo-form-details">
+            <div className="userinfo-row">
+              <span>First Name</span> {userData.first_name}
+            </div>
+            <div className="userinfo-row">
+              <span>Last Name</span> {userData.last_name}
+            </div>
+            <div className="userinfo-row">
+              <span>Phone</span> {userData.phone}
+            </div>
+            <div className="userinfo-row">
+              <span>Email</span> {userData.email}
+            </div>
+            <div className="userinfo-row">
+              <span>Date of Birth</span> {userData.dob}
+            </div>
+            <div className="userinfo-row">
+              <span>Gender</span> {userData.gender}
+            </div>
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Blood Group</span> {userData.blood_group}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Aadhar No.</span> {userData.aadhar_no}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Religion</span> {userData.religion}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Caste</span> {userData.caste}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Place of Birth</span> {userData.birth_place}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>District of Birth</span> {userData.birth_district}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Country of Birth</span> {userData.country}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Identity Mark</span> {userData.identity_mark}
+            </div>}
+            {type!=="examcoordinator"&&<div className="userinfo-row">
+              <span>Pincode</span> {userData.pincode}
+            </div>}
+            <div className="userinfo-row">
+              <span>Registratoin No.</span> {type==="student"?userData.regno : type==="faculty"?userData.faculty_id : type==="staff"?userData.staff_id : userData.coord_id }
+            </div>
+            <div className="userinfo-row">
+              <span>Address</span> {userData.address}
+            </div>
           </div>
         </div>
-      </div>
+      </div>}
+      {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}
     </div>
   );
 };

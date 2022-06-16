@@ -27,17 +27,14 @@
 
 .users-table-wrapper .users-table-row .eligible {
   color: var(--strong-green);
+  gap: 0.3em;
 }
 
 .users-table-wrapper .users-table-row .not-eligible {
   color: var(--strong-red);
+  gap: 0.3em;
 }
 
-.eligible span,
-.not-eligible span {
-  width: 100px;
-}
-
-.users-avatar-wrapper a {
-  cursor: pointer;
+.users-table-row .users-details a{
+  color: var(--primary-color);
 }

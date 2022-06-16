@@ -6,10 +6,10 @@ router.get('/departments',routeContoller.getDepartments);
 router.post('/courses',routeContoller.getCourses);
 
 router.post('/users/student',isAuth,routeContoller.getAllStudent);
-router.get('/users/faculty',isAuth,routeContoller.getAllFaculty);
-router.get('/users/staff',isAuth,routeContoller.getAllStaff);
-router.get('/users/examcoord',isAuth,routeContoller.getAllExamCoord);
+router.post('/users/faculty',isAuth,routeContoller.getAllFaculty);
+router.post('/users/staff',isAuth,routeContoller.getAllStaff);
+router.post('/users/examcoordinator',isAuth,routeContoller.getAllExamCoord);
 
-router.post('/users/student/course',isAuth,routeContoller.getFilteredStudent);
+router.post('/users/details',isAuth,routeContoller.getUserDetails);
 
 module.exports = router;

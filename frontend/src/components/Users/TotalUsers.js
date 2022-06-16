@@ -1,15 +1,18 @@
 import "./TotalUsers.css";
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import UserList from "./UserList";
-import {FormControl,Select,InputLabel,MenuItem,CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
+import Filter from "../UI/Filter/Filter";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
   const [filterCourses,setFilterCourses] = useState([]);
   const [loading,setLoading] = useState(false);
   const {user} = useContextData();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchCourses = async() => {
@@ -24,23 +27,26 @@ const TotalUsers = ({type}) => {
   },[user.deptId])
 
   useEffect(() => {
+    setLoading(true);
+    setUsers([]);
+
     const fetchUsers = async() => {
       try {
         const result = await axios.post(`/users/${type}`)
         setUsers(result.data);
-        console.log("Data : ",result.data)
-        !result && console.log("ERROR")
+        setLoading(false);
       } catch(err) {
         console.log(err);
       }
     }
     fetchUsers();
-  },[])
+  },[location.pathname])
 
-  const handleCourseChange = async() => {
+  const handleCourseChange = async(e) => {
+    const courseName = e.target.value;
     try {
       setLoading(true);
-      const result = await axios.post(`/users/${type}/course`,{deptId:user.deptId});
+      const result = await axios.post(`/users/${type}/`,{courseName});
         console.log("Course Chng : ",result.data)
         setUsers(result.data);
       setLoading(false);
@@ -50,42 +56,36 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  let showDOJ = true;
+  if(type!=="student" || type !=="exam_coord") showDOJ = false;
+
   return (
     <div className="users-main">
       <div className="users-Filter">
-        <FormControl className="SelectInput">
-          <InputLabel>Filter by Course</InputLabel>
-          <Select
-            label="Course"
-            defaultValue=""
-            size="small"
-            onChange={handleCourseChange}
-            fullWidth
-          >
-            {filterCourses.map((opt) => (
-              <MenuItem key={opt.course_id} value={opt.course_name}>
-                {opt.course_name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        {/* <Filter 
+        data={filterCourses} 
+        label="Filter By Course" 
+        filter="course" 
+        handleCourseChange={handleCourseChange}/> */}
       </div>
 
       <table className="users-table-wrapper">
         <thead className="thead">
           <tr>
-            <th>Profile</th>
-            <th>RegNo.</th>
+            <th>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
             <th>Name</th>
-            <th>Course</th>
-            <th>Batch</th>
-            <th>Semester</th>
+            {type!=="student" && <th>Email</th>}
+            {showDOJ && <th>DOJ</th>}
+            {type==="student" && <th>Course</th>}
+            {type==="student" && <th>Batch</th>}
+            {type==="student" && <th>Semester</th>}
+            <th>Details</th>
             <th>Eligiblity</th>
           </tr>
         </thead>
         {!loading&&<tbody>
           {users.map(obj =>{
-              return <UserList key={obj.regno} data={obj}/>
+              return <UserList key={Math.random()+Date.now()} data={obj} type={type}/>
           })}
         </tbody>}
       </table>

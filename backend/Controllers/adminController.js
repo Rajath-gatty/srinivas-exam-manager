@@ -137,7 +137,7 @@ exports.postNewCourse = async(req,res) => {
     exports.getStaffApproveList = async(req,res) => {
         const deptId = req.deptId;
         try {
-            const sql = `select staff_id,first_name,last_name,joining_year from staff where dept_id=${deptId} and staff.status='pending'`;
+            const sql = `select staff_id,first_name,last_name,joining_year from staff where dept_id=${deptId} and status='pending'`;
            const result = await db.execute(sql);
            res.send(result[0]);
         } catch(err) {
@@ -173,6 +173,23 @@ exports.postNewCourse = async(req,res) => {
         try {
             const result = await db.execute(`delete from staff where staff_id='${id}'`);
             res.status(200).send({success:true,data:result[0]});
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({success:false})
+        }
+    }
+
+    exports.postNewTimeTable = (req,res) => {
+        const {courseName,semester,timetable} = req.body;
+        const deptId = req.deptId;
+
+        const sql = `insert into timetable(dept_id,course_id,semester,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?)`;
+        try {
+            timetable.forEach(async({subjectName,subjectCode,examDate,examTime}) => {
+               await db.execute(sql,[deptId,courseName,semester,subjectName,subjectCode,examDate,examTime,'pending']);
+            })
+            console.log(result);
+            res.status(200).send({success:true,result:'Inserted Successfully'});
         } catch(err) {
             console.log(err);
             res.status(500).send({success:false})

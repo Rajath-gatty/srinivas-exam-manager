@@ -5,7 +5,7 @@ const  CourseDetailsTable = (props) => {
     
      return(
          <div className="course-details-table">
-             <p>{sem.semName}</p>
+             <p>SEM {sem.semName}</p>
             <table className="course-details-list-table">
             <thead>
             <tr>

@@ -69,4 +69,6 @@ router.get('/approve/staff/view/:id',isAuth,adminController.getApproveStaffDetai
 router.post('/approve/staff/:id',isAuth,adminController.postApproveStaff);
 router.post('/reject/staff/:id',isAuth,adminController.postRejectStaff);
 
+router.post('/timetable/new',isAuth,adminController.postNewTimeTable);
+
 module.exports = router;

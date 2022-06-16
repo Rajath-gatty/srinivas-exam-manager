@@ -2,9 +2,10 @@ import ApprovaList from './ApprovalList/ApprovalList';
 import "./Approval.css";
 import { useState,useEffect } from 'react';
 import axios from 'axios';
-import {FormControl,Select,InputLabel,MenuItem,CircularProgress} from "@mui/material";
+import {CircularProgress} from "@mui/material";
 import {useLocation} from "react-router-dom";
 import {useContextData} from "../../hooks/useContextData";
+import Filter from '../UI/Filter/Filter';
 
 const Approval = ({type}) => {
   const [approveList,setApproveList] = useState([]);
@@ -114,22 +115,12 @@ const Approval = ({type}) => {
     <div className="approval-main content">
       <div className="approve-main-header">
       <h1 className="approve-list-header">{type.charAt(0).toUpperCase() + type.slice(1)} Approval</h1>
-      {type==='student'&&<FormControl className="SelectInput">
-                <InputLabel>Filter by Course</InputLabel>
-                <Select
-                  label="Course"
-                  defaultValue=""
-                  size="small"
-                  onChange={handleCourseChange}
-                  fullWidth
-                >
-                  {filterCourses.map((opt) => (
-                    <MenuItem key={opt.course_id} value={opt.course_name}>
-                      {opt.course_name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>}
+      {type==='student'&&<Filter 
+      data={filterCourses} 
+      filter="course" 
+      label="Filter by Course"
+      handleCourseChange={handleCourseChange}
+      />}
       </div>
 
       <table className="approve-list-wrapper">

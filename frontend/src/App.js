@@ -126,6 +126,7 @@ function App() {
                   element={<ApprovalDetailsView />}
                 />
                  <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
+                <Route path="users/examcoordinator/:userId" element={<UserDetails />} />
               </Route>
 
               {/* Staff Access*/}
