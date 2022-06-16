@@ -10,4 +10,6 @@ router.get('/users/faculty',isAuth,routeContoller.getAllFaculty);
 router.get('/users/staff',isAuth,routeContoller.getAllStaff);
 router.get('/users/examcoord',isAuth,routeContoller.getAllExamCoord);
 
+router.post('/users/student/course',isAuth,routeContoller.getFilteredStudent);
+
 module.exports = router;

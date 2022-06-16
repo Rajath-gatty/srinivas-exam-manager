@@ -26,15 +26,35 @@ exports.getCourses = async(req,res) => {
     }
 }
 
-exports.getAllStudent = (req,res) => {
+exports.getAllStudent = async (req,res) => {
+  let sql;
+    sql=`select regno, first_name, last_name, course_id, joining_year, semester, eligibility from student`;
   
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    res.status(500).send(err);
+  }
 }
-exports.getAllFaculty = (req,res) => {
+
+exports.getFilteredStudent = async (req,res) => {
   const deptId = req.deptId;
+  let sql=`select regno, first_name, last_name, course_id, joining_year, semester, eligibility from student where dept_id=${deptId}`;
+  
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    res.status(500).send(err);
+  }
+}
+
+
+exports.getAllFaculty = (req,res) => {
+  // const deptId = req.deptId;
 }
 exports.getAllStaff = (req,res) => {
-
 }
 exports.getAllExamCoord = (req,res) => {
-
 }
