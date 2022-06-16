@@ -1,10 +1,10 @@
 import "./App.css";
 import "./pages/Registration/Registration.css";
 
-import { BrowserRouter as Browser, Routes, Route,Navigate} from "react-router-dom";
+import { BrowserRouter as Browser, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React,{useState,useEffect} from "react";
-import {useContextData} from "./hooks/useContextData";
+import React, { useState, useEffect } from "react";
+import { useContextData } from "./hooks/useContextData";
 
 import Login from "./pages/Login/Login";
 import SpecialLogin from "./pages/Login/SpecialLogin";
@@ -49,6 +49,7 @@ import Coding from "./components/Evaluator/Coding/Coding";
 import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
+import ExamcordTimeTable from "./components/Evaluator/ExamcordTimeTable/ExamcordTimeTable";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
 import PaymentRegular from "./components/Student/Application/Payment/Payment";
 
@@ -62,7 +63,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
 function App() {
-  const {setRole,setUser,setToken,token} = useContextData();
+  const { setRole, setUser, setToken, token } = useContextData();
   const [loading, setLoading] = useState(true);
 
   axios.defaults.headers.common['Authorization'] = token;
@@ -78,14 +79,14 @@ function App() {
     let prevUser = localStorage.getItem("user");
     prevUser = JSON.parse(prevUser);
 
-    if(prevUser) {
+    if (prevUser) {
       setToken(prevUser.token);
       setRole(prevUser.user.role);
       setUser(prevUser.user);
       setLoading(false);
     }
     setLoading(false);
-  }, [setToken,setRole,setUser])
+  }, [setToken, setRole, setUser])
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,15 +94,15 @@ function App() {
         <Browser>
           <Routes>
             {/* Public Routes */}
-            {!loading &&<Route path="/login" element={!token?<Login />:<Navigate to="/"/>}/>}
+            {!loading && <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />}
             {/* {!token&&<Route path="/login" element={<Login />}/>} */}
             {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
             {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
-            <Route path="/special" element={!token?<SpecialLogin />:<Navigate to="/"/>} />
-            <Route path="registration" element={!token?<Registration />:<Navigate to="/"/>} />
-            <Route path="registration/student" element={!token?<Student />:<Navigate to="/"/>} />
-            <Route path="registration/faculty" element={!token?<Faculty />:<Navigate to="/"/>} />
-            <Route path="registration/staff" element={!token?<Staff />:<Navigate to="/"/>} />
+            <Route path="/special" element={!token ? <SpecialLogin /> : <Navigate to="/" />} />
+            <Route path="registration" element={!token ? <Registration /> : <Navigate to="/" />} />
+            <Route path="registration/student" element={!token ? <Student /> : <Navigate to="/" />} />
+            <Route path="registration/faculty" element={!token ? <Faculty /> : <Navigate to="/" />} />
+            <Route path="registration/staff" element={!token ? <Staff /> : <Navigate to="/" />} />
 
             <Route element={<Layout />}>
               {/* Super Admin Access */}
@@ -120,18 +121,18 @@ function App() {
                   element={<CourseDetails />}
                 />
                 <Route path="courses/new-course" element={<Create />} />
-                <Route path="approve/staff" element={<Approval type="staff"/>} />
+                <Route path="approve/staff" element={<Approval type="staff" />} />
                 <Route
                   path="approve/staff/:id"
                   element={<ApprovalDetailsView />}
                 />
-                 <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
+                <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
               </Route>
 
               {/* Staff Access*/}
               <Route element={<ProtectedRoute allowedRole={["staff"]} />}>
                 <Route path="approve/student" element={<Approval type="student" />} />
-                <Route path="approve/faculty" element={<Approval type="faculty"/>} />
+                <Route path="approve/faculty" element={<Approval type="faculty" />} />
                 <Route
                   path="approve/student/:id"
                   element={<ApprovalDetailsView />}
@@ -213,7 +214,7 @@ function App() {
               >
                 <Route path="users/student" element={<TotalUsers type="student" />} />
                 <Route path="users/faculty" element={<TotalUsers type="faculty" />} />
-                <Route path="users/staff" element={<TotalUsers type="staff"/>} />
+                <Route path="users/staff" element={<TotalUsers type="staff" />} />
 
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
@@ -229,7 +230,7 @@ function App() {
                 />
                 <Route path="/evaluators" element={<Evaluators />} />
                 <Route path="/evaluators/assign" element={<AssignFaculty />} />
-              
+                <Route path="/examcordtimetable" element={<ExamcordTimeTable />} />
               </Route>
 
               {/*Common Protected Routes */}
@@ -252,7 +253,7 @@ function App() {
                 {/* <Route path="/" element={<Dashboard />}/> */}
                 {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
 
-                <Route path="/" element={token?<Dashboard />:<PageNotFound/>}/>
+                <Route path="/" element={token ? <Dashboard /> : <PageNotFound />} />
                 <Route path="profile" element={<Profile />} />
 
                 {/* Testing Route */}
@@ -260,7 +261,7 @@ function App() {
               </Route>
             </Route>
             {/* Page Not Found Route */}
-            <Route path="*" element={!loading?<PageNotFound />:<div style={{height:'90v'}} className="flex"><CircularProgress size={80}/></div>}></Route>
+            <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v' }} className="flex"><CircularProgress size={80} /></div>}></Route>
           </Routes>
         </Browser>
       </div>

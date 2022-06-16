@@ -13,6 +13,7 @@ const Coding = () => {
                         <th>Name</th>
                         <th>RegNo.</th>
                         <th>Coding sheet No</th>
+                        <th>Bundle No</th>
                     </tr>
                 </thead>
                 <tbody>

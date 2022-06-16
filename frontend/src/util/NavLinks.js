@@ -232,7 +232,7 @@ export const NavLinks = [
       },
       {
         title: "Time Table",
-        path: "/timetable",
+        path: "/examcordtimetable",
         icon: Calender,
       },
     ],
