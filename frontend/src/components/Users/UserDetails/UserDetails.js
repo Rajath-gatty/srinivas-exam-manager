@@ -8,7 +8,7 @@ import axios from "axios";
 
 const UserDetails = () => {
   const [userData,setUserData] = useState([]);
-  const [loading,setLoading] = useState(false);
+  const [loading,setLoading] = useState(true);
   
   const location = useLocation();
   const {type, userId} = location.state;
@@ -101,7 +101,7 @@ const UserDetails = () => {
           </div>
         </div>
       </div>}
-      {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}
+      {loading&&<div style={{marginTop:200}} className="flex"><CircularProgress size={45}/></div>}
     </div>
   );
 };

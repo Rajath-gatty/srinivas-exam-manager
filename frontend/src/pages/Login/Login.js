@@ -1,5 +1,5 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
@@ -30,6 +30,12 @@ const Login = () => {
 
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(loginUser){
+      setLoginUser(loginUser.charAt(0).toUpperCase() + loginUser.slice(1));
+    }
+  },[loginUser])
 
   const handleLogin = async(e) => {
     e.preventDefault();

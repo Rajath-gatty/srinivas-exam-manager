@@ -164,7 +164,6 @@ function App() {
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
                 <Route path="/promote" element={<Promote />} />
-
               </Route>
 
               {/* Faculty Access*/}
@@ -188,8 +187,6 @@ function App() {
                 <Route path="/application/repeater/payment" element={<PaymentRegular />} />
                 <Route path="/studenttimetable" element={<StudentTimeTable />} />
               </Route>
-
-
 
               {/* Faculty and Student access*/}
               <Route

@@ -1,0 +1,15 @@
+.NoData-container{
+    /* background-color: red; */
+    flex-direction: column;
+    gap: 2em;
+    min-height: 450px;
+}
+
+.NoData-container h4{
+    font-size: 1.2em;
+    color: var(--text-color);
+}
+
+.NoData-container img{
+    opacity: 0.9;
+}
