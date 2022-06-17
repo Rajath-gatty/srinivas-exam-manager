@@ -6,6 +6,7 @@ import {CircularProgress} from "@mui/material";
 import {useLocation} from "react-router-dom";
 import {useContextData} from "../../hooks/useContextData";
 import Filter from '../UI/Filter/Filter';
+import {NoData} from "../../Assets";
 
 const Approval = ({type}) => {
   const [approveList,setApproveList] = useState([]);
@@ -136,7 +137,7 @@ const Approval = ({type}) => {
         </tr>
         </thead>
         {!loading &&<tbody>
-        {approveList.map(item => {
+        {approveList.length!==0 ? approveList.map(item => {
          return <ApprovaList 
          key={Math.random()}
          courseName={item.course_name}
@@ -149,7 +150,15 @@ const Approval = ({type}) => {
          handleApprove={handleApprove}
          handleReject={handleReject}
          />
-        }) }
+        }) 
+        : 
+        <tr className='approval-NoData'>
+          <td colSpan="100%" className=''>
+            <span>No Approval Request</span>
+            <br />
+            <img src={NoData} alt="No Data" width="400px"/>
+          </td>
+        </tr> }
         </tbody>}
       </table>
       {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}

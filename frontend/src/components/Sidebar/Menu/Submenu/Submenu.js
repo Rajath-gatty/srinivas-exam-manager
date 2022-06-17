@@ -17,8 +17,7 @@ const SubMenu = ({
     var spanEle = itm.getElementsByTagName('span')[0].textContent;
     if(contextNotif){
       if(spanEle==="Approval")
-       { itm.setAttribute("data-notify","active")
-        console.log(itm)}
+        itm.setAttribute("data-notify","active")
       else
         itm.setAttribute("data-notify","inactive")
     }

@@ -82,3 +82,22 @@
     filter: var(--svg-grey);
     border-radius: 25px;
 }
+
+/* No Data found css */
+.approval-main .approval-NoData{
+    width: 100%;
+    position: relative;
+    top: 5em;
+}
+
+.approval-main .approval-NoData td{
+    text-align: center;
+}
+
+.approval-main .approval-NoData span{
+    font-size: 1.2em;
+}
+
+.approval-main .approval-NoData img{
+    margin-top: 2em;
+}

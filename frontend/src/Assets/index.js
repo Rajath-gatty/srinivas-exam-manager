@@ -22,6 +22,7 @@ import FacultyReg from "./Registration/faculty_reg.svg";
 import StaffReg from "./Registration/staff_reg.svg";
 import StudentReg from "./Registration/student_reg.svg";
 import LoginSvg from "./undraw_login.svg";
+import NoData from "./NoData.svg";
 
 export {
     Application,
@@ -43,5 +44,6 @@ export {
     Attendance,
     Indent,
     Coding,
-    SemMarks
+    SemMarks,
+    NoData
 }
