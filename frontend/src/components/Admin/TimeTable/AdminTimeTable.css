@@ -27,7 +27,7 @@
 .admin-timetable-main .admin-timetable-table th {
     color: var(--dark-grey);
     padding: 0.75em;
-    background: var(--grey-bg);
+    background: var(--grey-bg) !important;
 }
 
 .admin-timetable-main .admin-timetable-table .grey-bg {
@@ -51,6 +51,10 @@
     border: 1px solid var(--grey-bg);
 }
 
+.admin-timetable-main .admin-timetable-info-row td {
+    padding: 1.5em !important;
+}
+
 .admin-form-table-wrapper th {
     padding-bottom: 1em;
     text-align: left;
@@ -63,7 +67,7 @@
 }
 
 .admin-form-table-wrapper td{
-    border: 1px solid var(--grey-bg);
+    border: 1px solid rgb(212, 212, 212);
 }
 
 .admin-form-table-wrapper tbody {
@@ -75,7 +79,11 @@
 }
 
 .admin-form-table-wrapper .table-form-row input {
-  font-weight: bold;
+  font-weight: 400;
+}
+
+.table-form-row .slno {
+    padding: 0em 1em;
 }
 
 .admin-form-table-wrapper .table-form-row input::placeholder {
@@ -147,3 +155,9 @@
 
 .approved {color: var(--strong-green);}
 .rejected {color: var(--strong-red);}
+.field-error {
+    color: var(--strong-red);
+    margin-top: 1em;
+    text-align: center;
+    font-size: 0.9em;
+}

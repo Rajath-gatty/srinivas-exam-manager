@@ -180,16 +180,27 @@ exports.postNewCourse = async(req,res) => {
     }
 
     exports.postNewTimeTable = (req,res) => {
-        const {courseName,semester,timetable} = req.body;
+        const {courseName,semester,timetable,tId} = req.body;
         const deptId = req.deptId;
 
-        const sql = `insert into timetable(dept_id,course_id,semester,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?)`;
+        const sql = `insert into timetable(dept_id,course_id,semester,t_id,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?,?)`;
         try {
             timetable.forEach(async({subjectName,subjectCode,examDate,examTime}) => {
-               await db.execute(sql,[deptId,courseName,semester,subjectName,subjectCode,examDate,examTime,'pending']);
+               await db.execute(sql,[deptId,courseName,semester,tId,subjectName,subjectCode,examDate,examTime,'pending']);
             })
-            console.log(result);
             res.status(200).send({success:true,result:'Inserted Successfully'});
+        } catch(err) {
+            console.log(err);
+            res.status(500).send({success:false})
+        }
+    }
+
+    exports.getTimetables = async(req,res) => {
+        const deptId = req.deptId;
+        const sql = `select course_name,t_id,semester,count(subj_name) as total_subjects,date_format(convert_tz(created_at,@@session.time_zone,'+05:30'),'%d %b-%Y %l:%i %p') created_at,status from timetable join course on timetable.course_id=course.course_id where timetable.dept_id=${deptId} group by t_id;`;
+        try {
+            const result = await db.execute(sql);
+            res.status(200).send(result[0]);
         } catch(err) {
             console.log(err);
             res.status(500).send({success:false})
