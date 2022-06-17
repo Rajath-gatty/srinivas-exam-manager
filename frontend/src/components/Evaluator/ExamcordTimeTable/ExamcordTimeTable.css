@@ -1,122 +1,110 @@
-.admin-timetable-main {
+.examcoord-timetable-main {
     margin: 2em;
     width: 100%;
 }
 
-.admin-timetable-main .admin-timetable-header {
+.examcoord-timetable-main .admin-timetable-header {
     display: flex;
     max-width: 700px;
     justify-content: space-between;
 }
 
-.admin-timetable-main .admin-timetable-header-btn {
+.examcoord-timetable-main .admin-timetable-header-btn {
     gap: 1em;
 }
 
-.admin-timetable-main .admin-timetable-header h1 {
+.examcoord-timetable-main .admin-timetable-header h1 {
     color: var(--primary-color);
 }
 
-.admin-timetable-main .admin-timetable-table {
+.examcoord-timetable-main{
     width: 100%;
     text-align: center;
     border-collapse: collapse;
     margin-top: 2.5em;
 }
 
-.admin-timetable-main .admin-timetable-table th {
+.examcoord-timetable-main th {
     background: var(--grey-bg);
     background-color: rgb(213, 213, 213);
     color: var(--dark-grey);
     padding: 0.75em;
+    width: 100%;
 }
 
-.admin-timetable-main .admin-timetable-table tbody tr {
+.admin-timetable-table-wrapper {
+    width: 100%;
+}
+
+.admin-timetable-table tbody tr {
     border: 1px solid var(--grey-bg);
     color: var(--text-color);
     font-size: 0.9em;
 }
 
-.admin-timetable-main .admin-timetable-table td {
+.admin-timetable-table  {
+    box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
+}
+
+.examcoord-timetable-table  {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5em;
+    float: unset;
+}
+
+.examcoord-timetable-table th {
+    background: var(--grey-bg);
     padding: 1em;
 }
 
-body.active-modal {
-    overflow-y: hidden;
+.timetable-modal  {
+    border: 1px solid var(--grey-bg);
 }
 
-.btn-modal {
-    padding: 10px 20px;
-    display: block;
-    margin: 100px auto 0;
-    font-size: 18px;
-}
-
-.modal,
-.overlay {
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: fixed;
-}
-
-.overlay {
-    background: rgba(49, 49, 49, 0.8);
-}
-
-.modal-content {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    line-height: 1.4;
-    background: #f1f1f1;
-    padding: 14px 28px;
-    border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
-}
-
-.close-modal {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px 7px;
+.timetable-close-icon {
+    float: right;
+    margin-bottom: 1em;
     cursor: pointer;
-    background-color: rgb(226, 226, 226);
+    color: var(--strong-red);
+}
 
+.examcoord-timetable-table .timetable-modal td{
+    padding: 1em;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.admin-timetable-table tbody td {
+    padding: 1.5em !important;
 }
 
 .open-modal {
-
-    padding: 0 1em;
-    font-size: 0.95em;
-    gap: 0.5em;
-    color: #fff;
-    background-color: rgb(50, 133, 242);
-    border-color: var(--primary-color);
-    cursor: pointer;
+   background: none;
+   color: var(--primary-color);
+   border: none;
+   cursor: pointer;
+   font-size: 1.1em;
 }
 
 .btn-green {
     background-color: white;
     color: #4CAF50;
     border: 2px solid #4CAF50;
-    padding: 4px 8px;
     cursor: pointer;
     border-radius: 4px;
+    margin-top: 1.5em;
+    padding: 0.5em 1.5em;
 }
 
 .btn-red {
     background-color: white;
     color: #db4747;
     border: 2px solid #db4747;
-    padding: 4px 8px;
+    padding: 0.5em 1.5em;
     cursor: pointer;
     border-radius: 4px;
+    margin-top: 1.5em;
 
 }
 
