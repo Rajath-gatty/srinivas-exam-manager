@@ -22,7 +22,6 @@ const Approval = ({type}) => {
     try {
       setLoading(true);
       const result = await axios.post(`/${userType}/approvelist/${type}`);
-      console.log(result);
       setApproveList(result.data);
       setLoading(false);
     } catch(err) {
