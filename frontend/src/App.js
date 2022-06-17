@@ -50,6 +50,7 @@ import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
 import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import ExamcordTimeTable from "./components/Evaluator/ExamcordTimeTable/ExamcordTimeTable";
+import StudentTimeTable from "./components/Student/StudentTimeTable/StudentTimeTable";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
 import PaymentRegular from "./components/Student/Application/Payment/Payment";
 
@@ -126,7 +127,7 @@ function App() {
                   path="approve/staff/:id"
                   element={<ApprovalDetailsView />}
                 />
-                 <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
+                <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
                 <Route path="users/examcoordinator/:userId" element={<UserDetails />} />
               </Route>
 
@@ -185,6 +186,7 @@ function App() {
 
                 <Route path="/application/regular/payment" element={<PaymentRegular />} />
                 <Route path="/application/repeater/payment" element={<PaymentRegular />} />
+                <Route path="/studenttimetable" element={<StudentTimeTable />} />
               </Route>
 
 

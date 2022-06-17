@@ -9,14 +9,14 @@ const ExamcordTimeTable = () => {
     };
     return (
         <>
-            <div className="admin-timetable-main">
-                <div className="admin-timetable-header">
+            <div className="exam-timetable-main">
+                <div className="exam-timetable-header">
                     <h1>Recent Timetable</h1>
 
                 </div>
-                <div className="admin-timetable-table-wrapper">
+                <div className="exam-timetable-table-wrapper">
                     {/* <Skeleton rows={9} cols={7} profile /> */}
-                    <table className="admin-timetable-table">
+                    <table className="exam-timetable-table">
                         <thead>
                             <tr>
                                 <th>Course</th>
@@ -41,8 +41,8 @@ const ExamcordTimeTable = () => {
                                     <div onClick={toggleModal} className="overlay">
                                     </div>
                                     <div className="modal-content">
-                                        <div className="admin-timetable-table-wrapper">
-                                            <table className="admin-timetable-table">
+                                        <div className="exam-timetable-table-wrapper">
+                                            <table className="exam-timetable-table">
                                                 <thead >
 
                                                     <tr>

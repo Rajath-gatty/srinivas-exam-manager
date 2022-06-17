@@ -4,9 +4,9 @@ const AttendanceStatement = () => {
 
 
     return (
-        <div className="attendance-main">
+        <div className="admin-attendance-main">
             <FilterSearch />
-            <div className="main-box">
+            <div className="admin-main-box">
                 <div className="main-box-header">
                     <span>Attendance Statement</span>
                 </div>

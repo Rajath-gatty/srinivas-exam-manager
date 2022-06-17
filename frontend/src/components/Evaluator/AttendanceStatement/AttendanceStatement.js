@@ -1,14 +1,18 @@
-import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+
+import "./AttendanceStatement.css";
 import AttendanceStatementList from "./AttendanceStatementList";
+import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+
 const AttendanceStatement = () => {
    return (
-      <div className="attendance-main">
+      <div className="evaluator-main">
          <FilterSearch />
-         <table className="attendance-table-wrapper">
+
+         <table className="evaluator-table-wrapper">
             <thead className="thead">
                <tr>
-                  <th>Subject Name</th>
-                  <th>Subject Code</th>
+                  <th>SubjectName</th>
+                  <th>SubjectCode</th>
                   <th>Total No Students</th>
                   <th>No of absenties</th>
                   <th>Date</th>
@@ -16,12 +20,15 @@ const AttendanceStatement = () => {
             </thead>
             <tbody>
                <AttendanceStatementList></AttendanceStatementList>
-               <AttendanceStatementList></AttendanceStatementList>
-               <AttendanceStatementList></AttendanceStatementList>
+
             </tbody>
          </table>
       </div>
    );
-}
+};
 
 export default AttendanceStatement;
+
+
+
+

@@ -202,7 +202,7 @@ export const NavLinks = [
       },
       {
         title: "Time Table",
-        path: "/timetable",
+        path: "/studenttimetable",
         icon: Calender,
       }
     ],

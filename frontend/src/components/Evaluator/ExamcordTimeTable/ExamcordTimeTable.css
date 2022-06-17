@@ -1,43 +1,43 @@
-.admin-timetable-main {
+.exam-timetable-main {
     margin: 2em;
     width: 100%;
 }
 
-.admin-timetable-main .admin-timetable-header {
+.exam-timetable-main .exam-timetable-header {
     display: flex;
     max-width: 700px;
     justify-content: space-between;
 }
 
-.admin-timetable-main .admin-timetable-header-btn {
+.exam-timetable-main .exam-timetable-header-btn {
     gap: 1em;
 }
 
-.admin-timetable-main .admin-timetable-header h1 {
+.exam-timetable-main .exam-timetable-header h1 {
     color: var(--primary-color);
 }
 
-.admin-timetable-main .admin-timetable-table {
+.exam-timetable-main .exam-timetable-table {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
     margin-top: 2.5em;
 }
 
-.admin-timetable-main .admin-timetable-table th {
+.exam-timetable-main .exam-timetable-table th {
     background: var(--grey-bg);
     background-color: rgb(213, 213, 213);
     color: var(--dark-grey);
     padding: 0.75em;
 }
 
-.admin-timetable-main .admin-timetable-table tbody tr {
+.exam-timetable-main .exam-timetable-table tbody tr {
     border: 1px solid var(--grey-bg);
     color: var(--text-color);
     font-size: 0.9em;
 }
 
-.admin-timetable-main .admin-timetable-table td {
+.exam-timetable-main .exam-timetable-table td {
     padding: 1em;
 }
 

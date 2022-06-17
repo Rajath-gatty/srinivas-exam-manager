@@ -1,0 +1,37 @@
+.attendance-filter {
+    margin: 2em;
+    width: 100%;
+}
+
+.attendance-main-box {
+    width: 100%;
+    margin-top: 2em;
+
+}
+
+
+
+.marks-table {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.marks-table .thead th {
+    padding: 0.75em;
+    background: var(--grey-bg);
+}
+
+.marks-table td {
+    padding: 1em 0em;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.marks-table .attendance-table td {
+    padding: 1.25em 0em;
+}
+
+.marks-table .attendance-table {
+    border: 1px solid var(--grey-bg);
+}
