@@ -126,6 +126,17 @@
   font-size: 1.1em;
 }
 
+[data-notify="active"]::after{
+  content: '';
+  background-color: red;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0.3em;
+  left: 10.8em;
+}
+
 .dropdown li {
   margin-bottom: 0;
 }
