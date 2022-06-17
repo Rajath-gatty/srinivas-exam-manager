@@ -140,17 +140,17 @@ const Create = () => {
             <FormControl className="course-duration-select">
               <InputLabel>Duration</InputLabel>
               <Select
-                label="Department"
+                label="Duration"
                 defaultValue=""
                 size="small"
                 type="number"
                 error={errors.some((err) => err.param === "duration")}
                 onChange={(e) => dispatch({type:'DURATION',payload:e.target.value})}
               >
-                <MenuItem value="1">1</MenuItem>
-                <MenuItem value="2">2</MenuItem>
-                <MenuItem value="3">3</MenuItem>
-                <MenuItem value="4">4</MenuItem>
+                <MenuItem value="1">1 Year</MenuItem>
+                <MenuItem value="2">2 Year</MenuItem>
+                <MenuItem value="3">3 Year</MenuItem>
+                <MenuItem value="4">4 Year</MenuItem>
               </Select>
               <FormHelperText error>{errors.find((err) => err.param === "duration")?.msg}</FormHelperText>
             </FormControl>

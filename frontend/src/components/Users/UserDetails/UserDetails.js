@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"
-import { FiArrowLeft, FiCheck, FiX } from "react-icons/fi";
-import { FaUserCircle, FaCamera } from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 import {CircularProgress} from "@mui/material";
 import Back from "../../UI/Back/Back";
 import "./UserDetails.css";

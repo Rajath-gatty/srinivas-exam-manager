@@ -51,7 +51,7 @@ export const NavLinks = [
             path: "/users/staff",
           },
           {
-            title: "Exam coordinator",
+            title: "Exam Coordinator",
             path: "/users/examcoordinator",
           },
         ],

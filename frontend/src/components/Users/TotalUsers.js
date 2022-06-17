@@ -40,7 +40,7 @@ const TotalUsers = ({type}) => {
       }
     }
     fetchUsers();
-  },[location.pathname])
+  },[location.pathname,type])
 
   const handleCourseChange = async(e) => {
     const courseName = e.target.value;
@@ -62,11 +62,11 @@ const TotalUsers = ({type}) => {
   return (
     <div className="users-main">
       <div className="users-Filter">
-        {/* <Filter 
+        <Filter 
         data={filterCourses} 
         label="Filter By Course" 
         filter="course" 
-        handleCourseChange={handleCourseChange}/> */}
+        handleCourseChange={handleCourseChange}/>
       </div>
 
       <table className="users-table-wrapper">
