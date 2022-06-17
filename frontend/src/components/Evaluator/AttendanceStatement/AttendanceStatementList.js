@@ -1,15 +1,15 @@
 
-const AttendanceStatementList = () => {
+const CodingList = () => {
     return (
-        <tr className="attendance-table-row">
-            <td>HTML</td>
-            <td>3SU1A010</td>
-            <td>10</td>
-            <td>60</td>
-            <td>28-02-2022</td>
+        <tr className="evaluator-table-row">
+            <td>Java</td>
+            <td>3SU19SD060</td>
+            <td>40</td>
+            <td>5</td>
+            <td>10-06-2022</td>
         </tr>
 
     )
 }
 
-export default AttendanceStatementList;
+export default CodingList;

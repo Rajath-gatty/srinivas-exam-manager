@@ -1,7 +1,7 @@
 
 const EvaluatorsList = () => {
     return (
-        <tr className="coding-table-row">
+        <tr className="eval-table-row">
             <td>BCA</td>
             <td>V</td>
             <td>John</td>
@@ -13,3 +13,10 @@ const EvaluatorsList = () => {
 }
 
 export default EvaluatorsList;
+
+
+
+
+
+
+

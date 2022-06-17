@@ -16,7 +16,7 @@ const InternalMarks = () => {
             <th>Name</th>
             <th>Semester</th>
             <th>Java</th>
-          
+
           </tr>
         </thead>
         <tbody>
@@ -24,12 +24,10 @@ const InternalMarks = () => {
           <InternalList></InternalList>
           <InternalList></InternalList>
           <InternalList></InternalList>
-          <InternalList></InternalList>
-          <InternalList></InternalList>
-          <InternalList></InternalList>
-          <InternalList></InternalList>
+
         </tbody>
       </table>
+      <button className="submit">Submit</button>
     </div>
   );
 };

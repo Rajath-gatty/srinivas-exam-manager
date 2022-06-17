@@ -81,7 +81,7 @@ const ExamcordTimeTable = () => {
                 <div className="admin-timetable-header">
                     <h1>Approve Timetable</h1>
                 </div>
-                <div className="admin-timetable-table-wrapper">
+                <div className="exam-timetable-table-wrapper">
                     {/* <Skeleton rows={9} cols={7} profile /> */}
                     {!loading?<table className="admin-timetable-table">
                         <thead>

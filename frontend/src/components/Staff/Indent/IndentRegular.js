@@ -27,6 +27,7 @@ const IndentRegular = () => {
             <IndentRegularList></IndentRegularList>
           </tbody>
         </table>
+        <button className="submit">Submit</button>
       </div>
     </div>
   );
