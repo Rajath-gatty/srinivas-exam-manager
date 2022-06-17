@@ -25,6 +25,7 @@ const Coding = () => {
 
                 </tbody>
             </table>
+            <button className="submit">Submit</button>
         </div>
     );
 };

@@ -1,3 +1,4 @@
+import { TextField } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
 const InternalList = () => {
     return (
@@ -8,7 +9,9 @@ const InternalList = () => {
             <td>3SU19SA010</td>
             <td>John</td>
             <td>V</td>
-            <td className="internal-input-row"><input type="text"></input></td>
+            <td><TextField
+                variant="outlined"
+                size="small"></TextField></td>
 
         </tr>
 

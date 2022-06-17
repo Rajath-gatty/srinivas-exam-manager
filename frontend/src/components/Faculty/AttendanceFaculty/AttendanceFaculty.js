@@ -5,7 +5,7 @@ import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 const AttendanceFaculty = () => {
   return (
     <div className="faculty-attendance-main">
-      <FilterSearch search/>
+      <FilterSearch search />
 
       <table className="faculty-attendance-table-wrapper">
         <thead className="thead">
@@ -22,14 +22,10 @@ const AttendanceFaculty = () => {
           <AttendanceList />
           <AttendanceList />
           <AttendanceList />
-          <AttendanceList />
-          <AttendanceList />
-          <AttendanceList />
-          <AttendanceList />
-          <AttendanceList />
-          <AttendanceList />
+
         </tbody>
       </table>
+      <button className="submit">Submit</button>
     </div>
   );
 };
