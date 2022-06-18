@@ -170,3 +170,7 @@ a {
 .gap-1 {
   gap: 1em;
 }
+
+.gap-sm {
+  gap: 0.5em;
+}

@@ -31,12 +31,6 @@ const Login = () => {
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(loginUser){
-      setLoginUser(loginUser.charAt(0).toUpperCase() + loginUser.slice(1));
-    }
-  },[loginUser])
-
   const handleLogin = async(e) => {
     e.preventDefault();
     
@@ -93,7 +87,7 @@ const Login = () => {
 
       {/* Login Form */}
       <div className="login-form">
-        <h1 className="login-hdng">{loginUser ? "Login as "+loginUser : "Select Login User"}</h1>
+        <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelectContain flex">
           <div className="login-userSelect">

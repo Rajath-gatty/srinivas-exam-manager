@@ -1,7 +1,22 @@
 const router = require("express").Router();
 const controllers = require("../Controllers/registrationController");
 const db = require("../db");
+const path = require('path');
 const { body } = require("express-validator");
+const multer  = require('multer');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      const imgPath = path.join(__dirname,'..','uploads');
+      cb(null, imgPath)
+    },
+    filename: function (req, file, cb) {
+      console.log(file);
+      cb(null, Date.now()+file.originalname)
+    }
+  })
+
+const upload = multer({ storage: storage });
 
 //Student Post Request
 router.post(
@@ -47,7 +62,7 @@ router.post(
     body("department").trim().notEmpty().withMessage("Select Department"),
     body("course").trim().notEmpty().withMessage("Select Course"),
     body("joiningYear").trim().notEmpty().withMessage("Enter Joining Year"),
-  ],
+  ],upload.single("image"),
   controllers.postStudent
 );
 

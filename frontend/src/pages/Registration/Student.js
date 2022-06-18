@@ -30,6 +30,9 @@ const Student = () => {
 
   //Switch Courses Acc to Selected Department
   const [course, setCourse] = useState([]);
+  const [fileErr,setFileErr] = useState('');
+  const [photo,setPhoto] = useState(false);
+  const [fileUrl,setFileUrl] = useState('');
   const [passErr, setPassErr] = useState(false);
   const [errors, setErrors] = useState([]);
 
@@ -127,6 +130,11 @@ const Student = () => {
       course: courseRef.current.value,
       joiningYear: joiningYearRef.current.value,
     };
+    const formData = new FormData();
+    formData.append('image',photo);
+    formData.append('data',studentData);
+
+    console.log(formData);
 
     if (studentData.password !== studentData.cPasword) {
       setPassErr(true);
@@ -134,7 +142,7 @@ const Student = () => {
       try {
         const result = await axios.post(
           "/registration/student",
-          studentData
+          formData
         );
         console.log(result);
         setErrors([]);
@@ -146,6 +154,29 @@ const Student = () => {
       setPassErr(false);
     }
   };
+
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    setFileErr('');
+    console.log(file.type)
+    if(!(file.type==='image/jpg' || file.type==='image/jpeg' || file.type==='image/png')) {
+      setFileUrl('');
+      return setFileErr('Invalid Image type');
+    }
+
+    if(file.size/1024>2000) {
+      setFileUrl('');
+     return setFileErr('Image size must be less than 4mb');
+    }
+
+    setFileErr('');
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setFileUrl(reader.result);
+    }
+    setPhoto(file);
+  }
 
   return (
     <div>
@@ -612,9 +643,31 @@ const Student = () => {
                 </Select>
                 <FormHelperText error>{errors.find((err) => err.param === "joiningYear")?.msg}</FormHelperText>
               </FormControl>
-            </div>
-          </div>
 
+              {/* <div className="img-upload-wrapper">
+                <label htmlFor="student-profile">Upload Photo</label>
+                    <input type="file" name="studentProfile" id="studentProfile" />
+              </div> */}
+
+            </div>
+              <div className="upload-photo-wrapper" >
+                <div>
+              <p className="upload-label">Upload Photo</p>
+              <TextField
+                    size="small"
+                    type="file"
+                    hidden
+                    name="file-upload"
+                    className="upload-photo"
+                    error={fileErr.length>0}
+                    helperText={fileErr}
+                    onChange={(e) => handleFile(e)}
+                  />
+                  <FormHelperText>max size 4MB supported types JPEG, JPG and PNG</FormHelperText>
+                  </div>
+                  <img src={fileUrl} alt=""/>
+              </div>
+          </div>
           <input className="btn mt-2" type="submit" value="Register" />
 
           <div className="to-login mb-1">

@@ -177,3 +177,23 @@
   display: flex;
   gap: 0.75em;
 }
+
+.upload-photo-wrapper {
+  margin-top: 1.5em;
+}
+
+.upload-photo-wrapper .upload-label {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+.upload-photo-wrapper img {
+  margin-top: 1em;
+  max-height: 120px;
+  width: 130px;
+  object-fit: cover;
+}
+
+.upload-photo {
+  width: 325px;
+}

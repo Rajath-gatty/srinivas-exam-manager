@@ -8,6 +8,7 @@ const adminRoutes = require('./Router/adminRoutes');
 const staffRoutes = require('./Router/staffRoutes');
 const examcoordRoutes = require('./Router/examcoordRoutes');
 const routes = require('./Router/routes');
+
 app.use(express.json());
 app.use(cors());
 
@@ -17,4 +18,5 @@ app.use('/examcoord',examcoordRoutes);
 app.use(routes);
 app.use(registrationRoutes);
 
-app.listen(8080);
+const PORT = process.env.PORT||8080;
+app.listen(PORT);

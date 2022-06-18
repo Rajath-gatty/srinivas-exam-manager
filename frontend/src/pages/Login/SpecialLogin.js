@@ -31,12 +31,6 @@ const SpecialLogin = () => {
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    if(loginUser){
-      setLoginUser(loginUser.charAt(0).toUpperCase() + loginUser.slice(1));
-    }
-  },[loginUser])
-
   const handleLogin = async(e) => {
     e.preventDefault();
     
@@ -91,7 +85,7 @@ const SpecialLogin = () => {
 
       {/* Login Form */}
       <div className="login-form">
-        <h1 className="login-hdng">{loginUser ? "Login as "+loginUser : "Select Login User"}</h1>
+        <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelect">
           <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
@@ -126,7 +120,7 @@ const SpecialLogin = () => {
                 onChange={(e) =>setEmail(e.target.value)}
                 placeholder="example@gmail.com"
               />
-              <FiMail size={30} color="var(--light-grey)" />
+              <FiMail size={30} color="var(--light-grey)"/>
             </div>
           </div>
           <div className={passAct}>
