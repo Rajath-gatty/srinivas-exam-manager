@@ -128,13 +128,14 @@ const Student = () => {
       gEmail: gEmailRef.current?.value || "",
       department: departmentRef.current.value,
       course: courseRef.current.value,
-      joiningYear: joiningYearRef.current.value,
+      joiningYear: joiningYearRef.current.value
     };
     const formData = new FormData();
-    formData.append('image',photo);
-    formData.append('data',studentData);
-
-    console.log(formData);
+    
+    formData.append('studentProfiles',photo);
+    for (const key in studentData) {
+      formData.append(key,studentData[key]);
+    }
 
     if (studentData.password !== studentData.cPasword) {
       setPassErr(true);
@@ -144,9 +145,9 @@ const Student = () => {
           "/registration/student",
           formData
         );
-        console.log(result);
         setErrors([]);
         setPassErr(false);
+        console.log(result);
       } catch (err) {
         setErrors(err.response.data.err);
         console.log(err);
@@ -158,7 +159,6 @@ const Student = () => {
   const handleFile = (e) => {
     const file = e.target.files[0];
     setFileErr('');
-    console.log(file.type)
     if(!(file.type==='image/jpg' || file.type==='image/jpeg' || file.type==='image/png')) {
       setFileUrl('');
       return setFileErr('Invalid Image type');

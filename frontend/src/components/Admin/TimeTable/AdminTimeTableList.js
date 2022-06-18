@@ -16,7 +16,7 @@ const AdminTimeTableList = (props) => {
              <td>{semester}</td>
             <td>{total_subjects}</td>
              <td>{created_at}</td>
-              <td><p className={result+' '+'flex'+' '+'gap-sm'}>{status==='approved'?<><BiCheck size={20} /> {status}</>:status}</p></td>
+              <td><p className={`${result} flex gap-sm`}>{status==='approved'?<><BiCheck size={20} /> {status}</>:status}</p></td>
         </tr>
     )
 }

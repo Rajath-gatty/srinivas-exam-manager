@@ -1,13 +1,12 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useContextData } from "../hooks/useContextData";
-import PageNotFound from "../pages/PageNotFound/PageNotFound";
 
 const ProtectedRoute = ({ allowedRole }) => {
 
-  const { role,token } = useContextData();
+  const { role } = useContextData();
   return allowedRole.find((item) => item === role) ? (
     <Outlet />
-  ) :token?<PageNotFound />:<Navigate to="/login"/>;
+  ):null;
 };
 
 export default ProtectedRoute;

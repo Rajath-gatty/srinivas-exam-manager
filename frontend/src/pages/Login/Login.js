@@ -1,5 +1,5 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
 
 import "./Login.css";
@@ -47,7 +47,6 @@ const Login = () => {
     try {
       setLoading(true);
       const result = await axios.post('/login',data);
-      console.log(result);
       setRole(result.data.user.role);
       setToken(result.data.token);
       setUser(result.data.user);

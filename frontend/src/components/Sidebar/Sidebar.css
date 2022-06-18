@@ -23,10 +23,22 @@
   margin-left: 0.5em;
 }
 
+.profile-pic-container {
+  align-items: center;
+}
+
+.profile-pic {
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+}
+
 .user-profile {
   justify-content: space-evenly !important;
   margin-top: 2.75em;
   cursor: pointer;
+  object-fit: cover;
 }
 
 .user-avatar {

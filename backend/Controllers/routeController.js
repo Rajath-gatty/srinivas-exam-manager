@@ -1,4 +1,5 @@
 const db = require('../db');
+const hallTicketTemplate = require('../hallticket');
 
 exports.getDepartments = async(req,res) => {
     try {

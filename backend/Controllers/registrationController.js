@@ -3,64 +3,60 @@ const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
-
 exports.postStudent = async (req, res) => {
-  // const data = req.body;
+  const data = req.body;
+  const imagePath = `localhost:8080/studentProfiles/${req.file.filename}`;
 
-  // const err = validationResult(req).errors;
-  // if (err.length > 0) {
-  //   return res.status(400).send({ success: false, err });
-  // }
-  // try {
-  //   const hashedPassword = await bcrypt.hash(data.password, 4);
+  try {
+    const hashedPassword = await bcrypt.hash(data.password, 4);
 
-  //   const result = await db.execute(
-  //     "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,dept_id,course_id,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),(select course_id from course where course_name=?),?,?,?,?,?)",
-  //     [
-  //       data.regno,
-  //       data.firstName,
-  //       data.lastName,
-  //       data.gender,
-  //       data.dob,
-  //       data.email,
-  //       data.phone,
-  //       data.address,
-  //       data.bloodGroup,
-  //       data.caste,
-  //       data.aadharNo,
-  //       data.religion,
-  //       data.birthPlace,
-  //       data.birthDistrict,
-  //       data.country,
-  //       data.identityMark,
-  //       data.pincode,
-  //       hashedPassword,
-  //       data.fatherName,
-  //       data.fatherOccupation,
-  //       data.fatherPhone,
-  //       data.fatherEmail,
-  //       data.motherName,
-  //       data.motherOccupation,
-  //       data.motherPhone,
-  //       data.motherEmail,
-  //       data.gName,
-  //       data.gOccupation,
-  //       data.gPhone,
-  //       data.gEmail,
-  //       data.department,
-  //       data.course,
-  //       data.joiningYear,
-  //       "student",
-  //       "pending",
-  //       1,
-  //       false
-  //     ]
-  //   );
-
+    const result = await db.execute(
+      "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,dept_id,course_id,image_path,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),(select course_id from course where course_name=?),?,?,?,?,?,?)",
+      [
+        data.regno,
+        data.firstName,
+        data.lastName,
+        data.gender,
+        data.dob,
+        data.email,
+        data.phone,
+        data.address,
+        data.bloodGroup,
+        data.caste,
+        data.aadharNo,
+        data.religion,
+        data.birthPlace,
+        data.birthDistrict,
+        data.country,
+        data.identityMark,
+        data.pincode,
+        hashedPassword,
+        data.fatherName,
+        data.fatherOccupation,
+        data.fatherPhone,
+        data.fatherEmail,
+        data.motherName,
+        data.motherOccupation,
+        data.motherPhone,
+        data.motherEmail,
+        data.gName,
+        data.gOccupation,
+        data.gPhone,
+        data.gEmail,
+        data.department,
+        data.course,
+        imagePath,
+        data.joiningYear,
+        "student",
+        "pending",
+        1,
+        false
+      ]
+    );
     res.status(200).send({ success: true });
-  // } catch (err) {
-  //   res.status(500).send(err);
-  // }
+  } catch (err) {
+    res.status(500).send(err);
+  }
 };
 
 exports.postFaculty = async (req, res) => {
@@ -165,8 +161,8 @@ exports.postLogin = async(req,res) => {
     let id;
     if(loginType==='student') {
       id = "regno";
-      sql = `select regno,first_name,last_name,email,password,phone,dept_id,course_id,address,role from ${loginType} where email='${email}' and status='approved'`;
-    } else if(loginType==='super admin'){ 
+      sql = `select regno,first_name,last_name,email,password,phone,dept_id,semester,course_id,image_path,address,role from ${loginType} where email='${email}' and status='approved'`;
+    } else if(loginType==='super admin'){
       id = 's_admin_id';
       sql = `select ${id},first_name,last_name,email,password,role from ${loginType.split(' ').join('_')} where email='${email}'`;
     } else if(loginType==='exam coord') {
@@ -182,7 +178,6 @@ exports.postLogin = async(req,res) => {
         id = "staff_id";
       } 
       sql=`select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}' and status='approved'`;
-      console.log(sql);
     }
       const [user] = await db.execute(sql);
       // res.send({success:true});
@@ -206,12 +201,14 @@ exports.postLogin = async(req,res) => {
                   id:fetchedUser[id],
                   first_name:fetchedUser.first_name,
                   last_name:fetchedUser.last_name,
+                  imagePath:fetchedUser.image_path,
                   email:fetchedUser.email,
                   address:fetchedUser.address,
                   phone:fetchedUser.phone,
                   courseId:fetchedUser.course_id,
                   deptId:fetchedUser.dept_id,
-                  role:fetchedUser.role
+                  role:fetchedUser.role,
+                  semester:fetchedUser.semester
                 }
             });
         });

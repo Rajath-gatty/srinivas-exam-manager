@@ -64,9 +64,8 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
 function App() {
-  const { setRole, setUser, setToken, token } = useContextData();
+  const { setRole, setUser, setToken, token, user } = useContextData();
   const [loading, setLoading] = useState(true);
-
   axios.defaults.headers.common['Authorization'] = token;
   //MUI Components Fonts
   const theme = createTheme({
@@ -76,6 +75,7 @@ function App() {
   });
   //MUI Components Fonts[/]
 
+  //Check previous login credentials
   useEffect(() => {
     let prevUser = localStorage.getItem("user");
     prevUser = JSON.parse(prevUser);
@@ -95,7 +95,7 @@ function App() {
         <Browser>
           <Routes>
             {/* Public Routes */}
-            {!loading && <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />}
+            {!loading && <Route path="/login" element={!token ? <Login /> :<Navigate to="/" />} />}
             {/* {!token&&<Route path="/login" element={<Login />}/>} */}
             {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
             {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
@@ -254,7 +254,7 @@ function App() {
                 {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
 
                 <Route path="/" element={token ? <Dashboard /> : <PageNotFound />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="profile" element={token ?<Profile />: <PageNotFound />} />
 
                 {/* Testing Route */}
                 {/* <Route path="testing" element={<AnyTestComponent />} /> */}

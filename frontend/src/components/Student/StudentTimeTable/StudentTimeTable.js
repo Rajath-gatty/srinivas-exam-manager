@@ -1,13 +1,55 @@
-import FilterSearch from "../../UI/FilterSearch/FilterSearch";
-import StudentTimeTableList from "./StudentTimeTableList";
+import { useState, useEffect } from "react";
+import {HiDownload} from "react-icons/hi";
+import {useContextData} from "../../../hooks/useContextData";
 import "./StudentTimeTable.css";
-const StudentTimeTable = () => {
+import { CircularProgress } from "@mui/material";
+import axios from "axios";
 
+const StudentTimeTable = () => {
+    const [timetable, setTimetable] = useState([]);
+    const [loading,setLoading] = useState(true);
+    
+    const {user} = useContextData();
+    const semester = user.semester;
+    const courseId = user.courseId;
+     
+    useEffect(() =>{
+        const fetchTimetables = async () => {
+            try {
+                const result = await axios.post('/student/timetable',{semester, courseId});
+                setTimetable(result.data);
+                // console.log(result.data)
+                setLoading(false);
+            } catch(err) {
+                console.log(err);
+                setLoading(false);
+            }
+        }
+        fetchTimetables();
+    },[])
+
+    const handleHallticket = async () =>{
+        try {
+            const result = await axios.post('student/hallticket',timetable);
+            setLoading(false);
+        } catch(err) {
+            console.log(err);
+            setLoading(false);
+        }
+    }
+    
     return (
-        <div className="attendance-filter">
-            <FilterSearch />
+        <div className="student-timetable-container">
+            <div className="timetable-header flex">
+                <h1>Student Time Table</h1>
+                <div className="btn-outlined flex" onClick={handleHallticket}>
+                    <HiDownload size={25}/>
+                    <span>Download Hall Ticket</span>
+                </div>
+            </div>
+
             <div className="attendance-main-box">
-                <table className="marks-table">
+                <table className="timetable-table">
                     <thead className="thead">
                         <tr>
                             <th>SubjectName</th>
@@ -16,10 +58,18 @@ const StudentTimeTable = () => {
                             <th>Time</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <StudentTimeTableList></StudentTimeTableList>
-                    </tbody>
-                </table>
+                    {!loading && <tbody>
+                        {timetable.map(obj =>{
+                            return(<tr className="timetable-row" key={Math.random()+Date.now()}>
+                                <td>{obj.subj_name}</td>
+                                <td>{obj.subj_code}</td>
+                                <td>{obj.exam_date}</td>
+                                <td>{obj.exam_time}</td>
+                            </tr>)
+                        })}
+                    </tbody>}
+                </table> 
+                {loading && <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
             </div>
         </div>
     );
