@@ -17,7 +17,6 @@ const StudentTimeTable = () => {
             try {
                 const result = await axios.post('/student/timetable',{semester, courseId});
                 setTimetable(result.data);
-                // console.log(result.data)
                 setLoading(false);
             } catch(err) {
                 console.log(err);
@@ -25,7 +24,7 @@ const StudentTimeTable = () => {
             }
         }
         fetchTimetables();
-    },[])
+    })
 
     const handleHallticket = async () =>{
         try {
@@ -64,7 +63,7 @@ const StudentTimeTable = () => {
                     </thead>
                     {!loading && <tbody>
                         {timetable.map(obj =>{
-                            return(<tr className="timetable-row" key={Math.random()+Date.now()}>
+                            return(<tr className="timetable-row" key={Math.random()+Date.now()+obj.subj_code}>
                                 <td>{obj.subj_name}</td>
                                 <td>{obj.subj_code}</td>
                                 <td>{obj.exam_date}</td>
