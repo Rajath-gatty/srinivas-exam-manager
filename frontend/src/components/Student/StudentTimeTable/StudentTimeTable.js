@@ -8,7 +8,6 @@ import axios from "axios";
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
     const [loading,setLoading] = useState(true);
-    
     const {user} = useContextData();
     const semester = user.semester;
     const courseId = user.courseId;
@@ -30,7 +29,12 @@ const StudentTimeTable = () => {
 
     const handleHallticket = async () =>{
         try {
-            const result = await axios.post('student/hallticket',timetable);
+            const result = await axios.post('student/hallticket',{timetable},{responseType:"arraybuffer"});
+            const arr = new Uint8Array(result.data);
+            const blob = new Blob([arr], { type: 'application/pdf' });
+            const objectUrl = window.URL.createObjectURL(blob);
+            console.log(result.data);
+            window.open(objectUrl);
             setLoading(false);
         } catch(err) {
             console.log(err);
@@ -41,7 +45,7 @@ const StudentTimeTable = () => {
     return (
         <div className="student-timetable-container">
             <div className="timetable-header flex">
-                <h1>Student Time Table</h1>
+                <h1>Time Table</h1>
                 <div className="btn-outlined flex" onClick={handleHallticket}>
                     <HiDownload size={25}/>
                     <span>Download Hall Ticket</span>

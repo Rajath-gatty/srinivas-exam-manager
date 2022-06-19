@@ -29,7 +29,7 @@ const textSlide = {
 const Sidebar = () => {
   const [profAnimation,setProfAnimation] = useState(false);
 
-  const { role, setRole, setToken, setUser, user } = useContextData();
+  const { role, setRole, setToken, setUser, user,serverUrl } = useContextData();
   const location = useLocation();
   const navigate = useNavigate();
   // console.log(user);
@@ -65,7 +65,7 @@ const Sidebar = () => {
             <motion.img src={Avatar} width="40px" alt="avatar" />
           </motion.div>:
           <motion.div className="user-avatar flex profile-pic-container" variants={profAvatar} animate={profAnimation?"start":"stop"}>
-          <motion.img src={user.imagePath}  alt="avatar" className="profile-pic" />
+          <motion.img src={serverUrl+user.imagePath}  alt="avatar" className="profile-pic" />
           </motion.div>}
           <motion.div variants={textSlide} animate={profAnimation?"start":"stop"} className="user-name">
             <h2>{user.first_name+' '+user.last_name}</h2>

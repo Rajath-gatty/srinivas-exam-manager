@@ -1,7 +1,7 @@
 import "./App.css";
 import "./pages/Registration/Registration.css";
 
-import { BrowserRouter as Browser, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Browser, Routes, Route, Navigate} from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { useContextData } from "./hooks/useContextData";
@@ -64,9 +64,11 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
 function App() {
-  const { setRole, setUser, setToken, token, user } = useContextData();
+  const { setRole, setUser, setToken, token } = useContextData();
+  
   const [loading, setLoading] = useState(true);
   axios.defaults.headers.common['Authorization'] = token;
+
   //MUI Components Fonts
   const theme = createTheme({
     typography: {
@@ -85,7 +87,7 @@ function App() {
       setRole(prevUser.user.role);
       setUser(prevUser.user);
       setLoading(false);
-    }
+    } 
     setLoading(false);
   }, [setToken, setRole, setUser])
 
@@ -253,9 +255,8 @@ function App() {
                 {/* <Route path="/" element={<Dashboard />}/> */}
                 {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
 
-                <Route path="/" element={token ? <Dashboard /> : <PageNotFound />} />
-                <Route path="profile" element={token ?<Profile />: <PageNotFound />} />
-
+                <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login"/>}/>
+                <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login"/>}/>
                 {/* Testing Route */}
                 {/* <Route path="testing" element={<AnyTestComponent />} /> */}
               </Route>
@@ -265,7 +266,7 @@ function App() {
           </Routes>
         </Browser>
       </div>
-    </ThemeProvider >
+    </ThemeProvider>
   );
 }
 

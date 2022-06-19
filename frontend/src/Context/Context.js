@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export const Context = React.createContext();
 
 const ContextProvider = (props) => {
-
+  const [serverUrl] = useState('http://localhost:8080');
   const [role, setRole] = useState('');
   const [user, setUser] = useState({});
   const [token, setToken] = useState('');
@@ -11,6 +11,7 @@ const ContextProvider = (props) => {
   return (
     <Context.Provider
       value={{
+        serverUrl,
         token,
         setToken,
         role,
