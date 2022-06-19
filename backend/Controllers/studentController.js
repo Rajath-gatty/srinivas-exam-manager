@@ -1,4 +1,8 @@
 const db = require('../db');
+const pdf = require('html-pdf');
+const hallTicketTemplate = require('../hallticket');
+const fs = require('fs');
+const path = require('path');
 
 exports.getStudentTimetable = async(req,res) => {
     const {semester} = req.body;
@@ -16,12 +20,12 @@ exports.getStudentTimetable = async(req,res) => {
 
 exports.generateHallTicket = async(req,res) => {
     const deptId = req.deptId;
-    const timeTable = req.body.timeTable;
-    let regno;
+    const timetable = req.body.timetable;
+    let stdId;
     if(req.userId) {
-      regno = req.userId;
+      stdId = req.userId;
     } else {
-      regno = req.body.regno;
+      stdId = req.body.regno;
     }
   
     const options = {
@@ -35,24 +39,29 @@ exports.generateHallTicket = async(req,res) => {
   }
   
     try {
-      const result = await db.execute(`select first_name,last_name,dept_name,course_name,semester,image_url from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where regno='${regno}'`);
-      const {first_name,last_name,dept_name,course_name,semester,image_url} = result[0];
-      const filePath = path.join(__dirname,'hallticket.pdf');
+      const [result] = await db.execute(`select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where student.dept_id=${deptId} and regno='${stdId}'`);
+      const {regno,first_name,last_name,dept_name,course_name,semester,image_path} = result[0];
+
       const start = Date.now();
-      pdf.create(hallTicketTemplate( {first_name,last_name,dept_name,course_name,semester,image_url}),options).toStream((err,stream) => {
+      console.log(timetable);
+      pdf.create(hallTicketTemplate({regno,first_name,last_name,dept_name,course_name,semester,image_path,timetable}),options).toBuffer((err,data) => {
           res.setHeader('Content-type','application/pdf');
-          res.setHeader('Content-Disposition','inline;filename="hallticket.pdf"');
+          res.setHeader('Content-Disposition',`inline;filename="${regno}-hallticket.pdf"`);
+          // const writePath = path.join(__dirname,'..','uploads')
+          // const writeStream = fs.createWriteStream(writePath+'.pdf');
+          // stream.pipe(writeStream);
           if(!err) {
-              stream.pipe(res);
+              // stream.pipe(res);
+              console.log(data);
+              res.send(data);
               const stop = Date.now();
               console.log(`Time Taken to execute = ${(stop - start)/1000} seconds`);
           } else {
               res.send('Something went wrong');
           }
       })
-  
     } catch(err) {
-  
+      // res.sendStatus(400).send(err);
+      console.log(err);
     }
-    
   }

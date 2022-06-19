@@ -1,4 +1,15 @@
-module.exports = ({name,regno}) => {
+module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,image_path,timetable}) => {
+    const rows = timetable.map((item,i) => {
+        return `
+        <tr>
+            <td>${i+1}</td>
+            <td>${item.subj_code}</td>
+            <td class="width">${item.subj_name}</td>
+            <td>${item.exam_date}</td>
+            <td>${item.exam_time}</td>
+        </tr>
+        `;
+    })
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -110,13 +121,13 @@ module.exports = ({name,regno}) => {
                 <tr>
                     <td>${regno}</td>
                     <td>CCIS</td>
-                    <td><p>BCA-Semester 5</p><p>Examination 2022-2023</p></td>
+                    <td><p>${course_name}-Semester ${semester}</p><p>Examination 2022-2023</p></td>
                 </tr>
             </tbody>
         </table>
         <div class="info">
-            <p class="mb-1"><span style="font-weight: bold;">Candidate Name</span> &nbsp;: &nbsp;${name}</p>
-            <p><span style="font-weight: bold;">Examination Center</span> &nbsp;: &nbsp;College of Computer Science & Information Science</p>
+            <p class="mb-1"><span style="font-weight: bold;">Candidate Name</span> &nbsp;: &nbsp;${first_name+' '+last_name}</p>
+            <p><span style="font-weight: bold;">Examination Center</span> &nbsp;: &nbsp;${dept_name}</p>
         </div>
         <table class="timetable">
             <thead>
@@ -129,38 +140,11 @@ module.exports = ({name,regno}) => {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>19BCASD52</td>
-                    <td class="width">HTML </td>
-                    <td>17-jan-2023</td>
-                    <td>02:30 PM - 4:30 PM</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>19BCASD52</td>
-                    <td class="width">HTML</td>
-                    <td>17-jan-2023</td>
-                    <td>02:30 PM - 4:30 PM</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>19BCASD52</td>
-                    <td class="width">HTML</td>
-                    <td>17-jan-2023</td>
-                    <td>02:30 PM - 4:30 PM</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>19BCASD52</td>
-                    <td class="width">HTML</td>
-                    <td>17-jan-2023</td>
-                    <td>02:30 PM - 4:30 PM</td>
-                </tr>
+            ${rows}
             </tbody>
         </table>
         <div class="avatar">
-            <img src="https://previews.123rf.com/images/metelsky/metelsky1809/metelsky180900233/109815470-man-avatar-profile-male-face-icon-vector-illustration-.jpg?fj=1" alt="avatar">
+            <img src="${'http://localhost:8080'+image_path}" alt="avatar">
             <p style="text-align:center;font-weight:bold; margin-top: 2em;">Candidate's <br> Signature</p>
         </div>
         <p style="font-weight:bold; font-size: 1.1em; margin-top: 3em;margin-bottom:10em;">The candidate is permitted to appear for the examination</p>

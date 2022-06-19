@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.postStudent = async (req, res) => {
   const data = req.body;
-  const imagePath = `localhost:8080/studentProfiles/${req.file.filename}`;
+  const imagePath = `/studentProfiles/${req.file.filename}`;
 
   try {
     const hashedPassword = await bcrypt.hash(data.password, 4);
@@ -148,73 +148,73 @@ exports.postStaff = async (req, res) => {
     );
     res.status(200).send({ success: true, data: result[0] });
   } catch (err) {
-    res.status(500).send({ success: false, err});
+    res.status(500).send({ success: false, err });
   }
 };
 
-exports.postLogin = async(req,res) => {
+exports.postLogin = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
-  const loginType= req.body.role;
+  const loginType = req.body.role;
   try {
     let sql;
     let id;
-    if(loginType==='student') {
+    if (loginType === 'student') {
       id = "regno";
       sql = `select regno,first_name,last_name,email,password,phone,dept_id,semester,course_id,image_path,address,role from ${loginType} where email='${email}' and status='approved'`;
-    } else if(loginType==='super admin'){
+    } else if (loginType === 'super admin') {
       id = 's_admin_id';
       sql = `select ${id},first_name,last_name,email,password,role from ${loginType.split(' ').join('_')} where email='${email}'`;
-    } else if(loginType==='exam coord') {
+    } else if (loginType === 'exam coord') {
       id = "coord_id";
       sql = `select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType.split(' ').join('_')} where email='${email}'`;
-    } else if(loginType==='admin') {
+    } else if (loginType === 'admin') {
       id = "admin_id";
-      sql=`select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}'`;
+      sql = `select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}'`;
     } else {
-      if(loginType==='faculty') {
+      if (loginType === 'faculty') {
         id = "faculty_id";
-      } else if(loginType==='staff') {
+      } else if (loginType === 'staff') {
         id = "staff_id";
-      } 
-      sql=`select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}' and status='approved'`;
-    }
-      const [user] = await db.execute(sql);
-      // res.send({success:true});
-      if (user.length === 0) {
-          throw new Error("Invalid email or password");
-      } else {
-        const fetchedUser = user[0];
-        bcrypt.compare(password, fetchedUser.password).then((isEqual) => {
-            if (!isEqual) {
-                return res.status(401).json({
-                    error: "Invalid Email or password",
-                });
-            }
-            const token = jwt.sign(
-                { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName:fetchedUser.first_name, lastName:fetchedUser.last_name, id:fetchedUser[id] },
-                process.env.SECRET_KEY
-            );
-            res.status(200).json({
-                token: token,
-                user:{
-                  id:fetchedUser[id],
-                  first_name:fetchedUser.first_name,
-                  last_name:fetchedUser.last_name,
-                  imagePath:fetchedUser.image_path,
-                  email:fetchedUser.email,
-                  address:fetchedUser.address,
-                  phone:fetchedUser.phone,
-                  courseId:fetchedUser.course_id,
-                  deptId:fetchedUser.dept_id,
-                  role:fetchedUser.role,
-                  semester:fetchedUser.semester
-                }
-            });
-        });
       }
+      sql = `select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}' and status='approved'`;
+    }
+    const [user] = await db.execute(sql);
+    // res.send({success:true});
+    if (user.length === 0) {
+      throw new Error("Invalid email or password");
+    } else {
+      const fetchedUser = user[0];
+      bcrypt.compare(password, fetchedUser.password).then((isEqual) => {
+        if (!isEqual) {
+          return res.status(401).json({
+            error: "Invalid Email or password",
+          });
+        }
+        const token = jwt.sign(
+          { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName: fetchedUser.first_name, lastName: fetchedUser.last_name, id: fetchedUser[id] },
+          process.env.SECRET_KEY
+        );
+        res.status(200).json({
+          token: token,
+          user: {
+            id: fetchedUser[id],
+            first_name: fetchedUser.first_name,
+            last_name: fetchedUser.last_name,
+            imagePath: fetchedUser.image_path,
+            email: fetchedUser.email,
+            address: fetchedUser.address,
+            phone: fetchedUser.phone,
+            courseId: fetchedUser.course_id,
+            deptId: fetchedUser.dept_id,
+            role: fetchedUser.role,
+            semester: fetchedUser.semester
+          }
+        });
+      });
+    }
   } catch (error) {
-      res.status(404).json({success:false,error: error.message });
+    res.status(404).json({ success: false, error: error.message });
   }
 }
 
