@@ -11,6 +11,7 @@ import { useContextData } from "../../hooks/useContextData";
 const Profile = () => {
   const [allowEdit, setAllowEdit] = useState(false);
   const { setRole, setToken, setUser, user, serverUrl } = useContextData();
+  console.log(user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -30,28 +31,14 @@ const Profile = () => {
         animate={{ opacity: 1, scale: 1 }}
         className="profile-head flex"
       >
-        <div className="profile-userinfo flex">
-          <div className="profile-avatar flex">
+        <div className="profile-userinfo gap-2 flex">
+          <div className="profile-avatar  flex">
            {user.imagePath ? <div className="profileImg-container">
-              <img src={serverUrl+user.imagePath}  alt="avatar" />
+              <img className="profile-info-img" src={serverUrl+user.imagePath}  alt="avatar" />
             </div>
             :
             <FaUserCircle color="var(--light-grey)" size={70} />
             }
-            <div
-              className="profile-camera"
-              onClick={() => {
-                document.querySelector("#imagePicker").click();
-              }}
-            >
-              <FaCamera size={20} color="var(--light-grey)" />
-              <input
-                type="file"
-                id="imagePicker"
-                style={{ display: "none" }}
-                accept="image/png, image/jpeg"
-              />
-            </div>
           </div>
 
           <div className="profile-title flex">

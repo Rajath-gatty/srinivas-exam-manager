@@ -39,3 +39,10 @@
 .users-table-row .users-details a{
   color: var(--primary-color);
 }
+
+.userinfo-container .userinfo-details-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}

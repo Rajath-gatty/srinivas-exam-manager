@@ -12,11 +12,6 @@
   position: relative;
 }
 
-.profile-avatar {
-  position: relative;
-  width: fit-content;
-}
-
 .profile-avatar .profile-camera {
   background-color: var(--grey-bg);
   padding: 0.2em;
@@ -32,6 +27,13 @@
   color: var(--text-color);
   flex-direction: column;
   margin-left: 2em;
+}
+
+.profile-info-img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .profile-name {
@@ -186,8 +188,8 @@
   width: 70px;
   border-radius: 50%;
 }
-.profileImg-container img{
+/* .profileImg-container img{
   width: 100%;
   border-radius: 50%;
   object-fit: cover;
-}
+} */

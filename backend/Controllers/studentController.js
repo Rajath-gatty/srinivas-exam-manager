@@ -43,7 +43,6 @@ exports.generateHallTicket = async(req,res) => {
       const {regno,first_name,last_name,dept_name,course_name,semester,image_path} = result[0];
 
       const start = Date.now();
-      console.log(timetable);
       pdf.create(hallTicketTemplate({regno,first_name,last_name,dept_name,course_name,semester,image_path,timetable}),options).toBuffer((err,data) => {
           res.setHeader('Content-type','application/pdf');
           res.setHeader('Content-Disposition',`inline;filename="${regno}-hallticket.pdf"`);
@@ -52,7 +51,6 @@ exports.generateHallTicket = async(req,res) => {
           // stream.pipe(writeStream);
           if(!err) {
               // stream.pipe(res);
-              console.log(data);
               res.send(data);
               const stop = Date.now();
               console.log(`Time Taken to execute = ${(stop - start)/1000} seconds`);

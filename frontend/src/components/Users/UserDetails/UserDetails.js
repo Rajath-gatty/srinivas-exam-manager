@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"
 import { FaUserCircle } from "react-icons/fa";
 import {CircularProgress} from "@mui/material";
+import {useContextData} from "../../../hooks/useContextData";
 import Back from "../../UI/Back/Back";
 import "./UserDetails.css";
 import axios from "axios";
@@ -9,7 +10,7 @@ import axios from "axios";
 const UserDetails = () => {
   const [userData,setUserData] = useState([]);
   const [loading,setLoading] = useState(true);
-  
+  const {serverUrl} = useContextData();
   const location = useLocation();
   const {type, userId} = location.state;
 
@@ -21,7 +22,7 @@ const UserDetails = () => {
       try {
         const result = await axios.post(`/users/details`, {type, uid:userId.uid, idName:userId.idName})
         setUserData(result.data[0]);
-        setLoading(false);
+        setLoading(false); 
       } catch(err) {
         console.log(err);
       }
@@ -36,7 +37,8 @@ const UserDetails = () => {
       {!loading &&<div>
         <div className="userinfo-profile flex">
           <div className="userinfo-avatar flex">
-            <FaUserCircle color="var(--light-grey)" size={70} />
+            {!userData.image_path?<FaUserCircle color="var(--light-grey)" size={70} />:
+            <img className="userinfo-details-img" src={serverUrl+userData.image_path} />}
           </div>
 
           <div className="userinfo-title flex">
