@@ -33,6 +33,12 @@ module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,ima
             margin: auto;
         }
 
+        .hallticket-main .logo{
+            width:100%;
+            text-align:center;
+            margin-bottom: 1em;
+        }
+        
         .hallticket-main .main-hdng {
             text-align: center;
             margin-bottom: 2em;
@@ -61,9 +67,8 @@ module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,ima
         }
 
         .hallticket-main .timetable {
-            width: 530px;
+            width: 550px;
             border-collapse: collapse;
-            /* display: inline; */
         }
 
         .hallticket-main .timetable th,
@@ -75,19 +80,24 @@ module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,ima
             border: 1px solid #333;
         }
 
+        .hallticket-main .timetable tbody tr td{
+            text-align: center;
+            width:fit-content;
+        }
+
         .avatar {
             position: absolute;
-            top: 320px;
+            top: 380px;
             right: 10px;
             margin: 0 1em;
         }
 
         .avatar img{
-            width: 120px;
+            width: 100px;
         }
 
         .width {
-            width: 150px;
+            width: 145px;
             text-align: center;
         }
 
@@ -104,10 +114,11 @@ module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,ima
 </head>
 <body>
     <div class="hallticket-main">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Srinivas_University_logo.gif" alt="logo" width="50">
+        </div>
         <div class="main-hdng">
-            <span class="mr-1">SRINIVAS</span>
-            <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Srinivas_University_logo.gif" alt="logo">
-            <span class="ml-1">UNIVERSITY</span>
+            <span>SRINIVAS UNIVERSITY</span>
         </div>
         <table class="hallticket-meta">
             <thead>
@@ -127,7 +138,7 @@ module.exports = ({regno,first_name,last_name,dept_name,course_name,semester,ima
         </table>
         <div class="info">
             <p class="mb-1"><span style="font-weight: bold;">Candidate Name</span> &nbsp;: &nbsp;${first_name+' '+last_name}</p>
-            <p><span style="font-weight: bold;">Examination Center</span> &nbsp;: &nbsp;${dept_name}</p>
+            <p><span style="font-weight: bold;">Examination Center</span> &nbsp;: &nbsp;${dept_name}, Pandeshwara, Mangalore.</p>
         </div>
         <table class="timetable">
             <thead>
