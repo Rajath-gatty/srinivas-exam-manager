@@ -4,7 +4,7 @@
 }
 
 .main-box {
-  max-width: 900px;
+  max-width: 100%;
   margin: auto;
 }
 
@@ -38,4 +38,30 @@
 
 .indent-table-wrapper .indent-table-row {
   border: 1px solid var(--grey-bg);
+}
+
+.indent-box {
+  width: 900px;
+
+  margin: auto;
+  height: 11em;
+
+  padding: 16px;
+
+}
+
+.submit {
+  border-color: white;
+}
+
+.submit-btn {
+  margin-right: 2em;
+  display: flex;
+  gap: 2em;
+  justify-content: flex-end;
+
+}
+
+.btn-outlined {
+  height: 60px;
 }
