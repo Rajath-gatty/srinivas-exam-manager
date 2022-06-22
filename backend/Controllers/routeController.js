@@ -27,11 +27,24 @@ exports.getCourses = async(req,res) => {
     }
 }
 
+exports.getSemesters = async(req,res) => {
+  const courseName = req.body.courseName;
+  try {
+    const [result] = await db.execute(`select course_sem from course where course_name='${courseName}'`);
+    res.send(result[0]);
+  } catch(err) {
+      res.status(500).send(err);
+  }
+}
+
 exports.getAllStudent = async (req,res) => {
   const deptId = req.deptId;
-  const courseName = req.body.courseName;
+  const courseName = req.body.courseValue;
+  const semester = req.body.semester;
   let sql;
-  if(courseName) {
+  if(courseName&&semester) {
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and semester=${semester} and student.status='approved'`;
+  } else if(courseName) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and student.status='approved'`;
   } else {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and status='approved'`;
@@ -86,6 +99,20 @@ exports.getUserDetails = async(req,res) => {
   if(type==="examcoordinator") type = "exam_coord";
 
   let sql=`select * from ${type} where ${idName}='${userId}'`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    console.log(err);
+    res.status(500).send(err);
+  }
+}
+
+exports.getSemFilteredStudent = async(req,res) => {
+  const semester = req.body.semester;
+  const courseName = req.body.courseName;
+
+  let sql=`select course_name,eligibility,first_name,last_name,joining_year,regno,semester from student join course on student.course_id=course.course_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester}`;
   try{
     const result = await db.execute(sql);
     res.send(result[0]);

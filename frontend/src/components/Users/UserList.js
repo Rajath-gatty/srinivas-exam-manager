@@ -33,15 +33,10 @@ const UserList = ({ data, type }) => {
         </Link>
       </td>
 
-      {!eligible ? 
+      {type==="student" && 
         <td className={eligibility}>
-          <BiX size={20} />
-          <span>Not Eligible</span>
-        </td>
-        :
-        <td className={eligibility}>
-          <BiCheck size={20} />
-          <span>Eligible</span>
+          {!eligible? <BiX size={20} /> : <BiCheck size={20} />}
+          <span>{!eligible? "Not Eligible" : "Eligible"}</span>
         </td>}
     </tr>
   );

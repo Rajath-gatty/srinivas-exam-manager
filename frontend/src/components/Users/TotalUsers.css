@@ -46,3 +46,25 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.users-main .users-Filter{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  position: relative;
+}
+
+.users-main .users-Filter .btn-outlined{
+  position: absolute;
+  right: 0;
+  margin-bottom: 5px;
+  gap: 0.5em;
+}
+
+.users-main .hallticket-disabled {
+  color: #ccc;
+  border: 1px solid #ccc;
+  pointer-events: none;
+  cursor: disabled;
+}

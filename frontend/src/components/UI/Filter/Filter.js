@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import {FormControl,InputLabel,Select,MenuItem,FormHelperText} from "@mui/material";
 import "./Filter.css";
 
-const  Filter = forwardRef(({data=[], label, filter,error=false, helperText, handleCourseChange, handleSemChange, handleDeptChange,width="30%"},ref) => {
+const  Filter = forwardRef(({data=[], label, filter,error=false, helperText, handleCourseChange, handleSemesterChange, handleDeptChange,width="12em"},ref) => {
   const filters = ['course','department','semester'];
   const selectedFilter = filters.find(item => item===filter);
   let name;
@@ -18,8 +18,8 @@ const  Filter = forwardRef(({data=[], label, filter,error=false, helperText, han
     selectFunction = handleCourseChange;
   } else {
     // id = 'sem_id';
-    name = 'sem_name';
-    selectFunction = handleSemChange;
+    name = '';
+    selectFunction = handleSemesterChange;
   }
 
   return (
@@ -34,10 +34,11 @@ const  Filter = forwardRef(({data=[], label, filter,error=false, helperText, han
         onChange={selectFunction}
         error={error}
         inputRef={ref}
+        fullWidth
       >
-        {data.map((opt) => (
-          <MenuItem key={Math.random()+Date.now()} value={opt[name]}>
-            {opt[name]}
+        {data.map((opt,i) => (
+          <MenuItem key={Math.random()+Date.now()} value={selectedFilter==='semester'?i+1:opt[name]}>
+            {selectedFilter==='semester'?i+1:opt[name]}
           </MenuItem>
         ))}
       </Select>
