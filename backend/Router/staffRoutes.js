@@ -14,4 +14,6 @@ router.post('/reject/faculty/:id',isAuth,staffController.postRejectFaculty);
 
 router.post('/halltickets',isAuth,staffController.generateBulkHallticket);
 
+router.post('/eligibility',isAuth,staffController.setStudentEligibility);
+
 module.exports = router;
