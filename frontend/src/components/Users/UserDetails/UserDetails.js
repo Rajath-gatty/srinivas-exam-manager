@@ -10,9 +10,11 @@ import axios from "axios";
 const UserDetails = () => {
   const [userData,setUserData] = useState([]);
   const [loading,setLoading] = useState(true);
-  const {serverUrl} = useContextData();
+  const {serverUrl, user} = useContextData();
   const location = useLocation();
   const {type, userId} = location.state;
+
+  console.log(user)
 
   useEffect(()=>{
     setLoading(true);

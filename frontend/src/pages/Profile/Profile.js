@@ -11,7 +11,6 @@ import { useContextData } from "../../hooks/useContextData";
 const Profile = () => {
   const [allowEdit, setAllowEdit] = useState(false);
   const { setRole, setToken, setUser, user, serverUrl } = useContextData();
-  console.log(user);
   const navigate = useNavigate();
 
   const handleLogout = () => {
