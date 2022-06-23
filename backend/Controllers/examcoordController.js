@@ -15,7 +15,7 @@ exports.getTimetables = async(req,res) => {
 exports.getTimetableDetails = async(req,res) => {
         const deptId = req.deptId;
         const tId = req.params.tId;
-        const sql = `select subj_name,subj_code,exam_date,exam_time from timetable join course on timetable.course_id=course.course_id where timetable.dept_id=${deptId} and t_id='${tId}'`;
+        const sql = `select subj_name,subj_code,exam_date,exam_time from timetable join course on timetable.course_id=course.course_id where timetable.dept_id=${deptId} and t_id='${tId}' order by exam_date`;
         try {
             const result = await db.execute(sql);
             res.status(200).send(result[0]);

@@ -24,7 +24,7 @@ const StudentTimeTable = () => {
             }
         }
         fetchTimetables();
-    })
+    },[])
 
     const handleHallticket = async () =>{
         try {

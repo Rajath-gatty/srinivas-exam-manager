@@ -1,4 +1,7 @@
 const db = require('../db');
+const Pdfmake = require('pdfmake');
+const path = require('path');
+const hallTicketTemplate = require('../hallticket');
 
 exports.getStudentApproveList = async(req,res) => {
     const {courseName} = req.body;
@@ -89,6 +92,50 @@ exports.postRejectFaculty = async(req,res) => {
     const id = req.params.id;
     try {
         const result = await db.execute(`delete from faculty where faculty_id='${id}'`);
+        res.status(200).send({success:true,data:result[0]});
+    } catch(err) {
+        console.log(err);
+        res.status(500).send({success:false})
+    }
+}
+
+exports.generateBulkHallticket = async(req,res) => {
+    const {semester,courseName} = req.body;
+
+    try {
+        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester}`;
+        const [result] = await db.execute(sql);
+
+        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved'`;
+        const [timetable] = await db.execute(timetableSql);
+
+        const start = Date.now();
+        const fonts = {
+          Times: {
+              normal: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman.ttf'),
+              bold: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold.ttf'),
+              italics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-italic.ttf'),
+              bolditalics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
+            },
+        }
+        const pdf = new Pdfmake(fonts);
+        const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable),{});
+        doc.pipe(res);
+        doc.end();
+        const end = Date.now();
+        const total = end-start;
+        console.log(total+'ms');
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+exports.setStudentEligibility = async(req,res) => {
+    const {regno, eligibility} = req.body;
+    
+    try {
+        const sql = `update student set eligibility='${eligibility}' where regno='${regno}'`;
+        const result = await db.execute(sql);
         res.status(200).send({success:true,data:result[0]});
     } catch(err) {
         console.log(err);

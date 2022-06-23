@@ -1,9 +1,10 @@
 import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const UserList = ({ data, type }) => {
   const eligible = data.eligibility;
-  const eligibility = eligible ? "eligible flex" : "not-eligible flex";
+  // const eligibility = eligible ? "eligible flex" : "not-eligible flex";
   let UserID = "";
   if(type === "student")
     UserID = {uid:data.regno, idName:"regno"};
@@ -16,6 +17,16 @@ const UserList = ({ data, type }) => {
 
   let showDOJ = true;
   if(type!=="student" || type !=="exam_coord") showDOJ = false;
+
+  const HandleEligible = async () =>{
+    const regId = data.regno;
+    try {
+      const result = await axios.post('/staff/eligibility',{regno:regId, eligibility:1});
+      console.log(result.data);
+    } catch(err) {
+      console.log(err);
+    }
+  }
   
   return (
     <tr className="users-table-row">
@@ -33,15 +44,31 @@ const UserList = ({ data, type }) => {
         </Link>
       </td>
 
-      {!eligible ? 
-        <td className={eligibility}>
-          <BiX size={20} />
-          <span>Not Eligible</span>
-        </td>
-        :
-        <td className={eligibility}>
-          <BiCheck size={20} />
-          <span>Eligible</span>
+      {type==="student" && 
+        <td>
+          {!eligible ? 
+              <div className="users-eligibleBtn flex" onClick={HandleEligible}>
+                <BiCheck size={20} />
+                <span>Set Eligible</span>
+              </div>
+          :
+            <div className="users-eligibleTxt flex">
+              <BiCheck size={20} />
+              <span>Eligible</span>
+            </div>}
+
+            {/* <div className="users-eligibilityBtn flex">
+              
+              <div className="notEligibleBtn flex">
+                <BiX size={20} />
+                <span>Not Eligible</span>
+              </div>
+            </div> */}
+
+            {/* <div className={eligibility}>
+              {!eligible? <BiX size={20} /> : <BiCheck size={20} />}
+              <span>{!eligible? "Not Eligible" : "Eligible"}</span>
+            </div>} */}
         </td>}
     </tr>
   );
