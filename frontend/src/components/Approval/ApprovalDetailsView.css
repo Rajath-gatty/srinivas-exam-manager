@@ -22,6 +22,11 @@
   padding-top: 2em;
 }
 
+.ApprovalDetailsView .details-profile-img {
+  width: 100px;
+  border-radius: 50%;
+}
+
 .approve-avatar {
   background-color: var(--grey-bg);
   padding: 0.5em;

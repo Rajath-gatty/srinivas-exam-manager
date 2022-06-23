@@ -1,5 +1,6 @@
 const db = require('../db');
 const Pdfmake = require('pdfmake');
+const fs = require('fs');
 const path = require('path');
 const hallTicketTemplate = require('../hallticket');
 
@@ -9,9 +10,9 @@ exports.getStudentApproveList = async(req,res) => {
     try {
         let sql;
         if(!courseName) {
-            sql = `select regno,first_name,last_name,course_name,joining_year from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.status='pending'`;
+            sql = `select regno,first_name,last_name,course_name,joining_year,image_path from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.status='pending' order by regno`;
         } else {
-            sql = `select regno,first_name,last_name,course_name,joining_year from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.status='pending'`;
+            sql = `select regno,first_name,last_name,course_name,joining_year,image_path from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.status='pending'`;
         }
        const result = await db.execute(sql);
        res.send(result[0]);
@@ -45,9 +46,17 @@ exports.postApproveStudent = async(req,res) => {
 
 exports.postRejectStudent = async(req,res) => {
     const id = req.params.id;
+    const imgUrl = req.body.imageUrl;
+    const imagePath = path.join(__dirname,'..','uploads',imgUrl);
     try {
         const result = await db.execute(`delete from student where regno='${id}'`);
-        res.status(200).send({success:true,data:result[0]});
+        fs.unlink(imagePath,(err => {
+            if(err) {
+                console.log(err);
+                throw new Error('Something went wrong');
+            }
+            res.status(200).send({success:true,data:result[0]});
+        }));
     } catch(err) {
         console.log(err);
         res.status(500).send({success:false})
@@ -103,13 +112,13 @@ exports.generateBulkHallticket = async(req,res) => {
     const {semester,courseName} = req.body;
 
     try {
-        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester}`;
+        const start = Date.now();
+        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester} order by regno`;
         const [result] = await db.execute(sql);
 
-        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved'`;
+        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved' order by exam_date`;
         const [timetable] = await db.execute(timetableSql);
 
-        const start = Date.now();
         const fonts = {
           Times: {
               normal: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman.ttf'),
