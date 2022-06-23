@@ -2,8 +2,6 @@ import "./Indent.css";
 import IndentRegularList from "./IndentRegularList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 const IndentRegular = () => {
-  //   const departments = ["BCA", "BBA", "BCOM", "BHM", "BPT"];
-  //   const semeseter = ["sem1", "sem2", "sem3", "sem4"];
   return (
     <div className="indent-main">
       <FilterSearch search />
@@ -21,9 +19,6 @@ const IndentRegular = () => {
             </tr>
           </thead>
           <tbody>
-            <IndentRegularList></IndentRegularList>
-            <IndentRegularList></IndentRegularList>
-            <IndentRegularList></IndentRegularList>
             <IndentRegularList></IndentRegularList>
           </tbody>
         </table>

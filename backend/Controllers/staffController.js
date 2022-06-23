@@ -138,3 +138,16 @@ exports.generateBulkHallticket = async(req,res) => {
         console.log(err);
     }
 }
+
+exports.setStudentEligibility = async(req,res) => {
+    const {regno, eligibility} = req.body;
+    
+    try {
+        const sql = `update student set eligibility='${eligibility}' where regno='${regno}'`;
+        const result = await db.execute(sql);
+        res.status(200).send({success:true,data:result[0]});
+    } catch(err) {
+        console.log(err);
+        res.status(500).send({success:false})
+    }
+}

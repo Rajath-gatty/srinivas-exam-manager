@@ -2,7 +2,7 @@ import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { FaSearch } from "react-icons/fa";
 import "./FilterSearch.css";
 
-const FilterSearch = ({className='', search}) => {
+const FilterSearch = ({ className = '', search }) => {
   const departments = [
     "Computer Science & Information Science",
     "Management & Commerce",
@@ -15,7 +15,7 @@ const FilterSearch = ({className='', search}) => {
     "Allied Health Sciences",
     "Nursing Science",
   ];
-  
+
   const semesters = [
     "I",
     "II",
@@ -24,11 +24,12 @@ const FilterSearch = ({className='', search}) => {
     "V"
   ];
 
-  const showSearch = search ? "visible":"hidden";
+
+  const showSearch = search ? "visible" : "hidden";
 
   return (
-    <div className={[className,"filterSearch-container"].join(' ')}>
-      <form style={{visibility: showSearch}} className="filterSearch-form flex">
+    <div className={[className, "filterSearch-container"].join(' ')}>
+      <form style={{ visibility: showSearch }} className="filterSearch-form flex">
         <FaSearch color="var(--light-grey)" size={20} />
         <input type="text" placeholder="Search" />
       </form>
@@ -66,6 +67,7 @@ const FilterSearch = ({className='', search}) => {
           </Select>
         </FormControl>
       </div>
+
     </div>
   );
 };

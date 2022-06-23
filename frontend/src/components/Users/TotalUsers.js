@@ -41,8 +41,8 @@ const TotalUsers = ({type}) => {
       const resp = await axios.post('/semesters',{courseName});
       const data = await resp?.data;
       const semData = new Array(data.course_sem).fill('');
-      console.log(semData);
       setSemFilter(semData);
+      console.log(semData);
     } catch (error) {
         console.log(error);
     }
@@ -116,14 +116,10 @@ const TotalUsers = ({type}) => {
         handleSemesterChange={handleSemesterChange}
         />
 
-        {course&&sem?<div className="btn-outlined flex" onClick={handleHallticket}>
+        <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
           <VscFilePdf color="currentColor" size={22}/>
           <span>Generate Hall Tickets</span>
-        </div>:
-        <div className="btn-outlined hallticket-disabled flex">
-          <VscFilePdf color="currentColor" size={22}/>
-          <span>Generate Hall Tickets</span>
-        </div>}
+        </div>
       </div>}
 
       <table className="users-table-wrapper">
