@@ -9,7 +9,7 @@ import {useFetchCourses} from "../../hooks/useFetchCourses";
 import Filter from "../UI/Filter/Filter";
 import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -24,7 +24,6 @@ const TotalUsers = ({type}) => {
 
   useEffect(() => {
     setLoading(true);
-    toast("Default Notification !");
     setUsers([]);
 
     const fetchUsers = async() => {
@@ -128,6 +127,14 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  const notify = () =>{ 
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER
+    });
+    console.log("Tosted")
+  }
+
+
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
@@ -159,7 +166,7 @@ const TotalUsers = ({type}) => {
       <table className="users-table-wrapper">
         <thead className="thead">
           <tr>
-            <th>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
+            <th onClick={notify}>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
             <th>Name</th>
             {type!=="student" && <th>Email</th>}
             {showDOJ && <th>DOJ</th>}

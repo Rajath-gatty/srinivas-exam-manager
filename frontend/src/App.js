@@ -62,6 +62,8 @@ import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordin
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -267,6 +269,8 @@ function App() {
             <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v' }} className="flex"><CircularProgress size={80} /></div>}></Route>
           </Routes>
         </Browser>
+
+        <ToastContainer />
       </div>
     </ThemeProvider>
   );
