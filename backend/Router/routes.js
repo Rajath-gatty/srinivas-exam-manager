@@ -12,6 +12,7 @@ router.post('/users/staff',isAuth,routeContoller.getAllStaff);
 router.post('/users/examcoordinator',isAuth,routeContoller.getAllExamCoord);
 
 router.post('/users/student/semfilter',isAuth,routeContoller.getSemFilteredStudent);
+router.post('/users/student/search',isAuth,routeContoller.getStudentByID);
 
 router.post('/users/details',isAuth,routeContoller.getUserDetails);
 

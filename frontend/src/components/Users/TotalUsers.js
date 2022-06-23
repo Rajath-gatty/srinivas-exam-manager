@@ -9,6 +9,7 @@ import {useFetchCourses} from "../../hooks/useFetchCourses";
 import Filter from "../UI/Filter/Filter";
 import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
+import { toast } from 'react-toastify';
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -23,6 +24,7 @@ const TotalUsers = ({type}) => {
 
   useEffect(() => {
     setLoading(true);
+    toast("Default Notification !");
     setUsers([]);
 
     const fetchUsers = async() => {
@@ -80,6 +82,21 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  const HandleSearch = async (e) =>{
+    e.preventDefault();
+    const query = e.target[0].value.toUpperCase();
+    console.log(query)
+    try {
+      setLoading(true);
+      const result = await axios.post(`/users/student/search`,{query});
+      setUsers(result.data);
+      setLoading(false);
+    } catch(err) {
+      console.log('approve error',err);
+      setLoading(false);
+    }
+  }
+
   const handleHallticket = async () =>{
     try {
       const data = {
@@ -114,11 +131,12 @@ const TotalUsers = ({type}) => {
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
-        <div className="users-searchBar">
+        <form className="users-searchBar flex" onSubmit={HandleSearch}>
           <FaSearch color="var(--light-grey)" size={20} />
-          <input type="text" placeholder="Search Student Registration" />
-        </div>
-        <Filter 
+          <input type="text" placeholder="Enter Reg No." onBlur={(e) => e.target.placeholder = "Enter Reg No."} onFocus={(e) => e.target.placeholder = ""} />
+        </form>
+
+        <Filter  
         data={filterCourses} 
         label="Filter By Course" 
         filter="course" 

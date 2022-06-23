@@ -111,4 +111,21 @@
   border-radius: 3px;
 }
 
+.users-searchBar{
+  background-color: var(--grey-bg);
+  padding: 0.2em 1em;
+  border-radius: 4px;
+  color: var(--text-color);
+}
+
+.users-searchBar input{
+  height: 2.5em;
+  width: 100%;
+  min-width: 160px;
+  text-align: center;
+  background: none;
+  border: none;
+  outline: none;
+}
+
 
