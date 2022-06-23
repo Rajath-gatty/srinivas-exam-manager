@@ -1,7 +1,7 @@
 import "./App.css";
 import "./pages/Registration/Registration.css";
 
-import { BrowserRouter as Browser, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter as Browser, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useState, useEffect } from "react";
 import { useContextData } from "./hooks/useContextData";
@@ -9,7 +9,8 @@ import { useContextData } from "./hooks/useContextData";
 import Login from "./pages/Login/Login";
 import SpecialLogin from "./pages/Login/SpecialLogin";
 
-import Dashboard from "./pages/Dashboard";
+
+import Dashboard from "./pages/Dashboard/Dashboard";
 import Attendance from "./pages/Attendance";
 import TimeTable from "./pages/TimeTable";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
@@ -64,7 +65,7 @@ import axios from "axios";
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
-  
+
   const [loading, setLoading] = useState(true);
   axios.defaults.headers.common['Authorization'] = token;
 
@@ -86,7 +87,7 @@ function App() {
       setRole(prevUser.user.role);
       setUser(prevUser.user);
       setLoading(false);
-    } 
+    }
     setLoading(false);
   }, [setToken, setRole, setUser])
 
@@ -96,7 +97,7 @@ function App() {
         <Browser>
           <Routes>
             {/* Public Routes */}
-            {!loading && <Route path="/login" element={!token ? <Login /> :<Navigate to="/" />} />}
+            {!loading && <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />}
             {/* {!token&&<Route path="/login" element={<Login />}/>} */}
             {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
             {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
@@ -175,6 +176,7 @@ function App() {
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
+
                 <Route
                   path="application/regular"
                   element={<ApplicationRegular />}
@@ -192,6 +194,10 @@ function App() {
                   <ProtectedRoute allowedRole={["student", "faculty"]} />
                 }
               >
+                <Route
+                  path="dashboard"
+                  element={<Dashboard />}
+                />
                 <Route path="attendance" element={<Attendance />} />
               </Route>
 
@@ -251,8 +257,8 @@ function App() {
                 {/* <Route path="/" element={<Dashboard />}/> */}
                 {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
 
-                <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login"/>}/>
-                <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login"/>}/>
+                <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login" />} />
+                <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
                 {/* Testing Route */}
                 {/* <Route path="testing" element={<AnyTestComponent />} /> */}
               </Route>

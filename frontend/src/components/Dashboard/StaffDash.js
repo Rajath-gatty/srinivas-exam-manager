@@ -1,7 +1,7 @@
 import React from "react";
 
 const StaffDash = () => {
-  return <div className="content">StaffDash</div>;
+  return <div >StaffDash</div>;
 };
 
 export default StaffDash;
