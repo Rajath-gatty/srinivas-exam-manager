@@ -26,6 +26,10 @@
   border: 1px solid var(--grey-bg);
 }
 
+.users-table-row td{
+  text-align: center;
+}
+
 .users-table-wrapper .users-table-row .eligible {
   color: var(--strong-green);
   gap: 0.3em;
@@ -79,10 +83,12 @@
   border-radius: 3px;
   color: #fff;
   cursor: pointer;
+  background-color: var(--strong-green);
+  width: 125px;
 }
 
-.users-eligibleBtn{
-  background-color: var(--strong-green);
+.users-eligibleContainer{
+  width: 125px;
 }
 
 .users-eligibleTxt{
@@ -90,3 +96,19 @@
   padding: 0.3em 0;
   color: var(--strong-green);
 }
+
+.users-notEligible{
+  color: var(--strong-red);
+  border: 1px solid var(--strong-red);
+  border-radius: 3px;
+  margin-left: 2em; 
+  cursor: pointer;
+}
+
+.users-notEligible:hover{
+  color: #fff;
+  background-color: var(--strong-red);
+  border-radius: 3px;
+}
+
+
