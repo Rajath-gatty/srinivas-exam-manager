@@ -1,18 +1,40 @@
 import "./SemesterMarks.css";
 import SemesterMarksList from "./SemesterMarksList";
-import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 const SemesterMarks = () => {
+    const bundle = [
+        "22SDA010",
+        "22SDA020"
+
+    ];
     return (
         <div className="semester-main">
-            <FilterSearch />
+            <div className="flex">
+                <FormControl className="filter-Search">
+                    <InputLabel>Filter by BundleNo.</InputLabel>
+                    <Select
+                        label="bundle"
+                        defaultValue=""
+                        placeholder="Filter by bundle"
+                        size="small"
+                    >
+                        {bundle.map((opt) => (
+                            <MenuItem key={opt} value={opt}>
+                                {opt}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+
+            </div>
 
             <table className="semester-table-wrapper">
                 <thead className="thead">
                     <tr>
                         <th>Coding Sheet No</th>
-                        <th>Bundle No</th>
-                        <th>Semester</th>
+
                         <th>Java</th>
 
                     </tr>

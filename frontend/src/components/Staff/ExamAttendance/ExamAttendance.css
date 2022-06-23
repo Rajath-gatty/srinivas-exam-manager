@@ -1,6 +1,7 @@
 .admin-attendance-main {
     margin: 2em;
     width: 100%;
+
 }
 
 .indent-main {
@@ -64,4 +65,35 @@
 
 .text {
     color: var(--white);
+}
+
+.submit {
+    border-color: white;
+}
+
+.submit-btn {
+
+    margin-right: 2em;
+    display: flex;
+    gap: 2em;
+    justify-content: flex-end;
+
+
+
+}
+
+.button-outlined {
+
+    height: 60px;
+    background-color: rgb(25, 155, 215);
+    margin-top: 2em;
+    padding: 1em;
+    color: white;
+    border-color: white;
+    border-radius: 4px;
+}
+
+.filter-search {
+    width: 25%;
+
 }
