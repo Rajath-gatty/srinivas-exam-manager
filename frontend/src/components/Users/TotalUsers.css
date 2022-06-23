@@ -59,18 +59,33 @@
   position: relative;
 }
 
-.users-main .users-Filter .btn-outlined{
-  position: absolute;
-  right: 0;
+.users-HallticketBtn{
+  width: 14em;
+  margin-left: auto;
   margin-bottom: 5px;
+}
+
+.users-HallticketBtn .btn-outlined{
   gap: 0.5em;
 }
 
-.users-main .hallticket-disabled {
+.users-HallticketBtn .hallticket-disabled {
   color: #ccc;
   border: 1px solid #ccc;
-  pointer-events: none;
-  cursor: disabled;
+  /* pointer-events: none; */
+  /* cursor: disabled; */
+}
+
+.users-HallticketBtn .hallticket-disabled:hover{
+  background-color: #fff;
+}
+
+.users-HallticketBtn .users-btnLoader{
+  min-width: 13em;
+  height: 2.4em;
+  border-radius: 4px;
+  color: #fff;
+  background-color: var(--primary-color);
 }
 
 .users-eligibilityBtn{
@@ -127,5 +142,4 @@
   border: none;
   outline: none;
 }
-
 

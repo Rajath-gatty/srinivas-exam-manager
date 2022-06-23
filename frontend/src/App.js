@@ -270,7 +270,15 @@ function App() {
           </Routes>
         </Browser>
 
-        <ToastContainer />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </ThemeProvider>
   );

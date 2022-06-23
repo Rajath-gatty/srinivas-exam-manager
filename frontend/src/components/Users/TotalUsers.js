@@ -9,7 +9,7 @@ import {useFetchCourses} from "../../hooks/useFetchCourses";
 import Filter from "../UI/Filter/Filter";
 import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -17,6 +17,7 @@ const TotalUsers = ({type}) => {
   const[sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
+  const [btnLoading,setBtnLoading] = useState(false);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -96,8 +97,18 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  //Tost Notification
+  const notify = (type, msg) =>{ 
+    type === "warn" && toast.warn(msg); 
+  }
+
+
   const handleHallticket = async () =>{
-    try {
+    !sem&&!course ? notify("warn", "Select Course & Semester") :
+    !sem && notify("warn", "Select Semester");
+    
+    if(sem&&course) try {
+      setBtnLoading(true);
       const data = {
         courseName:course,
         semester:sem
@@ -109,6 +120,7 @@ const TotalUsers = ({type}) => {
       console.log(result.data);
       window.open(objectUrl);
       setLoading(false);
+      setBtnLoading(false);
     } catch(err) {
         console.log(err);
         setLoading(false);
@@ -126,14 +138,6 @@ const TotalUsers = ({type}) => {
       console.log(err);
     }
   }
-
-  const notify = () =>{ 
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_CENTER
-    });
-    console.log("Tosted")
-  }
-
 
   return (
     <div className="users-main">
@@ -157,16 +161,22 @@ const TotalUsers = ({type}) => {
         handleSemesterChange={handleSemesterChange}
         />
 
-        <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
+        <div className="users-HallticketBtn flex">
+          {!btnLoading ? <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
           <VscFilePdf color="currentColor" size={22}/>
-          <span>Generate Hall Tickets</span>
+            <span>Generate Hall Tickets</span>
+          </div> 
+          :
+          <div className="users-btnLoader flex" onClick={handleHallticket}>
+            <CircularProgress color="inherit" size={25}/>
+          </div>}
         </div>
       </div>}
 
       <table className="users-table-wrapper">
         <thead className="thead">
-          <tr>
-            <th onClick={notify}>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
+          <tr onClick={notify}>
+            <th>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
             <th>Name</th>
             {type!=="student" && <th>Email</th>}
             {showDOJ && <th>DOJ</th>}
