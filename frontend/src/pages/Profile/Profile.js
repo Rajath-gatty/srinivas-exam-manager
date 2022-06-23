@@ -47,7 +47,7 @@ const Profile = () => {
         </div>
 
         <div className="profile-options flex">
-          <div
+          {/* <div
             className="profile-edit flex"
             onClick={() => {
               setAllowEdit(!allowEdit);
@@ -64,7 +64,7 @@ const Profile = () => {
                 <span>Edit</span>
               </div>
             )}
-          </div>
+          </div> */}
 
           <div className="logout flex">
             <div onClick={handleLogout} className="logout-btn flex">

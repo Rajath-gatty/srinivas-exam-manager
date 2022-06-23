@@ -52,7 +52,6 @@ import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import ExamcordTimeTable from "./components/Evaluator/ExamcordTimeTable/ExamcordTimeTable";
 import StudentTimeTable from "./components/Student/StudentTimeTable/StudentTimeTable";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
-import PaymentRegular from "./components/Student/Application/Payment/Payment";
 
 
 import Departments from "./components/AdminSuper/Departments/Departments";
@@ -184,9 +183,6 @@ function App() {
                   path="application/repeater"
                   element={<ApplicationRepeater />}
                 />
-
-                <Route path="/application/regular/payment" element={<PaymentRegular />} />
-                <Route path="/application/repeater/payment" element={<PaymentRegular />} />
                 <Route path="/studenttimetable" element={<StudentTimeTable />} />
               </Route>
 

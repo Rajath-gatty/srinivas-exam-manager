@@ -7,6 +7,7 @@ import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
 import {useFetchCourses} from "../../hooks/useFetchCourses";
 import Filter from "../UI/Filter/Filter";
+import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 
 const TotalUsers = ({type}) => {
@@ -42,7 +43,6 @@ const TotalUsers = ({type}) => {
       const data = await resp?.data;
       const semData = new Array(data.course_sem).fill('');
       setSemFilter(semData);
-      console.log(semData);
     } catch (error) {
         console.log(error);
     }
@@ -99,9 +99,25 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  const UpdateEligibility = async(index,value,regno) =>{
+    const newState = [...users];
+    newState[index].eligibility = value;
+    setUsers([...newState]);
+    try {
+      const result = await axios.post('/staff/eligibility',{regno, eligibility:value});
+      console.log(result.data);
+  } catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
+        <div className="users-searchBar">
+          <FaSearch color="var(--light-grey)" size={20} />
+          <input type="text" placeholder="Search Student Registration" />
+        </div>
         <Filter 
         data={filterCourses} 
         label="Filter By Course" 
@@ -137,8 +153,13 @@ const TotalUsers = ({type}) => {
           </tr>
         </thead>
         {!loading&&<tbody>
-          {users.map(obj =>{
-              return <UserList key={Math.random()+Date.now()} data={obj} type={type}/>
+          {users.map((obj,i) =>{
+              return <UserList 
+              key={Math.random()+Date.now()} 
+              data={obj} 
+              type={type}
+              updateEligibility={UpdateEligibility}
+              index={i}/>
           })}
         </tbody>}
       </table>

@@ -18,9 +18,9 @@ import SrinivasLogo from "./SrinivasLogo.svg";
 
 // Illustrations
 import EvaluatorReg from "./Registration/examcord_reg.svg";
-import FacultyReg from "./Registration/faculty_reg.svg";
-import StaffReg from "./Registration/staff_reg.svg";
-import StudentReg from "./Registration/student_reg.svg";
+import FacultyReg from "./Registration/faculty_reg.webp";
+import StaffReg from "./Registration/staff_reg.webp";
+import StudentReg from "./Registration/student_reg.webp";
 import LoginSvg from "./undraw_login.svg";
 import NoDataSvg from "./NoData.svg";
 

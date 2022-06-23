@@ -35,7 +35,7 @@ const Dob = forwardRef((props,ref) => {
   return (
     <div className="dob-wrapper">
       <InputLabel id="date" className="dob-label" required={props.required}>
-        Date of Birth
+       {props.label?props.label:'Date of Birth'}
       </InputLabel>
       <div className="dob-container">
         <FormControl sx={{ minWidth: 100 }} >
