@@ -45,6 +45,28 @@
     padding-right: 3em;
 }
 
+.subject-modal-content {
+    margin: 1.75em 2em 2em 0.5em;
+    text-align: center;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.subject-modal-content tr th {
+    background: var(--grey-bg);
+    color: #333;
+    padding: 0.5em;
+}
+
+.subject-modal-content tbody tr {
+    border: 1px solid var(--grey-bg);
+    padding: 0.5em 0.25em;
+}
+
+.subject-modal-content tbody tr td {
+    padding: 1em 0em;
+}
+
 .payment-details-close-icon {
     color: var(--strong-red);
     font-size: 20px;
@@ -110,5 +132,9 @@
     font-weight: bold;
     border-bottom: 3px solid var(--primary-color);
     z-index: 2;
+}
+
+.modal-link {
+    width: 100px;
 }
 

@@ -149,21 +149,21 @@ function App() {
                 />
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
-                <Route path="payments/regular" element={<PaymentsRegular />}>
-                  <Route path="pending" element={<PaymentsRegularApproval />} />
+                <Route path="payments/regular" element={<PaymentsRegular type="regular"/>}>
+                  <Route path="pending" element={<PaymentsRegularApproval type="regular"/>} />
                   <Route
                     path="approved"
-                    element={<PaymentsRegularApproved />}
+                    element={<PaymentsRegularApproved type="regular"/>}
                   />
                 </Route>
-                <Route path="payments/repeater" element={<PaymentsRepeater />}>
+                <Route path="payments/repeater" element={<PaymentsRegular type="repeater"/>}>
                   <Route
                     path="pending"
-                    element={<PaymentsRepeaterApproval />}
+                    element={<PaymentsRegularApproval type="repeater"/>}
                   />
                   <Route
                     path="approved"
-                    element={<PaymentsRepeaterApproved />}
+                    element={<PaymentsRegularApproved type="repeater"/>}
                   />
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />

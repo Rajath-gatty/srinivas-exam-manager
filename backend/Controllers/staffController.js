@@ -141,7 +141,6 @@ exports.generateBulkHallticket = async(req,res) => {
 
 exports.setStudentEligibility = async(req,res) => {
     const {regno, eligibility} = req.body;
-    console.log("YOOO",regno, eligibility);
     try {
         const sql = `update student set eligibility=${eligibility} where regno='${regno}'`;
         const result = await db.execute(sql);
@@ -150,4 +149,87 @@ exports.setStudentEligibility = async(req,res) => {
         console.log(err);
         res.status(500).send({success:false})
     }
+}
+
+exports.getPendingPayments = async(req,res) => {
+    const deptId = req.deptId;
+    const type = req.params.type;
+    try {
+        const result = await db.execute(`select payment.id,first_name,last_name,payment.regno,payment.semester,course_name,payment_id,reciept_path from payment join student on payment.regno=student.regno join course on student.course_id=course.course_id where payment.dept_id=${deptId} and exam_status='${type}' and payment.status='pending'`);
+        res.status(200).send(result[0]);
+    } catch(err) {
+        console.log(err);
+        res.status(500).send({success:false})
+    }
+}
+
+exports.getPayments = async(req,res) => {
+    const deptId = req.deptId;
+    const type = req.params.type;
+    try {
+        const result = await db.execute(`select payment.id,first_name,last_name,payment.regno,payment.semester,course_name,payment.status,payment_id,reciept_path from payment join student on payment.regno=student.regno join course on student.course_id=course.course_id where payment.dept_id=${deptId} and exam_status='${type}' and payment.status='approved'`);
+        res.status(200).send(result[0]);
+    } catch(err) {
+        console.log(err);
+        res.status(500).send({success:false})
+    }
+}
+
+exports.postPaymentApproval = async(req,res) => {
+    const deptId = req.deptId;
+    const approvalType = req.params.approvalType;
+    const pId = req.body.pId;
+    const reciept = req.body.reciept;
+    try {
+        let sql;
+        if(approvalType==='approve') {
+            sql = `update payment set status='approved' where dept_id=${deptId} and id=${pId}`;
+            const result = await db.execute(sql);
+            res.status(200).send(result[0]);
+        } else {
+            sql = `delete from payment where dept_id=${deptId} and id=${pId}`;
+            const recieptPath = path.join(__dirname,'..','uploads',reciept);
+            fs.unlink(recieptPath,(async(err) => {
+                if(err) {
+                    throw new Error('Something went wrong');
+                } else {
+                    const result = await db.execute(sql);
+                    res.status(200).send(result[0]);
+                }
+            }))
+        }
+    } catch(err) {
+        console.log(err);
+        res.status(500).send({success:false})
+    }
+}
+
+exports.getPaymentDetails = async(req,res) => {
+    const paymentId = req.params.paymentId;
+    const deptId = req.deptId;
+    try{
+        const result = await db.execute(`select regno,bank_name,acc_no,transaction_id,date_format(dop,'%d %b %Y') dop,reciept_path from payment where dept_id=${deptId} and payment_id='${paymentId}'`);
+        res.send(result[0]);
+    } catch(err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+}
+
+exports.getSubjectDetails = async(req,res) => {
+    const paymentId = req.params.paymentId;
+    const deptId = req.deptId;
+    try{
+        const result = await db.execute(`select id,subj_name,subj_code from repeater_subjects where dept_id=${deptId} and payment_id='${paymentId}'`);
+        res.send(result[0]);
+    } catch(err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+}
+
+exports.getPaymentReciept = async(req,res) => {
+    const reciept = req.body.recieptPath;
+    const recieptPath = path.join(__dirname,'..','uploads',reciept);
+    res.download(recieptPath);
 }

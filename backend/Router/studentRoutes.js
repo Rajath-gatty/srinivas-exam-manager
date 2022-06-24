@@ -6,10 +6,17 @@ const upload = require('../middleware/multer');
 
 router.post('/application/regular',upload.single('reciept'),[
     check('bank').trim().isLength({min:3}).withMessage('Enter valid Bank name'),
-    check('accno').trim().isLength({min:3}).withMessage('Enter valid accno'),
+    check('accno').trim().isLength({min:3}).isNumeric().withMessage('Enter valid accno'),
     check('transaction').trim().isLength({min:3}).withMessage('Enter valid transaction ID'),
     check('date').isDate({ format: "YYYY/MM/DD" }).withMessage('Enter valid Date')
 ],isAuth,studentController.postRegularPayment);
+
+router.post('/application/repeater',upload.single('reciept'),[
+    check('bank').trim().isLength({min:3}).withMessage('Enter valid Bank name'),
+    check('accno').trim().isLength({min:3}).isNumeric().withMessage('Enter valid accno'),
+    check('transaction').trim().isLength({min:3}).withMessage('Enter valid transaction ID'),
+    check('date').isDate({ format: "YYYY/MM/DD" }).withMessage('Enter valid Date')
+],isAuth,studentController.postRepeaterPayment);
 
 router.post('/application/subjects',isAuth,studentController.getStudentSubjects);
 

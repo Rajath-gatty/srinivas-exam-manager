@@ -1,6 +1,7 @@
 import "../Payments.css";
 import {NavLink, Outlet, useLocation} from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 const  PaymentsRegular = () => {
     const [showModal, setShowModal] = useState(false);

@@ -127,7 +127,7 @@ const ApplicationRegular = () => {
         </div>
         <p>{sub.subj_code}</p>
       </div>
-      }):<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}
+      }):<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress size={45}/></div>}
       </div>
 
       <div className="application-total">

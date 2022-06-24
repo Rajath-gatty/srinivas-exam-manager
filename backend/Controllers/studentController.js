@@ -39,6 +39,40 @@ try {
   }
 }
 
+exports.postRepeaterPayment = async(req,res) => {
+  const file = req.file;
+  const deptId = req.deptId;
+  const {bank,accno,transaction,date,semester,courseId,studentId,paymentId} = req.body;
+  const recieptPath = `/reciepts/${file.filename}`;
+  const repeaterSubjects = JSON.parse(req.body.repeaterSubjects);
+
+  const err = validationResult(req).errors;
+  if (err.length > 0) {
+    res.status(400).send({ success: false, err });
+    fs.unlink(file.path,(err)=>err&&res.status(500).send('Something went wrong'));
+    return;
+  }
+
+  try {
+    const sql = `insert into payment(dept_id,course_id,payment_id,regno,semester,bank_name,dop,transaction_id,acc_no,reciept_path,exam_status,status) values(?,?,?,?,?,?,?,?,?,?,?,?)`;
+
+    const sql2 = `insert into repeater_subjects(dept_id,payment_id,subj_name,subj_code) values(?,?,?,?)`;
+
+    db.execute(sql,[deptId,courseId,paymentId,studentId,semester,bank,date,transaction,accno,recieptPath,'repeater','pending'])
+    .then(() => {
+      repeaterSubjects.forEach(sub => {
+       return db.execute(sql2,[deptId,paymentId,sub.subj_name,sub.subj_code])
+      })
+    })
+    .then(result => {
+      res.send(result);
+    })
+  } catch(err) {
+    res.status(500).send(err);
+    console.log(err)
+  }
+}
+
 exports.getStudentTimetable = async(req,res) => {
     const {semester} = req.body;
     const deptId = req.deptId;
