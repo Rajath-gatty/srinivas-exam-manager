@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import {FaUserCircle} from "react-icons/fa";
+import { useContextData } from "../../../hooks/useContextData";
 
 const ApprovaList = (props) => {
- const {name,regno,joiningYear,courseName,type,facultyId,staffId,handleApprove,handleReject} = props;
+ const {name,regno,joiningYear,courseName,type,facultyId,staffId,imageUrl,handleApprove,handleReject} = props;
+
+ const {serverUrl} = useContextData();
   let id;
   if(type==='student') id=regno;
   else if(type==='faculty') id=facultyId;
@@ -11,7 +13,7 @@ const ApprovaList = (props) => {
   return (
     <tr className="approve-table-row">
       {type==='student'&&<td className="approve-avatar-wrapper">
-      <FaUserCircle color="var(--light-grey)" size={30}/>
+      <img src={serverUrl+imageUrl} className="approval-profile-img" alt="" />
       </td>}
       <td>{name}</td>
       {type==='student'&&<td>{regno}</td>}
@@ -22,7 +24,7 @@ const ApprovaList = (props) => {
       </td>
       <td className="flex approve-table-btn-wrapper">
         <button onClick={()=> handleApprove(id)} className="btn-outlined-green">Approve</button>
-        <button onClick={()=> handleReject(id)}  className="btn-outlined-red">Reject</button>
+        <button onClick={()=> handleReject(id,imageUrl)}  className="btn-outlined-red">Reject</button>
       </td>
     </tr>
   );

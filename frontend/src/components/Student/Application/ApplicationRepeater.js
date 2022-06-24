@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {
   FormControl,
   Select,
@@ -8,10 +8,17 @@ import {
 } from "@mui/material";
 import "./Application.css";
 import { Link } from "react-router-dom";
+import { useContextData } from "../../../hooks/useContextData";
+import axios from "axios";
 
 const ApplicationRepeater = () => {
   const [selectedSemester, setSelectedSemester] = useState("");
+  const [loading,setLoading] = useState(true);
+  const [subjects,setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState([]);
+
+  const {user} = useContextData();
+  const semesterArr = new Array(user.semester).fill('');
 
   const AddSubject = (e) => {
     const CheckFlag = e.target.checked;
@@ -23,11 +30,44 @@ const ApplicationRepeater = () => {
       setSelectedSubject(selectedSubject.filter((e) => e !== SubjectName));
     }
   };
-
   const TotalFee = 200 * selectedSubject.length;
+
+  useEffect(() => {
+    const fetchSubjects = async() => {
+      try {
+        const data = {
+          courseId:user.courseId,
+          semester:selectedSemester
+        }
+        const result = await axios.post('/student/application/subjects',data);
+        setSubjects(result.data);
+        setLoading(false);
+      } catch(err) {
+        console.log(err);
+        setLoading(false);
+      }
+    }
+    fetchSubjects();
+  },[selectedSemester])
+
+
+  const handleSemesterChange = async(e) => {
+    setSelectedSemester(e.target.value);
+    const data = {
+      courseId:user.courseId,
+      semester:e.target.value
+    }
+    try {
+      const result = await axios.post('/student/application/repeater/subjects',data);
+      console.log(result);
+    } catch(err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="application-repeater flex">
+      <div className="application-repeater-header">
       <h2>Choose Repeater Semester</h2>
       <div className="application-selector flex">
         <FormControl className="select-sem">
@@ -36,21 +76,17 @@ const ApplicationRepeater = () => {
             label="Department"
             defaultValue=""
             size="small"
-            onChange={(e) => {
-              setSelectedSemester(e.target.value);
-            }}
+            onChange={handleSemesterChange}
           >
-            <MenuItem value="SEM I">I Semester</MenuItem>
-            <MenuItem value="SEM II">II Semester</MenuItem>
-            <MenuItem value="SEM III">III Semester</MenuItem>
-            <MenuItem value="SEM IV">IV Semester</MenuItem>
-            <MenuItem value="SEM V">V Semester</MenuItem>
-            <MenuItem value="SEM VI">VI Semester</MenuItem>
+            {semesterArr.map((_,i) => {
+              return <MenuItem key={i} value={i+1}>{i+1}</MenuItem>
+            })}
           </Select>
         </FormControl>
       </div>
+      </div>
       <div className="application-semester">
-        {selectedSemester ? selectedSemester : "Select Semester"}
+        {selectedSemester ? 'SEM '+selectedSemester : "Select Semester"}
       </div>
 
       <div className="application-form flex">
@@ -58,59 +94,18 @@ const ApplicationRepeater = () => {
           <span>Subject Name</span>
           <span>Subject Code</span>
         </div>
-        <div className="application-row">
+        {subjects.map((sub => {
+          return <div key={sub.subj_code} className="application-row">
           <div className="subject-checkbox">
-            <Checkbox value="HTML" onChange={AddSubject} /> <span>HTML</span>
+            <Checkbox value={sub.subj_name} onChange={AddSubject} /> <span>{sub.subj_name}</span>
           </div>
-          <span>19BCASD55</span>
+          <span>{sub.subj_code}</span>
         </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="CSS" onChange={AddSubject} /> <span>CSS</span>
-          </div>
-          <span>19BCASD56</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="React" onChange={AddSubject} /> <span>React</span>
-          </div>
-          <span>19BCASD57</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="Node.js" onChange={AddSubject} />
-            <span>Node.js</span>
-          </div>
-          <span>19BCASD58</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="OS" onChange={AddSubject} /> <span>OS</span>
-          </div>
-          <span>19BCASD59</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="AI" onChange={AddSubject} /> <span>AI</span>
-          </div>
-          <span>19BCASD60</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="SE" onChange={AddSubject} /> <span>SE</span>
-          </div>
-          <span>19BCASD61</span>
-        </div>
-        <div className="application-row">
-          <div className="subject-checkbox">
-            <Checkbox value="Java" onChange={AddSubject} /> <span>Java</span>
-          </div>
-          <span>19BCASD62</span>
-        </div>
+        }))}
       </div>
 
       {selectedSubject.length !== 0 ? (
-        <div className="selected-subjects flex">
+        <div className="selected-subjects">
           <div className="selected-subject-header flex">
             <span>Repeater Subjects</span>
             <span>Fees</span>

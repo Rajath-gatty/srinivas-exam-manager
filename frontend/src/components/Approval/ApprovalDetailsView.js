@@ -6,6 +6,7 @@ import { useParams,useLocation} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./ApprovalDetailsView.css";
 import { CircularProgress } from "@mui/material";
+import { useContextData } from "../../hooks/useContextData";
 
 const StudentApprovalView = () => {
   const [details,setDetails] = useState({});
@@ -17,9 +18,11 @@ const StudentApprovalView = () => {
   const navigate = useNavigate();
   const params = useParams(); 
   const location = useLocation();
+  const {serverUrl} = useContextData();
 
   const ApproveBtn = document.querySelector(".green");
   const RejectBtn = document.querySelector(".red");
+  const type = location.search.split('=')[1];
 
   useEffect(() => {
     if (approve !== "") {
@@ -37,7 +40,6 @@ const StudentApprovalView = () => {
   }, []);
 
   useEffect(() => {
-    const type = location.search.split('=')[1];
     const user = type==='staff'?'admin':'staff';
 
     const fetchDetails = async() => {
@@ -64,7 +66,8 @@ const StudentApprovalView = () => {
         <FiArrowLeft color="var(--light-grey)" size={30}/> <span>Back</span>
         </div>
         <div className="approve-user-avatar flex">
-          <FaUserCircle color="var(--light-grey)" size={70}/>
+          {!type==='student'?<FaUserCircle color="var(--light-grey)" size={70}/>
+          :<img src={serverUrl+details.image_path} className="details-profile-img" alt="" />}
         </div>
 
         <div className="approve-user-title flex">

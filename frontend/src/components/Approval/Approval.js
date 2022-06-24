@@ -84,11 +84,12 @@ const Approval = ({type}) => {
     }
   }
 
-  const handleReject = async(id) => {
+  const handleReject = async(id,imageUrl) => {
+    const data = type==='student'?{imageUrl}:null;
     try {
       setLoading(true);
-      const result = await axios.post(`/${userType}/reject/${type}/${id}`);
-      if(result.data.success) {
+      const result = await axios.post(`/${userType}/reject/${type}/${id}`,data);
+      if(result.response.status===200) {
         setApproveList(state => {
           const newState = [...state];
           return newState.filter(item => {
@@ -143,6 +144,7 @@ const Approval = ({type}) => {
          name={item.first_name+' '+item.last_name}
          joiningYear={item.joining_year}
          regno={item.regno}
+         imageUrl={item.image_path}
          type={type}
          staffId={item.staff_id}
          facultyId={item.faculty_id}

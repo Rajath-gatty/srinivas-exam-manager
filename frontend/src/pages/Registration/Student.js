@@ -93,7 +93,7 @@ const Student = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
-    const dobErr = dob.length > 4;
+    const dobErr = dob.length >=10;
     const studentData = {
       regno: regnoRef.current.value,
       firstName: firstNameRef.current.value,
@@ -132,7 +132,7 @@ const Student = () => {
     };
     const formData = new FormData();
     
-    formData.append('studentProfiles',photo);
+    formData.append('studentProfile',photo);
     for (const key in studentData) {
       formData.append(key,studentData[key]);
     }
@@ -164,7 +164,7 @@ const Student = () => {
       return setFileErr('Invalid Image type');
     }
 
-    if(file.size/1024>2000) {
+    if(file.size/1024>4000) {
       setFileUrl('');
      return setFileErr('Image size must be less than 4mb');
     }

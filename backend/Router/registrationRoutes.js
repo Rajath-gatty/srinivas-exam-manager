@@ -1,29 +1,17 @@
 const router = require("express").Router();
 const controllers = require("../Controllers/registrationController");
 const db = require("../db");
-const path = require('path');
+const fs = require('fs');
 const { body,check,validationResult} = require("express-validator");
-const multer  = require('multer');
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      const imgPath = path.join(__dirname,'..','uploads','studentProfiles');
-      cb(null, imgPath)
-    },
-    filename: function (req, file, cb) {
-      console.log(file);
-      const uid = (Math.random() + 1).toString(36).substring(2);
-      const mimeType = file.mimetype.split('/')[1];
-      cb(null, uid+'.'+mimeType)
-    }
-  })
-
-const upload = multer({ storage: storage });
+const upload = require('../middleware/multer');
 
 const validate = (req,res,next) => {
+  const file = req.file;
   const err = validationResult(req).errors;
   if (err.length > 0) {
-    return res.status(400).send({ success: false, err });
+     res.status(400).send({ success: false, err });
+     fs.unlink(file.path,(err)=>console.log(err));
+     return;
   }
   next();
 }
@@ -31,7 +19,7 @@ const validate = (req,res,next) => {
 //Student Post Request
 router.post(
   "/registration/student",
-  upload.single("studentProfiles"),[
+  upload.single("studentProfile"),[
     check("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
     check("regno").trim().isLength({ min: 5 }).withMessage("Enter valid Registration No.").custom(async (value) => {
       const result = await db.execute(

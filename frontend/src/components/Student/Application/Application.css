@@ -14,7 +14,7 @@
 .application-semester {
   background-color: var(--primary-color);
   color: var(--white);
-  width: 30em;
+  width: 800px;
   padding: 0.5em;
   text-align: center;
 }
@@ -22,21 +22,26 @@
 .application-form {
   flex-direction: column;
   margin: 1em 0;
-  width: 30em;
+  width: 800px;
+  box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
 }
 
 .application-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   text-align: center;
-  padding: 0.5em;
+  padding: 0.75em 0.5em;
   width: 100%;
   border: 1px solid var(--grey-bg);
   border-top: none;
+  color: var(--text-color);
 }
 
 .application-row.header {
-  background-color: grey;
+  background-color: var(--grey-bg);
+  color: #333;
+  font-weight: bold;
+  margin-top: 0em;
 }
 
 .application-total {
@@ -61,13 +66,16 @@
 }
 
 /* Repeater Part */
-.application-repeater {
-  min-height: 100vh;
-}
 
 .application-repeater h2 {
   color: var(--text-color);
   /* margin-top: -4em; */
+}
+
+.application-repeater .application-repeater-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .application-selector {
@@ -100,8 +108,10 @@
 }
 
 .selected-subjects {
-  flex-direction: column;
+  /* flex-direction: column; */
   margin-top: 2em;
+  max-width: 700px;
+  text-align: left;
 }
 
 .selected-subject-header {
@@ -109,23 +119,27 @@
   grid-template-columns: 1fr 1fr;
   column-gap: 10em;
   background-color: var(--grey-bg);
-  padding: 0.5em 1em;
+  padding: 0.5em 1em 0.5em 2em;
+  color: #333;
+  font-weight: bold;
 }
 
 .selected-subject-header span:nth-child(2) {
-  margin-left: 5em;
+  margin-left: 1.5em;
 }
 
 .selected-subject-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 15em;
-  padding: 0.25em 0;
+  column-gap: 10em;
+  padding: 0.75em 0;
+  color: var(--text-color);
+  border: 1px solid var(--grey-bg);
 }
 
 .selected-subject-list span:nth-child(1) {
   padding-left: 2em;
-  text-align: center;
+  text-align: left;
 }
 
 .selected-subject-list span:nth-child(2) {
@@ -139,4 +153,50 @@
 
 .application-repeater .application-total span:nth-child(1) {
   margin-left: 3em;
+}
+
+/* Payments */
+.student-payment {
+  margin: 0em 1em;
+  position: relative;
+}
+
+.student-payment h2 {
+  margin: 1em 0;
+}
+
+.payment-input-file {
+  display: none;
+}
+
+.student-payment-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin-top: 1em;
+}
+
+.student-payment-form .timetable-upload-btn {
+  height: 25px;
+}
+
+.student-payment-form input {
+  width: 250px;
+}
+
+.student-payment-form img {
+  width: 100px;
+  max-height: 250px;
+}
+
+.payment-submit{
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1em;
+  padding: 0.6em 2em;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-top: 3em;
 }
