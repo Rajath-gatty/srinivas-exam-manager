@@ -17,6 +17,7 @@ import Dob from "../../UI/Dob";
 import { FiUpload } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import dateFormat from "dateformat";
+import {toast} from "react-toastify";
 
 const ApplicationRepeater = () => {
   const [selectedSemester, setSelectedSemester] = useState("");
@@ -113,7 +114,7 @@ const ApplicationRepeater = () => {
     }
   }
   
-  const handleRegularSubmit = async(e) => {
+  const handleRepeaterSubmit = async(e) => {
     e.preventDefault();
     const bank = bankRef.current.value;
     const accno = accountRef.current.value;
@@ -143,6 +144,13 @@ const ApplicationRepeater = () => {
       const result = await axios.post('/student/application/repeater',formData);
       console.log(result);
       setErrors([]);
+
+      toast.success("Application Registered!", {
+        isLoading: false, 
+        autoClose: 3000, 
+        closeOnClick: true,
+        draggable: true
+      });
     } catch(err) {
       if(err.response.status===400) {
         setErrors(err.response.data.err);
@@ -214,7 +222,7 @@ const ApplicationRepeater = () => {
     <IoMdClose size={25} className="timetable-close-icon" onClick={handleCloseModal} />
     <div className="student-payment">
       <h2>Payment Details</h2>
-      <form onSubmit={handleRegularSubmit}>
+      <form onSubmit={handleRepeaterSubmit}>
         <div className="student-payment-form">
         <TextField
           label="Bank Name"

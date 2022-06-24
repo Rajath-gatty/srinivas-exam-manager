@@ -18,6 +18,7 @@ const TotalUsers = ({type}) => {
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);
+  const [searchUser,setSearchUser] = useState(false);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -37,7 +38,7 @@ const TotalUsers = ({type}) => {
       }
     }
     fetchUsers();
-  },[location.pathname,type])
+  },[location.pathname,type,searchUser])
 
   const fetchSemesters = async (courseName) => {
     try {
@@ -85,12 +86,20 @@ const TotalUsers = ({type}) => {
   const HandleSearch = async (e) =>{
     e.preventDefault();
     const query = e.target[0].value.toUpperCase();
-    console.log(query)
+    query === "" && setSearchUser(!searchUser);
+    
     try {
       setLoading(true);
       const result = await axios.post(`/users/student/search`,{query});
       setUsers(result.data);
       setLoading(false);
+
+      result.data.length===0 && toast.error("User Not Found!", {
+        isLoading: false, 
+        autoClose: 3000, 
+        closeOnClick: true,
+        draggable: true
+      });
     } catch(err) {
       console.log('approve error',err);
       setLoading(false);

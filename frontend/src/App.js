@@ -278,6 +278,7 @@ function App() {
           pauseOnFocusLoss
           draggable
           pauseOnHover
+          limit={3}
         />
       </div>
     </ThemeProvider>
