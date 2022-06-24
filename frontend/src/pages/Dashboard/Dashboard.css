@@ -1,0 +1,114 @@
+.box {
+    height: auto;
+}
+
+.heading {
+
+    display: flex;
+
+    padding-top: 4em;
+    padding-left: 5em;
+
+}
+
+.title {
+    font-family: serif;
+    color: rgb(50, 39, 122);
+    font-weight: 900;
+}
+
+.logo-img {
+    margin-left: 5em;
+    margin-top: -1em;
+    height: 90px;
+    width: 90px;
+
+}
+
+
+
+.college {
+    margin-top: 2em;
+    border-radius: 4px;
+
+}
+
+.box {
+    width: 100%;
+
+}
+
+
+
+.calender-main {
+    background-color: rgb(40, 137, 255);
+    width: 24%;
+    padding-top: 2em;
+    margin-top: -8%;
+    margin-bottom: 2em;
+    margin-left: 4em;
+
+}
+
+.college-header {
+    background-color: rgb(222, 221, 221);
+    height: 30%;
+    width: 50%;
+    padding-top: 2em;
+    padding-left: 2em;
+    padding-right: 2em;
+    margin-top: -26%;
+    margin-left: 40%;
+
+}
+
+.header-title {
+    padding-top: 6px;
+
+}
+
+.college-text {
+
+    padding: 2em 1em 2em 1em;
+}
+
+p {
+    color: #685206;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 24px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.header-text {
+    color: darkslateblue;
+}
+
+.description {
+    display: flex;
+    position: left;
+    background-color: rgb(79, 79, 117);
+    margin-left: -48%;
+    margin-right: 30%;
+    margin-top: 4em;
+    margin-bottom: 4em;
+    padding: 2em 2em 2em 2em;
+
+}
+
+.photo {
+    width: 150px;
+    height: 200px;
+    padding-right: 1em;
+}
+
+.head-title {
+    color: white;
+
+}
+
+.highlight-title {
+    color: yellow;
+}
