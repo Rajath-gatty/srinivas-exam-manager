@@ -121,3 +121,17 @@ exports.getSemFilteredStudent = async(req,res) => {
     res.status(500).send(err);
   }
 }
+
+exports.getStudentByID = async(req,res) => {
+  const {query} = req.body;
+  const deptId = req.deptId;
+
+  let sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
+  try{
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  }catch(err){
+    console.log(err);
+    res.status(500).send(err);
+  }
+}

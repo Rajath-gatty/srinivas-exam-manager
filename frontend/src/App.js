@@ -62,6 +62,8 @@ import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordin
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -147,21 +149,21 @@ function App() {
                 />
                 <Route path="indent/regular" element={<IndentRegular />} />
                 <Route path="indent/repeater" element={<IndentRepeater />} />
-                <Route path="payments/regular" element={<PaymentsRegular />}>
-                  <Route path="pending" element={<PaymentsRegularApproval />} />
+                <Route path="payments/regular" element={<PaymentsRegular type="regular"/>}>
+                  <Route path="pending" element={<PaymentsRegularApproval type="regular"/>} />
                   <Route
                     path="approved"
-                    element={<PaymentsRegularApproved />}
+                    element={<PaymentsRegularApproved type="regular"/>}
                   />
                 </Route>
-                <Route path="payments/repeater" element={<PaymentsRepeater />}>
+                <Route path="payments/repeater" element={<PaymentsRegular type="repeater"/>}>
                   <Route
                     path="pending"
-                    element={<PaymentsRepeaterApproval />}
+                    element={<PaymentsRegularApproval type="repeater"/>}
                   />
                   <Route
                     path="approved"
-                    element={<PaymentsRepeaterApproved />}
+                    element={<PaymentsRegularApproved type="repeater"/>}
                   />
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
@@ -267,6 +269,17 @@ function App() {
             <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v' }} className="flex"><CircularProgress size={80} /></div>}></Route>
           </Routes>
         </Browser>
+
+        <ToastContainer
+          position="bottom-center"
+          autoClose={3000}
+          hideProgressBar
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          limit={3}
+        />
       </div>
     </ThemeProvider>
   );

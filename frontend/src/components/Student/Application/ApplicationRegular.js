@@ -8,6 +8,7 @@ import {useContextData} from "../../../hooks/useContextData";
 import { useEffect,useState,useRef } from "react";
 import Modal from "../../UI/Modal/Modal";
 import Dob from "../../UI/Dob";
+import {toast} from "react-toastify";
 
 const ApplicationRegular = () => {
   const [loading,setLoading] = useState(true);
@@ -102,6 +103,13 @@ const ApplicationRegular = () => {
         const result = await axios.post('/student/application/regular',formData);
         console.log(result);
         setErrors([]);
+
+        toast.success("Application Registered!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true
+        });
       } catch(err) {
         if(err.response.status===400) {
           setErrors(err.response.data.err);
@@ -127,7 +135,7 @@ const ApplicationRegular = () => {
         </div>
         <p>{sub.subj_code}</p>
       </div>
-      }):<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}
+      }):<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress size={45}/></div>}
       </div>
 
       <div className="application-total">

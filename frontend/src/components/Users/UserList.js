@@ -47,7 +47,7 @@ const UserList = ({ data, type, updateEligibility, index }) => {
                 <span>Eligible</span>
               </div>
 
-              <BiX className="users-notEligible" size={20} onClick={()=>{updateEligibility(index, false, data.regno);}}/>
+              <BiX className="users-notEligible" title="Set Not-Eligible" size={20} onClick={()=>{updateEligibility(index, false, data.regno);}}/>
             </div>
             }
         </td>}

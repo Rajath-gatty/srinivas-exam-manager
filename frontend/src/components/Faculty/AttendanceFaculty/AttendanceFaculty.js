@@ -1,8 +1,20 @@
 import "./AttendanceFaculty.css";
 import AttendanceList from "./AttendanceList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+import { toast } from "react-toastify";
 
 const AttendanceFaculty = () => {
+
+  const HandleAttendanceSubmit = () =>{
+    //Temp Logic pending
+    toast.success("Attendance Updated Successfully!", {
+      isLoading: false, 
+      autoClose: 3000, 
+      closeOnClick: true,
+      draggable: true
+    });
+  }
+
   return (
     <div className="faculty-attendance-main">
       <FilterSearch search />
@@ -25,7 +37,7 @@ const AttendanceFaculty = () => {
 
         </tbody>
       </table>
-      <button className="submit">Submit</button>
+      <button onClick={HandleAttendanceSubmit} className="submit">Submit</button>
     </div>
   );
 };

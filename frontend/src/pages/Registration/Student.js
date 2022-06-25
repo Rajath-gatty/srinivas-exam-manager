@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import dateFormat from "dateformat";
 import {
@@ -18,6 +18,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
 import { useFetchDepartment } from "../../hooks/useFetchDepartments";
+import {toast} from "react-toastify";
 
 const Student = () => {
   const [gender, setGender] = useState("");
@@ -37,11 +38,12 @@ const Student = () => {
   const [errors, setErrors] = useState([]);
 
   const DegreeYear = [
-    2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016,
-    2017, 2018, 2019, 2020, 2021, 2022,
+     2015, 2016,
+    2017, 2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027
   ];
 
   const departments = useFetchDepartment();
+  const navigate = useNavigate();
 
   const SwitchCourse = async(evt) => {
     const dept = evt.target.value;
@@ -92,10 +94,12 @@ const Student = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const loader = toast.loading("Creating User...");
+    
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
     const dobErr = dob.length >=10;
     const studentData = {
-      regno: regnoRef.current.value,
+      regno: regnoRef.current.value.toUpperCase(),
       firstName: firstNameRef.current.value,
       lastName: lastNameRef.current.value,
       dob: dobErr && dateFormat(dob, "dd-mm-yyyy"),
@@ -138,19 +142,34 @@ const Student = () => {
     }
 
     if (studentData.password !== studentData.cPasword) {
-      setPassErr(true);
+      return setPassErr(true);
     } else {
       try {
-        const result = await axios.post(
-          "/registration/student",
-          formData
-        );
+        const result = await axios.post("/registration/student",formData);
         setErrors([]);
         setPassErr(false);
         console.log(result);
+        
+        navigate("/login");
+        toast.update(loader, { 
+          render: "User Registered Successfully!", 
+          type: "success", 
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true });
+
       } catch (err) {
         setErrors(err.response.data.err);
         console.log(err);
+
+        toast.update(loader, { 
+        render: "Fill all the required fields!", 
+        type: "error", 
+        isLoading: false, 
+        autoClose: 3000, 
+        closeOnClick: true,
+        draggable: true });
       }
       setPassErr(false);
     }

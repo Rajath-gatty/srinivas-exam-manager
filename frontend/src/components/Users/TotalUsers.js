@@ -9,6 +9,8 @@ import {useFetchCourses} from "../../hooks/useFetchCourses";
 import Filter from "../UI/Filter/Filter";
 import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
+import { toast } from 'react-toastify';
+import fileDownload from "js-file-download";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -16,6 +18,7 @@ const TotalUsers = ({type}) => {
   const[sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
+  const [btnLoading,setBtnLoading] = useState(false);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -36,6 +39,36 @@ const TotalUsers = ({type}) => {
     }
     fetchUsers();
   },[location.pathname,type])
+
+    const handleSearch = async(e) => {
+      const query = e.target.value.toUpperCase();
+      let cancelToken;
+      if (typeof cancelToken != typeof undefined) {
+        cancelToken.cancel("Operation canceled due to new request.");
+      }
+
+      const source = axios.CancelToken.source();
+      cancelToken = source.token;
+      try {
+        setLoading(true);
+        const result = await axios.post(`/users/student/search`,{query},{cancelToken:cancelToken});
+        if(result.data.length>0) {
+          setUsers(result.data);
+        }
+        setLoading(false);
+  
+        result.data.length===0 && toast.error("User Not Found!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true,
+          toastId:'not-found'
+        });
+      } catch(err) {
+        console.log('approve error',err);
+        setLoading(false);
+      }
+    }
 
   const fetchSemesters = async (courseName) => {
     try {
@@ -80,19 +113,30 @@ const TotalUsers = ({type}) => {
     }
   }
 
+  //Tost Notification
+  const notify = (type, msg) =>{ 
+    type === "warn" && toast.warn(msg); 
+  }
+
+
   const handleHallticket = async () =>{
-    try {
+    !sem&&!course ? notify("warn", "Select Course & Semester") :
+    !sem && notify("warn", "Select Semester");
+    
+    if(sem&&course) try {
+      setBtnLoading(true);
       const data = {
         courseName:course,
         semester:sem
       }
-      const result = await axios.post('staff/halltickets',data,{responseType:"arraybuffer"});
-      const arr = new Uint8Array(result.data);
-      const blob = new Blob([arr], { type: 'application/pdf' });
+      const result = await axios.post('staff/halltickets',data,{responseType:"blob"});
+      const blob = new Blob([result.data], { type: 'application/pdf' });
       const objectUrl = window.URL.createObjectURL(blob);
-      console.log(result.data);
+      const uid = (Math.random() + 1).toString(36).substring(2);
+      fileDownload(result.data,`hallticket-${course}-SEM-${sem}-${uid}.pdf`);
       window.open(objectUrl);
       setLoading(false);
+      setBtnLoading(false);
     } catch(err) {
         console.log(err);
         setLoading(false);
@@ -114,11 +158,14 @@ const TotalUsers = ({type}) => {
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
-        <div className="users-searchBar">
+        {/* <form className="users-searchBar flex" onSubmit={HandleSearch}> */}
+        <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
-          <input type="text" placeholder="Search Student Registration" />
-        </div>
-        <Filter 
+          <input type="text " placeholder="Enter Reg No." onBlur={(e) => e.target.placeholder = "Enter Reg No."} onChange={handleSearch} />
+          </div>
+        {/* </form> */}
+
+        <Filter  
         data={filterCourses} 
         label="Filter By Course" 
         filter="course" 
@@ -132,15 +179,21 @@ const TotalUsers = ({type}) => {
         handleSemesterChange={handleSemesterChange}
         />
 
-        <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
+        <div className="users-HallticketBtn flex">
+          {!btnLoading ? <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
           <VscFilePdf color="currentColor" size={22}/>
-          <span>Generate Hall Tickets</span>
+            <span>Generate Hall Tickets</span>
+          </div> 
+          :
+          <div className="users-btnLoader flex" onClick={handleHallticket}>
+            <CircularProgress color="inherit" size={25}/>
+          </div>}
         </div>
       </div>}
 
       <table className="users-table-wrapper">
         <thead className="thead">
-          <tr>
+          <tr onClick={notify}>
             <th>{type==="student" ? "RegNo" : type==="faculty" ? "Faculty ID" : type==="staff" ? "Staff ID" : "Coord ID"}</th>
             <th>Name</th>
             {type!=="student" && <th>Email</th>}

@@ -1,14 +1,23 @@
 import "./SemesterMarks.css";
 import SemesterMarksList from "./SemesterMarksList";
-
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { toast } from "react-toastify";
 
 const SemesterMarks = () => {
     const bundle = [
         "22SDA010",
         "22SDA020"
-
     ];
+
+    const HandleSemMarks = () =>{
+        toast.success("Semester Marks Updated!", {
+        isLoading: false, 
+        autoClose: 3000, 
+        closeOnClick: true,
+        draggable: true
+        });
+    }
+
     return (
         <div className="semester-main">
             <div className="flex">
@@ -48,7 +57,7 @@ const SemesterMarks = () => {
                 </tbody>
 
             </table>
-            <button className="submit">Submit</button>
+            <button onClick={HandleSemMarks} className="submit">Submit</button>
         </div>
 
     );

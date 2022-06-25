@@ -2,8 +2,19 @@ import "./InternalMarks.css";
 import "./InternalList";
 import InternalList from "./InternalList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
+import { toast } from "react-toastify";
 
 const InternalMarks = () => {
+
+  const HandleMarksSubmit = () =>{
+    toast.success("Internals Marks Updated!", {
+      isLoading: false, 
+      autoClose: 3000, 
+      closeOnClick: true,
+      draggable: true
+    });
+  }
+
   return (
     <div className="internal-main">
       <FilterSearch />
@@ -27,7 +38,7 @@ const InternalMarks = () => {
 
         </tbody>
       </table>
-      <button className="submit">Submit</button>
+      <button onClick={HandleMarksSubmit} className="submit">Submit</button>
     </div>
   );
 };

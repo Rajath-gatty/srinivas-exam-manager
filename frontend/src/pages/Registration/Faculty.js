@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import dateFormat from "dateformat";
 import {
@@ -14,6 +14,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Dob from "../../components/UI/Dob";
 import RadioInput from "../../components/UI/RadioInput";
 import { useFetchDepartment } from "../../hooks/useFetchDepartments";
+import {toast} from "react-toastify";
 
 const Faculty = () => {
   const [gender, setGender] = useState("");
@@ -21,6 +22,7 @@ const Faculty = () => {
   const [errors, setErrors] = useState([]);
 
   const departments = useFetchDepartment();
+  const navigate = useNavigate();
 
   const facultyIdRef = useRef();
   const firstNameRef = useRef();
@@ -53,6 +55,8 @@ const Faculty = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const loader = toast.loading("Creating User...");
+
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
     const dobErr = dob.length>=10;
     const facultyData = {
@@ -88,19 +92,33 @@ const Faculty = () => {
       setPassErr(true);
     } else {
       try {
-        const result = await axios.post(
-          "/registration/faculty",
-          facultyData
-        );
+        const result = await axios.post("/registration/faculty",facultyData);
         console.log(result);
         setErrors([]);
         setPassErr(false);
+
+        navigate("/login");
+        toast.update(loader, { 
+          render: "User Registered Successfully!", 
+          type: "success", 
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true });
       } catch (err) {
         if(!err.response.data) {
           return setErrors([]);
         }
         setErrors(err.response.data.err);
         console.log(err.response.data.err);
+
+        toast.update(loader, { 
+          render: "Fill all the required fields!", 
+          type: "error", 
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true });
       }
     }
   };

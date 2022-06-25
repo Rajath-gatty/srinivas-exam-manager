@@ -10,6 +10,7 @@ import StaffSvg from "../../Assets/Registration/staff_reg.svg";
 import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
+import {toast} from "react-toastify";
 
 const Login = () => {
   const [emailfocus, setEmailFocus] = useState(false);
@@ -31,10 +32,15 @@ const Login = () => {
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
 
+  const notify = (type, msg) =>{
+    type==="warn" && toast.warn(msg);
+  }
+
   const handleLogin = async(e) => {
     e.preventDefault();
     
     if(email===''||password==='') {
+      notify("warn", "Enter Email & Password !")
       return;
     }
 

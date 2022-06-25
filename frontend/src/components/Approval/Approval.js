@@ -7,6 +7,7 @@ import {useLocation} from "react-router-dom";
 import {useContextData} from "../../hooks/useContextData";
 import Filter from '../UI/Filter/Filter';
 import NoData from "../UI/NoData/NoData";
+import {toast} from "react-toastify";
 
 const Approval = ({type}) => {
   const [approveList,setApproveList] = useState([]);
@@ -77,6 +78,13 @@ const Approval = ({type}) => {
           })
         })
         setLoading(false);
+
+        toast.success("User Approved!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true
+        });
       }
     } catch(err) {
       console.log('approve error',err);
@@ -105,6 +113,13 @@ const Approval = ({type}) => {
           })
         })
         setLoading(false);
+
+        toast.success("User Rejected!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true
+        });
       }
     } catch(err) {
       console.log('approve error',err);

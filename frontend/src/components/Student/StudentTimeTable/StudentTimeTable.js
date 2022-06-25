@@ -4,6 +4,7 @@ import {useContextData} from "../../../hooks/useContextData";
 import "./StudentTimeTable.css";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
+import fileDownload from "js-file-download";
 
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
@@ -28,9 +29,9 @@ const StudentTimeTable = () => {
 
     const handleHallticket = async () =>{
         try {
-            const result = await axios.post('student/hallticket',{timetable},{responseType:"arraybuffer"});
-            const arr = new Uint8Array(result.data);
-            const blob = new Blob([arr], { type: 'application/pdf' });
+            const result = await axios.post('student/hallticket',{timetable},{responseType:"blob"});
+            fileDownload(result.data,`${user.first_name+'-'+user.last_name}-SEM-${user.semester}-hallticket.pdf`);
+            const blob = new Blob([result.data], { type: 'application/pdf' });
             const objectUrl = window.URL.createObjectURL(blob);
             console.log(result.data);
             window.open(objectUrl);

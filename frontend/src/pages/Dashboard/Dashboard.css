@@ -72,7 +72,7 @@
     padding: 2em 1em 2em 1em;
 }
 
-p {
+.box p {
     color: #685206;
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 14px;

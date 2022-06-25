@@ -1,7 +1,7 @@
 const path = require('path');
 // const imagePath = path.join(__dirname,'uploads');
 
-module.exports = (studentArr,timetable) => {
+module.exports = (studentArr,timetable,courseName) => {
 
     const contentBody = (regno,first_name,last_name,dept_name,course_name,semester,image_path,index) =>[
         {
@@ -26,7 +26,7 @@ module.exports = (studentArr,timetable) => {
                widths:['*','*',160],
                body:[
                 [{text:'USN',style:{bold:true}},{text:'College Code',style:{bold:true}},{text:'Name of Examination',style:{bold:true}}],
-                [{text:`${regno}`,margin:[0,7,0,0]},{text:'CCIS',margin:[0,7,0,0]},`${course_name}-Semester ${semester} \n Examination 2022-2023`],
+                [{text:`${regno}`,margin:[0,7,0,0]},{text:'CCIS',margin:[0,7,0,0]},`${course_name?course_name:courseName}-Semester ${semester} \n Examination 2022-2023`],
                ]
            }
          }
