@@ -113,7 +113,7 @@ exports.generateBulkHallticket = async(req,res) => {
 
     try {
         const start = Date.now();
-        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester} order by regno`;
+        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester} and eligibility=1 order by regno`;
         const [result] = await db.execute(sql);
 
         const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved' order by exam_date`;
@@ -232,4 +232,15 @@ exports.getPaymentReciept = async(req,res) => {
     const reciept = req.body.recieptPath;
     const recieptPath = path.join(__dirname,'..','uploads',reciept);
     res.download(recieptPath);
+}
+
+exports.getFacultySubject = async(req,res) => {
+    const {courseName,semester} = req.body;
+    try{
+        const result = await db.execute(``);
+        res.send(result[0]);
+    } catch(err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
 }

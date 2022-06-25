@@ -64,6 +64,7 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects";
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -168,6 +169,7 @@ function App() {
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
                 <Route path="/promote" element={<Promote />} />
+                <Route path="/users/faculty/subjects/:facultyId" element={<FacultySubjects />} />
               </Route>
 
               {/* Faculty Access*/}

@@ -5,6 +5,11 @@
     flex: 1;
 } */
 
+.filter-comp {
+  flex: 1;
+  text-align: center;
+}
+
 .filter-comp .filterSearch-SelectInput {
   width: 10em;
   text-align: left;

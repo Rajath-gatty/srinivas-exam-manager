@@ -109,7 +109,7 @@ exports.generateHallTicket = async(req,res) => {
   ;
     try {
       const start = Date.now();
-      const [result] = await db.execute(`select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where student.dept_id=? and regno=?`,[deptId,stdId]);
+      const [result] = await db.execute(`select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where student.dept_id=? and regno=? and eligibility=1`,[deptId,stdId]);
 
       const pdf = new Pdfmake(fonts);
       fs.readFile(`./pdfs/${stdId}.pdf`, 'utf8', (err, data) => {

@@ -174,3 +174,8 @@ a {
 .gap-sm {
   gap: 0.5em;
 }
+
+/* Toastify Custom CSS */
+.Toastify__toast-body{
+  text-align: center;
+}

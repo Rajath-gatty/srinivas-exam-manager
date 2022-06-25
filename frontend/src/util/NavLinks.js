@@ -178,7 +178,7 @@ export const NavLinks = [
     links: [
       {
         title: "Dashboard",
-        path: "/studentdash",
+        path: "/",
         icon: Dashboard,
       },
       {

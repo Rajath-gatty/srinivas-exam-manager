@@ -143,3 +143,7 @@
   outline: none;
 }
 
+.users-facultySub{
+  color: var(--primary-color) !important;
+  cursor: pointer;
+}

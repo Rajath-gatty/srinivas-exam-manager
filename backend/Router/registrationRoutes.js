@@ -6,11 +6,10 @@ const { body,check,validationResult} = require("express-validator");
 const upload = require('../middleware/multer');
 
 const validate = (req,res,next) => {
-  const file = req.file;
   const err = validationResult(req).errors;
   if (err.length > 0) {
      res.status(400).send({ success: false, err });
-     fs.unlink(file.path,(err)=>console.log(err));
+     fs.unlink(req.file.path,(err)=>console.log(err));
      return;
   }
   next();

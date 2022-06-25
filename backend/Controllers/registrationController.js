@@ -161,7 +161,7 @@ exports.postLogin = async (req, res) => {
     let id;
     if (loginType === 'student') {
       id = "regno";
-      sql = `select regno,first_name,last_name,email,password,phone,dept_id,semester,course_id,image_path,address,role from ${loginType} where email='${email}' and status='approved'`;
+      sql = `select regno,first_name,last_name,email,password,phone,dept_id,semester,course_id,image_path,address,role,eligibility from ${loginType} where email='${email}' and status='approved'`;
     } else if (loginType === 'super admin') {
       id = 's_admin_id';
       sql = `select ${id},first_name,last_name,email,password,role from ${loginType.split(' ').join('_')} where email='${email}'`;
@@ -208,7 +208,8 @@ exports.postLogin = async (req, res) => {
             courseId: fetchedUser.course_id,
             deptId: fetchedUser.dept_id,
             role: fetchedUser.role,
-            semester: fetchedUser.semester
+            semester: fetchedUser.semester,
+            eligibility:fetchedUser.eligibility
           }
         });
       });

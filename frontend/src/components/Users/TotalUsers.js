@@ -11,6 +11,8 @@ import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
+import Modal from "../UI/Modal/Modal";
+import {IoMdClose} from "react-icons/io";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -19,6 +21,9 @@ const TotalUsers = ({type}) => {
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);
+  const [showModal,setShowModal] = useState(false);
+  const [details,setDetails] = useState([]);
+  const [detailsLoading,setDetailsLoading] = useState(true);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -33,6 +38,7 @@ const TotalUsers = ({type}) => {
         const result = await axios.post(`/users/${type}`)
         setUsers(result.data);
         setLoading(false);
+        console.log(result)
       } catch(err) {
         console.log(err);
       }
@@ -118,7 +124,6 @@ const TotalUsers = ({type}) => {
     type === "warn" && toast.warn(msg); 
   }
 
-
   const handleHallticket = async () =>{
     !sem&&!course ? notify("warn", "Select Course & Semester") :
     !sem && notify("warn", "Select Semester");
@@ -154,6 +159,15 @@ const TotalUsers = ({type}) => {
       console.log(err);
     }
   }
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+    // if(typeof(tId)==='string') {
+    //     setDetails([]);
+    //     setDetailsLoading(true);
+    //     fetchDetails(tId);
+    // }
+};
 
   return (
     <div className="users-main">
@@ -199,8 +213,9 @@ const TotalUsers = ({type}) => {
             {type!=="student" && <th>Email</th>}
             {showDOJ && <th>DOJ</th>}
             {type==="student" && <th>Course</th>}
-            {type==="student" && <th>Batch</th>}
+            {type==="student" && <th>Batch</th>} 
             {type==="student" && <th>Semester</th>}
+            {type==="faculty" && <th>Subjects</th>}
             <th>Details</th>
             {type==="student" && <th>Eligiblity</th>}
           </tr>
@@ -212,8 +227,38 @@ const TotalUsers = ({type}) => {
               data={obj} 
               type={type}
               updateEligibility={UpdateEligibility}
+              setShowModal={setShowModal}
               index={i}/>
           })}
+
+          {showModal && 
+            <Modal onClose={toggleModal}>
+              <div className="modal">
+              <IoMdClose size={25} className="timetable-close-icon" onClick={toggleModal} />
+                  <div className="overlay">
+                  </div>
+                  <div className="modal-content">
+                    {!detailsLoading?<div className="admin-timetable-table-wrapper">
+                      <table className="examcoord-timetable-table">
+                        <thead >
+                            <tr>
+                                <th>Subject Name</th>
+                                <th>Subject Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {details.map(item => (
+                            <tr key={Math.random()+Date.now()} className="timetable-modal">
+                                  <td>{item.subj_name}</td>
+                                  <td>{item.subj_code}</td>
+                              </tr>
+                            ))}                                               
+                        </tbody>
+                      </table>
+                    </div>:<div className="flex"><CircularProgress thickness={4}/></div>}
+                  </div>
+              </div>
+            </Modal>}
         </tbody>}
       </table>
       {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}

@@ -7,7 +7,7 @@ const ProtectedRoute = ({ allowedRole }) => {
 
   return role && allowedRole.find((item) => item === role) ? (
     <Outlet />
-  ):<Navigate to="/login"/>
+  ):null
 };
 
 export default ProtectedRoute;

@@ -101,9 +101,11 @@ const ExamcordTimeTable = () => {
                                 <td>{item.semester}</td>
                                 <td>{item.created_at}</td>
                                 <td><button className="open-modal" onClick={() => toggleModal(item.t_id)}> view</button></td>
-                                <td className="approval">                                            <div className="flex approve-table-btn-wrapper gap-1">
-                                                <button onClick={()=>handleApprove(item.t_id)} className="btn-outlined-green" >Approve</button><button onClick={()=>handleReject(item.t_id)}className="btn-outlined-red">Reject</button>
-                                            </div></td>
+                                <td className="approval">                                            
+                                    <div className="flex approve-table-btn-wrapper gap-1">
+                                        <button onClick={()=>handleApprove(item.t_id)} className="btn-outlined-green" >Approve</button><button onClick={()=>handleReject(item.t_id)}className="btn-outlined-red">Reject</button>
+                                    </div>
+                                </td>
                             </tr>
                             )
                         })}

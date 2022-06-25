@@ -16,7 +16,7 @@ const SubMenu = ({
   NotifyEle.forEach(itm=>{
     var spanEle = itm.getElementsByTagName('span')[0].textContent;
     if(contextNotif){
-      if(spanEle==="Approval")
+      if(spanEle==="Approval" || spanEle==="Payments")
         itm.setAttribute("data-notify","active")
       else
         itm.setAttribute("data-notify","inactive")

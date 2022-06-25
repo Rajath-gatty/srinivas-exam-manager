@@ -94,7 +94,6 @@ const Student = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const loader = toast.loading("Creating User...");
     
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`;
     const dobErr = dob.length >=10;
@@ -150,26 +149,22 @@ const Student = () => {
         setPassErr(false);
         console.log(result);
         
-        navigate("/login");
-        toast.update(loader, { 
-          render: "User Registered Successfully!", 
-          type: "success", 
+        toast.success("User Registered Successfully!", {
           isLoading: false, 
           autoClose: 3000, 
           closeOnClick: true,
           draggable: true });
 
+          navigate("/login");  
       } catch (err) {
         setErrors(err.response.data.err);
         console.log(err);
 
-        toast.update(loader, { 
-        render: "Fill all the required fields!", 
-        type: "error", 
-        isLoading: false, 
-        autoClose: 3000, 
-        closeOnClick: true,
-        draggable: true });
+        toast.error("Fill all the required fields!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true });
       }
       setPassErr(false);
     }

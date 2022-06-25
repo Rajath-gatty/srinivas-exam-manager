@@ -5,6 +5,7 @@ import "./StudentTimeTable.css";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import fileDownload from "js-file-download";
+import {toast} from "react-toastify";
 
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
@@ -12,6 +13,7 @@ const StudentTimeTable = () => {
     const {user} = useContextData();
     const semester = user.semester;
     const courseId = user.courseId;
+    console.log(user)
      
     useEffect(() =>{
         const fetchTimetables = async () => {
@@ -28,17 +30,21 @@ const StudentTimeTable = () => {
     },[])
 
     const handleHallticket = async () =>{
-        try {
-            const result = await axios.post('student/hallticket',{timetable},{responseType:"blob"});
-            fileDownload(result.data,`${user.first_name+'-'+user.last_name}-SEM-${user.semester}-hallticket.pdf`);
-            const blob = new Blob([result.data], { type: 'application/pdf' });
-            const objectUrl = window.URL.createObjectURL(blob);
-            console.log(result.data);
-            window.open(objectUrl);
-            setLoading(false);
-        } catch(err) {
-            console.log(err);
-            setLoading(false);
+        if(user.eligibility){
+            try {
+                const result = await axios.post('student/hallticket',{timetable},{responseType:"blob"});
+                fileDownload(result.data,`${user.first_name+'-'+user.last_name}-SEM-${user.semester}-hallticket.pdf`);
+                const blob = new Blob([result.data], { type: 'application/pdf' });
+                const objectUrl = window.URL.createObjectURL(blob);
+                console.log(result.data);
+                window.open(objectUrl);
+                setLoading(false);
+            } catch(err) {
+                console.log(err);
+                setLoading(false);
+            }
+        }else{
+            toast.error("User Not Eligible!")
         }
     }
     

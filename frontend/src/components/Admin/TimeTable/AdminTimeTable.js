@@ -155,9 +155,9 @@ const AdminTimeTable = () => {
                     <div className="upload-wrapper">
                         <div className="admin-upload">
                             <form onSubmit={handleSubmit}>
-                            <div className="select-box flex">
+                            <div className="select-box ">
 
-                            <Filter width="90%" 
+                            <Filter width="80%" 
                             data={filterCourses} 
                             filter="course" 
                             label="Choose Course"
@@ -168,7 +168,7 @@ const AdminTimeTable = () => {
                             />
 
                             <Filter 
-                            width="90%" 
+                            width="80%" 
                             data={semFilter} 
                             filter="semester" 
                             label="Choose Semester"

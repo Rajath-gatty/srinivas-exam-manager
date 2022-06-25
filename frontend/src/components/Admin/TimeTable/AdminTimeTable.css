@@ -121,6 +121,10 @@
     margin-bottom: 1em;
 }
 
+.upload-timetable-wrapper .select-box {
+    display: flex;
+}
+
 .upload-timetable-wrapper .upload-wrapper .timetable-send-btn {
     margin-top: 2em;
 }

@@ -21,7 +21,7 @@ router.get('/subjectdetails/:paymentId',isAuth,staffController.getSubjectDetails
 router.post('/payments/reciept',isAuth,staffController.getPaymentReciept);
 
 router.post('/halltickets',isAuth,staffController.generateBulkHallticket);
-
 router.post('/eligibility',isAuth,staffController.setStudentEligibility);
+router.post('/faculty/subjects',isAuth,staffController.getFacultySubject);
 
 module.exports = router;

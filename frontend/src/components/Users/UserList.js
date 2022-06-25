@@ -1,7 +1,7 @@
 import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
-const UserList = ({ data, type, updateEligibility, index }) => {
+const UserList = ({ data, type, updateEligibility, index, setShowModal }) => {
 
   let eligible = data.eligibility;
   let UserID = "";
@@ -26,6 +26,12 @@ const UserList = ({ data, type, updateEligibility, index }) => {
       {type==="student" && <td>{data.joining_year}</td>}
       {type==="student" && <td>{data.semester}</td>}
       {showDOJ && <td>{data.joining_year}</td>}
+
+      {type==="faculty" && <td className="users-facultySub" onClick={()=>setShowModal(true)}>
+        {/* <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID }} > */}
+          View Subjects
+        {/* </Link> */}
+      </td>}
 
       <td className="users-details">
         <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID }} >
