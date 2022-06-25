@@ -128,7 +128,7 @@ exports.generateBulkHallticket = async(req,res) => {
             },
         }
         const pdf = new Pdfmake(fonts);
-        const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable),{});
+        const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable,courseName),{});
         doc.pipe(res);
         doc.end();
         const end = Date.now();

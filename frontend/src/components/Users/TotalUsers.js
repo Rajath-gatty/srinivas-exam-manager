@@ -10,6 +10,7 @@ import Filter from "../UI/Filter/Filter";
 import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
+import fileDownload from "js-file-download";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,6 @@ const TotalUsers = ({type}) => {
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);
-  const [searchUser,setSearchUser] = useState(false);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -38,7 +38,37 @@ const TotalUsers = ({type}) => {
       }
     }
     fetchUsers();
-  },[location.pathname,type,searchUser])
+  },[location.pathname,type])
+
+    const handleSearch = async(e) => {
+      const query = e.target.value.toUpperCase();
+      let cancelToken;
+      if (typeof cancelToken != typeof undefined) {
+        cancelToken.cancel("Operation canceled due to new request.");
+      }
+
+      const source = axios.CancelToken.source();
+      cancelToken = source.token;
+      try {
+        setLoading(true);
+        const result = await axios.post(`/users/student/search`,{query},{cancelToken:cancelToken});
+        if(result.data.length>0) {
+          setUsers(result.data);
+        }
+        setLoading(false);
+  
+        result.data.length===0 && toast.error("User Not Found!", {
+          isLoading: false, 
+          autoClose: 3000, 
+          closeOnClick: true,
+          draggable: true,
+          toastId:'not-found'
+        });
+      } catch(err) {
+        console.log('approve error',err);
+        setLoading(false);
+      }
+    }
 
   const fetchSemesters = async (courseName) => {
     try {
@@ -83,29 +113,6 @@ const TotalUsers = ({type}) => {
     }
   }
 
-  const HandleSearch = async (e) =>{
-    e.preventDefault();
-    const query = e.target[0].value.toUpperCase();
-    query === "" && setSearchUser(!searchUser);
-    
-    try {
-      setLoading(true);
-      const result = await axios.post(`/users/student/search`,{query});
-      setUsers(result.data);
-      setLoading(false);
-
-      result.data.length===0 && toast.error("User Not Found!", {
-        isLoading: false, 
-        autoClose: 3000, 
-        closeOnClick: true,
-        draggable: true
-      });
-    } catch(err) {
-      console.log('approve error',err);
-      setLoading(false);
-    }
-  }
-
   //Tost Notification
   const notify = (type, msg) =>{ 
     type === "warn" && toast.warn(msg); 
@@ -122,11 +129,11 @@ const TotalUsers = ({type}) => {
         courseName:course,
         semester:sem
       }
-      const result = await axios.post('staff/halltickets',data,{responseType:"arraybuffer"});
-      const arr = new Uint8Array(result.data);
-      const blob = new Blob([arr], { type: 'application/pdf' });
+      const result = await axios.post('staff/halltickets',data,{responseType:"blob"});
+      const blob = new Blob([result.data], { type: 'application/pdf' });
       const objectUrl = window.URL.createObjectURL(blob);
-      console.log(result.data);
+      const uid = (Math.random() + 1).toString(36).substring(2);
+      fileDownload(result.data,`hallticket-${course}-SEM-${sem}-${uid}.pdf`);
       window.open(objectUrl);
       setLoading(false);
       setBtnLoading(false);
@@ -151,10 +158,12 @@ const TotalUsers = ({type}) => {
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
-        <form className="users-searchBar flex" onSubmit={HandleSearch}>
+        {/* <form className="users-searchBar flex" onSubmit={HandleSearch}> */}
+        <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
-          <input type="text" placeholder="Enter Reg No." onBlur={(e) => e.target.placeholder = "Enter Reg No."} onFocus={(e) => e.target.placeholder = ""} />
-        </form>
+          <input type="text " placeholder="Enter Reg No." onBlur={(e) => e.target.placeholder = "Enter Reg No."} onChange={handleSearch} />
+          </div>
+        {/* </form> */}
 
         <Filter  
         data={filterCourses} 

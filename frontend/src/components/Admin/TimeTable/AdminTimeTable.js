@@ -10,6 +10,8 @@ import Modal from "../../UI/Modal/Modal";
 import AdminTimeTableList from "./AdminTimeTableList";
 import Filter from "../../UI/Filter/Filter";
 import axios from "axios";
+import { useContextData } from "../../../hooks/useContextData";
+import { useFetchCourses } from "../../../hooks/useFetchCourses";
 
 const AdminTimeTable = () => {
     const [showModal, setShowModal] = useState(false);
@@ -20,9 +22,12 @@ const AdminTimeTable = () => {
     const [semesterError,setSemesterError] = useState('');
     const [timetables,setTimetables] = useState([]);
     const [loading,setLoading] = useState(true);
-
+    const [semFilter,setSemFilter] = useState([]);
     const courseRef = useRef();
     const semesterRef = useRef();
+
+    const {user} = useContextData();
+    const filterCourses = useFetchCourses(user.deptId);
 
     const hideModalHandler = () => {
         setShowModal(false);
@@ -47,6 +52,23 @@ const AdminTimeTable = () => {
         values.splice(index, 1);
         setInputFields(values);
     }
+
+    const fetchSemesters = async (courseName) => {
+        try {
+          const resp = await axios.post('/semesters',{courseName});
+          const data = await resp?.data;
+          console.log(data);
+          const semData = new Array(data.course_sem).fill('');
+          setSemFilter(semData);
+        } catch (error) {
+            console.log(error);
+        }
+      };
+    
+      const handleCourseChange = (e) => {
+        const courseValue = e.target.value;
+        fetchSemesters(courseValue);
+      }
 
     useEffect(() => {
         const fetchTimetables = async() => {
@@ -136,21 +158,22 @@ const AdminTimeTable = () => {
                             <div className="select-box flex">
 
                             <Filter width="90%" 
-                            data={[{course_name:'BCA',course_id:'1'},{course_name:'MCA',course_id:'3'}]} 
+                            data={filterCourses} 
                             filter="course" 
                             label="Choose Course"
                             ref={courseRef}
-                            error={courseError&&true}
+                            handleCourseChange={handleCourseChange}
+                            error={courseError?true:false}
                             helperText={courseError}
                             />
 
                             <Filter 
                             width="90%" 
-                            data={[{sem_name:1,sem_id:'2'},{sem_name:2,sem_id:'2'}]} 
+                            data={semFilter} 
                             filter="semester" 
                             label="Choose Semester"
                             ref={semesterRef}
-                            error={semesterError&&true}
+                            error={semesterError?true:false}
                             helperText={semesterError}
                             />
                             </div>
