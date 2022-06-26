@@ -1,0 +1,40 @@
+.faculty-current-sub-hdng {
+    width: 100%;
+    padding: 0.75em 0em;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-align: center;
+}
+
+.faculty-selected-Subjects {
+    margin-bottom: 1.5em;
+}
+
+.add-subjects-container {
+    width: 900px;
+}
+
+.add-subjects-container h2 {
+    text-align: left;
+}
+
+.subject-not-found {
+    color: var(--text-color);
+    margin: 4em 0em;
+}
+
+.faculty-selected-subject-list {
+    font-weight: bold;
+}
+
+.faculty-application-submit {
+    padding: 0.75em 1.5em;
+    background-color: var(--strong-green);
+    width: 130px;
+    float: right;
+    margin-top: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    color: var(--white);
+}

@@ -21,9 +21,6 @@ const TotalUsers = ({type}) => {
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);
-  const [showModal,setShowModal] = useState(false);
-  const [details,setDetails] = useState([]);
-  const [detailsLoading,setDetailsLoading] = useState(true);
   const {user} = useContextData();
   const location = useLocation();
 
@@ -160,15 +157,6 @@ const TotalUsers = ({type}) => {
     }
   }
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-    // if(typeof(tId)==='string') {
-    //     setDetails([]);
-    //     setDetailsLoading(true);
-    //     fetchDetails(tId);
-    // }
-};
-
   return (
     <div className="users-main">
       {type==='student'&&<div className="users-Filter">
@@ -227,38 +215,8 @@ const TotalUsers = ({type}) => {
               data={obj} 
               type={type}
               updateEligibility={UpdateEligibility}
-              setShowModal={setShowModal}
               index={i}/>
           })}
-
-          {showModal && 
-            <Modal onClose={toggleModal}>
-              <div className="modal">
-              <IoMdClose size={25} className="timetable-close-icon" onClick={toggleModal} />
-                  <div className="overlay">
-                  </div>
-                  <div className="modal-content">
-                    {!detailsLoading?<div className="admin-timetable-table-wrapper">
-                      <table className="examcoord-timetable-table">
-                        <thead >
-                            <tr>
-                                <th>Subject Name</th>
-                                <th>Subject Code</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {details.map(item => (
-                            <tr key={Math.random()+Date.now()} className="timetable-modal">
-                                  <td>{item.subj_name}</td>
-                                  <td>{item.subj_code}</td>
-                              </tr>
-                            ))}                                               
-                        </tbody>
-                      </table>
-                    </div>:<div className="flex"><CircularProgress thickness={4}/></div>}
-                  </div>
-              </div>
-            </Modal>}
         </tbody>}
       </table>
       {loading&&<div style={{marginTop:80}} className="flex"><CircularProgress size={45}/></div>}

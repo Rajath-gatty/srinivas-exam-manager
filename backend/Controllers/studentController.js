@@ -8,9 +8,13 @@ const {validationResult} = require('express-validator');
 exports.getStudentSubjects = async(req,res) => {
   const {semester,courseId} = req.body;
   try {
-    const sql = `select sem_id,subj_name,subj_code from semester where course_id=? and sem_name=?`;
-    const result = await db.execute(sql,[courseId,semester]);
-    res.status(200).send(result[0]);
+    if(courseId&&semester) {
+      const sql = `select sem_id,subj_name,subj_code from semester where course_id=? and sem_name=?`;
+      const result = await db.execute(sql,[courseId,semester]);
+      res.status(200).send(result[0]);
+    } else {
+      res.send([]);
+    }
   } catch(err) {
     console.log(err);
     res.status(500).send(err);
