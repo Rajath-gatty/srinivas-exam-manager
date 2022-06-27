@@ -1,51 +1,30 @@
 .faculty-attendance-main {
-  margin: 2em;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
+  flex-direction: column;
+  margin: 0 2em;
+  margin-bottom: 5em;
 }
-
-/* .attendance-main .filter-wrapper {
-  display: flex;
-  gap: 1em;
-  justify-content: space-between; 
-} */
-
-/* .attendance-main .select-filter {
-  width: 400px;
-} */
-
-/* .attendance-main .filter-wrapper .search-form {
-  width: 100%;
-  margin-right: 1.5em;
-} */
-/* 
-.attendance-main .filter-wrapper .search-input {
-  width: 100%;
-  padding: 0.85em 0.75em;
-  background: var(--grey-bg);
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  text-align: center;
-} */
 
 .faculty-attendance-main .filter-wrapper .search-input::placeholder {
   color: var(--light-grey);
+}
+
+.faculty-attendance-table-wrapper .attendance-textfield {
+  width: 150px;
 }
 
 .faculty-attendance-table-wrapper {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-top: 2em;
+  margin-top: 1em;
   box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
 }
 
-/* .attendance-table-wrapper .attendance-table-row {} */
+/* .attendance-table-wrapper .attendance-table-row {} */ 
 
 .faculty-attendance-table-wrapper .thead th {
   padding: 0.75em;
+  font-size: 0.9em;
   background: var(--grey-bg);
 }
 
@@ -55,10 +34,65 @@
   font-size: 0.9em;
 }
 
+.faculty-attendance-table-wrapper .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .faculty-attendance-table-wrapper .attendance-table-row {
   border: 1px solid var(--grey-bg);
 }
 
 .faculty-attendance-avatar-wrapper a {
   cursor: pointer;
+}
+
+.faculty-attendance-Header{
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+
+.faculty-attendance-SubjTitile{
+  margin-right: 5em; 
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.faculty-attendance-SubjTitile h4{
+  display: flex;
+  align-items: center;
+}
+
+.faculty-attendance-SubjTitile h4 span{
+  color: var(--primary-color);
+  margin-left: 0.5em;
+  font-size: 1.1em;
+}
+
+.faculty-attendance-Filters{
+  gap: 1em;
+}
+
+.faculty-attendance-submit{
+  width: 100%;
+  margin-top: 2em;
+  position: relative;
+}
+
+.faculty-attendance-submit button{
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  position: absolute;
+  right: 2em;
 }

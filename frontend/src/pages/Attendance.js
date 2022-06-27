@@ -7,13 +7,9 @@ const Attendance = () => {
 
   return (
     <div
-      className="attendance-container"
-      style={{
-        width: "100%",
-      }}
-    >
+      className="attendance-container" style={{width: "100%", height: "100%"}}>
       {role === "student" ? <AttendanceStudent /> : <AttendanceFaculty />}
-    </div>
+    </div> 
   );
 };
 

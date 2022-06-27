@@ -77,20 +77,20 @@ export const NavLinks = [
         icon: Dashboard,
       },
       {
-        title: "Attendance",
+        title: "Attendance / Marks",
         path: "/attendance",
-        icon: Attendance
-      },
-      {
-        title: "Internal Marks",
-        path: "/internal",
         icon: InternalMarks
       },
-      {
-        title: "Semester Marks",
-        path: "/semester",
-        icon: SemMarks
-      }
+      // {
+      //   title: "Internal Marks",
+      //   path: "/internal",
+      //   icon: InternalMarks
+      // },
+      // {
+      //   title: "Semester Marks",
+      //   path: "/semester",
+      //   icon: SemMarks
+      // }
     ],
   },
   {

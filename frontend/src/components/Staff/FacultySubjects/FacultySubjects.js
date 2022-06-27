@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 import "./FacultySubjects.css";
 import {
   Checkbox, CircularProgress,
@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 const FacultySubjects = () => {
   const [selectedSemester, setSelectedSemester] = useState(false);
   const [loading,setLoading] = useState(false);
+  const [postLoading,setPostLoading] = useState(false);
   const [subjectLoading,setSubjectLoading] = useState(true);
   const [subjects,setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState([]);
@@ -24,20 +25,35 @@ const FacultySubjects = () => {
   const deptId = user.deptId;
   const filterCourses = useFetchCourses(deptId);
   const location=useLocation();
+  const navigate=useNavigate();
   const {facultyId} = useParams();
 
-  const AddSubject = (e,data) => {
+  const AddSubject = async(e,data) => {
     const CheckFlag = e.target.checked;
+
     if (CheckFlag) {
       if(selectedSubject.find(el=>el.subj_code===data.subj_code)) {
         return;
       }
       setSelectedSubject([...selectedSubject, data]);
     } else {
+      try {
+        const result = await axios.post('/staff/faculty/subjects/delete',{data,facultyId});
+        toast.success(`${data.subj_name} Removed`, {
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          });
+      } catch(err) {
+        console.log(err);
+        setLoading(false);
+      }
       setSelectedSubject(selectedSubject.filter((e) => e.subj_code !== data.subj_code));
     }
   };
- 
+ console.log(subjects);
   useEffect(() => {
     const fetchSubjects = async() => {
       try {
@@ -46,6 +62,7 @@ const FacultySubjects = () => {
           semester:selectedSemester
         }
         const result = await axios.get(`/staff/faculty/current-subjects/${facultyId}`,data);
+        console.log(result.data);
         setSelectedSubject(result.data);
         setSubjectLoading(false);
       } catch(err) {
@@ -91,19 +108,17 @@ const FacultySubjects = () => {
       subjects:selectedSubject
     }
     try {
-      // setLoading(true);
-      const response = await axios.post('/staff/faculty/add-subjects',data);
-      const result = await response.data;
+      setPostLoading(true);
+      await axios.post('/staff/faculty/add-subjects',data);
       toast.success('Changes Saved!', {
-        position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
-        progress: undefined,
         });
-      // setLoading(false);
+      setPostLoading(false);
+      navigate(-1);
     } catch(err) {
       console.log(err);
     }
@@ -120,15 +135,15 @@ const FacultySubjects = () => {
                 {!selectedSubject.length<=0&&<div className="faculty-current-sub-hdng">
                 <h3>Current Teaching Subjects</h3>
       </div>}
-          {selectedSubject.map((subject) => {
+          {selectedSubject.map((subject,i) => {
             return (
-              <div key={subject.id} className="faculty-selected-subject-list selected-subject-list">
+              <div key={i} className="faculty-selected-subject-list selected-subject-list">
                 <span>{subject.subj_name}</span>
                 <span>{subject.subj_code}</span>
               </div>
             );
           })}
-          {!selectedSubject.length<=0&&<button onClick={handlePostSubject}className="faculty-application-submit">Save</button>}
+          {!selectedSubject.length<=0&&<button onClick={handlePostSubject}className="faculty-application-submit">{!postLoading?'Save':<div className="flex"><CircularProgress size={20} color='inherit' thickness={4}/></div>}</button>}
         </div>
       ) : <div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress thickness={4}/></div>}
             <div className="application-selector gap-2 flex add-subjects-container">
@@ -158,14 +173,19 @@ const FacultySubjects = () => {
           <span>Subject Code</span>
         </div></>}
         {!loading?subjects.map((sub => {
-          const updatedSub = Object.assign(sub,{courseName:course,semester:selectedSemester});
-          return <div key={sub.subj_code} className="application-row">
+          const updatedSub = Object.assign(sub,{course_name:course,semester:selectedSemester});
+          return ( 
+          <div key={sub.subj_code} className="application-row">
           <div className="subject-checkbox">
-            <Checkbox value={sub.sem_id}  defaultChecked={selectedSubject.find(item=>item.subj_code===sub.subj_code)&&true} onChange={(e) =>{AddSubject(e,updatedSub)}} /> <span>{sub.subj_name}</span>
+            <Checkbox 
+            value={sub.sem_id}  
+            defaultChecked={selectedSubject.find(item=>item.subj_code===sub.subj_code)&&true} onChange={(e) =>{AddSubject(e,updatedSub)}} 
+            /> 
+            <span>{sub.subj_name}</span>
           </div>
           <span>{sub.subj_code}</span>
         </div>
-        })):<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress thickness={4}/></div>}
+        )})):<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress thickness={4}/></div>}
       </div>
     </div>
   );

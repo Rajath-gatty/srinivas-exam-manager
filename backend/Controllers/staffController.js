@@ -249,22 +249,16 @@ exports.getCurrentSubjects = async(req,res) => {
 exports.PostFacultySubjects = (req,res) => {
     const deptId = req.deptId;
     const {subjects,facultyId} = req.body;
-
-         db.execute(`delete from faculty_subjects where dept_id=${deptId} and faculty_id='${facultyId}'`)
-        .then(async() => {
-            const sql = `insert into faculty_subjects(dept_id,course_id,faculty_id,semester,subj_name,subj_code) values(?,(select course_id from course where course_name=?),?,?,?,?)`;
-            subjects.forEach(async(sub) => {
-                return await db.execute(sql,[deptId,sub.courseName,facultyId,sub.semester,sub.subj_name,sub.subj_code])
-            })
+    try {
+        const sql = `insert ignore into faculty_subjects(dept_id,course_id,faculty_id,semester,subj_name,subj_code) values(?,(select course_id from course where course_name=?),?,?,?,?)`;
+        subjects.forEach(async(sub) => {
+            await db.execute(sql,[deptId,sub.course_name,facultyId,sub.semester,sub.subj_name,sub.subj_code])
         })
-        .then(result => {
-            res.send(result);
-        })
-        .catch(err=>{
-            console.log(err);
-            res.status(500).send(err);
-        })
-        
+        res.send('Inserted!')
+    } catch(err) {
+        console.log(err);
+    }
+           
 }
 
 exports.getFacultySubject = async(req,res) => {
@@ -280,5 +274,18 @@ exports.getFacultySubject = async(req,res) => {
     } catch(err) {
         console.log(err);
         res.status(500).send(err);
+    }
+}
+
+exports.removeFacultySubjects = async(req,res) => {
+    const deptId = req.deptId;
+    const {data,facultyId} = req.body;
+
+    try {
+       let sql = `delete from faculty_subjects where dept_id=${deptId} and faculty_id='${facultyId}' and subj_code='${data.subj_code}'`;
+        await db.execute(sql);
+       res.send('success');
+    } catch(err) {
+        console.log(err);
     }
 }

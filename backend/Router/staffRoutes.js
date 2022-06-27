@@ -26,5 +26,6 @@ router.post('/eligibility',isAuth,staffController.setStudentEligibility);
 router.get('/faculty/current-subjects/:facultyId',isAuth,staffController.getCurrentSubjects);
 router.post('/faculty/subjects',isAuth,staffController.getFacultySubject);
 router.post('/faculty/add-subjects',isAuth,staffController.PostFacultySubjects);
+router.post('/faculty/subjects/delete',isAuth,staffController.removeFacultySubjects);
 
 module.exports = router;

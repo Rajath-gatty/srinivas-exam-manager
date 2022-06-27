@@ -38,3 +38,7 @@
     border-radius: 3px;
     color: var(--white);
 }
+
+.application-form {
+    margin-bottom: 6em;
+}
