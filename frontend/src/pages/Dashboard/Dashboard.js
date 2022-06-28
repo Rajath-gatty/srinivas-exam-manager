@@ -39,10 +39,10 @@ const Dashboard = () => {
 
         <div className='description'>
           <img className=" photo" src='https://srinivasuniversity.edu.in/asset/img/chancellor.png'></img>
-          <span> <p className='head-title'>Shri Dr. CA A. Raghavendra Rao</p>
-            <p className='highlight-title'> Chancellor of Srinivas University</p>
+          <p className='head-title'>Shri Dr. CA A. Raghavendra Rao</p>
+          <p className='highlight-title'> Chancellor of Srinivas University</p>
 
-            <p className='head-title'> My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation.</p></span>
+          <p className='head-title'> My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation.</p>
         </div>
 
       </div>
