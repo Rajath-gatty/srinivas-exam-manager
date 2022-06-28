@@ -17,8 +17,7 @@ const AttendanceFaculty = () => {
   const [selectedSemester,setSelectedSemester] = useState(false);
   const [facultySubjects,setFacultySubjects] = useState([]);
   const [selectedSubject,setSelectedSubject] = useState(false);
-  const [attendance,setAttendance] = useState([]);
-  const [marks,setMarks] = useState([]);
+  const [markAttendance,setMarkAttendance] = useState([]);
 
   const {user,serverUrl} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
@@ -56,7 +55,6 @@ const AttendanceFaculty = () => {
         }
     );
     console.log(result);
-      // const result = await axios.post('',{courseName});
       const semData = new Array(result.data.course_sem).fill('');
       setSemFilter(semData);
     } catch (error) {
@@ -81,6 +79,14 @@ const AttendanceFaculty = () => {
       const result = await axios.post("/users/student/semfilter",data);
       console.log(result.data);
       setStudents(result.data);
+     const updatedResult = result.data.map(item => {
+        return {
+          regno: item.regno,
+          attendance: '',
+          mark: ''
+        }
+      })
+      setMarkAttendance(updatedResult);
       setLoading(false);
     } catch(err) {
       console.log(err);
@@ -89,31 +95,50 @@ const AttendanceFaculty = () => {
   }
 
  const handleAttendanceChange = (index,value) => {
-    setAttendance(state => {
-      const newState = {...state};
-      if(state[index]) {
-       return newState[index].attendance=value;
-      } else {
-        // return [...newState,]
-      }
+  setMarkAttendance(state => {
+      const newState = [...state];
+      newState[index].attendance =value;
+      return [...newState];
     })
   }
 
  const handleMarkChange = (index,value) => {
-
+  setMarkAttendance(state => {
+    const newState = [...state];
+    newState[index].mark =value;
+    return [...newState];
+  })
   }
 
-  const HandleAttendanceSubmit = () =>{
-    //Temp Logic pending
-    toast.success("Attendance Updated Successfully!", {
-      isLoading: false, 
-      autoClose: 3000, 
-      closeOnClick: true,
-      draggable: true
-    });
+  const HandleAttendanceSubmit = async() =>{
+    try {
+      const data = {
+        courseName:course,
+        semester:selectedSemester,
+        subjectName:selectedSubject,
+        subjectCode:facultySubjects.map(obj=>{
+          if(obj.subj_name === selectedSubject)
+          {
+            console.log(obj.subj_code);
+            return obj.subj_code;
+          }
+        }).filter(item=> item !==undefined)[0],
+        studentDetails:markAttendance
+      }
+      const result = await toast.promise(
+        axios.post("/faculty/marksattendance/add",data),
+        {
+          pending: 'Loading ...',
+          success: 'Added Successfully!',
+          error: 'Something went wrong!'
+        }
+    );
+      console.log(result);
+    } catch(err) {
+      console.log(err);
+    }
   }
 
-  console.log("YOO",selectedSubject);
   return (
     <div className="faculty-attendance-main flex">
       <div className="faculty-attendance-Header flex">

@@ -16,3 +16,17 @@ exports.getFacultySubjects = async(req,res) => {
 }
 
 
+exports.postMarksAttendance = async(req,res) => {
+    const deptId=req.deptId;
+    const {courseName,semester,subjectName,subjectCode,studentDetails} = req.body;
+
+    try {
+        studentDetails.forEach(async(std)=> {
+            await db.execute('insert ignore into marks_attendence(dept_id,course_id,semester,regno,subj_name,subj_code,marks,attendence) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?)',[deptId,courseName,semester,std.regno,subjectName,subjectCode,std.mark,std.attendance])
+        })
+        res.send('success');
+    } catch(err) {
+        console.log(err);
+    }
+}
+
