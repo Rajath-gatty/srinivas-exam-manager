@@ -1,6 +1,6 @@
 import "./ExamCoordinator.css";
 import { GoSettings } from "react-icons/go";
-import { FaSearch } from "react-icons/fa";
+// import { FaSearch } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { useState,useEffect } from "react";
