@@ -2,7 +2,7 @@ const router = require('express').Router();
 const routeContoller = require('../Controllers/routeController');
 const isAuth = require('../middleware/isAuth');
 
-router.get('/departments',routeContoller.getDepartments);
+router.get('/department',routeContoller.getDepartments);
 router.post('/courses',routeContoller.getCourses);
 router.post('/semesters',routeContoller.getSemesters);
 
