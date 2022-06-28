@@ -101,7 +101,7 @@ const Create = () => {
     try {
       state.semesters.forEach((sem,i) => {
         if(!sem.subjects.length>0) {
-          throw new Error('Add Subjects');
+          throw new TypeError('Add Subjects');
         }
       })
       const result = await axios.post('/admin/new-course',state);
@@ -109,8 +109,9 @@ const Create = () => {
     } catch(err) {
       if(err.response?.status===400) {
        return setErrors(err.response.data);
-      }
-      console.log(err);
+      } else if(err instanceof TypeError) {
+       return setErrors([{param:'subjects'}])
+      } 
       setErrors([]);
     }
   };
@@ -181,7 +182,7 @@ const Create = () => {
                 />
               );
             })}
-
+            {errors.some((err) => err.param === "subjects")&&<p style={{color:'red',marginTop:'1em'}}>Add all semester Subjects</p>}
             {semCount > 0 && (
               <button className="btn course-submit-btn" type="submit">
                 Submit

@@ -38,7 +38,7 @@ const FacultySubjects = () => {
       setSelectedSubject([...selectedSubject, data]);
     } else {
       try {
-        const result = await axios.post('/staff/faculty/subjects/delete',{data,facultyId});
+        const result = await axios.post(`/faculty/subjects/delete`,{data,facultyId});
         toast.success(`${data.subj_name} Removed`, {
           autoClose: 3000,
           hideProgressBar: true,
@@ -61,7 +61,7 @@ const FacultySubjects = () => {
           courseName:course,
           semester:selectedSemester
         }
-        const result = await axios.get(`/staff/faculty/current-subjects/${facultyId}`,data);
+        const result = await axios.get(`/faculty/current-subjects/${facultyId}`,data);
         console.log(result.data);
         setSelectedSubject(result.data);
         setSubjectLoading(false);
@@ -93,7 +93,7 @@ const FacultySubjects = () => {
     }
     try {
       setLoading(true);
-      const result = await axios.post('/staff/faculty/subjects',data);
+      const result = await axios.post('/faculty/subjects',data);
       setSubjects(result.data);
       setLoading(false);
     } catch(err) {
@@ -109,7 +109,7 @@ const FacultySubjects = () => {
     }
     try {
       setPostLoading(true);
-      await axios.post('/staff/faculty/add-subjects',data);
+      await axios.post('/faculty/add-subjects',data);
       toast.success('Changes Saved!', {
         autoClose: 3000,
         hideProgressBar: true,

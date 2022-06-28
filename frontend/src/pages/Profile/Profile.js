@@ -42,7 +42,7 @@ const Profile = () => {
 
           <div className="profile-title flex">
             <span className="profile-name">{user.first_name +" "+ user.last_name}</span>
-            <span className="profile-data">BCA 3rd Year</span>
+            {/* <span className="profile-data">BCA 3rd Year</span> */}
           </div>
         </div>
 

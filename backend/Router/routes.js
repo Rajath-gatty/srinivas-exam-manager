@@ -13,7 +13,11 @@ router.post('/users/examcoordinator',isAuth,routeContoller.getAllExamCoord);
 
 router.post('/users/student/semfilter',isAuth,routeContoller.getSemFilteredStudent);
 router.post('/users/student/search',isAuth,routeContoller.getStudentByID);
-
 router.post('/users/details',isAuth,routeContoller.getUserDetails);
+
+router.get('/faculty/current-subjects/:facultyId',isAuth,routeContoller.getCurrentSubjects);
+router.post('/faculty/subjects',isAuth,routeContoller.getFacultySubject);
+router.post('/faculty/add-subjects',isAuth,routeContoller.PostFacultySubjects);
+router.post('/faculty/subjects/delete',isAuth,routeContoller.removeFacultySubjects);
 
 module.exports = router;
