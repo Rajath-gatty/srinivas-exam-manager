@@ -190,6 +190,7 @@ const AttendanceFaculty = () => {
               data={student}
               index={i}
               serverUrl={serverUrl}
+              markAttendance={markAttendance}
               handleAttendanceChange={handleAttendanceChange}
               handleMarkChange={handleMarkChange}
             />
