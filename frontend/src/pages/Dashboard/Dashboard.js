@@ -21,7 +21,7 @@ const Dashboard = () => {
           <img className='college' width="100%" height="35%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
         </Carousel.Item>
         <Carousel.Item>
-          <img className='college' width="100%" height="35%" src="https://static.collegedekho.com/media/img/institute/crawled_images/None/1592131056Cover.jpg" alt='srinivas-pand' />
+          <img className='college' width="100%" height="35%" src="https://www.sitmng.ac.in/assets/img/header-img.png" alt='srinivas-pand' />
         </Carousel.Item>
 
       </Carousel>
