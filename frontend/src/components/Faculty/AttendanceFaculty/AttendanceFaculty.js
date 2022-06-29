@@ -87,10 +87,8 @@ const AttendanceFaculty = () => {
           mark: ''
         }
       })
-
       setMarkAttendance(updatedResult);
       setLoading(false);
-
     } catch (err) {
       console.log(err);
       setLoading(false);

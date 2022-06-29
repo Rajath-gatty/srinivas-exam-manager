@@ -15,13 +15,13 @@ const Dashboard = () => {
       </div>
       <Carousel cols={1} rows={1} gap={10} autoplay={1000} loop={true} breakpoint={800} hideArrow={true}>
         <Carousel.Item>
+          <img className='college' width="100%" height="35%" src="https://media-exp1.licdn.com/dms/image/C4E1BAQEbUXMIXYek5A/company-background_10000/0/1607667817075?e=2147483647&v=beta&t=BD7re0CiXwnekdcmNXSVZj1AP6Z-AJyvOkMCjxwtmKg" alt='srinivas-muk' />
+        </Carousel.Item>
+        <Carousel.Item>
           <img className='college' width="100%" height="35%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
         </Carousel.Item>
         <Carousel.Item>
           <img className='college' width="100%" height="35%" src="https://static.collegedekho.com/media/img/institute/crawled_images/None/1592131056Cover.jpg" alt='srinivas-pand' />
-        </Carousel.Item>
-        <Carousel.Item>
-          <img className='college' width="100%" height="35%" src="https://media-exp1.licdn.com/dms/image/C4E1BAQEbUXMIXYek5A/company-background_10000/0/1607667817075?e=2147483647&v=beta&t=BD7re0CiXwnekdcmNXSVZj1AP6Z-AJyvOkMCjxwtmKg" alt='srinivas-muk' />
         </Carousel.Item>
 
       </Carousel>
