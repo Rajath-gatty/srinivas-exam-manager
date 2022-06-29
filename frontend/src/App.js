@@ -169,7 +169,7 @@ function App() {
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
                 <Route path="/promote" element={<Promote />} />
-                <Route path="/users/faculty/subjects/:facultyId" element={<FacultySubjects />} />
+                
               </Route>
 
               {/* Faculty Access*/}
@@ -227,6 +227,8 @@ function App() {
                 <Route path="users/student/:userId" element={<UserDetails />} />
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
+
+                <Route path="/users/faculty/subjects/:facultyId" element={<FacultySubjects />} />
               </Route>
 
               {/* Exam Coordinator Access */}
@@ -268,7 +270,7 @@ function App() {
               </Route>
             </Route>
             {/* Page Not Found Route */}
-            <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v' }} className="flex"><CircularProgress size={80} /></div>}></Route>
+            <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v',marginTop:250 }} className="flex"><CircularProgress size={80} /></div>}></Route>
           </Routes>
         </Browser>
 

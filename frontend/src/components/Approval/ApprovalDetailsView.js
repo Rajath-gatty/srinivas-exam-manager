@@ -25,21 +25,6 @@ const StudentApprovalView = () => {
   const type = location.search.split('=')[1];
 
   useEffect(() => {
-    if (approve !== "") {
-      if (approve === "Approve") {
-        RejectBtn.style.display = "none";
-        ApproveBtn.classList.add("green-active");
-        setApproveText("Approved");
-      }
-      if (approve === "Reject") {
-        ApproveBtn.style.display = "none";
-        RejectBtn.classList.add("red-active");
-        setRejectText("Rejected");
-      }
-    }
-  }, []);
-
-  useEffect(() => {
     const user = type==='staff'?'admin':'staff';
 
     const fetchDetails = async() => {
@@ -66,8 +51,9 @@ const StudentApprovalView = () => {
         <FiArrowLeft color="var(--light-grey)" size={30}/> <span>Back</span>
         </div>
         <div className="approve-user-avatar flex">
-          {!type==='student'?<FaUserCircle color="var(--light-grey)" size={70}/>
-          :<img src={serverUrl+details.image_path} className="details-profile-img" alt="" />}
+          {type==='student'?
+          <img src={serverUrl+details.image_path} className="details-profile-img" alt="" />
+          :<FaUserCircle color="var(--light-grey)" size={70}/>}
         </div>
 
         <div className="approve-user-title flex">
@@ -76,24 +62,6 @@ const StudentApprovalView = () => {
         </div>
       </div>
 
-      <div className="approve-buttons flex">
-        <button
-          className="approve-btn green flex"
-          onClick={() => {
-            setApprove("Approve");
-          }}
-        >
-          <FiCheck size={20}/> {approveText}
-        </button>
-        <button
-          className="approve-btn red flex"
-          onClick={() => {
-            setApprove("Reject");
-          }}
-        >
-          <FiX size={20}/> {rejectText}
-        </button>
-      </div>
       <div className="approve-form flex">
         <div className="approve-details">
           <div className="approveRow">
