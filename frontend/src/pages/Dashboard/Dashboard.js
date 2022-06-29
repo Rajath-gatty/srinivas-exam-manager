@@ -36,17 +36,19 @@ const Dashboard = () => {
         <div className='college-text'>
           <p> Srinivas University, Mangalore, is a Private Research and skill focused University in Mangalore, Karnataka, India established in 2013 by Karnataka State Act.Srinivas University is the flagship of 18 Srinivas Group of Institutions started by A. Shama Rao Foundation, Mangalore, India, a private Charitable Trust founded in 1988 by an Eminent Chartered Accountant A. Raghavendra Rao. A. Shama Rao Foundation has started many professional colleges in Mangalore which include Srinivas Institute of Medical Sciences and Research Center, Srinivas Institute of Dental Sciences, Srinivas Institute of Technology, Srinivas College of Pharmacy, Srinivas Institute of Nursing Sciences, A Shama Rao Nursing School, Srinivas Integrated Campus, Srinivas College of Hotel Management, Vijayalakshmi Institute of Hospitality Sciences, Srinivas First Grade College, Srinivas School of Engineering, Srinivas Institute of Management Studies, Srinivas College of Physiotherapy, Srinivas School of Business, Srinivas School of Management, Srinivas College of Education, Srinivas Institute of Social Work.</p>
         </div>
-
         <div className='description'>
           <img className=" photo" src='https://srinivasuniversity.edu.in/asset/img/chancellor.png'></img>
-          <p className='head-title'>Shri Dr. CA A. Raghavendra Rao</p>
-          <p className='highlight-title'> Chancellor of Srinivas University</p>
+          <br></br>
+          <p style={{ color: "white" }}>Shri Dr.CA. Raghavendra Rao<br></br>
+            Chancellor of Srinivas University<br></br>
+            "My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation."
+          </p>
 
-          <p className='head-title'> My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation.</p>
         </div>
 
+
       </div>
-    </div>
+    </div >
   )
 }
 
