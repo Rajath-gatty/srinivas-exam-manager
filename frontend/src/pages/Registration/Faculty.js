@@ -300,6 +300,7 @@ const Faculty = () => {
               label="Pincode"
               variant="outlined"
               size="small"
+              type="number"
               fullWidth
               inputRef={pincodeRef}
               error={errors.some((err) => err.param === "pincode")}

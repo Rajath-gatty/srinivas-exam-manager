@@ -222,6 +222,7 @@ const Student = () => {
               label="Phone"
               variant="outlined"
               size="small"
+              type="number"
               inputRef={phoneRef}
               required
               fullWidth
@@ -269,6 +270,7 @@ const Student = () => {
               label="Aadhar Card Number"
               variant="outlined"
               size="small"
+              type="number"
               inputRef={aadharNoRef}
               fullWidth
               error={errors.some((err) => err.param === "aadharNo")}
@@ -359,6 +361,7 @@ const Student = () => {
               label="Pincode"
               variant="outlined"
               size="small"
+              type="number"
               inputRef={pincodeRef}
               fullWidth
               error={errors.some((err) => err.param === "pincode")}
@@ -423,7 +426,7 @@ const Student = () => {
                 label="Mobile Number"
                 variant="outlined"
                 size="small"
-                type="tel"
+                type="number"
                 inputRef={fatherPhoneRef}
                 fullWidth
                 error={errors.some(
@@ -486,7 +489,7 @@ const Student = () => {
                 label="Mobile Number"
                 variant="outlined"
                 size="small"
-                type="tel"
+                type="number"
                 inputRef={motherPhoneRef}
                 fullWidth
                 error={errors.some(
@@ -567,7 +570,7 @@ const Student = () => {
                     label="Mobile Number"
                     variant="outlined"
                     size="small"
-                    type="tel"
+                    type="number"
                     inputRef={gPhoneRef}
                     fullWidth
                     error={errors.some(
@@ -642,6 +645,7 @@ const Student = () => {
                   placeholder="Joining Academic Year"
                   defaultValue=""
                   size="small"
+                  type="number"
                   inputRef={joiningYearRef}
                   fullWidth
                   error={errors.some(

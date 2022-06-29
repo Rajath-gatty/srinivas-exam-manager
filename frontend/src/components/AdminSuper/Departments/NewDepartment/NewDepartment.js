@@ -112,7 +112,7 @@ const NewDepartment = () => {
                 label="Email"
                 variant="outlined"
                 size="small"
-                type="text"
+                type="email"
                 fullWidth
                 inputRef={emailRef}
                 error={errors.some(err=>err.param==='email')}

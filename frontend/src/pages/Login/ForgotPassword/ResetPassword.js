@@ -1,8 +1,7 @@
 import "./ForgotPassword.css"
 import { useState } from "react";
 import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
-import ForgotPasswordSvg from "../../../Assets/ForgotPassword.svg";
-import {useNavigate, useLocation, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
 import {toast} from "react-toastify";
@@ -13,7 +12,6 @@ const ResetPassword = () => {
     const [confirmPassword,setConfirmPassword] = useState('');
     const [loading,setLoading]= useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
     const {resetId} = useParams();
 
     const handleFormSubmit = async (e) =>{

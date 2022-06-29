@@ -9,9 +9,8 @@ router.post('/new-course',isAuth,[
     body('duration').notEmpty().withMessage('Select Duration')
 ],adminController.postNewCourse);
 
-
 router.post('/department/new-department',isAuth,[
-    body("departmentName").trim().notEmpty().withMessage("Enter department name")
+    body("departmentName").trim().notEmpty().withMessage("Enter department name").isAlpha().withMessage("value must be characters")
     .custom(async(value) => {
       const result = await db.execute(
         `SELECT dept_name FROM department WHERE dept_name='${value}'`
@@ -20,7 +19,7 @@ router.post('/department/new-department',isAuth,[
         return Promise.reject("Department already exists");
       }
     }),
-    body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
+    body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long").isAlpha().withMessage("value must be characters"),
     body("gender").trim().isIn(["male", "female", "others"]).withMessage("Please specify Gender"),
     body("dob").trim().isDate({ format: "DD/MM/YYYY" }).withMessage("Please Enter Valid Date"),
     body("email").trim().isEmail().withMessage("Enter valid Email ID")
@@ -33,8 +32,9 @@ router.post('/department/new-department',isAuth,[
         }
       }),
     body("phone").trim().isLength({ min: 10, max: 10 }).withMessage("Enter valid phone number"),
-    body("address").trim().isLength({ min: 1 }).withMessage("Address cannot be empty"),
-    body("password").trim().isLength({ min: 5 }).withMessage("Password must contain atleast 5 characters")
+    body("address").trim().isLength({ min: 1 }).withMessage("Address cannot be empty").isAlpha().withMessage("value must be characters"),
+    body("password").trim().isStrongPassword({ minLength: 8, minLowercase: 1,minUppercase: 1, minNumbers: 1, minSymbols: 1
+  }).withMessage("Password must contain At least 8 characters the more characters the better, mixture of both uppercase and lowercase letters, mixture of letters and numbers, inclusion of at least one special character, e.g., ! @ # ? ")
 ],adminController.postNewDepartment);
 
 router.get('/courses',isAuth,adminController.getCourses);
@@ -46,8 +46,8 @@ router.get('/departments',isAuth,adminController.getDepartments);
 router.get('/examcoordinators',isAuth,adminController.getExamCoordinators);
 
 router.post('/registration/examcoordinator',isAuth,[
-  body("departmentName").trim().notEmpty().withMessage("Select department"),
-  body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long"),
+  body("departmentName").trim().notEmpty().withMessage("Select department").isAlpha().withMessage("value must be characters"),
+  body("firstName").trim().isLength({ min: 3 }).withMessage("Name must be atleast 3 characters long").isAlpha().withMessage("value must be characters"),
     body("gender").trim().isIn(["male", "female", "others"]).withMessage("Please specify Gender"),
     body("dob").trim().isDate({ format: "DD/MM/YYYY" }).withMessage("Please Enter Valid Date"),
     body("email").trim().isEmail().withMessage("Enter valid Email ID")
@@ -60,8 +60,9 @@ router.post('/registration/examcoordinator',isAuth,[
         }
       }),
     body("phone").trim().isLength({ min: 10, max: 10 }).withMessage("Enter valid phone number"),
-    body("address").trim().isLength({ min: 1 }).withMessage("Address cannot be empty"),
-    body("password").trim().isLength({ min: 5 }).withMessage("Password must contain atleast 5 characters")
+    body("address").trim().isLength({ min: 1 }).withMessage("Address cannot be empty").isAlpha().withMessage("value must be characters"),
+    body("password").trim().isStrongPassword({ minLength: 8, minLowercase: 1,minUppercase: 1, minNumbers: 1, minSymbols: 1
+  }).withMessage("Password must contain At least 8 characters the more characters the better, mixture of both uppercase and lowercase letters, mixture of letters and numbers, inclusion of at least one special character, e.g., ! @ # ? ")
 ],adminController.postNewCoordinator);
 
 router.post('/approvelist/staff',isAuth,adminController.getStaffApproveList);

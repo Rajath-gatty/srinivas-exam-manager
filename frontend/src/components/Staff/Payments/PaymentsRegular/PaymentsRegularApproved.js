@@ -80,7 +80,7 @@ const  PaymentsRegularApproved = ({type}) => {
 
      return (
           <>
-            <FilterSearch className="mt-1"/>
+            {/* <FilterSearch className="mt-1"/> */}
             <table className="payments-wrapper">
                 <thead>
                     <tr>

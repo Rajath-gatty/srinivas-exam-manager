@@ -66,13 +66,11 @@ const Login = () => {
       navigate('/');
       setLoading(false);
     } catch(err) {
-      if(err.response.status===401)
       setErrors(err.response.data.error);
       console.log(err);
       setLoading(false);
-    }
   }
- 
+}
   return (
     <div className="login-container">
       {/* Login Side Design */}
