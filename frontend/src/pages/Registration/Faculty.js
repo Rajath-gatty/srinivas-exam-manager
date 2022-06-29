@@ -56,6 +56,7 @@ const Faculty = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const loader = toast.loading("Creating User...");
+    toast.dismiss();
 
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
     const dobErr = dob.length>=10;
