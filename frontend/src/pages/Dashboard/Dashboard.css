@@ -18,7 +18,7 @@
 }
 
 .logo-img {
-    margin-left: 5em;
+    padding-right: 2em;
     margin-top: -1em;
     height: 90px;
     width: 90px;
@@ -43,8 +43,8 @@
 .calender-main {
     background-color: rgb(40, 137, 255);
     width: 24%;
-    padding-top: 2em;
-    margin-top: -8%;
+    padding-top: 1.5em;
+    margin-top: -35%;
     margin-bottom: 2em;
     margin-left: 4em;
 
@@ -54,10 +54,11 @@
     background-color: rgb(222, 221, 221);
     height: 30%;
     width: 50%;
+
     padding-top: 2em;
     padding-left: 2em;
     padding-right: 2em;
-    margin-top: -26%;
+    margin-top: -29%;
     margin-left: 40%;
 
 }
