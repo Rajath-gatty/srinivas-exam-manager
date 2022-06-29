@@ -15,13 +15,13 @@ const Dashboard = () => {
       </div>
       <Carousel cols={1} rows={1} gap={10} autoplay={1000} loop={true} breakpoint={800} hideArrow={true}>
         <Carousel.Item>
-          <img className='college' width="100%" height="60%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
+          <img className='college' width="100%" height="35%" src="https://media-exp1.licdn.com/dms/image/C4E1BAQEbUXMIXYek5A/company-background_10000/0/1607667817075?e=2147483647&v=beta&t=BD7re0CiXwnekdcmNXSVZj1AP6Z-AJyvOkMCjxwtmKg" alt='srinivas-muk' />
         </Carousel.Item>
         <Carousel.Item>
-          <img className='college' width="100%" height="60%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
+          <img className='college' width="100%" height="35%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
         </Carousel.Item>
         <Carousel.Item>
-          <img className='college' width="100%" height="60%" src="https://www.srinivasgroup.com/img/home/banner2.jpg" alt='srinivas' />
+          <img className='college' width="100%" height="35%" src="https://static.collegedekho.com/media/img/institute/crawled_images/None/1592131056Cover.jpg" alt='srinivas-pand' />
         </Carousel.Item>
 
       </Carousel>
@@ -36,17 +36,19 @@ const Dashboard = () => {
         <div className='college-text'>
           <p> Srinivas University, Mangalore, is a Private Research and skill focused University in Mangalore, Karnataka, India established in 2013 by Karnataka State Act.Srinivas University is the flagship of 18 Srinivas Group of Institutions started by A. Shama Rao Foundation, Mangalore, India, a private Charitable Trust founded in 1988 by an Eminent Chartered Accountant A. Raghavendra Rao. A. Shama Rao Foundation has started many professional colleges in Mangalore which include Srinivas Institute of Medical Sciences and Research Center, Srinivas Institute of Dental Sciences, Srinivas Institute of Technology, Srinivas College of Pharmacy, Srinivas Institute of Nursing Sciences, A Shama Rao Nursing School, Srinivas Integrated Campus, Srinivas College of Hotel Management, Vijayalakshmi Institute of Hospitality Sciences, Srinivas First Grade College, Srinivas School of Engineering, Srinivas Institute of Management Studies, Srinivas College of Physiotherapy, Srinivas School of Business, Srinivas School of Management, Srinivas College of Education, Srinivas Institute of Social Work.</p>
         </div>
-
         <div className='description'>
           <img className=" photo" src='https://srinivasuniversity.edu.in/asset/img/chancellor.png'></img>
-          <p className='head-title'>Shri Dr. CA A. Raghavendra Rao</p>
-          <p className='highlight-title'> Chancellor of Srinivas University</p>
+          <br></br>
+          <p style={{ color: "white" }}>Shri Dr.CA. Raghavendra Rao<br></br>
+            Chancellor of Srinivas University<br></br>
+            "My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation."
+          </p>
 
-          <p className='head-title'> My aim is to transform Society through education by setting up academic institutions in dynamic equilibrium with its social, ecological and economic environment striving continuously for excellence in education, research and technological service to the nation.</p>
         </div>
 
+
       </div>
-    </div>
+    </div >
   )
 }
 

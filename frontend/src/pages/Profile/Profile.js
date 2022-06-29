@@ -1,15 +1,15 @@
 import "./Profile.css";
 import { BiLogOut } from "react-icons/bi";
-import { useState } from "react";
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FiCheck } from "react-icons/fi";
-import { FaUserCircle, FaCamera, FaUserEdit } from "react-icons/fa";
+// import { FiCheck } from "react-icons/fi";
+import { FaUserCircle } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
 import { motion } from "framer-motion";
 import { useContextData } from "../../hooks/useContextData";
 
 const Profile = () => {
-  const [allowEdit, setAllowEdit] = useState(false);
+  // const [allowEdit, setAllowEdit] = useState(false);
   const { setRole, setToken, setUser, user, serverUrl } = useContextData();
   const navigate = useNavigate();
 
@@ -78,9 +78,10 @@ const Profile = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9, transition: { duration: 2 } }}
         animate={{ opacity: 1, scale: 1 }}
-        className={
-          allowEdit ? "profile-userDetails" : "profile-userDetails-ReadOnly"
-        }
+        className="profile-userDetails-ReadOnly"
+        // className={
+        //   allowEdit ? "profile-userDetails" : "profile-userDetails-ReadOnly"
+        // }
       >
         <div className="profile-row firstname">
           <label>First Name</label>

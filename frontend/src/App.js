@@ -35,7 +35,7 @@ import SemesterMarks from "./components/Faculty/SemesterMarks/SemesterMarks";
 import IndentRegular from "./components/Staff/Indent/IndentRegular";
 import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
 import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/PaymentsRegular";
-import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
+// import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
 import Promote from "./components/Staff/Promote/Promote";
@@ -97,10 +97,7 @@ function App() {
         <Browser>
           <Routes>
             {/* Public Routes */}
-            {!loading && <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />}
-            {/* {!token&&<Route path="/login" element={<Login />}/>} */}
-            {/* <Route element={<Layout />}><Route path="/" element={<Dashboard/>}/></Route>} */}
-            {/* <Route path="/login" element={!token?<Login/>:<Navigate to="/dashboard"/>} /> */}
+            {!loading && <Route path="/login" element={!token ? <Login /> : <Navigate to="/" />} />}\
             <Route path="/special" element={!token ? <SpecialLogin /> : <Navigate to="/" />} />
             <Route path="registration" element={!token ? <Registration /> : <Navigate to="/" />} />
             <Route path="registration/student" element={!token ? <Student /> : <Navigate to="/" />} />
