@@ -8,7 +8,8 @@ import { useContextData } from "./hooks/useContextData";
 
 import Login from "./pages/Login/Login";
 import SpecialLogin from "./pages/Login/SpecialLogin";
-
+import ForgotPassword from "./pages/Login/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/Login/ForgotPassword/ResetPassword";
 
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Attendance from "./pages/Attendance";
@@ -42,10 +43,7 @@ import Promote from "./components/Staff/Promote/Promote";
 import Profile from "./pages/Profile/Profile";
 import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproval";
 import PaymentsRegularApproved from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproved";
-import PaymentsRepeaterApproval from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproval";
-import PaymentsRepeaterApproved from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeaterApproved";
 import Coding from "./components/Evaluator/Coding/Coding";
-
 
 import ExamAttendance from "./components/Staff/ExamAttendance/ExamAttendance";
 import AttendanceStatement from "./components/Evaluator/AttendanceStatement/AttendanceStatement";
@@ -53,7 +51,6 @@ import Evaluators from "./components/Evaluator/Evaluators/Evaluators";
 import ExamcordTimeTable from "./components/Evaluator/ExamcordTimeTable/ExamcordTimeTable";
 import StudentTimeTable from "./components/Student/StudentTimeTable/StudentTimeTable";
 import AssignFaculty from "./components/Evaluator/Evaluators/AssignFaculty/AssignFaculty";
-
 
 import Departments from "./components/AdminSuper/Departments/Departments";
 import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/NewDepartment";
@@ -109,6 +106,8 @@ function App() {
             <Route path="registration/student" element={!token ? <Student /> : <Navigate to="/" />} />
             <Route path="registration/faculty" element={!token ? <Faculty /> : <Navigate to="/" />} />
             <Route path="registration/staff" element={!token ? <Staff /> : <Navigate to="/" />} />
+            <Route path="forgotpassword" element={!token ? <ForgotPassword /> : <Navigate to="/" />} />
+            <Route path="reset-password/:resetId" element={<ResetPassword />} />
 
             <Route element={<Layout />}>
               {/* Super Admin Access */}
@@ -148,8 +147,8 @@ function App() {
                   path="approve/faculty/:id"
                   element={<ApprovalDetailsView />}
                 />
-                <Route path="indent/regular" element={<IndentRegular />} />
-                <Route path="indent/repeater" element={<IndentRepeater />} />
+                {/* <Route path="indent/regular" element={<IndentRegular />} />
+                <Route path="indent/repeater" element={<IndentRepeater />} /> */}
                 <Route path="payments/regular" element={<PaymentsRegular type="regular"/>}>
                   <Route path="pending" element={<PaymentsRegularApproval type="regular"/>} />
                   <Route
@@ -168,7 +167,7 @@ function App() {
                   />
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
-                <Route path="/promote" element={<Promote />} />
+                {/* <Route path="/promote" element={<Promote />} /> */}
                 
               </Route>
 

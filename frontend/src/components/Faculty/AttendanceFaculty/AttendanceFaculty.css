@@ -66,6 +66,7 @@
 .faculty-attendance-SubjTitile h4{
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .faculty-attendance-SubjTitile h4 span{

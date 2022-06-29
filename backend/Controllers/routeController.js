@@ -1,5 +1,8 @@
 const db = require('../db');
-const hallTicketTemplate = require('../hallticket');
+const jwt = require('jsonwebtoken');
+const emailTemplate = require('../emailTemplate');
+const bcrypt = require('bcrypt');
+const sgMail = require('@sendgrid/mail');
 
 exports.getDepartments = async(req,res) => { 
     try {
@@ -30,8 +33,16 @@ exports.getCourses = async(req,res) => {
 
 exports.getSemesters = async(req,res) => {
   const courseName = req.body.courseName;
+  const courseId = req.body.courseId;
+
   try {
-    const [result] = await db.execute(`select course_sem from course where course_name='${courseName}'`);
+    let sql;
+    if(courseName) {
+      sql = `select course_sem from course where course_name='${courseName}'`;
+    } else {
+      sql = `select course_sem from course where course_id=${courseId}`;
+    }
+    const [result] = await db.execute(sql);
     res.send(result[0]);
   } catch(err) {
       res.status(500).send(err);
@@ -192,3 +203,83 @@ exports.removeFacultySubjects = async(req,res) => {
       console.log(err);
   }
 }
+
+exports.postForgotPassword = async (req, res) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const { email,role } = req.body;
+  const re =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if (!re.test(email)) {
+      return res.status(422).json({ error: "Invalid email" });
+  }
+  let tableName;
+  let columnId;
+  if(role==='admin') {
+    tableName='admin';
+    columnId='admin_id';
+  } else if(role==='super admin'){
+    tableName='super_admin';
+    columnId='s_admin_id';
+  } else if(role==='exam coord') {
+    tableName='exam_coord';
+    columnId='coord_id';
+  } else if(role==='student') {
+    tableName='student';
+    columnId='regno';
+  } else if(role==='faculty') {
+    tableName='faculty';
+    columnId='faculty_id';
+  } else if(role==='staff') {
+    tableName='staff';
+    columnId='staff_id';
+  }
+  try {
+      const [user] = await db.execute(`select role,${columnId},dept_id from ${tableName} where email='${email}'`);
+      if (!user.length>0) {
+          return res
+              .status(422)
+              .json({ error: "No user found with this email" });
+      }
+      const fetchedUser = user[0];
+      const deptId = fetchedUser.dept_id;
+      console.log(deptId);
+      const key = jwt.sign({ role:tableName,deptId:deptId,columnId,id:fetchedUser[columnId] }, process.env.SECRET_KEY, {
+          expiresIn: "10min",
+      });
+      const url = `${process.env.CLIENT_URL}/reset-password/${key}`;
+
+      const msg = {
+        to: email,
+        from: `Srinivas Exam Manager <rajathgatty001@gmail.com>`,
+        subject: "password reset",
+        text: "and easy to do anywhere, even with Node.js",
+        html: emailTemplate(email,url)
+      }
+      // console.log(url);
+      sgMail.send(msg)
+      .then(result => {
+        res.send(result);
+      })
+      .catch((error) => {
+        console.log(JSON.stringify(error));
+          res.status(500).json({ error: "Email not sent" });
+      });
+  } catch (err) {
+      return res.status(401).json({ error: err.message });
+  }
+}
+ 
+exports.postResetPassword = async (req, res) => {
+  const { password,token } = req.body;
+  try {
+      const result = jwt.verify(token, process.env.SECRET_KEY);
+      console.log(result);
+      const [user] = await db.execute(`select password,${result.columnId},dept_id from ${result.role} where ${result.columnId}=? and dept_id=${result.deptId}`,[result.id]);
+      console.log(user);
+      const hashedPassword = await bcrypt.hash(password, 5);
+      const finalResult = await db.execute(`update ${result.role} set password='${hashedPassword}' where dept_id=${result.deptId} and ${result.columnId}=?`,[result.id]);
+      console.log(finalResult);
+      res.json({ sucess: true });
+  } catch (err) {
+      res.status(500).json({ error: 'Link Expired!' });
+  }
+};

@@ -134,6 +134,8 @@ const AttendanceFaculty = () => {
         }
     );
       console.log(result);
+      setMarkAttendance([]);
+      setSelectedSubject('');
     } catch(err) {
       console.log(err);
     }
@@ -190,6 +192,7 @@ const AttendanceFaculty = () => {
             data={student} 
             index={i}
             serverUrl={serverUrl}
+            markAttendance={markAttendance}
             handleAttendanceChange={handleAttendanceChange}
             handleMarkChange={handleMarkChange}
             />

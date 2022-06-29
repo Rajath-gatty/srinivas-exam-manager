@@ -61,7 +61,7 @@ const Departments = () => {
                 <td>{item.first_name}</td>
                 {/* <td>{item.dptReg}</td> */}
                 <td>
-                  <div className="manage-dpt flex">
+                  <div className="manage-dpt flex" style={{visibility:'hidden'}}>
                     <GoSettings color="var(--primary-color)" size={20} />
                     <span>Manage</span>
                   </div>

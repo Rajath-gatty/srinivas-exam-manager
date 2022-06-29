@@ -133,25 +133,25 @@ export const NavLinks = [
           },
         ],
       },
-      {
-        title: "Indent",
-        icon: Indent,
-        subMenu: [
-          {
-            title: "Regular",
-            path: "/indent/regular",
-          },
-          {
-            title: "Repeater",
-            path: "/indent/repeater",
-          },
-        ],
-      },
-      {
-        title: "Attendance",
-        icon: Indent,
-        path: "/exam-attendance"
-      },
+      // {
+      //   title: "Indent",
+      //   icon: Indent,
+      //   subMenu: [
+      //     {
+      //       title: "Regular",
+      //       path: "/indent/regular",
+      //     },
+      //     {
+      //       title: "Repeater",
+      //       path: "/indent/repeater",
+      //     },
+      //   ],
+      // },
+      // {
+      //   title: "Attendance",
+      //   icon: Indent,
+      //   path: "/exam-attendance"
+      // },
       {
         title: "Payments",
         icon: Payment,
@@ -166,11 +166,11 @@ export const NavLinks = [
           },
         ],
       },
-      {
-        title: "Promote",
-        icon: Indent,
-        path: "/promote"
-      },
+      // {
+      //   title: "Promote",
+      //   icon: Indent,
+      //   path: "/promote"
+      // },
     ],
   },
   {
@@ -182,7 +182,7 @@ export const NavLinks = [
         icon: Dashboard,
       },
       {
-        title: "Attendance",
+        title: "Attendance / Marks",
         path: "/attendance",
         icon: Attendance
       },
@@ -215,21 +215,21 @@ export const NavLinks = [
         path: "/",
         icon: Dashboard,
       },
-      {
-        title: "Coding Sheet",
-        path: "/coding",
-        icon: Coding,
-      },
-      {
-        title: "Attendance Statement",
-        path: "/attendance-statement",
-        icon: Coding,
-      },
-      {
-        title: "Evaluators",
-        path: "/evaluators",
-        icon: Users,
-      },
+      // {
+      //   title: "Coding Sheet",
+      //   path: "/coding",
+      //   icon: Coding,
+      // },
+      // {
+      //   title: "Attendance Statement",
+      //   path: "/attendance-statement",
+      //   icon: Coding,
+      // },
+      // {
+      //   title: "Evaluators",
+      //   path: "/evaluators",
+      //   icon: Users,
+      // },
       {
         title: "Time Table",
         path: "/examcordtimetable",

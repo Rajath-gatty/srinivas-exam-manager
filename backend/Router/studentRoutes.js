@@ -22,6 +22,8 @@ router.post('/application/subjects',isAuth,studentController.getStudentSubjects)
 
 router.post('/timetable',isAuth,studentController.getStudentTimetable);
 
+router.post('/internal/marks',isAuth,studentController.getStudentInternalMarks);
+
 router.post('/hallticket',isAuth,studentController.generateHallTicket);
 
 module.exports = router;

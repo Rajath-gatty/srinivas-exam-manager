@@ -22,13 +22,11 @@ const month = [
 let year = [];
 
 const currDate = new Date();
-const fYear = currDate.getFullYear() - 10;
-const startYear = currDate.getFullYear() - 30;
-
+const fYear = currDate.getFullYear();
+const startYear = currDate.getFullYear() - 60 ;
 for (var i = startYear; i <= fYear; i++) {
   year.push(i);
 }
-// console.log(year);
 
 const Dob = forwardRef((props,ref) => {
   const {dateRef,monthRef,yearRef} = ref.current;

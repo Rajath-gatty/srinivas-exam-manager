@@ -15,7 +15,6 @@ exports.getFacultySubjects = async(req,res) => {
     }
 }
 
-
 exports.postMarksAttendance = async(req,res) => {
     const deptId=req.deptId;
     const {courseName,semester,subjectName,subjectCode,studentDetails} = req.body;
@@ -29,4 +28,3 @@ exports.postMarksAttendance = async(req,res) => {
         console.log(err);
     }
 }
-

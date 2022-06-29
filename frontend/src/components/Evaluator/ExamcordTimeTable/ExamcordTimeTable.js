@@ -4,6 +4,7 @@ import Modal from "../../UI/Modal/Modal";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {IoMdClose} from "react-icons/io";
+import NoData from "../../UI/NoData/NoData";
 
 const ExamcordTimeTable = () => {
     const [modal, setModal] = useState(false);
@@ -109,7 +110,7 @@ const ExamcordTimeTable = () => {
                             </tr>
                             )
                         })}
-                            {modal && 
+                            {modal &&
                                 <Modal onClose={toggleModal}>
                                 <div className="modal">
                                 <IoMdClose size={25} className="timetable-close-icon" onClick={toggleModal} />
@@ -143,7 +144,7 @@ const ExamcordTimeTable = () => {
                                 </Modal>}
                         </tbody>
                     </table>:<div style={{marginTop:100}} className="flex"><CircularProgress thickness={4}/></div>}
-
+                    {!loading&&timetables.length<=0&&<NoData text="No timetable found"/>}
                 </div>
             </div>
 

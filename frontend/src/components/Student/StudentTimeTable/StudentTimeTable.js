@@ -9,15 +9,15 @@ import {toast} from "react-toastify";
 
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
-    const [loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(false);
     const {user} = useContextData();
     const semester = user.semester;
     const courseId = user.courseId;
-    console.log(user)
-     
+    
     useEffect(() =>{
         const fetchTimetables = async () => {
             try {
+                setLoading(true);
                 const result = await axios.post('/student/timetable',{semester, courseId});
                 setTimetable(result.data);
                 setLoading(false);

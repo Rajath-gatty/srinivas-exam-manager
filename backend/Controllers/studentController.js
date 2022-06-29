@@ -78,9 +78,8 @@ exports.postRepeaterPayment = async(req,res) => {
 }
 
 exports.getStudentTimetable = async(req,res) => {
-    const {semester} = req.body;
+    const {semester,courseId} = req.body;
     const deptId = req.deptId;
-    const courseId = req.body.courseId;
 
     try{
         let sql = `select subj_code,subj_name,exam_date,exam_time from timetable where dept_id=? and course_id=? and semester=? and status='approved'`;
@@ -129,6 +128,19 @@ exports.generateHallTicket = async(req,res) => {
       console.log(end-start+'ms');
     } catch(err) {
       res.status(400).send(err);
+      console.log(err);
+    }
+  }
+
+  exports.getStudentInternalMarks = async(req,res) => {
+    const deptId = req.deptId;
+    const {semester,courseId,regno} = req.body;
+    try {
+      const result = await db.execute(`select id,subj_name,subj_code,marks,attendence from marks_attendence where course_id=${courseId} and semester=${semester} and regno='${regno}'`);
+      console.log(result[0]);
+      res.send(result[0]);
+    } catch(err) {
+      res.send(err);
       console.log(err);
     }
   }

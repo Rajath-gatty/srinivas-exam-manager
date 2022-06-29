@@ -20,4 +20,7 @@ router.post('/faculty/subjects',isAuth,routeContoller.getFacultySubject);
 router.post('/faculty/add-subjects',isAuth,routeContoller.PostFacultySubjects);
 router.post('/faculty/subjects/delete',isAuth,routeContoller.removeFacultySubjects);
 
+router.post('/forgot-password',routeContoller.postForgotPassword);
+router.post('/reset-password',routeContoller.postResetPassword);
+
 module.exports = router;

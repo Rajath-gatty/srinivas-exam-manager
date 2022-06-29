@@ -1,10 +1,10 @@
-const AttendanceStudentList = () => {
+const AttendanceStudentList = ({item}) => {
     return (
         <tr className="attendance-table">
-            <td>Software Engineering</td>
-            <td>3SU19SA010</td>
-            <td>63</td>
-            <td>75</td>
+            <td>{item.subj_name}</td>
+            <td>{item.subj_code}</td>
+            <td>{item.marks}</td>
+            <td>{item.attendence}</td>
         </tr>
 
     )

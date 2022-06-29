@@ -23,6 +23,7 @@ import StaffReg from "./Registration/staff_reg.webp";
 import StudentReg from "./Registration/student_reg.webp";
 import LoginSvg from "./undraw_login.svg";
 import NoDataSvg from "./NoData.svg";
+import ForgotPassword from "./ForgotPassword.svg";
 
 export {
     Application,

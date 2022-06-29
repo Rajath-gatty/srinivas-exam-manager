@@ -138,7 +138,7 @@ const SpecialLogin = () => {
           </div>
           {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
           <div className="forgot-pass">
-            <Link to="#">Forgot Password ?</Link>
+            <Link to="/forgotpassword">Forgot Password ?</Link>
           </div>
           <div className="form-controls">
           <button type="submit" className="login-submit btn">{loading?<CircularProgress color="inherit" size={20}/>:'Login'}</button>
