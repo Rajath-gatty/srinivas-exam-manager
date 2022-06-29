@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import {FiArrowLeft,FiCheck,FiX} from "react-icons/fi";
+import {FiArrowLeft} from "react-icons/fi";
 import {FaUserCircle} from "react-icons/fa";
 import axios from "axios";
 import { useParams,useLocation} from "react-router-dom";
@@ -11,17 +11,17 @@ import { useContextData } from "../../hooks/useContextData";
 const StudentApprovalView = () => {
   const [details,setDetails] = useState({});
   const [loading,setLoading] = useState(true);
-  const [approve,setApprove] = useState('');
-  const [approveText,setApproveText] = useState('');
-  const [rejectText,setRejectText] = useState('');
+  // const [approve,setApprove] = useState('');
+  // const [approveText,setApproveText] = useState('');
+  // const [rejectText,setRejectText] = useState('');
 
   const navigate = useNavigate();
   const params = useParams(); 
   const location = useLocation();
   const {serverUrl} = useContextData();
 
-  const ApproveBtn = document.querySelector(".green");
-  const RejectBtn = document.querySelector(".red");
+  // const ApproveBtn = document.querySelector(".green");
+  // const RejectBtn = document.querySelector(".red");
   const type = location.search.split('=')[1];
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const StudentApprovalView = () => {
       }
     }
     fetchDetails();
-  },[location.search,params.id])
+  },[location.search,params.id,type])
 
   return !loading?(
     <div className="ApprovalDetailsView content">

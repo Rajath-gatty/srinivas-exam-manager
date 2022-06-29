@@ -39,6 +39,7 @@ const FacultySubjects = () => {
     } else {
       try {
         const result = await axios.post(`/faculty/subjects/delete`,{data,facultyId});
+        result.status === 200 &&
         toast.success(`${data.subj_name} Removed`, {
           autoClose: 3000,
           hideProgressBar: true,
@@ -71,7 +72,7 @@ const FacultySubjects = () => {
       }
     }
     fetchSubjects();
-  },[])
+  })
 
   const handleCourseChange = async(e) => {
     const courseName = e.target.value;
