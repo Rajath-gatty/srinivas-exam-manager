@@ -112,6 +112,20 @@ const AttendanceFaculty = () => {
   }
 
   const HandleAttendanceSubmit = async () => {
+    let flag=0;
+    markAttendance.forEach(sub => {
+      if(sub.attendance===''||sub.mark==='') {
+        return flag=1;
+      }
+      return flag;
+    })
+
+    if(flag===1) {
+      return toast.error('Fill all the Fields',{
+        autoClose:true,
+        toastId:'Internal-marks'
+      })
+    }
     try {
       const data = {
         courseName: course,
@@ -133,6 +147,7 @@ const AttendanceFaculty = () => {
           error: 'Something went wrong!'
         }
       );
+      setMarkAttendance([]);
       console.log(result);
     } catch (err) {
       console.log(err);

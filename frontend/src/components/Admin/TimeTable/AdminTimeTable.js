@@ -12,6 +12,7 @@ import Filter from "../../UI/Filter/Filter";
 import axios from "axios";
 import { useContextData } from "../../../hooks/useContextData";
 import { useFetchCourses } from "../../../hooks/useFetchCourses";
+import { toast } from "react-toastify";
 
 const AdminTimeTable = () => {
     const [showModal, setShowModal] = useState(false);
@@ -88,7 +89,18 @@ const AdminTimeTable = () => {
         e.preventDefault();
         const course = courseRef.current.value;
         const semester = semesterRef.current.value;
-
+        let flag=0;
+        inputFields.forEach(input => {
+            if(input.subjectName===''||input.subjectCode===''||input.examDate===''||input.examTime==='') {
+                flag=1;
+            }
+        })
+        if(flag===1) {
+            return toast.error('Fill all the Fields',{
+                toastId:'admin-timetable',
+                autoClose:true
+            })
+        }
         if(course==='') {
            return setCourseError('Select Course');
         } else if(semester==='') {
