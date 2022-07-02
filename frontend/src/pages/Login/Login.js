@@ -86,13 +86,14 @@ const Login = () => {
       {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
-          <img width="50px" src={SrinivasLogo} alt="Login SVG" />
+          <img width="50px" height="60px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
         <img
           className="login-vector"
           width="400px"
+          height="240px"
           src={LoginSvg}
           alt="Login SVG"
         />
@@ -105,17 +106,17 @@ const Login = () => {
         {!loginUser ? <div className="login-userSelectContain flex">
           <div className="login-userSelect">
             <div className="login-userBox" onClick={()=>{setLoginUser("student")}}>
-                <img src={StudentSvg} alt="Student Svg" width="100px"/>
+                <img src={StudentSvg} alt="Student Svg" width="100px" height="100px"/>
                 <h3>Student</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("faculty")}}>
-                <img src={FacultySvg} alt="Faculty Svg" width="100px"/>
+                <img src={FacultySvg} alt="Faculty Svg" width="100px" height="100px"/>
                 <h3>Faculty</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("staff")}}>
-                <img src={StaffSvg} alt="Staff Svg" width="100px"/>
+                <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
                 <h3>Staff</h3>
             </div>
           </div>

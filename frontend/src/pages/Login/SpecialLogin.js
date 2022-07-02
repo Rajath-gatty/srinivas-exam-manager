@@ -86,13 +86,14 @@ const SpecialLogin = () => {
       {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
-          <img width="50px" src={SrinivasLogo} alt="Login SVG" />
+          <img width="50px" height="60px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
         <img
           className="login-vector"
           width="400px"
+          height="240px"
           src={LoginSvg}
           alt="Login SVG"
         />
@@ -104,17 +105,17 @@ const SpecialLogin = () => {
 
         {!loginUser ? <div className="login-userSelect">
           <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px"/>
+              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Super Admin</h3>
           </div>
           
           <div className="login-userBox" onClick={()=>{setLoginUser("admin")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px"/>
+              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Admin</h3>
           </div>
 
           <div className="login-userBox" onClick={()=>{setLoginUser("exam coord")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px"/>
+              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Exam Coord</h3>
           </div>
         </div>
