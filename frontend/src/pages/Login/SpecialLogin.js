@@ -1,6 +1,7 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState} from "react";
-import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
+import { useState, useEffect, useRef} from "react";
+import { FiMail, FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
+import {MdAlternateEmail} from "react-icons/md";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
@@ -9,16 +10,19 @@ import axios from "axios";
 
 import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
+import {toast} from "react-toastify";
 
 const SpecialLogin = () => {
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
+
   const [loginUser, setLoginUser] = useState("");
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const [showPass,setShowPass] = useState(false);
+
   const [loading,setLoading] = useState(false);
   const [errors,setErrors] = useState('');
-
   const onEmailActive = () => setEmailFocus(true);
   const onPassActive = () => setPassFocus(true);
 
@@ -31,10 +35,21 @@ const SpecialLogin = () => {
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
 
+  const passRef = useRef();
+  useEffect(() => {
+    if(passRef.current)
+    showPass ? passRef.current.type = "text" : passRef.current.type = "password";
+  },[showPass]);
+
+  const notify = (type, msg) =>{
+    type==="warn" && toast.warn(msg);
+  }
+
   const handleLogin = async(e) => {
     e.preventDefault();
     
     if(email===''||password==='') {
+      notify("warn", "Enter Email & Password !")
       return;
     }
 
@@ -120,7 +135,7 @@ const SpecialLogin = () => {
                 onChange={(e) =>setEmail(e.target.value)}
                 placeholder="example@gmail.com"
               />
-              <FiMail size={30} color="var(--light-grey)"/>
+              <MdAlternateEmail size={25} color="var(--light-grey)"/>
             </div>
           </div>
           <div className={passAct}>
@@ -132,8 +147,11 @@ const SpecialLogin = () => {
                 onBlur={onPassBlur}
                 onChange={(e) =>setPassword(e.target.value)}
                 placeholder="Password"
+                ref={passRef}
               />
-              <FiLock size={30} color="var(--light-grey)" />
+              {!password ? <FiLock size={25} color="var(--light-grey)" />
+              : !showPass ? <FiEyeOff size={25} color="var(--text-color)" style={{cursor:'pointer'}} onClick={()=>setShowPass(!showPass)}/> 
+              : <FiEye size={25} color="var(--text-color)" style={{cursor:'pointer'}} onClick={()=>setShowPass(!showPass)}/>}
             </div>
           </div>
           {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
