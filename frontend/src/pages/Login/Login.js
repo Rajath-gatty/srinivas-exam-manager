@@ -1,6 +1,7 @@
 import { Link,useNavigate} from "react-router-dom";
-import { useState} from "react";
-import { FiMail, FiLock, FiArrowLeft } from "react-icons/fi";
+import { useState, useEffect, useRef} from "react";
+import { FiMail, FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
+import {MdAlternateEmail} from "react-icons/md";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
@@ -15,9 +16,12 @@ import {toast} from "react-toastify";
 const Login = () => {
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
+  
   const [loginUser, setLoginUser] = useState("");
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const [showPass,setShowPass] = useState(false);
+
   const [loading,setLoading] = useState(false);
   const [errors,setErrors] = useState('');
   const onEmailActive = () => setEmailFocus(true);
@@ -31,6 +35,12 @@ const Login = () => {
 
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
+  
+  const passRef = useRef();
+  useEffect(() => {
+    if(passRef.current)
+    showPass ? passRef.current.type = "text" : passRef.current.type = "password";
+  },[showPass]);
 
   const notify = (type, msg) =>{
     type==="warn" && toast.warn(msg);
@@ -76,13 +86,14 @@ const Login = () => {
       {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
-          <img width="50px" src={SrinivasLogo} alt="Login SVG" />
+          <img width="50px" height="60px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
         <img
           className="login-vector"
           width="400px"
+          height="240px"
           src={LoginSvg}
           alt="Login SVG"
         />
@@ -95,17 +106,17 @@ const Login = () => {
         {!loginUser ? <div className="login-userSelectContain flex">
           <div className="login-userSelect">
             <div className="login-userBox" onClick={()=>{setLoginUser("student")}}>
-                <img src={StudentSvg} alt="Student Svg" width="100px"/>
+                <img src={StudentSvg} alt="Student Svg" width="100px" height="100px"/>
                 <h3>Student</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("faculty")}}>
-                <img src={FacultySvg} alt="Faculty Svg" width="100px"/>
+                <img src={FacultySvg} alt="Faculty Svg" width="100px" height="100px"/>
                 <h3>Faculty</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("staff")}}>
-                <img src={StaffSvg} alt="Staff Svg" width="100px"/>
+                <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
                 <h3>Staff</h3>
             </div>
           </div>
@@ -132,7 +143,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="example@gmail.com"
               />
-              <FiMail size={30} color="var(--light-grey)" />
+              <MdAlternateEmail size={25} color="var(--light-grey)" />
             </div>
           </div>
           <div className={passAct}>
@@ -144,8 +155,11 @@ const Login = () => {
                 onBlur={onPassBlur}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                ref={passRef}
               />
-              <FiLock size={30} color="var(--light-grey)" />
+              {!password ? <FiLock size={25} color="var(--light-grey)" />
+              : !showPass ? <FiEyeOff size={25} color="var(--text-color)" style={{cursor:'pointer'}} onClick={()=>setShowPass(!showPass)}/> 
+              : <FiEye size={25} color="var(--text-color)" style={{cursor:'pointer'}} onClick={()=>setShowPass(!showPass)}/>}
             </div>
           </div>
           {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
