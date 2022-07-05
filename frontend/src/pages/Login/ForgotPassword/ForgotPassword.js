@@ -1,7 +1,7 @@
 import "./ForgotPassword.css"
 import { useState } from "react";
 import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
-import ForgotPasswordSvg from "../../../Assets/ForgotPassword.svg";
+import {ForgotPassword as ForgotPasswordSvg} from "../../../Assets";
 import {useNavigate, useLocation} from "react-router-dom";
 import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
