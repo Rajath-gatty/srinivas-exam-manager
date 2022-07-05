@@ -39,6 +39,11 @@
     gap: 1em;
 }
 
+.dashboard-chancellor p{
+    text-align: justify;
+    font-size: 1.05em;
+}
+
 .dashboard-chancellor p .chancellor-name{
     font-size: 1.2em;
     font-weight: bold;
