@@ -22,10 +22,9 @@ const Dashboard = () => {
       </div>
 
       {role === 'superadmin' ? <SuperDash/> :
-      role === 'admin' ? <AdminDash/> :
       role === 'examcoord' ? <CoordDash/> :
-      role === 'staff' ? <AdminDash/> :
-      role === 'faculty' ? <AdminDash/> : <StudentDash/>}
+      role === 'admin' || role === 'staff' || role === 'faculty' ? <AdminDash/> 
+      : <StudentDash/>}
 
       <div className="dashboard-AboutTitle">About Srinivas University</div>
       <div className="dashboard-suInfo flex">

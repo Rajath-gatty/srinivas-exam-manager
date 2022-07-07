@@ -10,7 +10,6 @@ const AdminDash = () => {
   const [studentCount, setStudentCount] = useState(0);
   const [facultyCount, setFacultyCount] = useState(0);
   const [staffCount, setStaffCount] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,8 +22,6 @@ const AdminDash = () => {
         setFacultyCount(resFaculty.data.length); 
         const resStaff = await axios.post(`/users/staff`)
         setStaffCount(resStaff.data.length);
-
-        setLoading(false);
       } catch(err) {
         console.log(err);
       }

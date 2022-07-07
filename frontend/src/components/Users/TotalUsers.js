@@ -11,8 +11,8 @@ import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
-import Modal from "../UI/Modal/Modal";
-import {IoMdClose} from "react-icons/io";
+// import Modal from "../UI/Modal/Modal";
+// import {IoMdClose} from "react-icons/io";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
@@ -150,6 +150,7 @@ const TotalUsers = ({type}) => {
     setUsers([...newState]);
     try {
       const result = await axios.post('/staff/eligibility',{regno, eligibility:value});
+      console.log(result.data);
   } catch(err) {
       console.log(err);
     }
