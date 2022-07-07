@@ -35,7 +35,6 @@ const TotalUsers = ({type}) => {
         const result = await axios.post(`/users/${type}`)
         setUsers(result.data);
         setLoading(false);
-        console.log(result)
       } catch(err) {
         console.log(err);
       }
@@ -151,7 +150,6 @@ const TotalUsers = ({type}) => {
     setUsers([...newState]);
     try {
       const result = await axios.post('/staff/eligibility',{regno, eligibility:value});
-      console.log(result.data);
   } catch(err) {
       console.log(err);
     }
