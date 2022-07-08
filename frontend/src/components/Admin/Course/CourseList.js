@@ -8,10 +8,19 @@ const CourseList = ({name,duration,totalSem,courseId}) => {
                 <td>{totalSem} Semesters</td>
                 <td><Link to={'/courses/course-details/'+courseId}>view</Link></td>
                 <td>
-                    <button className="course-edit-btn btn-outlined flex">
+                    <Link to={{
+                        pathname:"/courses/new-course",
+                        search:"&edit=true",
+                    }} 
+                    state={{
+                        courseName:name,
+                        duration,
+                        totalSem
+                    }}
+                    className="course-edit-btn btn-outlined flex">
                         <BiEditAlt size={15} color="var(--primary-color) :hover{color:var(--white)}"/>
                         <span>Edit</span>
-                    </button>
+                    </Link>
                 </td>
         </tr>
     )

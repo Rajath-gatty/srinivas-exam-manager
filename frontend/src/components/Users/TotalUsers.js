@@ -17,7 +17,7 @@ import fileDownload from "js-file-download";
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
   const [semFilter,setSemFilter] = useState([]);
-  const[sem,setSem] = useState("");
+  const [sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);

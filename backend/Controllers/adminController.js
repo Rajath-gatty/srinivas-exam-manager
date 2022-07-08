@@ -15,25 +15,26 @@ exports.postNewCourse = async (req, res) => {
         return res.status(403).send('course Already exists');
     }
     const courseSql = 'insert into course(dept_id,course_name,course_duration,course_sem) values(?,?,?,?)';
-    db.execute(courseSql, [deptId, name, duration, totalSemesters])
-        .then(() => {
-            return db.execute(`select course_id from course where course_name='${name}'`)
-        })
-        .then(([result]) => {
-            semesters.forEach(sem => {
-                sem.subjects.forEach(sub => {
-                    const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
-                    return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code])
-                })
-            })
-        })
-        .then((result) => {
-            res.status(200).send({ success: true, result })
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send({ success: false, err });
-        })
+    res.send('Success');
+    // db.execute(courseSql, [deptId, name, duration, totalSemesters])
+    //     .then(() => {
+    //         return db.execute(`select course_id from course where course_name='${name}'`)
+    //     })
+    //     .then(([result]) => {
+    //         semesters.forEach(sem => {
+    //             sem.subjects.forEach(sub => {
+    //                 const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
+    //                 return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code])
+    //             })
+    //         })
+    //     })
+    //     .then((result) => {
+    //         res.status(200).send({ success: true, result })
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         res.status(500).send({ success: false, err });
+    //     })
 }
 
 exports.postNewDepartment = async (req, res) => {

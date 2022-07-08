@@ -10,7 +10,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import axios from "axios";
-
+import { useLocation } from "react-router-dom";
 import "./Create.css";
 import SemList from "./SemList";
 import { useReducer,useState} from "react";
@@ -26,7 +26,7 @@ const courseDetailsReducer = (state, action) => {
   if (action.type === "ADD_SEM") {
     semCount++;
     const sem = {
-      semName: "SEM " + semCount,
+      semName:semCount,
       subjects: [],
     };
     state.semesters.push(sem);
@@ -79,7 +79,8 @@ const Create = () => {
   const [errors,setErrors] = useState([]);
 
   const navigate = useNavigate();
-
+  const location = useLocation();
+  console.log(location);
   const addSem = (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_SEM" });
@@ -96,8 +97,10 @@ const Create = () => {
   const removeSubject = (subIndex, semIndex) => {
     dispatch({ type: "REMOVE_SUBJECT", payload: { subIndex, semIndex } });
   };
+
   const newCourseSubmit = async(e) => {
     e.preventDefault();
+    console.log(state);
     try {
       state.semesters.forEach((sem,i) => {
         if(!sem.subjects.length>0) {
@@ -149,9 +152,9 @@ const Create = () => {
                 onChange={(e) => dispatch({type:'DURATION',payload:e.target.value})}
               >
                 <MenuItem value="1">1 Year</MenuItem>
-                <MenuItem value="2">2 Year</MenuItem>
-                <MenuItem value="3">3 Year</MenuItem>
-                <MenuItem value="4">4 Year</MenuItem>
+                <MenuItem value="2">2 Years</MenuItem>
+                <MenuItem value="3">3 Years</MenuItem>
+                <MenuItem value="4">4 Years</MenuItem>
               </Select>
               <FormHelperText error>{errors.find((err) => err.param === "duration")?.msg}</FormHelperText>
             </FormControl>

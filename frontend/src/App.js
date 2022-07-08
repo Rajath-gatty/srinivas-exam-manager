@@ -57,11 +57,13 @@ import NewDepartment from "./components/AdminSuper/Departments/NewDepartment/New
 
 import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordinator";
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
-import { CircularProgress } from "@mui/material";
+import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects";
+import Classroom from "./components/Users/Classroom/Classroom";
+
 import axios from "axios";
+import { CircularProgress } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects";
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -165,7 +167,7 @@ function App() {
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
                 {/* <Route path="/promote" element={<Promote />} /> */}
-                
+  
               </Route>
 
               {/* Faculty Access*/}
@@ -176,7 +178,6 @@ function App() {
 
               {/* Student Access*/}
               <Route element={<ProtectedRoute allowedRole={["student"]} />}>
-
                 <Route
                   path="application/regular"
                   element={<ApplicationRegular />}
@@ -211,7 +212,7 @@ function App() {
               >
                 <Route path="timetable" element={<TimeTable />} />
               </Route>
-
+                
               {/* Admin and Staff Access */}
               <Route
                 element={<ProtectedRoute allowedRole={["admin", "staff"]} />}
@@ -237,6 +238,11 @@ function App() {
                 <Route path="/evaluators" element={<Evaluators />} />
                 <Route path="/evaluators/assign" element={<AssignFaculty />} />
                 <Route path="/examcordtimetable" element={<ExamcordTimeTable />} />
+              </Route>
+              
+              {/* Admin and Staff and Faculty Access */}
+              <Route element={<ProtectedRoute allowedRole={["admin", "staff", "faculty"]} />}>
+                <Route path="/users/classrooms" element={<Classroom />} />
               </Route>
 
               {/*Common Protected Routes */}

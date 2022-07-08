@@ -30,7 +30,7 @@ const SemList = (props) => {
   return (
     <div className="semester">
       <div className="semester-header">
-        <h3 className="sem-text">{props.details.semName}</h3>
+        <h3 className="sem-text">SEM {props.details.semName}</h3>
         <AiOutlineMinusCircle
           onClick={() => props.removeSem(props.index)}
           className="remove-svg"
