@@ -8,12 +8,13 @@ import {
   MenuItem,
   InputLabel,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import "./Create.css";
 import SemList from "./SemList";
-import { useReducer,useState} from "react";
+import { useEffect, useReducer,useState} from "react";
 
 const initialState = {
   name: '',
@@ -21,12 +22,10 @@ const initialState = {
   semesters: [],
 };
 
-let semCount = 0;
 const courseDetailsReducer = (state, action) => {
   if (action.type === "ADD_SEM") {
-    semCount++;
     const sem = {
-      semName:semCount,
+      semName:state.semesters.length+1,
       subjects: [],
     };
     state.semesters.push(sem);
@@ -37,7 +36,6 @@ const courseDetailsReducer = (state, action) => {
     const oldState = [...state.semesters];
     const newState = oldState.filter((_, i) => i !== action.payload);
     state.semesters = newState;
-    if (semCount > 0) semCount--;
     return { ...state };
   }
 
@@ -72,15 +70,65 @@ const courseDetailsReducer = (state, action) => {
     newState.duration= action.payload;
     return newState;
   }
+
+  if (action.type === "EDIT") {
+    const newState = {
+      name: action.payload.courseName,
+      duration:action.payload.duration,
+      semesters:action.payload.semesters
+    }
+    return newState;
+  }
 };
 
 const Create = () => {
   const [state, dispatch] = useReducer(courseDetailsReducer, initialState);
   const [errors,setErrors] = useState([]);
+  const [loading,setLoading] = useState(true);
 
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+
+  useEffect(() => {
+    setLoading(false);
+    const fetchCourseDetails = async() => {
+      try {
+        setLoading(true);
+        const result = await axios.post('/admin/course-details',{courseId:location.state.courseId});
+        const newArr = result.data.reduce((acc,cur) =>{
+          if(acc.some((item) => item.semName===cur.sem_name)) {
+              acc.forEach((item,i) =>{
+                  if(item.semName===cur.sem_name) {
+                      acc[i].subjects.push({name:cur.subj_name,code:cur.subj_code})
+                  }
+              })
+          } else {
+              acc.push({
+                  semName:cur.sem_name,
+                  subjects:[{name:cur.subj_name,code:cur.subj_code}]
+              })
+          }
+      return acc;
+  },[])
+  const data = {
+    courseName:location.state.courseName,
+    duration:location.state.duration,
+    semesters:newArr
+  }
+  editCourse(data);
+  setLoading(false);
+  console.log(newArr);
+  
+      } catch(err) {
+        console.log(err);
+        setLoading(false);
+      }
+    }
+    if(location.search.split('=')[1]=='true') {
+      fetchCourseDetails();
+    }
+  },[])
+
   const addSem = (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_SEM" });
@@ -98,6 +146,10 @@ const Create = () => {
     dispatch({ type: "REMOVE_SUBJECT", payload: { subIndex, semIndex } });
   };
 
+  const editCourse = (data) => {
+    dispatch({ type: "EDIT", payload:data });
+  };
+
   const newCourseSubmit = async(e) => {
     e.preventDefault();
     console.log(state);
@@ -107,7 +159,11 @@ const Create = () => {
           throw new TypeError('Add Subjects');
         }
       })
-      const result = await axios.post('/admin/new-course',state);
+      const data = {
+        ...state,
+        edit:location.search.split('=')[1]=='true'
+      }
+      const result = await axios.post('/admin/new-course',data);
       console.log(result);
     } catch(err) {
       if(err.response?.status===400) {
@@ -119,7 +175,7 @@ const Create = () => {
     }
   };
   return (
-    <div className="create-course-main">
+   <div className="create-course-main">
       <div className="back-btn flex" onClick={() => navigate(-1)}>
         <FiArrowLeft
           color="var(--light-grey)"
@@ -137,6 +193,8 @@ const Create = () => {
               variant="outlined"
               size="small"
               fullWidth
+              value={state.name}
+              disabled={location.search.split('=')[1]=='true'}
               error={errors.some((err) => err.param === "name")}
               helperText={errors.find((err) => err.param === "name")?.msg}
               onChange={(e) => dispatch({type:'COURSENAME',payload:e.target.value})}
@@ -148,6 +206,8 @@ const Create = () => {
                 defaultValue=""
                 size="small"
                 type="number"
+                value={state.duration}
+                disabled={location.search.split('=')[1]=='true'}
                 error={errors.some((err) => err.param === "duration")}
                 onChange={(e) => dispatch({type:'DURATION',payload:e.target.value})}
               >
@@ -173,7 +233,7 @@ const Create = () => {
                 <span>New Sem</span>
               </button>
             </div>
-            {state.semesters.map((semester, index) => {
+            {!loading?state.semesters.map((semester, index) => {
               return (
                 <SemList
                   key={Math.random()}
@@ -184,11 +244,11 @@ const Create = () => {
                   removeSubject={removeSubject}
                 />
               );
-            })}
+            }):<div style={{marginTop:120}} className="flex"><CircularProgress thickness={4}/></div>}
             {errors.some((err) => err.param === "subjects")&&<p style={{color:'red',marginTop:'1em'}}>Add all semester Subjects</p>}
-            {semCount > 0 && (
-              <button className="btn course-submit-btn" type="submit">
-                Submit
+            {state.semesters.length > 0 && (
+              <button className="btn-green mt-2" type="submit">
+                {location.search.split('=')[1]=='true'?'Update':'Submit'}
               </button>
             )}
           </div>

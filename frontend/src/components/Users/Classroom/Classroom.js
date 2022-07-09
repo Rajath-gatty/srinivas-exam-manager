@@ -15,7 +15,6 @@ const Classroom = () => {
   const {user} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
   const count = [1,2,3,4,5,6,7,8];
-  console.log(count)
 
   const fetchSemesters = async (courseName) => {
     try {

@@ -63,11 +63,39 @@
 }
 
 .create-course-main .semester-wrapper .semester {
-  max-width: 600px;
+  max-width: 100%;
   padding: 1.5em;
   border: 1px solid var(--grey-bg);
   margin-top: 2em;
   box-shadow: 4px 4px 4px -5px rgba(145, 145, 145, 1);
+  background-color: #fff;
+}
+
+.create-course-main .semester-wrapper .course-subject-list th {
+  text-align: left;
+  /* background-color: var(--grey-bg); */
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 200;
+  padding: 0.75em;
+}
+
+.create-course-main .semester-wrapper .course-subject-list {
+  width: 100%;
+  font-size: 0.9em;
+  color: var(--dark-grey);
+  border-collapse: collapse;
+}
+
+.create-course-main  .course-subject-list-row td{
+  font-size: 1em;
+  padding: 0.75em;
+  border: 1px solid var(--grey-bg);
+}
+
+.create-course-main  .course-subject-list-row .course-subject-list-row-border {
+  border: none;
+  background: #fff !important;
 }
 
 .create-course-main .semester-wrapper .semester .sem-text {
@@ -81,7 +109,8 @@
 }
 
 .create-course-main .subject-details-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2em;
 }
 
@@ -143,11 +172,8 @@
   flex-direction: column;
 }
 
-.semester .subject-info-wrapper .close-svg {
-  transform: rotate(45deg);
+.create-course-main .semester-wrapper .course-subject-list .close-svg {
   position: relative;
-  top: -0.8em;
-  right: -0.4em;
   cursor: pointer;
 }
 

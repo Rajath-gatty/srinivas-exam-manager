@@ -10,12 +10,12 @@ const CourseList = ({name,duration,totalSem,courseId}) => {
                 <td>
                     <Link to={{
                         pathname:"/courses/new-course",
-                        search:"&edit=true",
+                        search:"edit=true",
                     }} 
                     state={{
+                        courseId,
                         courseName:name,
                         duration,
-                        totalSem
                     }}
                     className="course-edit-btn btn-outlined flex">
                         <BiEditAlt size={15} color="var(--primary-color) :hover{color:var(--white)}"/>
