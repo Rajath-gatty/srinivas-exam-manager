@@ -1,0 +1,10 @@
+.CreateClass-container{
+  width: 100%;
+  position: relative;
+  margin: 2em;
+}
+
+.CreateClass-Header{
+  margin-top: 1em;
+  color: var(--primary-color);
+}

@@ -60,6 +60,7 @@ import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoord
 import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects";
 import Classroom from "./components/Users/Classroom/Classroom";
 import StudentUsers from "./components/Users/Classroom/StudentUsers";
+import CreateClass from "./components/Users/Classroom/Create/Create";
 
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
@@ -227,6 +228,7 @@ function App() {
                 <Route path="users/staff/:userId" element={<UserDetails />} />
 
                 <Route path="/users/faculty/subjects/:facultyId" element={<FacultySubjects />} />
+                <Route path="/classrooms/create" element={<CreateClass />} />
               </Route>
 
               {/* Exam Coordinator Access */}

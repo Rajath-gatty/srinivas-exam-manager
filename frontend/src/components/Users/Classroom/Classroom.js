@@ -77,10 +77,11 @@ const Classroom = () => {
           handleSemesterChange={handleSemesterChange}
           />
 
-          <div className="btn-outlined">
+          {user.role === "admin" || user.role === "staff" && 
+            <Link to="./create" className="btn-outlined">
               <HiPlus size={20} />
               <span>Create</span>
-          </div>
+          </Link>}
         </div>
       </div>
 
@@ -89,16 +90,16 @@ const Classroom = () => {
           return <Link to="./student" key={obj} className="Classroom-card">
             <div className="Card-Info flex">
               <div className="Card-Header">
-                <h2>Class Name</h2>
-                <h4 className="Card-Course">BCA</h4>
+                <h2>Class {obj}</h2>
+                <h4 className="Card-Course">{obj%2 === 0 ? "BCA" : "MCA"}</h4>
               </div>
-
-              <p><span>Total Students: </span> 66</p>
 
               <div className="Card-Body">
                 <p><span>Semester: </span> 3 SEM</p>
                 <p><span>Batch: </span> 2019</p>
               </div>
+
+              <p className="Card-Total"><span>Total Students: </span> 66</p>
             </div>
           </Link>
         })}
