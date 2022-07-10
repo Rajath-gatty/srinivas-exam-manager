@@ -16,6 +16,10 @@
   /* --grey-bg: #f4f4ff; */
   --grey-bg: #f1f1f1;
   --dark-grey: #5b5b5b;
+
+  /* main-bg affects Filter background */
+  --main-bg:rgb(252, 252, 252); 
+
   --strong-red: #e21717;
   --strong-green: #4dc514;
   --red: #d54747;
@@ -56,7 +60,7 @@ a {
 }
 
 body {
-  background-color: rgb(250, 250, 250);
+  background-color: var(--main-bg);
 }
 
 .flex {
@@ -73,6 +77,7 @@ body {
   border-radius: 4px;
   cursor: pointer;
   justify-self: left;
+  font-size: 1em;
 }
 
 .btn:disabled {
