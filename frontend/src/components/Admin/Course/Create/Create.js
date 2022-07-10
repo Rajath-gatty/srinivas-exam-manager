@@ -15,6 +15,7 @@ import { useLocation } from "react-router-dom";
 import "./Create.css";
 import SemList from "./SemList";
 import { useEffect, useReducer,useState} from "react";
+import { toast } from "react-toastify";
 
 const initialState = {
   name: '',
@@ -99,13 +100,13 @@ const Create = () => {
           if(acc.some((item) => item.semName===cur.sem_name)) {
               acc.forEach((item,i) =>{
                   if(item.semName===cur.sem_name) {
-                      acc[i].subjects.push({name:cur.subj_name,code:cur.subj_code})
+                      acc[i].subjects.push({name:cur.subj_name,code:cur.subj_code,ia:cur.i_a,credits:cur.credits})
                   }
               })
           } else {
               acc.push({
                   semName:cur.sem_name,
-                  subjects:[{name:cur.subj_name,code:cur.subj_code}]
+                  subjects:[{name:cur.subj_name,code:cur.subj_code,ia:cur.i_a,credits:cur.credits}]
               })
           }
       return acc;
@@ -117,14 +118,13 @@ const Create = () => {
   }
   editCourse(data);
   setLoading(false);
-  console.log(newArr);
   
       } catch(err) {
         console.log(err);
         setLoading(false);
       }
     }
-    if(location.search.split('=')[1]=='true') {
+    if(location.state?.edit) {
       fetchCourseDetails();
     }
   },[])
@@ -161,10 +161,12 @@ const Create = () => {
       })
       const data = {
         ...state,
-        edit:location.search.split('=')[1]=='true'
+        edit:location.state?.edit
       }
       const result = await axios.post('/admin/new-course',data);
       console.log(result);
+      toast.success(result.data);
+      navigate('/courses');
     } catch(err) {
       if(err.response?.status===400) {
        return setErrors(err.response.data);
@@ -174,6 +176,7 @@ const Create = () => {
       setErrors([]);
     }
   };
+
   return (
    <div className="create-course-main">
       <div className="back-btn flex" onClick={() => navigate(-1)}>
@@ -194,7 +197,7 @@ const Create = () => {
               size="small"
               fullWidth
               value={state.name}
-              disabled={location.search.split('=')[1]=='true'}
+              disabled={location.state?.edit}
               error={errors.some((err) => err.param === "name")}
               helperText={errors.find((err) => err.param === "name")?.msg}
               onChange={(e) => dispatch({type:'COURSENAME',payload:e.target.value})}
@@ -207,7 +210,7 @@ const Create = () => {
                 size="small"
                 type="number"
                 value={state.duration}
-                disabled={location.search.split('=')[1]=='true'}
+                disabled={location.state?.edit}
                 error={errors.some((err) => err.param === "duration")}
                 onChange={(e) => dispatch({type:'DURATION',payload:e.target.value})}
               >
@@ -248,7 +251,7 @@ const Create = () => {
             {errors.some((err) => err.param === "subjects")&&<p style={{color:'red',marginTop:'1em'}}>Add all semester Subjects</p>}
             {state.semesters.length > 0 && (
               <button className="btn-green mt-2" type="submit">
-                {location.search.split('=')[1]=='true'?'Update':'Submit'}
+                {location.state?.edit?'Update':'Submit'}
               </button>
             )}
           </div>

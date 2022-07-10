@@ -3,38 +3,54 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
 exports.postNewCourse = async (req, res) => {
-    const { duration, name, semesters } = req.body;
+    const { duration, name, semesters, edit } = req.body;
     const deptId = req.deptId;
     const err = validationResult(req).errors;
     if (err.length > 0) {
         return res.status(400).send(err);
     }
+    if(edit === true) {
+      db.execute(`select course_id from course where course_name='${name}'`)
+      .then(([result]) => {
+        semesters.forEach(sem => {
+            sem.subjects.forEach(sub => {
+                const semSql = `insert ignore into semester(dept_id,course_id,sem_name,subj_name,subj_code,i_a,credits) values(?,?,?,?,?,?,?)`;
+                return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code,sub.ia,sub.credits])
+            })
+        })
+    })
+    .then(() => {
+        res.send('Course subjects Updated!');
+    })
+    .catch((err) => res.status(500).send(err))
+    } else {
     const totalSemesters = semesters.length;
     const checkCourse = await db.execute(`select course_name from course where course_name='${name}'`);
     if (checkCourse[0].length > 0) {
         return res.status(403).send('course Already exists');
     }
     const courseSql = 'insert into course(dept_id,course_name,course_duration,course_sem) values(?,?,?,?)';
-    res.send('Success');
-    // db.execute(courseSql, [deptId, name, duration, totalSemesters])
-    //     .then(() => {
-    //         return db.execute(`select course_id from course where course_name='${name}'`)
-    //     })
-    //     .then(([result]) => {
-    //         semesters.forEach(sem => {
-    //             sem.subjects.forEach(sub => {
-    //                 const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
-    //                 return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code])
-    //             })
-    //         })
-    //     })
-    //     .then((result) => {
-    //         res.status(200).send({ success: true, result })
-    //     })
-    //     .catch(err => {
-    //         console.log(err);
-    //         res.status(500).send({ success: false, err });
-    //     })
+
+    db.execute(courseSql, [deptId, name, duration, totalSemesters])
+        .then(() => {
+            return db.execute(`select course_id from course where course_name='${name}'`)
+        })
+        .then(([result]) => {
+            semesters.forEach(sem => {
+                sem.subjects.forEach(sub => {
+                    const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code,i_a,credits) values(?,?,?,?,?,?,?)`;
+                    return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code,sub.ia,sub.credits])
+                })
+            })
+        })
+        .then((result) => {
+            res.status(200).send('Course Added!')
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({ success: false, err });
+        })
+    }
 }
 
 exports.postNewDepartment = async (req, res) => {
@@ -90,7 +106,7 @@ exports.getCourses = async (req, res) => {
 exports.getCourseDetails = async (req, res) => {
     const deptId = req.deptId;
     try {
-        const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name from semester where dept_id=${deptId} AND course_id=${req.body.courseId} order by sem_name`);
+        const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name,i_a,credits from semester where dept_id=${deptId} AND course_id=${req.body.courseId} order by sem_name`);
         res.send(result[0]);
     } catch (err) {
         console.log(err);

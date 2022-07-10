@@ -2,6 +2,7 @@ import { AiOutlineMinusCircle } from "react-icons/ai";
 import { HiMinus,HiPlus } from "react-icons/hi";
 import { TextField } from "@mui/material";
 import { useState, useRef } from "react";
+import {toast} from "react-toastify";
 
 const SemList = (props) => {
   const [subjects, setSubjects] = useState({
@@ -11,22 +12,29 @@ const SemList = (props) => {
 
   const subjectNameRef = useRef();
   const subjectCodeRef = useRef();
+  const IaRef = useRef();
+  const creditsRef = useRef();
 
   const addSubjects = (e) => {
     e.preventDefault();
-    const subjectName = subjectNameRef.current.children[1].children[0].value;
-    const subjectCode = subjectCodeRef.current.children[1].children[0].value;
+    const Ia = IaRef.current.value;
+    const credits = creditsRef.current.value;
+    const subjectName = subjectNameRef.current.value;
+    const subjectCode = subjectCodeRef.current.value;
 
-    if (subjectName !== "" && subjectCode !== "") {
+    if (subjectName !== "" && subjectCode !== "" && Ia !== "" && credits !== "") {
       setSubjects((prevState) => {
         const newArr = { ...prevState };
-        newArr.subjects.push({ name: subjectName, code: subjectCode });
+        newArr.subjects.push({ name: subjectName, code: subjectCode, ia:Ia, credits:credits });
         return newArr;
       });
       props.addSubjectsToReducer(subjects);
+    } else {
+      toast.warn('Please Fill all the Fields',{
+        toastId:"sem-id"
+      });
     }
   };
-
   return (
     <div className="semester">
       <div className="semester-header">
@@ -45,7 +53,7 @@ const SemList = (props) => {
           size="small"
           className="subject-input"
           fullWidth
-          ref={subjectNameRef}
+          inputRef={subjectNameRef}
         />
         <TextField
           label="Subject code"
@@ -53,26 +61,28 @@ const SemList = (props) => {
           size="small"
           className="subject-input"
           fullWidth
-          ref={subjectCodeRef}
+          inputRef={subjectCodeRef}
         />
         <TextField
           label="I/A"
           variant="standard"
           size="small"
+          type="number"
           className="subject-input"
           fullWidth
-          ref={subjectCodeRef}
+          inputRef={IaRef}
         />
         <TextField
           label="Credits"
           variant="standard"
           size="small"
           className="subject-input"
+          type="number"
           fullWidth
-          ref={subjectCodeRef}
+          inputRef={creditsRef}
         />
         <button
-          className="add-subject-btn btn-outlined flex"
+          className=" btn-outlined-green flex"
           onClick={(e) => addSubjects(e)}
         >
           <HiPlus size={20} />
@@ -96,8 +106,8 @@ const SemList = (props) => {
             <tr key={subIndex} className="course-subject-list-row">
             <td>{sub.name}</td>
             <td>{sub.code}</td>
-            <td>50</td>
-            <td>100</td>
+            <td>{sub.ia}</td>
+            <td>{sub.credits}</td>
             <td className="course-subject-list-row-border"><HiMinus
                 className="close-svg"
                 color="var(--strong-red)"
