@@ -217,7 +217,7 @@ function App() {
               <Route
                 element={<ProtectedRoute allowedRole={["admin", "staff"]} />}
               >
-                <Route path="users/student" element={<TotalUsers type="student" />} />
+                {/* <Route path="users/student" element={<TotalUsers type="student" />} /> */}
                 <Route path="users/faculty" element={<TotalUsers type="faculty" />} />
                 <Route path="users/staff" element={<TotalUsers type="staff" />} />
 
@@ -242,7 +242,7 @@ function App() {
               
               {/* Admin and Staff and Faculty Access */}
               <Route element={<ProtectedRoute allowedRole={["admin", "staff", "faculty"]} />}>
-                <Route path="/users/classrooms" element={<Classroom />} />
+                <Route path="/classrooms" element={<Classroom />} />
               </Route>
 
               {/*Common Protected Routes */}

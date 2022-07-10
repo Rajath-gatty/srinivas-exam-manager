@@ -43,10 +43,10 @@ export const NavLinks = [
         title: "Users",
         icon: Users,
         subMenu: [
-          {
-            title: "Student",
-            path: "/users/classrooms",
-          },
+          // {
+          //   title: "Student",
+          //   path: "/users/classrooms",
+          // },
           {
             title: "Faculty",
             path: "/users/faculty",
@@ -115,10 +115,10 @@ export const NavLinks = [
         title: "Users",
         icon: Users,
         subMenu: [
-          {
-            title: "Student",
-            path: "/users/classrooms",
-          },
+          // {
+          //   title: "Student",
+          //   path: "/users/classrooms",
+          // },
           {
             title: "Faculty",
             path: "/users/faculty",
