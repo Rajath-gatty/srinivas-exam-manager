@@ -59,6 +59,7 @@ import ExamCoordinator from "./components/AdminSuper/Examcoordinator/ExamCoordin
 import NewExamCoordinator from "./components/AdminSuper/Examcoordinator/NewCoordinator/NewCoordinator";
 import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects";
 import Classroom from "./components/Users/Classroom/Classroom";
+import StudentUsers from "./components/Users/Classroom/StudentUsers";
 
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
@@ -221,7 +222,7 @@ function App() {
                 <Route path="users/faculty" element={<TotalUsers type="faculty" />} />
                 <Route path="users/staff" element={<TotalUsers type="staff" />} />
 
-                <Route path="users/student/:userId" element={<UserDetails />} />
+                {/* <Route path="users/student/:userId" element={<UserDetails />} /> */}
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
 
@@ -243,6 +244,9 @@ function App() {
               {/* Admin and Staff and Faculty Access */}
               <Route element={<ProtectedRoute allowedRole={["admin", "staff", "faculty"]} />}>
                 <Route path="/classrooms" element={<Classroom />} />
+                <Route path="/classrooms/student" element={<StudentUsers />} />
+                <Route path="/classrooms/student/:userId" element={<UserDetails />} />
+\
               </Route>
 
               {/*Common Protected Routes */}

@@ -1,5 +1,6 @@
 import "./Classroom.css";
 import { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 import { HiPlus } from "react-icons/hi";
 import Filter from "../../UI/Filter/Filter";
 import {useFetchCourses} from "../../../hooks/useFetchCourses";
@@ -85,14 +86,21 @@ const Classroom = () => {
 
       <div className="Classroom-cardList">
         {count.map(obj =>{
-          return <div key={obj} className="Classroom-card">
+          return <Link to="./student" key={obj} className="Classroom-card">
             <div className="Card-Info flex">
               <div className="Card-Header">
                 <h2>Class Name</h2>
                 <h4 className="Card-Course">BCA</h4>
               </div>
+
+              <p><span>Total Students: </span> 66</p>
+
+              <div className="Card-Body">
+                <p><span>Semester: </span> 3 SEM</p>
+                <p><span>Batch: </span> 2019</p>
+              </div>
             </div>
-          </div>
+          </Link>
         })}
       </div>
     </div>
