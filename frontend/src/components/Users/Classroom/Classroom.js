@@ -87,11 +87,10 @@ const Classroom = () => {
         {count.map(obj =>{
           return <div key={obj} className="Classroom-card">
             <div className="Card-Info flex">
-              <h2>Class: Class_Name</h2>
-              <p>Course: Course_Name</p>
-              <p>Semester: Semester_Name</p>
-              <p>Section: Section_Name</p>
-              <p>Class Coordinator: Coordinator_name</p>
+              <div className="Card-Header">
+                <h2>Class Name</h2>
+                <h4 className="Card-Course">BCA</h4>
+              </div>
             </div>
           </div>
         })}
