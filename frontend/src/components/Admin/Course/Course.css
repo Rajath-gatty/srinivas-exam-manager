@@ -72,8 +72,10 @@
   gap: 0.5em;
   margin: auto;
   background: none;
+  max-width: 50px;
 }
 
 .course-main .course-edit-btn:hover {
   background: var(--primary-color);
+  color: #fff;
 }

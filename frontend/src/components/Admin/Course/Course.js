@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { HiPlus } from "react-icons/hi";
 import CourseList from "./CourseList";
 import axios from "axios";
-import Skeleton from "../../UI/Skeleton/Skeleton";
+import { CircularProgress } from "@mui/material";
 
 const Course = () => {
   const [courses,setCourses] = useState([]);
@@ -62,7 +62,7 @@ const Course = () => {
             />
           })}
         </tbody>
-      </table>: <Skeleton rows={3} cols={6} profile marginTop="2em"/>}
+      </table>: <div style={{marginTop:70}} className="flex"><CircularProgress thickness={4}/></div>}
     </div>
   );
 };

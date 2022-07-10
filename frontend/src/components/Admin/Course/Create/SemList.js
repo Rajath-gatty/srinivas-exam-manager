@@ -1,7 +1,8 @@
 import { AiOutlineMinusCircle } from "react-icons/ai";
-import { HiPlus } from "react-icons/hi";
+import { HiMinus,HiPlus } from "react-icons/hi";
 import { TextField } from "@mui/material";
 import { useState, useRef } from "react";
+import {toast} from "react-toastify";
 
 const SemList = (props) => {
   const [subjects, setSubjects] = useState({
@@ -11,22 +12,29 @@ const SemList = (props) => {
 
   const subjectNameRef = useRef();
   const subjectCodeRef = useRef();
+  const IaRef = useRef();
+  const creditsRef = useRef();
 
   const addSubjects = (e) => {
     e.preventDefault();
-    const subjectName = subjectNameRef.current.children[1].children[0].value;
-    const subjectCode = subjectCodeRef.current.children[1].children[0].value;
+    const Ia = IaRef.current.value;
+    const credits = creditsRef.current.value;
+    const subjectName = subjectNameRef.current.value;
+    const subjectCode = subjectCodeRef.current.value;
 
-    if (subjectName !== "" && subjectCode !== "") {
+    if (subjectName !== "" && subjectCode !== "" && Ia !== "" && credits !== "") {
       setSubjects((prevState) => {
         const newArr = { ...prevState };
-        newArr.subjects.push({ name: subjectName, code: subjectCode });
+        newArr.subjects.push({ name: subjectName, code: subjectCode, ia:Ia, credits:credits });
         return newArr;
       });
       props.addSubjectsToReducer(subjects);
+    } else {
+      toast.warn('Please Fill all the Fields',{
+        toastId:"sem-id"
+      });
     }
   };
-
   return (
     <div className="semester">
       <div className="semester-header">
@@ -38,14 +46,14 @@ const SemList = (props) => {
           color="var(--strong-red)"
         />
       </div>
-      <div className="subject-details-wrapper flex">
+      <div className="subject-details-wrapper">
         <TextField
           label="Subject Name"
           variant="standard"
           size="small"
           className="subject-input"
           fullWidth
-          ref={subjectNameRef}
+          inputRef={subjectNameRef}
         />
         <TextField
           label="Subject code"
@@ -53,10 +61,28 @@ const SemList = (props) => {
           size="small"
           className="subject-input"
           fullWidth
-          ref={subjectCodeRef}
+          inputRef={subjectCodeRef}
+        />
+        <TextField
+          label="I/A"
+          variant="standard"
+          size="small"
+          type="number"
+          className="subject-input"
+          fullWidth
+          inputRef={IaRef}
+        />
+        <TextField
+          label="Credits"
+          variant="standard"
+          size="small"
+          className="subject-input"
+          type="number"
+          fullWidth
+          inputRef={creditsRef}
         />
         <button
-          className="add-subject-btn btn-outlined flex"
+          className=" btn-outlined-green flex"
           onClick={(e) => addSubjects(e)}
         >
           <HiPlus size={20} />
@@ -64,22 +90,47 @@ const SemList = (props) => {
         </button>
       </div>
       <div className="subject-info-main">
+        <table className="course-list-table course-subject-list">
+            <thead>
+              <tr>
+                <th>Subject Name</th>
+                <th>Subject Code</th>
+                <th>I/A</th>
+                <th>Total credits</th>
+              </tr>
+            </thead>
+            <tbody>
+             
         {props.details.subjects.map((sub, subIndex) => {
           return (
-            <div key={subIndex} className="subject-info-wrapper flex">
-              <div className="subject-info flex">
-                <h3>{sub.name}</h3>
-                <p>{sub.code}</p>
-              </div>
-              <HiPlus
+            <tr key={subIndex} className="course-subject-list-row">
+            <td>{sub.name}</td>
+            <td>{sub.code}</td>
+            <td>{sub.ia}</td>
+            <td>{sub.credits}</td>
+            <td className="course-subject-list-row-border"><HiMinus
                 className="close-svg"
                 color="var(--strong-red)"
                 size={20}
                 onClick={() => props.removeSubject(subIndex, props.index)}
-              />
-            </div>
+              /></td>
+          </tr>
+            // <div key={subIndex} className="subject-info-wrapper flex">
+            //   <div className="subject-info flex">
+            //     <h3>{sub.name}</h3>
+            //     <p>{sub.code}</p>
+            //   </div>
+            //   <HiPlus
+            //     className="close-svg"
+            //     color="var(--strong-red)"
+            //     size={20}
+            //     onClick={() => props.removeSubject(subIndex, props.index)}
+            //   />
+            // </div>
           );
         })}
+            </tbody>
+        </table>
       </div>
     </div>
   );

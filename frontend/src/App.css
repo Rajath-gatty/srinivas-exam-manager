@@ -43,8 +43,20 @@
   font-family: "Lato", sans-serif;
 }
 
+table {
+  background-color: #fff;
+}
+
+label {
+  background: transparent;
+}
+
 a {
   text-decoration: none;
+}
+
+body {
+  background-color: rgb(250, 250, 250);
 }
 
 .flex {
@@ -75,7 +87,8 @@ a {
   border-radius: 4px;
   padding: 0.5em 1em;
   transition: 200ms ease-in-out;
-  background-color: var(--white);
+  /* background-color: var(--white); */
+  background: transparent;
   cursor: pointer;
 }
 
@@ -92,6 +105,18 @@ a {
   padding: 0.5em 1em;
   background-color: var(--white);
   cursor: pointer;
+}
+
+.btn-green {
+  text-decoration: none;
+  color: var(--strong-green);
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background-color: var(--strong-green);
+  color: var(--white);
+  outline: none;
+  border: none;
 }
 
 .btn-outlined-green:hover {
@@ -132,9 +157,9 @@ a {
 }
 
 /* MUI Select Label fix  */
- .MuiFormControl-root .MuiInputLabel-root {
-  background-color: var(--white) !important;
-}
+ /* .MuiFormControl-root .MuiInputLabel-root { */
+  /* background-color: var(--white) !important; */
+/* } */
 
 .MuiFormControl-root .MuiInputLabel-root[data-shrink="true"] {
   top: 0 !important;
