@@ -187,7 +187,7 @@ exports.postLogin = async (req, res) => {
       const fetchedUser = user[0];
       bcrypt.compare(password, fetchedUser.password).then((isEqual) => {
         if (!isEqual) {
-          return res.status(401).json({
+          return res.status(404).send({
             error: "Invalid Email or password",
           });
         }
