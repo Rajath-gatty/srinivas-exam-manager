@@ -134,16 +134,39 @@ const Create = () => {
     dispatch({ type: "ADD_SEM" });
   };
 
-  const removeSem = (index) => {
-    dispatch({ type: "REMOVE_SEM", payload: index });
+  const removeSem = async(index) => {
+    const sem = state.semesters[index];
+    if(sem.subjects.length>0) {
+      if(window.confirm(`Remove semester ${sem.semName}?`)) {
+        let subjectCodes = [];
+        sem.subjects.forEach(sub => subjectCodes.push(sub.code))
+        await toast.promise(axios.post(`/admin/courses/subjects/remove`,{subjects:subjectCodes}),{
+          pending: 'Loading...',
+          success: 'Subjects Deleted!',
+          error: 'Something went wrong'
+        })
+        dispatch({ type: "REMOVE_SEM", payload: index });
+      }
+    } else {
+      dispatch({ type: "REMOVE_SEM", payload: index });
+    }
   };
 
   const addSubjectsToReducer = (subjects) => {
     dispatch({ type: "ADD_SUBJECT", payload: subjects });
   };
 
-  const removeSubject = (subIndex, semIndex) => {
-    dispatch({ type: "REMOVE_SUBJECT", payload: { subIndex, semIndex } });
+  const removeSubject = async(subIndex, semIndex) => {
+    const subject = state.semesters[semIndex].subjects[subIndex];
+    console.log(subject);
+    if(window.confirm(`Remove subject ${subject.name} ?`)) {
+     await toast.promise(axios.post(`/admin/courses/subjects/remove`,{subjects:[subject.code]}),{
+        pending: 'Loading...',
+        success:  `Subject ${subject.name} deleted!`,
+        error: 'Something went wrong'
+      })
+      dispatch({ type: "REMOVE_SUBJECT", payload:{ subIndex, semIndex }});
+    } 
   };
 
   const editCourse = (data) => {
@@ -187,7 +210,7 @@ const Create = () => {
         />
         <span>Back</span>
       </div>
-      <h1 className="main-hdng">New Course</h1>
+      <h1 className="main-hdng">{location.state?.edit?'Edit':'New'} Course</h1>
       <div className="course-details-wrapper">
         <form onSubmit={newCourseSubmit}>
           <div className="course-meta">

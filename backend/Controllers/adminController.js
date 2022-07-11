@@ -53,6 +53,20 @@ exports.postNewCourse = async (req, res) => {
     }
 }
 
+exports.removeCourseSubjects = async(req,res) => {
+    const {subjects} = req.body;
+    console.log(subjects)
+    try {
+    const sql = `delete from semester where subj_code in (?)`;
+    const result = await db.query(sql,[subjects]);
+    console.log(result);
+    res.send('Success');
+    } catch(err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
+}
+
 exports.postNewDepartment = async (req, res) => {
     const { departmentName, firstName, lastName, dob, email, gender, address, phone, password } = req.body;
     const err = validationResult(req).errors;
