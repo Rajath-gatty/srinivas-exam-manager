@@ -16,6 +16,13 @@ import {
 const Create = () => {
   const navigate = useNavigate();
 
+  const DegreeYear = [
+    2015, 2016,
+   2017, 2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027
+ ];
+ const Courses = ["BCA", "MCA"];
+ const Semesters = [1,2,3,4,5,6];
+
   const HandleCreateClass = () =>{
     toast.success('Classroom created successfully');
     navigate('/classrooms');
@@ -28,8 +35,75 @@ const Create = () => {
         <h1>Create Classroom</h1>
       </div>
         
-      <form className="flex" onSubmit={HandleCreateClass}>
+      <form className="CreateClass-form flex" onSubmit={HandleCreateClass}>
+        <div className="CreateClass-formRow flex">
+          <TextField
+            label="Classroom Name"
+            variant="outlined"
+            size="small"
+            fullWidth
+            required
+          />
+          
+          <FormControl className="SelectInput">
+            <InputLabel>Class Batch</InputLabel>
+            <Select
+              label="Class Batch"
+              placeholder="Class Batch" 
+              defaultValue=""
+              value=""
+              size="small"
+              type="number"
+              required
+            >
+              {DegreeYear.map((opt) => (
+                <MenuItem key={opt} value={opt}>
+                  {opt}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </div>
 
+        <div className="CreateClass-formRow flex">
+          <FormControl fullWidth>
+              <InputLabel>Course</InputLabel>
+              <Select
+                label="Course"
+                placeholder="Course" 
+                defaultValue=""
+                value=""
+                size="small"
+                type="number"
+                required
+              >
+                {Courses.map((opt) => (
+                  <MenuItem key={opt} value={opt}>
+                    {opt}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          
+          <FormControl fullWidth>
+              <InputLabel>Semester</InputLabel>
+              <Select
+                label="Semester"
+                placeholder="Semester" 
+                defaultValue=""
+                value=""
+                size="small"
+                type="number"
+                required
+              >
+                {Semesters.map((opt) => (
+                  <MenuItem key={opt} value={opt}>
+                    {opt}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+        </div>
       </form>
     </div>
   )
