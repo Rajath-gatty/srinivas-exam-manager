@@ -16,6 +16,7 @@ const Classroom = () => {
   const {user} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
   const count = [1,2,3,4,5,6,7,8];
+  const colors = ['#737EBB','#6EAF84','#B55F5F','#5FB5B5'];
 
   const fetchSemesters = async (courseName) => {
     try {
@@ -89,17 +90,19 @@ const Classroom = () => {
         {count.map(obj =>{
           return <Link to="./student" key={obj} className="Classroom-card">
             <div className="Card-Info flex">
-              <div className="Card-Header">
-                <h2>Class {obj}</h2>
+              <div className="Card-Header" style={{background:colors[Math.floor(Math.random()*4)]}}>
+                <h2 className="classroom-main-header">Class {obj}</h2>
+                <div className="sub-header">
                 <h4 className="Card-Course">{obj%2 === 0 ? "BCA" : "MCA"}</h4>
+                <h4 className="Card-Course-sem">V SEM</h4>
+                </div>
               </div>
 
               <div className="Card-Body">
-                <p><span>Semester: </span> 3 SEM</p>
-                <p><span>Batch: </span> 2019</p>
+              <p ><span>Total Students: </span>    66</p>
+                <p><span>Batch: </span>    2019</p>
               </div>
 
-              <p className="Card-Total"><span>Total Students: </span> 66</p>
             </div>
           </Link>
         })}

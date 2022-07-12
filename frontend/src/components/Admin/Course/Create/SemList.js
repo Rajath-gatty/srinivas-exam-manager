@@ -90,7 +90,7 @@ const SemList = (props) => {
         </button>
       </div>
       <div className="subject-info-main">
-        <table className="course-list-table course-subject-list">
+        {props.details.subjects.length>0&&<table className="course-list-table course-subject-list">
             <thead>
               <tr>
                 <th>Subject Name</th>
@@ -100,7 +100,7 @@ const SemList = (props) => {
               </tr>
             </thead>
             <tbody>
-             
+
         {props.details.subjects.map((sub, subIndex) => {
           return (
             <tr key={subIndex} className="course-subject-list-row">
@@ -115,22 +115,10 @@ const SemList = (props) => {
                 onClick={() => props.removeSubject(subIndex, props.index)}
               /></td>
           </tr>
-            // <div key={subIndex} className="subject-info-wrapper flex">
-            //   <div className="subject-info flex">
-            //     <h3>{sub.name}</h3>
-            //     <p>{sub.code}</p>
-            //   </div>
-            //   <HiPlus
-            //     className="close-svg"
-            //     color="var(--strong-red)"
-            //     size={20}
-            //     onClick={() => props.removeSubject(subIndex, props.index)}
-            //   />
-            // </div>
           );
         })}
             </tbody>
-        </table>
+        </table>}
       </div>
     </div>
   );
