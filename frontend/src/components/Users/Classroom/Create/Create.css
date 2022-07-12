@@ -8,3 +8,19 @@
   margin-top: 1em;
   color: var(--primary-color);
 }
+
+.CreateClass-form{
+  flex-direction: column;
+  gap: 2em;
+  margin: 2.5em 5em;
+}
+
+.CreateClass-formRow{
+  width: 100%;
+  gap: 4em;
+}
+
+.CreateClass-form .MuiFormControl-root.SelectInput{
+  min-width: 150px;
+  margin-right: 20em;
+}

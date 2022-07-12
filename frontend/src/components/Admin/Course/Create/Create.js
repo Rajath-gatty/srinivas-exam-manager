@@ -136,11 +136,17 @@ const Create = () => {
 
   const removeSem = async(index) => {
     const sem = state.semesters[index];
+    const totalSem = state.semesters.length;
     if(sem.subjects.length>0) {
       if(window.confirm(`Remove semester ${sem.semName}?`)) {
         let subjectCodes = [];
-        sem.subjects.forEach(sub => subjectCodes.push(sub.code))
-        await toast.promise(axios.post(`/admin/courses/subjects/remove`,{subjects:subjectCodes}),{
+        sem.subjects.forEach(sub => subjectCodes.push(sub.code));
+        const data = {
+          subjects:subjectCodes,
+          totalSem,
+          courseId:location.state.courseId
+        }
+        await toast.promise(axios.post(`/admin/courses/subjects/remove`,data),{
           pending: 'Loading...',
           success: 'Subjects Deleted!',
           error: 'Something went wrong'

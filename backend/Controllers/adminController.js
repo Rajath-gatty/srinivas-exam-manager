@@ -4,6 +4,7 @@ const { validationResult } = require('express-validator');
 
 exports.postNewCourse = async (req, res) => {
     const { duration, name, semesters, edit } = req.body;
+    const totalSemesters = semesters.length;
     const deptId = req.deptId;
     const err = validationResult(req).errors;
     if (err.length > 0) {
@@ -11,7 +12,9 @@ exports.postNewCourse = async (req, res) => {
     }
     if(edit === true) {
       db.execute(`select course_id from course where course_name='${name}'`)
-      .then(([result]) => {
+      .then(async([result]) => {
+        const courseRes = `update course set course_sem=? where course_id=${result[0].course_id}`;
+        await db.execute(courseRes,[totalSemesters])
         semesters.forEach(sem => {
             sem.subjects.forEach(sub => {
                 const semSql = `insert ignore into semester(dept_id,course_id,sem_name,subj_name,subj_code,i_a,credits) values(?,?,?,?,?,?,?)`;
@@ -24,7 +27,6 @@ exports.postNewCourse = async (req, res) => {
     })
     .catch((err) => res.status(500).send(err))
     } else {
-    const totalSemesters = semesters.length;
     const checkCourse = await db.execute(`select course_name from course where course_name='${name}'`);
     if (checkCourse[0].length > 0) {
         return res.status(403).send('course Already exists');
@@ -54,12 +56,18 @@ exports.postNewCourse = async (req, res) => {
 }
 
 exports.removeCourseSubjects = async(req,res) => {
-    const {subjects} = req.body;
-    console.log(subjects)
+    const {subjects,courseId} = req.body;
+    let totalSem = req.body.totalSem-1;
+    console.log(totalSem,courseId);
     try {
+    if(totalSem>=0) {
+        const sql = `update course set course_sem=? where course_id=${courseId}`;
+        const courseRes = await db.execute(sql,[totalSem]);
+        console.log(courseRes);
+    }
     const sql = `delete from semester where subj_code in (?)`;
     const result = await db.query(sql,[subjects]);
-    console.log(result);
+    // console.log(result);
     res.send('Success');
     } catch(err) {
         console.log(err);
