@@ -9,18 +9,68 @@
   color: var(--primary-color);
 }
 
+.CreateClass-Main{
+  padding: 1em;
+  margin: 1.5em 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
+}
+
 .CreateClass-form{
   flex-direction: column;
   gap: 2em;
   margin: 2.5em 5em;
 }
 
-.CreateClass-formRow{
-  width: 100%;
-  gap: 4em;
+.CreateClass-SelectUsers {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
 }
 
-.CreateClass-form .MuiFormControl-root.SelectInput{
+.CreateClass-formRow{
+  display: flex;
+  align-items: center;
+  gap: 4em;
+  width: 100%;
+}
+
+.CreateClass-formRow .MuiFormControl-root.TextInput{
+  width: 350px;
+}
+
+.CreateClass-formRow .MuiFormControl-root.SelectMenu{
+  min-width: 350px;
+}
+
+.CreateClass-formRow .MuiFormControl-root.SelectMenu label{
+  top: -6px;
+}
+
+.CreateClass-form .MuiFormControl-root.SelectMenu.Mr{
   min-width: 150px;
-  margin-right: 20em;
+}
+
+.CreateClass-SelectUsers{
+  /* border-top: 2px solid rgb(189, 189, 189); */
+  padding: 1em;
+}
+
+.CreateClass-SelectUsers h2{
+  color: var(--text-color);
+  margin-bottom: 1em;
+}
+
+.CreateClass-SelectUsers .users-main{
+  margin: 0;
+}
+
+.CreateClass-SelectUsers .users-main .users-searchBar{
+  width: 100%;
+}
+
+.CreateClass-SelectUsers .users-main .users-table-wrapper .CreateClass-UserCheckbox{
+  padding: 0;
+  width: 10px;
 }

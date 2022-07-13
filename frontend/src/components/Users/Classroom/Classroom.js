@@ -78,7 +78,7 @@ const Classroom = () => {
           handleSemesterChange={handleSemesterChange}
           />
 
-          {user.role === "admin" || user.role === "staff" && 
+          {["admin","staff"].includes(user.role) && 
             <Link to="./create" className="btn-outlined">
               <HiPlus size={20} />
               <span>Create</span>

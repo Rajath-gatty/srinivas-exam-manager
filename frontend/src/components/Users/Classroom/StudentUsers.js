@@ -11,18 +11,21 @@ import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
+import Checkbox from "@mui/material/Checkbox";
 
-const StudentUsers = () => {
+const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
   const [users, setUsers] = useState([]);
   const [semFilter,setSemFilter] = useState([]);
   const [sem,setSem] = useState("");
   const [course, setCourse] = useState("");
-  const [loading,setLoading] = useState(false);
-  const [btnLoading,setBtnLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [selectAll, setSelectAll] = useState(false);
   const {user} = useContextData();
   const location = useLocation();
 
   const filterCourses = useFetchCourses(user.deptId);
+  let showEligible = hideEligible?false:true;
 
   useEffect(() => {
     setLoading(true);
@@ -154,6 +157,7 @@ const StudentUsers = () => {
     }
   }
 
+  // console.log(selectAll);
   return (
     <div className="users-main">
       {<div className="users-Filter">
@@ -178,16 +182,16 @@ const StudentUsers = () => {
         handleSemesterChange={handleSemesterChange}
         />
 
-        <div className="users-HallticketBtn flex">
+        {showEligible &&<div className="users-HallticketBtn flex">
           {!btnLoading ? <div className={course&&sem? "btn-outlined flex" : "btn-outlined hallticket-disabled flex"} onClick={handleHallticket}>
           <VscFilePdf color="currentColor" size={22}/>
             <span>Generate Hall Tickets</span>
           </div> 
           :
-          <div className="users-btnLoader flex" onClick={handleHallticket}>
+          <div className="users-btnLoader flex">
             <CircularProgress color="inherit" size={25}/>
           </div>}
-        </div>
+        </div>}
       </div>}
 
       <table className="users-table-wrapper">
@@ -198,18 +202,26 @@ const StudentUsers = () => {
             <th>Course</th>
             <th>Batch</th>
             <th>Semester</th>
-            <th>Details</th>
-            <th>Eligiblity</th>
+            {showEligible && <th>Details</th>}
+            {showEligible && <th>Eligiblity</th>}
+            {showCheckbox && <th onClick={()=>{setSelectAll(prevState => !prevState)}}> 
+              <div className=""></div>
+            </th>}
           </tr>
         </thead>
         {!loading&&<tbody>
           {users.map((obj,i) =>{
               return <UserList 
-              key={Math.random()+Date.now()} 
+              key={obj.regno} 
               data={obj} 
               type="student"
               updateEligibility={UpdateEligibility}
-              index={i}/>
+              showEligible={showEligible}
+              showCheckbox={showCheckbox}
+              selectAll={selectAll}
+              index={i}
+              HandleSelectedUser={HandleSelectedUser}
+              />
           })}
         </tbody>}
       </table>

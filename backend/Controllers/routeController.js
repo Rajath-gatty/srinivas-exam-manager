@@ -171,8 +171,7 @@ exports.PostFacultySubjects = (req,res) => {
       res.send('Inserted!')
   } catch(err) {
       console.log(err);
-  }
-         
+  } 
 }
 
 exports.getFacultySubject = async(req,res) => {
