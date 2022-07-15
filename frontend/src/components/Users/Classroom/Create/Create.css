@@ -11,14 +11,13 @@
 
 .CreateClass-Main{
   padding: 1em;
-  margin: 1.5em 0;
+  margin: 1.5em 0 0.06em 0;
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
 }
 
 .CreateClass-form{
-  flex-direction: column;
   gap: 2em;
   margin: 2.5em 5em;
 }
@@ -31,25 +30,24 @@
 
 .CreateClass-formRow{
   display: flex;
-  align-items: center;
   gap: 4em;
   width: 100%;
 }
 
-.CreateClass-formRow .MuiFormControl-root.TextInput{
+/* .CreateClass-formRow .MuiFormControl-root.TextInput{
   width: 350px;
-}
+} */
 
-.CreateClass-formRow .MuiFormControl-root.SelectMenu{
+/* .CreateClass-formRow .MuiFormControl-root.SelectMenu{
   min-width: 350px;
-}
+} */
 
 .CreateClass-formRow .MuiFormControl-root.SelectMenu label{
   top: -6px;
 }
 
 .CreateClass-form .MuiFormControl-root.SelectMenu.Mr{
-  min-width: 150px;
+  width: 100%;
 }
 
 .CreateClass-SelectUsers{

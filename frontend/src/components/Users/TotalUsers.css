@@ -15,7 +15,7 @@
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-top: 2em;
+  margin-top: 1em;
   box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
 }
 
@@ -135,10 +135,12 @@
 }
 
 .users-searchBar{
-  background-color: var(--grey-bg);
+  background-color: rgb(253, 253, 253);
   padding: 0.2em 1em;
   border-radius: 4px;
+  border: 1px solid rgb(226, 226, 226);
   color: var(--text-color);
+  max-width: 600px;
 }
 
 .users-searchBar input{
@@ -151,13 +153,17 @@
   outline: none;
 }
 
+.users-searchBar input::placeholder {
+  color: rgb(199, 199, 199);
+}
+
 .users-facultySub{
   color: var(--primary-color) !important;
   cursor: pointer;
 }
 
 .classroom-student-select-header th{
-  background-color: #fff !important;
+  background-color: rgb(250, 250, 250) !important;
 }
 
 .classroom-student-select-header{
