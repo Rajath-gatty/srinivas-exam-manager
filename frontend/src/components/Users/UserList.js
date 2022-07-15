@@ -1,4 +1,3 @@
-import { useState, useRef } from "react";
 import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
@@ -22,7 +21,7 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
   return ( 
     <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&'var(--light-primary)'}}>
       {showCheckbox && <td className="CreateClass-UserCheckbox">
-        <Checkbox checked={checkBoxValue} onChange={(e)=>{HandleSelectedUser(e,data,index)}}/>
+        <Checkbox checked={checkBoxValue} onChange={(e)=>{HandleSelectedUser(e.target.checked,data,index)}}/>
       </td>}
       <td>{UserID.uid}</td>
       <td>{data.first_name +" "+ data.last_name}</td>
