@@ -50,6 +50,7 @@
     margin-top: 3em;
     gap: 1em;
     background-color: var(--grey-bg);
+    border-radius: 10px;
 }
 
 .dashboard-chancellor p{
