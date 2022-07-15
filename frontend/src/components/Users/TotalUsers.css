@@ -147,3 +147,11 @@
   color: var(--primary-color) !important;
   cursor: pointer;
 }
+
+.classroom-student-select-header th{
+  background-color: #fff !important;
+}
+
+.classroom-student-select-header{
+  border: 1px solid rgb(230, 230, 230);
+}

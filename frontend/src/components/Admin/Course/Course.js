@@ -14,11 +14,8 @@ const Course = () => {
       const fetchCourses = async() => {
           try {
               setLoading(true);
-              const result = await axios.get('/admin/courses',{
-                headers:{
-                  'Cache-Control':'public, max-age=20'
-                }
-              });
+              const result = await axios.get('/admin/courses');
+              console.log(result);
               setLoading(false);
               setCourses(result.data);
           } catch(err) {

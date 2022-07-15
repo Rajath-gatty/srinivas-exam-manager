@@ -13,7 +13,6 @@ import {
 import StudentUsers from "../StudentUsers";
 
 const Create = () => {
-  const [selectedStudents,setSelectedStudents] = useState([]);
   const navigate = useNavigate();
   const DegreeYear = [2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027];
  const Courses = ["BCA", "MCA"];
@@ -22,24 +21,6 @@ const Create = () => {
   const HandleCreateClass = () =>{
     toast.success('Classroom created successfully');
     navigate('/classrooms');
-  }
-
-  const HandleSelectedUser = (e,std) => {
-    if(e.target.checked) {
-      setSelectedStudents(prevState => {
-        const newArr = [...prevState];
-        newArr.push(std);
-        console.log(newArr);
-        return newArr;
-      });
-    } else {
-      setSelectedStudents(prevState => {
-        const newArr = [...prevState];
-        const upArr = newArr.filter(item => item.regno!==std.regno)
-        console.log(upArr);
-        return upArr;
-      });
-    }
   }
 
   return (
@@ -127,7 +108,7 @@ const Create = () => {
 
         <div className="CreateClass-SelectUsers">
           <h2>Add Students</h2>
-          <StudentUsers showCheckbox hideEligible HandleSelectedUser={HandleSelectedUser}/>
+          <StudentUsers showCheckbox hideEligible/>
         </div>
     </div>
   )

@@ -3,22 +3,7 @@ import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 
-const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, selectAll, HandleSelectedUser }) => {
-  const [checked,setChecked] = useState(false);
-  const [prevChecked,setPrevChecked] = useState(false);
-  const checkBoxRef = useRef();
-
-  let initial=false;
-  const HandleCheck = (e) => {
-    HandleSelectedUser(e,data);
-    setChecked(prevState=> {
-      initial=true;
-      setPrevChecked(prevState);
-     return !prevState
-    });
-  }
-
-  const ischecked = selectAll;
+const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser }) => {
   
   let eligible = data.eligibility;
   let UserID = "";
@@ -33,16 +18,11 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
 
   let showDOJ = true;
   if(type!=="student" || type !=="exam_coord") showDOJ = false;
-  
-  // console.log(selectAll);
-
-  return (
-    <tr className="users-table-row">
+  console.log(checkBoxValue);
+  return ( 
+    <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&'var(--light-primary)'}}>
       {showCheckbox && <td className="CreateClass-UserCheckbox">
-        {/* <Checkbox  defaultChecked={selectAll?selectAll:checked} onChange={HandleCheck}/> */}
-        {/* <Checkbox value={data.regno} checked={selectAll?checked===false&&prevChecked?false:true:false} onChange={HandleCheck}/> */}
-        {/* <Checkbox value={data.regno} checked={result} onChange={HandleCheck}/> */}
-        {/* <Checkbox defaultChecked={selectAll} onChange={(e)=>HandleSelectedUser(e,data)}/> */}
+        <Checkbox checked={checkBoxValue} onChange={(e)=>{HandleSelectedUser(e,data,index)}}/>
       </td>}
       <td>{UserID.uid}</td>
       <td>{data.first_name +" "+ data.last_name}</td>

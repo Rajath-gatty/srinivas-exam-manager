@@ -118,7 +118,7 @@ exports.getCourses = async (req, res) => {
     const deptId = req.deptId;
     try {
         const result = await db.execute(`select course_id,course_name,course_sem,course_duration from course where dept_id=${deptId}`);
-        res.send(result[0]);
+        res.set('Cache-Control','public, max-age=30').send(result[0]);
     } catch (err) {
         console.log(err);
         res.status(404).send({ success: false });

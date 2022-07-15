@@ -13,14 +13,16 @@ import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
 import Checkbox from "@mui/material/Checkbox";
 
-const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
+const StudentUsers = ({hideEligible, showCheckbox}) => {
   const [users, setUsers] = useState([]);
   const [semFilter,setSemFilter] = useState([]);
   const [sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [loading, setLoading] = useState(false);
   const [btnLoading, setBtnLoading] = useState(false);
-  const [selectAll, setSelectAll] = useState(false);
+  const [selectedStudents,setSelectedStudents] = useState([]);
+  const [checkBoxValues,setCheckBoxValues] = useState([]);
+
   const {user} = useContextData();
   const location = useLocation();
 
@@ -35,6 +37,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
       try {
         const result = await axios.post(`/users/student/`,{courseName:course,semester:sem});
         setUsers(result.data);
+        setCheckBoxValues(new Array(result.data.length).fill(false));
         setLoading(false);
       } catch(err) {
         console.log(err);
@@ -157,7 +160,36 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
     }
   }
 
+  const HandleSelectedUser = (e,std,index) => {
+    if(e.target.checked) {
+      setSelectedStudents(prevState => {
+        let newArr = [...prevState];
+        if(Array.isArray(std)) 
+        return newArr=std;
+        newArr.push(std);
+        return newArr;
+      });
+      setCheckBoxValues(prevState => {
+        const newArr = [...prevState];
+        newArr[index]=true;
+        return newArr;
+      })
+    } else {
+      setCheckBoxValues(prevState => {
+        const newArr = [...prevState];
+        newArr[index]=false;
+        return newArr;
+      })
+      setSelectedStudents(prevState => {
+        const newArr = [...prevState];
+        const upArr = newArr.filter(item => item.regno!==std.regno)
+        console.log(upArr);
+        return upArr;
+      });
+    }
+  }
   // console.log(selectAll);
+  console.log(selectedStudents);
   return (
     <div className="users-main">
       {<div className="users-Filter">
@@ -196,7 +228,17 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
 
       <table className="users-table-wrapper">
         <thead className="thead">
-          <tr>
+          <tr className="classroom-student-select-header">
+            {showCheckbox && <th> 
+            <Checkbox onChange={(e)=>{
+              setCheckBoxValues(prevState=>{
+                const newState = [...prevState];
+                const upState = newState.map(el=>e.target.checked)
+                return upState;
+              })
+              HandleSelectedUser(e,users);
+              }}/>
+            </th>}
             <th>RegNo</th>
             <th>Name</th>
             <th>Course</th>
@@ -204,9 +246,6 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
             <th>Semester</th>
             {showEligible && <th>Details</th>}
             {showEligible && <th>Eligiblity</th>}
-            {showCheckbox && <th onClick={()=>{setSelectAll(prevState => !prevState)}}> 
-              <div className=""></div>
-            </th>}
           </tr>
         </thead>
         {!loading&&<tbody>
@@ -218,7 +257,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser}) => {
               updateEligibility={UpdateEligibility}
               showEligible={showEligible}
               showCheckbox={showCheckbox}
-              selectAll={selectAll}
+              checkBoxValue={checkBoxValues[i]}
               index={i}
               HandleSelectedUser={HandleSelectedUser}
               />

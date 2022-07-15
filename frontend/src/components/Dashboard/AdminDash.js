@@ -7,21 +7,18 @@ import { FaUsers } from "react-icons/fa";
 import CountUp from 'react-countup';
 
 const AdminDash = () => {
-  const [studentCount, setStudentCount] = useState(0);
-  const [facultyCount, setFacultyCount] = useState(0);
-  const [staffCount, setStaffCount] = useState(0);
+  const [count,setCount] = useState(0);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const FetchUsersCount = async() => {
       try {
-        const resStudent = await axios.post(`/users/student`)
-        setStudentCount(resStudent.data.length);
-        const resFaculty = await axios.post(`/users/faculty`)
-        setFacultyCount(resFaculty.data.length); 
-        const resStaff = await axios.post(`/users/staff`)
-        setStaffCount(resStaff.data.length);
+        const res = await axios.get(`/dashboard/users/count`);
+       const result = res.data.reduce((acc,cur) => {
+          return Object.assign(acc,acc[cur.user]=cur.count);
+        },{})
+        setCount(result);
       } catch(err) {
         console.log(err);
       }
@@ -34,7 +31,7 @@ const AdminDash = () => {
       <div className="dashboard-statsItem" onClick={()=>navigate("/users/student")}>
         <FaUserGraduate size={50} />
         <div className="dashboard-statsInfo">
-          <div className="dashboard-statsCount"><CountUp end={studentCount} /></div>
+          <div className="dashboard-statsCount"><CountUp end={count.student} /></div>
           <div className="dashboard-statsLabel">Students</div>
         </div>
       </div>
@@ -42,7 +39,7 @@ const AdminDash = () => {
       <div className="dashboard-statsItem" onClick={()=>navigate("/users/faculty")}>
         <FaChalkboardTeacher size={50} />
         <div className="dashboard-statsInfo">
-          <div className="dashboard-statsCount"><CountUp end={facultyCount} /></div>
+          <div className="dashboard-statsCount"><CountUp end={count.faculty} /></div>
           <div className="dashboard-statsLabel">Faculty</div>
         </div>
       </div>
@@ -50,7 +47,7 @@ const AdminDash = () => {
       <div className="dashboard-statsItem" onClick={()=>navigate("/users/staff")}>
         <FaUsers size={50} />
         <div className="dashboard-statsInfo">
-          <div className="dashboard-statsCount"><CountUp end={staffCount} /></div>
+          <div className="dashboard-statsCount"><CountUp end={count.staff} /></div>
           <div className="dashboard-statsLabel">Staff</div>
         </div>
       </div>

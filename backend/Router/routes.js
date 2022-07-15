@@ -6,6 +6,8 @@ router.get('/departments',routeContoller.getDepartments);
 router.post('/courses',routeContoller.getCourses);
 router.post('/semesters',routeContoller.getSemesters);
 
+router.get('/dashboard/users/count',isAuth,routeContoller.getUserCount);
+
 router.post('/users/student',isAuth,routeContoller.getAllStudent);
 router.post('/users/faculty',isAuth,routeContoller.getAllFaculty);
 router.post('/users/staff',isAuth,routeContoller.getAllStaff);
