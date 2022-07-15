@@ -5,11 +5,10 @@ import Login from "../pages/Login/Login";
 
 const Layout = () => {
     const location = useLocation().pathname;
-    console.log(location)
     const {token} = useContextData();
 
    return token?<div className="section">
-         <Sidebar/>
+        <Sidebar/>
         <Outlet/>
     </div>:<Login from={location}/>
 }
