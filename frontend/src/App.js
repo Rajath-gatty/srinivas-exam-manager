@@ -248,7 +248,6 @@ function App() {
                 <Route path="/classrooms" element={<Classroom />} />
                 <Route path="/classrooms/student" element={<StudentUsers />} />
                 <Route path="/classrooms/student/:userId" element={<UserDetails />} />
-\
               </Route>
 
               {/*Common Protected Routes */}
@@ -266,17 +265,11 @@ function App() {
                   />
                 }
               >
-                {/* {token?<Route path="/" element={<Dashboard />}/>:<Route path="/login" element={<Login/>}/>} */}
-                {/* {token&&<Route path="/" element={<Dashboard />}/>} */}
-                {/* <Route path="/" element={<Dashboard />}/> */}
-                {/* <Route>{token?<Route path="/" element={<Dashboard/>}/>:<Route element={<Navigate to="/login"/>}/>}</Route> */}
-
                 <Route path="/" element={token ? <Dashboard /> : <Navigate to="/login" />} />
                 <Route path="/profile" element={token ? <Profile /> : <Navigate to="/login" />} />
-                {/* Testing Route */}
-                {/* <Route path="testing" element={<AnyTestComponent />} /> */}
               </Route>
             </Route>
+
             {/* Page Not Found Route */}
             <Route path="*" element={!loading ? <PageNotFound /> : <div style={{ height: '90v',marginTop:250 }} className="flex"><CircularProgress size={80} /></div>}></Route>
           </Routes>

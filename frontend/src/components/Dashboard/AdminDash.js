@@ -28,7 +28,7 @@ const AdminDash = () => {
 
   return (
     <div className="dashboard-stats">
-      <div className="dashboard-statsItem" onClick={()=>navigate("/users/student")}>
+      <div className="dashboard-statsItem" onClick={()=>navigate("/classrooms")}>
         <FaUserGraduate size={50} />
         <div className="dashboard-statsInfo">
           <div className="dashboard-statsCount"><CountUp end={count.student} /></div>

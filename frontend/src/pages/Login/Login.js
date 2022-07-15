@@ -13,7 +13,7 @@ import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
 import {toast} from "react-toastify";
 
-const Login = () => {
+const Login = ({from}) => {
   const [emailfocus, setEmailFocus] = useState(false);
   const [passfocus, setPassFocus] = useState(false);
   
@@ -73,7 +73,14 @@ const Login = () => {
         user:result.data.user
       }
       localStorage.setItem("user",JSON.stringify(userData));
-      navigate('/');
+
+      //If navigated to Login from another page 
+      // redirect to that page after login
+      if(from)
+        navigate(from);
+      else
+        navigate('/');
+
       setLoading(false);
     } catch(err) {
       setErrors(err.response.data.error);

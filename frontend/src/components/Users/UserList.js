@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 
 const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser }) => {
-  
+  console.log(showEligible)
   let eligible = data.eligibility;
   let UserID = "";
   if(type === "student")
@@ -17,7 +17,7 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
 
   let showDOJ = true;
   if(type!=="student" || type !=="exam_coord") showDOJ = false;
-  console.log(checkBoxValue);
+
   return ( 
     <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&'var(--light-primary)'}}>
       {showCheckbox && <td className="CreateClass-UserCheckbox">
@@ -37,7 +37,7 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
         </Link>
       </td>}
 
-      {showEligible && <td className="users-details">
+      {!showCheckbox && <td className="users-details">
         <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID }} >
           View
         </Link>
