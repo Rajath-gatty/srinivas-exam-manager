@@ -12,6 +12,7 @@ import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
 import Checkbox from "@mui/material/Checkbox";
+import Back from "../../UI/Back/Back";
 
 const StudentUsers = ({hideEligible, showCheckbox}) => {
   const [users, setUsers] = useState([]);
@@ -191,7 +192,8 @@ const StudentUsers = ({hideEligible, showCheckbox}) => {
   // console.log(selectAll);
   console.log(selectedStudents);
   return (
-    <div className="users-main">
+    <div className="users-main student-main">
+      <Back top="-2em" left="0" />
       {<div className="users-Filter">
         {/* <form className="users-searchBar flex" onSubmit={HandleSearch}> */}
         <div className="users-searchBar flex">

@@ -1,6 +1,14 @@
 .users-main {
   margin: 2em;
   width: 100%;
+  position: relative;
+}
+
+.users-main.student-main{
+  margin: 2em;
+  margin-top: 3em;
+  width: 100%;
+  position: relative;
 }
 
 .users-table-wrapper {
