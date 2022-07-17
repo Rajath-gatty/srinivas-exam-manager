@@ -67,8 +67,8 @@ exports.getAllStudent = async (req,res) => {
   const {classId} = req.body;
 
   let sql;
-  if(classId){
-    sql = `select * from student where dept_id=${deptId} and class_id=${classId}`;
+  if(classId){ 
+    sql = `select regno,first_name,last_name,course_name,joining_year,student.semester,eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and class_id=${classId}`;
   }
   else if(courseName&&semester) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and semester=${semester} and student.status='approved' order by regno`;
@@ -151,10 +151,14 @@ exports.getSemFilteredStudent = async(req,res) => {
 }
 
 exports.getStudentByID = async(req,res) => {
-  const {query} = req.body;
+  const {query, classId} = req.body;
   const deptId = req.deptId;
-
-  let sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
+  let sql;
+  if(classId) {
+    sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.class_id=${classId} and student.regno LIKE '${query}%'`;
+  } else {
+    sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
+  }
   try{
     const result = await db.execute(sql);
     res.send(result[0]);
@@ -308,10 +312,8 @@ exports.postCreateClassroom = async (req, res) => {
       return res.status(422).json({ error: "Classroom Name already used!" });
     }
 
-    const cId= await db.execute(`select course_id from course where course_name='${course}'`);
-    const courseId=cId[0][0].course_id;
-    const sql = `insert into classroom(name,batch,course_id,dept_id,semester,color) values('${className}','${batch}','${courseId}','${deptId}','${semester}','${color}')`;
-    await db.execute(sql);
+    const sql = `insert into classroom(name,batch,course_id,dept_id,semester,color) values(?,?,(select course_id from course where course_name=?),?,?,?)`;
+    await db.execute(sql,[className,batch,course,deptId,semester,color]);
     res.send({ success: true });
   } catch (err) {
       res.status(500).json({ error: err.message });
@@ -321,19 +323,17 @@ exports.postCreateClassroom = async (req, res) => {
 exports.postAddStudentToClass = async (req, res) => {
   const { className, batch, course, semester } = req.body.ClassData;
   const { selectedStudents } = req.body;
+  const students = selectedStudents.map(std=>std.regno);
   const deptId = req.deptId;
 
   try {
-    const cId= await db.execute(`select course_id from course where course_name='${course}' and dept_id='${deptId}'`);
-    const courseId=cId[0][0].course_id;
-    const classId = await db.execute(`select class_id from classroom where name='${className}' and batch='${batch}' and course_id='${courseId}' and dept_id='${deptId}' and semester='${semester}'`);
+    const classId = await db.execute(`select class_id from classroom where name=? and batch=? and course_id=(select course_id from course where course_name=?) and dept_id=? and semester=?`,[className,batch,course,deptId,semester]);
     const classId1 = classId[0][0].class_id;
-    
-    for(let i=0;i<selectedStudents.length;i++) {
-      const regno = selectedStudents[i].regno;
-      const sql = `update student set class_id='${classId1}' where regno='${regno}'`;
-      await db.execute(sql);
-    }
+    console.log(students);
+    const sql = `update student set class_id='${classId1}' where regno in (?)`;
+    const result = await db.query(sql,[students]);
+    console.log(result);
+
     res.send({ success: true });
   } catch (err) {
       res.status(500).json({ error: err.message });
@@ -343,7 +343,7 @@ exports.postAddStudentToClass = async (req, res) => {
 exports.getClassroom = async(req,res) => {
   const deptId = req.deptId;
   try{
-    const sql = `select * from classroom where dept_id='${deptId}'`;
+    const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
     const result = await db.execute(sql);
     res.send(result[0]);
   } catch(err) {

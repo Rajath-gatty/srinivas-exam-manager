@@ -22,7 +22,7 @@ return (
                 <NavLink
                   to={link.path}
                   className={(navData) => setNavLinkActive(navData)}
-                  style={{width:'100%',paddingTop:'18px',paddingBottom:'18px'}}
+                  style={{width:'100%',paddingTop:'15px',paddingBottom:'15px'}}
                   >
                   <img src={link.icon} alt={link.title} width="17px" />
                   <span>{link.title}</span>

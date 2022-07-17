@@ -76,8 +76,18 @@ const Sidebar = () => {
       </>
   );
 
+  const styles = { 
+    boxSizing: 'border-box',
+    overflowY:'auto',
+    width:270,
+    position:'fixed',
+    top:0,
+    overflowX:'hidden',
+    borderRight:'none',
+    boxShadow:'1px 0px 10px rgba(0, 0, 0, 0.1)'}
+
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{width:window.innerWidth>600&&350}}>
       <Drawer 
       open={open}
       anchor={"left"} 
@@ -86,7 +96,7 @@ const Sidebar = () => {
       onClose={() => setOpen(false)}
       sx={{
         display: { xs: 'none', sm: 'block' },
-        '& .MuiDrawer-paper': { boxSizing: 'border-box',overflowY:'auto'},
+        '& .MuiDrawer-paper': styles
       }}
       >
       {drawer}
@@ -103,7 +113,7 @@ const Sidebar = () => {
       disableSwipeToOpen={true}
       sx={{
         display: { xs: 'block', sm: 'none' },
-        '& .MuiDrawer-paper': { boxSizing: 'border-box',overflowY:'auto'},
+        '& .MuiDrawer-paper': styles
       }}
       >
       {drawer}

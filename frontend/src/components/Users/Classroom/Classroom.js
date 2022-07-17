@@ -47,31 +47,20 @@ const Classroom = () => {
     const courseValue = e.target.value;
     fetchSemesters(courseValue);
     setCourse(courseValue);
-    try {
-      setLoading(true);
-      const result = await axios.post(`/users/student/`,{courseValue,semester:sem});
-      setClasses(result.data);
-      setLoading(false);
-    } catch(err) {
-      console.log('approve error',err);
-      setLoading(false);
-    }
   }
 
   const handleSemesterChange = async(e) =>{
     const semester = e.target.value;
     setSem(semester);
-    try {
-      setLoading(true);
-      const result = await axios.post(`/users/student/semfilter`,{semester,courseName:course});
-      setClasses(result.data);
-      setLoading(false);
-    } catch(err) {
-      console.log('approve error',err);
-      setLoading(false);
-    }
   }
 
+  const filteredClass = 
+  course&&sem?
+  classes.filter(obj => obj.course_name===course&&obj.semester===sem)
+  :course
+  ?classes.filter(obj => obj.course_name===course)
+  :classes;
+  
   return (
     <div className="Classroom-container">
       <div className="Classroom-header">
@@ -101,20 +90,20 @@ const Classroom = () => {
       </div>
 
       {!loading ? <div className="Classroom-cardList">
-        {classes.map(obj =>{
-          var courseName = filterCourses.filter(itm => itm.course_id === obj.course_id)[0].course_name;
+        {filteredClass.map(obj =>{
+        // {tempClasses.map(obj =>{
           return <Link to="./student" state={obj} key={obj.class_id} className="Classroom-card">
             <div className="Card-Info flex">
               <div className="Card-Header" style={{background:obj.color}}>
                 <h2 className="classroom-main-header">{obj.name}</h2>
                 <div className="sub-header">
-                  <h4 className="Card-Course">{courseName}</h4>
+                  <h4 className="Card-Course">{obj.course_name}</h4>
                   <h4 className="Card-Course-sem">{obj.semester} SEM</h4>
                 </div>
               </div>
 
               <div className="Card-Body">
-              <p ><span>Total Students: </span>    66</p>
+            <p ><span>Total Students: </span>   {obj.total_students}</p>
                 <p><span>Batch: </span>   {obj.batch}</p>
               </div>
 

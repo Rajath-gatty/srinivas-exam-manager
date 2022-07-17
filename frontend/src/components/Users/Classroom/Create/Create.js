@@ -10,7 +10,7 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
-import StudentUsers from "../StudentUsers";
+import StudentList from "./StudentList";
 import axios from "axios";
 import Filter from "../../../UI/Filter/Filter";
 import { useContextData } from "../../../../hooks/useContextData";
@@ -54,7 +54,7 @@ const Create = () => {
     setUsers([]);
     const fetchUsers = async() => {
       try {
-        const result = await axios.post(`/users/student/`,{courseName:course,semester:sem});
+        const result = await axios.post(`/users/student/`,{courseValue:course,semester:sem});
         setUsers(result.data);
         setCheckBoxValues(new Array(result.data.length).fill(false));
         setLoading(false);
@@ -241,7 +241,7 @@ const Create = () => {
 
         <div className="CreateClass-SelectUsers">
           <h2>Add Students</h2>
-          <StudentUsers 
+          <StudentList 
           showCheckbox 
           hideEligible 
           users={users}
