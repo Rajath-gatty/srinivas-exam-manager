@@ -7,6 +7,7 @@ import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
+import Back from "../../UI/Back/Back";
 
 const StudentUsers = (props) => {
   const location = useLocation();
