@@ -8,6 +8,7 @@ const SubMenu = ({
   showMenu,
   toggleDropdown,
   setSubNavActive,
+  onOpen
 }) => {
 
   //Notify when Approval Request is Pending
@@ -47,7 +48,7 @@ const SubMenu = ({
                 to={subLinks.path}
                 className={(subNav) => setSubNavActive(subNav)}
               >
-                <span>{subLinks.title}</span>
+                <span onClick={()=>onOpen(false)}>{subLinks.title}</span>
               </NavLink>
             );
           })}

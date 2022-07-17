@@ -61,6 +61,7 @@ a {
 
 body {
   background-color: var(--main-bg);
+  overflow-y: scroll;
 }
 
 .flex {
@@ -177,6 +178,9 @@ body {
 }
 
 /* Utility Classes */
+.m-1 {
+  margin:0.5em;
+}
 .mt-1 {
   margin-top: 1em;
 }

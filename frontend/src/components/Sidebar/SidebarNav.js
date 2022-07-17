@@ -3,7 +3,7 @@ import { NavLinks } from "../../util/NavLinks";
 import { useContextData } from "../../hooks/useContextData";
 import Menu from "./Menu/Menu";
 
-const SidebarNav = ({role}) => {
+const SidebarNav = ({role,onOpen}) => {
 const [showMenu, setShowMenu] = useState([{text: 'Approval', state: false},{text: 'Users', state: false},{text: 'Payments', state: false},{text: 'Indent', state: false},{text: 'Application', state: false},{text: 'Evaluation', state: false}]);
 
 const {token} = useContextData();
@@ -44,6 +44,7 @@ const toggleDropdown = useCallback((evt) => {
               showMenu={showMenu}
               setSubNavActive={setSubNavActive}
               setNavLinkActive={setNavLinkActive}
+              onOpen={onOpen}
               toggleDropdown={toggleDropdown}/>
             );
           })}
