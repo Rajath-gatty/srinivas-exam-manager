@@ -1,5 +1,5 @@
 import "./Create.css";
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import Back from '../../../UI/Back/Back';
@@ -15,18 +15,36 @@ import axios from "axios";
 import Filter from "../../../UI/Filter/Filter";
 import { useContextData } from "../../../../hooks/useContextData";
 import {useFetchCourses} from "../../../../hooks/useFetchCourses";
+import {CircularProgress} from "@mui/material";
 
 const Create = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [btnLoading, setBtnLoading] = useState(false);
   const [semFilter,setSemFilter] = useState([]);
   const [sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [selectedStudents,setSelectedStudents] = useState([]);
   const [checkBoxValues,setCheckBoxValues] = useState([]);
 
+  const classNameRef = useRef();
+  const batchRef = useRef();
+  const courseRef = useRef();
+  const semRef = useRef();
+
   const navigate = useNavigate();
   const DegreeYear = [2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027];
+  const colors = [
+    "#34C349",
+    "#2DB9CB",
+    "#E1CC00",
+    "#3564FB",
+    "#C13C14",
+    "#30A7E7",
+    "#FB1061",
+    "#9110F3",
+    "#E43F0E"
+  ];
 
   const {user} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
@@ -45,11 +63,34 @@ const Create = () => {
       }
     }
     fetchUsers();
-  },[])
+  },[course,sem]);
 
-  const HandleCreateClass = () =>{
-    toast.success('Classroom created successfully');
-    navigate('/classrooms');
+  const HandleCreateClass = async (e) =>{
+    e.preventDefault();
+    setBtnLoading(true);
+
+    const ClassData = {
+      className: classNameRef.current?.value,
+      batch: batchRef.current?.value,
+      course: courseRef.current?.value,
+      semester: semRef.current?.value,
+      color: colors[Math.floor(Math.random()*colors.length)]
+    }
+
+    try {
+      const result = await axios.post(`/classroom/create`,ClassData);
+      console.log(result.data.success);
+      if(result.data.success)
+        var result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
+
+      setBtnLoading(false);
+      toast.success('Classroom created successfully',{autoClose:3000});
+      navigate('/classrooms');
+    } catch(err) {
+      setBtnLoading(false);
+      toast.error(err.response.data.error,{autoClose:3000});
+      console.log(err);
+    }
   }
 
   const HandleSelectedUser = (checked,std,index) => {
@@ -140,6 +181,7 @@ const Create = () => {
               size="small"
               fullWidth
               required
+              inputRef={classNameRef}
             />
             
             <FormControl className="SelectMenu Mr">
@@ -148,10 +190,10 @@ const Create = () => {
                 label="Class Batch"
                 placeholder="Class Batch" 
                 defaultValue=""
-                value=""
                 size="small"
                 type="number"
                 required
+                inputRef={batchRef}
               >
                 {DegreeYear.map((opt) => (
                   <MenuItem key={opt} value={opt}>
@@ -163,25 +205,35 @@ const Create = () => {
           </div>
 
           <div className="CreateClass-formRow mt-2">
-          <Filter  
-          data={filterCourses} 
-          label="Course" 
-          filter="course" 
-          width="100%"
-          handleCourseChange={handleCourseChange}
-          />
+            <Filter  
+            data={filterCourses} 
+            label="Course" 
+            filter="course" 
+            width="100%"
+            ref={courseRef}
+            handleCourseChange={handleCourseChange}
+            required
+            />
 
-          <Filter 
-          data={semFilter} 
-          label="Semester" 
-          filter="semester" 
-          width="100%"
-          handleSemesterChange={handleSemesterChange}
-          />
+            <Filter 
+            data={semFilter} 
+            label="Semester" 
+            filter="semester" 
+            width="100%"
+            ref={semRef}
+            handleSemesterChange={handleSemesterChange}
+            required
+            />
           </div>
-          {selectedStudents.length>0&&<h3 className="mt-1" style={{color:'var(--text-color)'}}>Selected Students {selectedStudents.length}</h3>}
-          <div className="classroom-submit-btn mt-1">
-            <input type="submit" className="btn-green" value="Create" />
+
+          {selectedStudents.length>0 &&
+            <h3 className="mt-1" style={{color:'var(--text-color)'}}>Selected Students : {selectedStudents.length}</h3>}
+          
+          <div className="classroom-submitBtn mt-1">
+            <button type="submit" className="btn-green flex">
+              {!btnLoading?"Create":<CircularProgress size={16} color={"inherit"} />}
+            </button>
+              
           </div>
         </form>
         </div>

@@ -6,6 +6,7 @@ import Filter from "../../UI/Filter/Filter";
 import {useFetchCourses} from "../../../hooks/useFetchCourses";
 import {useContextData} from "../../../hooks/useContextData";
 import axios from "axios";
+import {CircularProgress} from "@mui/material";
 
 const Classroom = () => {
   const [classes, setClasses] = useState([]);
@@ -15,18 +16,21 @@ const Classroom = () => {
   const [loading,setLoading] = useState(false);
   const {user} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
-  const count = [1,2,3,4,5,6,7,8];
-  const colors = [
-    "#34C349",
-    "#2DB9CB",
-    "#E1CC00",
-    "#3564FB",
-    "#C13C14",
-    "#30A7E7",
-    "#FB1061",
-    "#9110F3",
-    "#E43F0E"
-  ];
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchClasses = async () => {
+      try {
+        const result = await axios.get(`/classroom`);
+        setClasses(result.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
+      }
+    }
+    fetchClasses();
+  },[]);
 
   const fetchSemesters = async (courseName) => {
     try {
@@ -96,27 +100,29 @@ const Classroom = () => {
         </div>
       </div>
 
-      <div className="Classroom-cardList">
-        {count.map(obj =>{
-          return <Link to="./student" key={obj} className="Classroom-card">
+      {!loading ? <div className="Classroom-cardList">
+        {classes.map(obj =>{
+          var courseName = filterCourses.filter(itm => itm.course_id === obj.course_id)[0].course_name;
+          return <Link to="./student" state={obj} key={obj.class_id} className="Classroom-card">
             <div className="Card-Info flex">
-              <div className="Card-Header" style={{background:colors[Math.floor(Math.random()*colors.length)]}}>
-                <h2 className="classroom-main-header">Class {obj}</h2>
+              <div className="Card-Header" style={{background:obj.color}}>
+                <h2 className="classroom-main-header">{obj.name}</h2>
                 <div className="sub-header">
-                <h4 className="Card-Course">{obj%2 === 0 ? "BCA" : "MCA"}</h4>
-                <h4 className="Card-Course-sem">V SEM</h4>
+                  <h4 className="Card-Course">{courseName}</h4>
+                  <h4 className="Card-Course-sem">{obj.semester} SEM</h4>
                 </div>
               </div>
 
               <div className="Card-Body">
               <p ><span>Total Students: </span>    66</p>
-                <p><span>Batch: </span>    2019</p>
+                <p><span>Batch: </span>   {obj.batch}</p>
               </div>
 
             </div>
           </Link>
         })}
       </div>
+      : <div style={{marginTop:200}} className="flex"><CircularProgress size={45}/></div>}
     </div>
   )
 }

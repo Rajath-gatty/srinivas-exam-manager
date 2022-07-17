@@ -72,3 +72,9 @@
   padding: 0;
   width: 10px;
 }
+
+.CreateClass-form .classroom-submitBtn .btn-green{
+  font-size: 1em;
+  min-width: 5em;
+  color: #fff;
+}

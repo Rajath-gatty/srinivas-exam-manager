@@ -64,8 +64,13 @@ exports.getAllStudent = async (req,res) => {
   const deptId = req.deptId;
   const courseName = req.body.courseValue;
   const semester = req.body.semester;
+  const {classId} = req.body;
+
   let sql;
-  if(courseName&&semester) {
+  if(classId){
+    sql = `select * from student where dept_id=${deptId} and class_id=${classId}`;
+  }
+  else if(courseName&&semester) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and semester=${semester} and student.status='approved' order by regno`;
   } else if(courseName) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and student.status='approved' order by regno`;
@@ -288,8 +293,61 @@ exports.postResetPassword = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 5);
       const finalResult = await db.execute(`update ${result.role} set password='${hashedPassword}' where dept_id=${result.deptId} and ${result.columnId}=?`,[result.id]);
       console.log(finalResult);
-      res.json({ sucess: true });
+      res.json({ success: true });
   } catch (err) {
       res.status(500).json({ error: 'Link Expired!' });
   }
 };
+
+exports.postCreateClassroom = async (req, res) => {
+  const { className, batch, course, semester, color } = req.body;
+  const deptId = req.deptId;
+  try {
+    const result = await db.execute(`select name from classroom where name='${className}' and dept_id=${deptId}`);
+    if(result[0].length>0) {
+      return res.status(422).json({ error: "Classroom Name already used!" });
+    }
+
+    const cId= await db.execute(`select course_id from course where course_name='${course}'`);
+    const courseId=cId[0][0].course_id;
+    const sql = `insert into classroom(name,batch,course_id,dept_id,semester,color) values('${className}','${batch}','${courseId}','${deptId}','${semester}','${color}')`;
+    await db.execute(sql);
+    res.send({ success: true });
+  } catch (err) {
+      res.status(500).json({ error: err.message });
+  }
+};
+
+exports.postAddStudentToClass = async (req, res) => {
+  const { className, batch, course, semester } = req.body.ClassData;
+  const { selectedStudents } = req.body;
+  const deptId = req.deptId;
+
+  try {
+    const cId= await db.execute(`select course_id from course where course_name='${course}' and dept_id='${deptId}'`);
+    const courseId=cId[0][0].course_id;
+    const classId = await db.execute(`select class_id from classroom where name='${className}' and batch='${batch}' and course_id='${courseId}' and dept_id='${deptId}' and semester='${semester}'`);
+    const classId1 = classId[0][0].class_id;
+    
+    for(let i=0;i<selectedStudents.length;i++) {
+      const regno = selectedStudents[i].regno;
+      const sql = `update student set class_id='${classId1}' where regno='${regno}'`;
+      await db.execute(sql);
+    }
+    res.send({ success: true });
+  } catch (err) {
+      res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getClassroom = async(req,res) => {
+  const deptId = req.deptId;
+  try{
+    const sql = `select * from classroom where dept_id='${deptId}'`;
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  } catch(err) {
+      console.log(err);
+      res.status(500).send(err);
+  }
+}
