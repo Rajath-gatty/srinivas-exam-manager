@@ -6,6 +6,8 @@ import SidebarNav from "./SidebarNav";
 import { Link, useLocation } from "react-router-dom";
 import {motion} from "framer-motion";
 import { useState, useEffect} from "react";
+import { Drawer, List, SwipeableDrawer} from "@mui/material";
+import { FiMenu } from "react-icons/fi";
 
 const profAvatar = {
   stop: {
@@ -27,6 +29,7 @@ const textSlide = {
 
 const Sidebar = () => {
   const [profAnimation,setProfAnimation] = useState(false);
+  const [open,setOpen] = useState(true);
 
   const { role, user,serverUrl } = useContextData();
   const location = useLocation();
@@ -41,10 +44,9 @@ const Sidebar = () => {
     }
   },[location.pathname])
 
-  return (
+  const drawer = (
     <>
-    <div className="sidebar">
-      <div className="sidebar-header">
+    <div className="sidebar-header">
         <div className="logo flex">
           <img src={SrinivasLogo} width="25px" alt="logo" />
           <h1>Srinivas Exam Manager</h1>
@@ -67,19 +69,46 @@ const Sidebar = () => {
         </Link>
       </div>
       <div className="sidebar-nav flex">
-        <ul>
-          <SidebarNav role={role}/>
-        </ul>
+        <List>
+          <SidebarNav role={role} onOpen={setOpen}/>
+        </List>
       </div>
+      </>
+  );
 
-      {/* <div className="logout flex">
-        <div onClick={handleLogout} className="logout-btn flex">
-          <BiLogOut size={20} />
-          <span>Logout</span>
-        </div>
-      </div> */}
+  return (
+    <div className="sidebar">
+      <Drawer 
+      open={open}
+      anchor={"left"} 
+      variant="permanent"
+      className="sidebar-drawer" 
+      onClose={() => setOpen(false)}
+      sx={{
+        display: { xs: 'none', sm: 'block' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box',overflowY:'auto'},
+      }}
+      >
+      {drawer}
+    </Drawer>
+    {window.innerWidth<600&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
+    <SwipeableDrawer 
+      open={open} 
+      onOpen={() => setOpen(true)} 
+      anchor={"left"} 
+      variant="temporary"
+      className="sidebar-drawer" 
+      ModalProps={{keepMounted:true}}
+      onClose={() => setOpen(false)}
+      disableSwipeToOpen={true}
+      sx={{
+        display: { xs: 'block', sm: 'none' },
+        '& .MuiDrawer-paper': { boxSizing: 'border-box',overflowY:'auto'},
+      }}
+      >
+      {drawer}
+    </SwipeableDrawer>
     </div>
-    </>
   );
 };
 

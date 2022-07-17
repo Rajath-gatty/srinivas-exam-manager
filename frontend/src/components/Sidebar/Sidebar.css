@@ -1,4 +1,4 @@
-.sidebar {
+/* .sidebar {
   max-width: 270px;
   width: 100%;
   height: 100vh;
@@ -10,6 +10,38 @@
   top: 0px;
   overflow: hidden;
   background-color: #fff;
+} */
+
+.sidebar-drawer {
+  /* width: 270px; */
+  height: 100vh;
+  box-shadow: 1px 0px 10px rgba(0, 0, 0, 0.1);
+  /* display: flex;
+  flex-direction: column;
+  position: relative;
+  position: sticky;
+  top: 0px;
+  overflow: hidden;
+  background-color: #fff; */
+}
+
+.MuiPaper-root {
+  position: sticky !important;
+  top: 0px;
+  width: 270px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  border-right: none;
+  transition: 1s;
+}
+
+.ham-menu-icon {
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: -15px;
+  color: rgb(95, 95, 95);
+  cursor: pointer;
 }
 
 .sidebar-header {
@@ -69,13 +101,9 @@
 .sidebar-nav ul {
   list-style: none;
   width: 100%;
-  padding: 1em 0;
-  margin-top: 1em;
-  font-size: 0.95em;
 }
 
 .sidebar-nav ul li {
-  margin-bottom: 0.75rem;
   width: 100%;
 }
 
@@ -107,6 +135,14 @@
   color: var(--primary-color) !important;
 }
 
+.MuiListItemButton-root {
+  padding: 0px !important;
+} 
+
+.MuiListItemIcon-root{
+  min-width: 17px !important;
+}
+
 .active::after {
   content: "";
   width: 6px;
@@ -125,7 +161,7 @@
 
 .dropdownLink {
   cursor: pointer;
-  padding: 0.5em 0;
+  padding: 1.1em 0;
   width: 100%;
   position: relative;
   justify-content: start !important;

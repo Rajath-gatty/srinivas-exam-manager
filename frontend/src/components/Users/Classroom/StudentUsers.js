@@ -5,7 +5,6 @@ import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
-import Back from "../../UI/Back/Back";
 
 const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading}) => {
 
@@ -42,7 +41,6 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
 
   return (
     <div className="users-main student-main">
-      <Back top="-2em" left="0" />
       {<div className="users-Filter">
         <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
