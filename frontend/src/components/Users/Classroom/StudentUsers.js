@@ -1,4 +1,6 @@
 import "../TotalUsers.css";
+import {useState,useEffect} from 'react';
+import { resolvePath, useLocation } from "react-router-dom";
 import UserList from "../UserList";
 import {CircularProgress} from "@mui/material";
 import axios from "axios";
@@ -7,9 +9,38 @@ import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
 import Back from "../../UI/Back/Back";
 
-const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading}) => {
+const StudentUsers = (props) => {
+  const location = useLocation();
+  const classInfo = location.state;
+  const path = location.pathname;
+  const showEligible = hideEligible ? false:true;
 
-  let showEligible = hideEligible?false:true;
+  const [isCreatePath, setIsCreatePath] = useState(false);
+  var [loading, setLoading] = useState(false);
+  var [users, setUsers] = useState([]);
+
+console.log(props)
+  if(path === "/classrooms/create"){
+    setIsCreatePath(true);
+    var {hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading} = props;
+  }
+  useEffect(() => {
+    if(path === "/classrooms/student"){
+      setLoading(true);
+      const fetchUsers = async () => {
+        var classId = classInfo.class_id;
+        try {
+          const result = await axios.post(`/users/student/`,{classId});
+          setUsers(result.data);
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          console.log(error);
+        }
+      }
+      fetchUsers();
+    }
+  },[path])
 
   const handleSearch = async(e) => {
     const query = e.target.value.toUpperCase();
@@ -42,7 +73,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
 
   return (
     <div className="users-main student-main">
-      <Back top="-2em" left="0" />
+      {!showCheckbox && <Back top="-2em" left="0" />}
       {<div className="users-Filter">
         <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
@@ -73,17 +104,25 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
           </tr>
         </thead>
         {!loading&&<tbody>
-          {users.map((obj,i) =>{
-              return <UserList 
-              key={obj.regno} 
-              data={obj} 
-              type="student"
-              showEligible={showEligible}
-              showCheckbox={showCheckbox}
-              checkBoxValue={checkBoxValues[i]}
-              index={i}
-              HandleSelectedUser={HandleSelectedUser}
-              />
+          {users.map((obj,i) =>{ 
+              return (
+              isCreatePath ? <UserList 
+                key={obj.regno} 
+                data={obj} 
+                type="student"
+                showEligible={showEligible}
+                showCheckbox={showCheckbox}
+                checkBoxValue={checkBoxValues[i]}
+                index={i}
+                HandleSelectedUser={HandleSelectedUser}
+                />
+                : 
+                <UserList 
+                key={obj.regno} 
+                data={obj} 
+                type="student"
+                showEligible={showEligible}
+                />)
           })}
         </tbody>}
       </table>
