@@ -6,8 +6,8 @@ import {CircularProgress} from "@mui/material";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
+import Checkbox from "@mui/material/Checkbox";
 import Back from "../../UI/Back/Back";
-import { useContextData } from "../../../hooks/useContextData";
 
 const StudentUsers = () => {
   const location = useLocation();
@@ -16,8 +16,6 @@ const StudentUsers = () => {
 
   var [loading, setLoading] = useState(false);
   var [users, setUsers] = useState([]);
-
-  const {user} = useContextData();
 
   useEffect(() => {
       setLoading(true);
