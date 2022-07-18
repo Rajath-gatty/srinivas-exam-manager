@@ -110,7 +110,6 @@ const Sidebar = () => {
       className="sidebar-drawer" 
       ModalProps={{keepMounted:true}}
       onClose={() => setOpen(false)}
-      disableSwipeToOpen={true}
       sx={{
         display: { xs: 'block', sm: 'none' },
         '& .MuiDrawer-paper': styles

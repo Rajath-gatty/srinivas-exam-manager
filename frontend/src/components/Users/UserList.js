@@ -2,7 +2,8 @@ import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 
-const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser }) => {
+const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser,disableCurStudent }) => {
+  const disablestd = disableCurStudent?.includes(data.regno);
   let eligible = data.eligibility;
   let UserID = "";
   if(type === "student")
@@ -19,9 +20,13 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
 
   // console.log(data)
   return ( 
-    <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&'var(--light-primary)'}}>
+    <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&disablestd?'#fafafa':checkBoxValue?'var(--light-primary)':disablestd&&'#fafafa'}}>
       {showCheckbox && <td className="CreateClass-UserCheckbox">
-        <Checkbox checked={checkBoxValue} onChange={(e)=>{HandleSelectedUser(e.target.checked,data,index)}}/>
+        <Checkbox 
+        className="student-disabled-checkbox"
+        disabled={disablestd} 
+        checked={disablestd?true:checkBoxValue} 
+        onChange={(e)=>{HandleSelectedUser(e.target.checked,data,index)}}/>
       </td>}
       <td>{UserID.uid}</td>
       <td>{data.first_name +" "+ data.last_name}</td>

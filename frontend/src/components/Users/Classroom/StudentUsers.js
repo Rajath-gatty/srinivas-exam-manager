@@ -1,13 +1,16 @@
 import "../TotalUsers.css";
+import "./Classroom.css";
 import {useState,useEffect} from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation,Link } from "react-router-dom";
 import UserList from "../UserList";
 import {CircularProgress} from "@mui/material";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import Checkbox from "@mui/material/Checkbox";
+import fileDownload from "js-file-download"
 import Back from "../../UI/Back/Back";
+import {VscFilePdf} from "react-icons/vsc";
+import {IoSettingsOutline} from "react-icons/io5";
 
 const StudentUsers = () => {
   const location = useLocation();
@@ -16,6 +19,7 @@ const StudentUsers = () => {
 
   var [loading, setLoading] = useState(false);
   var [users, setUsers] = useState([]);
+  const [btnLoading,setBtnLoading] = useState(false);
 
   useEffect(() => {
       setLoading(true);
@@ -62,15 +66,70 @@ const StudentUsers = () => {
     }
   }
 
+  const handleHallticket = async () =>{
+    const {course_name:course,semester:sem,class_id} = location.state;
+     try {
+      setBtnLoading(true);
+      const data = {
+        courseName:course,
+        semester:sem,
+        classId:class_id
+      }
+      console.log(data);
+      const result = await axios.post('staff/halltickets',data,{responseType:"blob"});
+      const blob = new Blob([result.data], { type: 'application/pdf' });
+      const objectUrl = window.URL.createObjectURL(blob);
+      const uid = (Math.random() + 1).toString(36).substring(2);
+      fileDownload(result.data,`hallticket-${course}-SEM-${sem}-${uid}.pdf`);
+      window.open(objectUrl);
+      setBtnLoading(false);
+    } catch(err) {
+        console.log(err);
+        setBtnLoading(false);
+    }
+  }
+
+  const UpdateEligibility = async(index,value,regno) =>{
+    const newState = [...users];
+    console.log(index,value,regno);
+    console.log(newState);
+    newState[index].eligibility = value;
+    setUsers([...newState]);
+    try {
+      const result = await axios.post('/staff/eligibility',{regno, eligibility:value});
+      console.log(result.data);
+  } catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="users-main student-main">
       <Back top="-2em" left="0" />
-      {<div className="users-Filter">
+      <div className="users-Filter flex">
         <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
           <input type="text " placeholder="Enter Reg No." onBlur={(e) => e.target.placeholder = "Enter Reg No."} onChange={handleSearch} />
-          </div>
-      </div>}
+        </div>
+
+        {showEligible &&<div className="users-HallticketBtn flex">
+          {!btnLoading ? <div className="btn-outlined flex" onClick={handleHallticket}>
+          <VscFilePdf color="currentColor" size={22}/>
+            <span>Generate Hall Tickets</span>
+          </div> 
+          :
+          <div className="users-btnLoader flex">
+            <CircularProgress color="inherit" size={25}/>
+          </div>}
+        </div>}
+          
+        <div className="edit-container flex">
+            <Link to="/classrooms/create" state={{edit:true,students:users.map(std=>std.regno),classInfo:classInfo}} className="classroom-edit-btn btn-outlined-green flex gap-1">
+            <span>Edit</span>
+            <IoSettingsOutline size={20}/>
+            </Link>
+        </div>
+      </div>
 
       <table className="users-table-wrapper">
         <thead className="thead">
@@ -85,12 +144,14 @@ const StudentUsers = () => {
           </tr>
         </thead>
         {!loading&&<tbody>
-          {users.map((obj) =>{ 
+          {users.map((obj,i) =>{ 
               return  <UserList 
-              key={obj.regno} 
+              key={obj.regno}
               data={obj} 
               type="student"
               showEligible={showEligible}
+              updateEligibility={UpdateEligibility}
+              index={i}
               />
           })}
         </tbody>}

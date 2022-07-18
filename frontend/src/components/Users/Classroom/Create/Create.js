@@ -1,6 +1,6 @@
 import "./Create.css";
 import {useState,useEffect,useRef} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useLocation} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import Back from '../../../UI/Back/Back';
 import {
@@ -26,6 +26,7 @@ const Create = () => {
   const [course, setCourse] = useState("");
   const [selectedStudents,setSelectedStudents] = useState([]);
   const [checkBoxValues,setCheckBoxValues] = useState([]);
+  const [curStudents,setCurStudents] = useState([]);
 
   const classNameRef = useRef();
   const batchRef = useRef();
@@ -33,6 +34,11 @@ const Create = () => {
   const semRef = useRef();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  const classInfo = location.state?.classInfo;
+  const students = location.state?.students;
+
   const DegreeYear = [2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027];
   const colors = [
     "#34C349",
@@ -49,6 +55,21 @@ const Create = () => {
   const {user} = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
 
+  useEffect(() => {
+    if(location.state?.edit) {
+      setCurStudents(students);
+      users.forEach((std,i) => {
+        if(students.includes(std.regno)) {
+          setCheckBoxValues(prevState => {
+            const newState = [...prevState];
+            newState[i]=true;
+            return newState;
+          })
+        }
+      })
+    }
+  },[users])
+  
   useEffect(() => {
     setLoading(true);
     setUsers([]);
@@ -97,8 +118,10 @@ const Create = () => {
     if(checked) {
       setSelectedStudents(prevState => {
         let newArr = [...prevState];
-        if(Array.isArray(std)) 
-        return newArr=std;
+        if(Array.isArray(std)) {
+          const newArr = std.filter(s=>!curStudents.includes(s.regno))
+          return newArr;
+        }
         newArr.push(std);
         return newArr;
       });
@@ -169,7 +192,7 @@ const Create = () => {
       <Back top="-1em" left="0"/>
       <div className="CreateClass-Main">
         <div className="CreateClass-Header">
-          <h1>Create Classroom</h1>
+          <h1>{location.state?.edit ? "Update "+classInfo.name : "Create Classroom"}</h1>
         </div>
         <div className="CreateClass-form-container">
         <form className="CreateClass-form" onSubmit={HandleCreateClass}>
@@ -179,9 +202,11 @@ const Create = () => {
               label="Classroom Name"
               variant="outlined"
               size="small"
+              value={classInfo?.name}
               fullWidth
               required
               inputRef={classNameRef}
+              disabled={location.state?.edit}
             />
             
             <FormControl className="SelectMenu Mr">
@@ -190,9 +215,11 @@ const Create = () => {
                 label="Class Batch"
                 placeholder="Class Batch" 
                 defaultValue=""
+                value={classInfo?.batch}
                 size="small"
                 type="number"
                 required
+                disabled={location.state?.edit}
                 inputRef={batchRef}
               >
                 {DegreeYear.map((opt) => (
@@ -210,8 +237,10 @@ const Create = () => {
             label="Course" 
             filter="course" 
             width="100%"
+            value={classInfo?.course_name}
             ref={courseRef}
             handleCourseChange={handleCourseChange}
+            disabled={location.state?.edit}
             required
             />
 
@@ -220,8 +249,10 @@ const Create = () => {
             label="Semester" 
             filter="semester" 
             width="100%"
+            value={classInfo?.semester}
             ref={semRef}
             handleSemesterChange={handleSemesterChange}
+            disabled={location.state?.edit}
             required
             />
           </div>
@@ -231,7 +262,7 @@ const Create = () => {
           
           <div className="classroom-submitBtn mt-1">
             <button type="submit" className="btn-green flex">
-              {!btnLoading?"Create":<CircularProgress size={16} color={"inherit"} />}
+              {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
             </button>
               
           </div>
@@ -251,6 +282,7 @@ const Create = () => {
           HandleSelectedUser={HandleSelectedUser}
           checkBoxValues={checkBoxValues}
           setCheckBoxValues={setCheckBoxValues}
+          disableCurStudent={curStudents}
           />
         </div>
     </div>

@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
 import Back from "../../../UI/Back/Back";
 
-const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading}) => {
+const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading,disableCurStudent}) => {
   const showEligible = hideEligible ? false:true;
 
   const handleSearch = async(e) => {
@@ -71,6 +71,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
             {showEligible && <th>Eligiblity</th>}
           </tr>
         </thead>
+        {console.log(disableCurStudent)}
         {!loading&&<tbody>
           {users.map((obj,i) =>{ 
               return <UserList 
@@ -82,6 +83,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
                 checkBoxValue={checkBoxValues[i]}
                 index={i}
                 HandleSelectedUser={HandleSelectedUser}
+                disableCurStudent={disableCurStudent}
                 />
           })}
         </tbody>}

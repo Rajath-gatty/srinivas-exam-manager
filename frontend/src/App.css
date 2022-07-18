@@ -109,7 +109,7 @@ body {
   border: 1px solid var(--strong-green);
   border-radius: 4px;
   padding: 0.5em 1em;
-  background-color: var(--white);
+  background-color: transparent;
   cursor: pointer;
 }
 

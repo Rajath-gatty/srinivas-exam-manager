@@ -98,6 +98,7 @@ module.exports = (studentArr,timetable,courseName) => {
                 bold:true,
                 margin:[0,100,30,20]
             },
-        }
+        },
+        compress:false
     };
 }
