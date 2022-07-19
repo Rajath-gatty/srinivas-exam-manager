@@ -25,7 +25,6 @@ const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, e
         selectFunction = handleSemesterChange;
   }
 
-  console.log(value)
   return (
     <div className="filter-comp selectbox">
     <FormControl style={{width}} className="filterSearch-SelectInput">

@@ -124,7 +124,7 @@ const StudentUsers = () => {
         </div>}
           
         <div className="edit-container flex">
-            <Link to="/classrooms/create" state={{edit:true,students:users.map(std=>std.regno),classInfo:classInfo}} className="classroom-edit-btn btn-outlined-green flex gap-1">
+            <Link to="/classrooms/create" state={{edit:true,students:users.map(std=>std.regno),classInfo:classInfo}} className="classroom-edit-btn btn-outlined-green flex gap-sm">
             <span>Edit</span>
             <IoSettingsOutline size={20}/>
             </Link>

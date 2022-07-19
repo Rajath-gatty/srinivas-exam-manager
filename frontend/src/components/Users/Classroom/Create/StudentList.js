@@ -71,7 +71,6 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
             {showEligible && <th>Eligiblity</th>}
           </tr>
         </thead>
-        {console.log(disableCurStudent)}
         {!loading&&<tbody>
           {users.map((obj,i) =>{ 
               return <UserList 

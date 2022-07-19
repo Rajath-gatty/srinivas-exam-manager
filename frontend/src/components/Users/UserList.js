@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 
 const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser,disableCurStudent }) => {
+
   const disablestd = disableCurStudent?.includes(data.regno);
   let eligible = data.eligibility;
+
   let UserID = "";
   if(type === "student")
     UserID = {uid:data.regno, idName:"regno"};
@@ -15,10 +17,9 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
   else 
     UserID = {uid:data.coord_id, idName:"coord_id"};
 
-  let showDOJ = true;
+  let showDOJ = true; 
   if(type!=="student" || type !=="exam_coord") showDOJ = false;
 
-  // console.log(data)
   return ( 
     <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&disablestd?'#fafafa':checkBoxValue?'var(--light-primary)':disablestd&&'#fafafa'}}>
       {showCheckbox && <td className="CreateClass-UserCheckbox">

@@ -78,6 +78,7 @@ const Sidebar = () => {
 
   const styles = { 
     boxSizing: 'border-box',
+    height:'100vh',
     overflowY:'auto',
     width:270,
     position:'fixed',

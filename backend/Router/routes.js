@@ -27,6 +27,8 @@ router.post('/reset-password',routeContoller.postResetPassword);
 
 router.post('/classroom/create',isAuth,routeContoller.postCreateClassroom);
 router.post('/classroom/add-student',isAuth,routeContoller.postAddStudentToClass);
+router.post('/classroom/remove-student',isAuth,routeContoller.postRemoveStudent);
+router.post('/classroom/delete',isAuth,routeContoller.deleteClassroom);
 router.get('/classroom',isAuth,routeContoller.getClassroom);
 
 module.exports = router;

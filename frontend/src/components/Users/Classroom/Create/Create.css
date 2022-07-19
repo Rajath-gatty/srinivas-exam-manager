@@ -26,6 +26,8 @@
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
+  margin-top: 1em;
+  scroll-behavior: smooth;
 }
 
 .CreateClass-formRow{
@@ -78,3 +80,55 @@
   min-width: 5em;
   color: #fff;
 }
+
+.CreateClass-container .Delete-class{
+  background-color: rgba(221, 25, 25, 0.05);
+  border-radius: 5px;
+  box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
+  margin-top: 1em;
+  padding: 1em; 
+} 
+
+.CreateClass-container .Delete-class h2{
+  color: var(--text-color);
+}
+
+.CreateClass-container .Delete-class p{
+  margin: 0.5em 2em;
+  margin-top: 1em;
+  color: var(--strong-red);
+}
+
+.CreateClass-container .Delete-class p span{
+  color: #000;
+}
+
+.CreateClass-container .Delete-class .Delete-form{
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin: 1em 2em;
+}
+.CreateClass-container .Delete-class .Delete-form input{
+  width: 15em;
+  padding: 0.5em; 
+  font-size: 1em;
+  outline: none;
+}
+
+.CreateClass-container .Delete-class .Delete-form input::placeholder{
+  color: #ccc;
+}
+
+.CreateClass-container .current-students-container h2{
+  color: var(--text-color);
+}
+
+.CreateClass-container .classroom-btn-wrapper {
+  justify-content: flex-start;
+  margin-top: 1em;
+}
+
+/* .CreateClass-container .classroom-btn-wrapper span {
+  font-size: 1em;
+} */

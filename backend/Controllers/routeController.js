@@ -304,7 +304,7 @@ exports.postResetPassword = async (req, res) => {
 };
 
 exports.postCreateClassroom = async (req, res) => {
-  const { className, batch, course, semester, color } = req.body;
+  const { className, batch, course, semester, color,edit } = req.body;
   const deptId = req.deptId;
   try {
     const result = await db.execute(`select name from classroom where name='${className}' and dept_id=${deptId}`);
@@ -315,6 +315,7 @@ exports.postCreateClassroom = async (req, res) => {
     const sql = `insert into classroom(name,batch,course_id,dept_id,semester,color) values(?,?,(select course_id from course where course_name=?),?,?,?)`;
     await db.execute(sql,[className,batch,course,deptId,semester,color]);
     res.send({ success: true });
+
   } catch (err) {
       res.status(500).json({ error: err.message });
   }
@@ -333,12 +334,29 @@ exports.postAddStudentToClass = async (req, res) => {
     const sql = `update student set class_id='${classId1}' where regno in (?)`;
     const result = await db.query(sql,[students]);
     console.log(result);
-
     res.send({ success: true });
   } catch (err) {
       res.status(500).json({ error: err.message });
   }
 };
+
+exports.postRemoveStudent = async(req,res) => {
+  const { regno,classId } = req.body;
+  const sql = `update student set class_id=null where class_id='${classId}' and regno=?`;
+    const result = await db.query(sql,[regno]);
+    console.log(result);
+    res.send({ success: true });
+}
+
+exports.deleteClassroom = async(req,res) => {
+  const {classId} = req.body.classId;
+  try {
+     await db.execute('delete from classroom where class_id=?',[classId]);
+    res.send({success:true});
+  } catch(err) {
+    console.log(err);
+  }
+}
 
 exports.getClassroom = async(req,res) => {
   const deptId = req.deptId;

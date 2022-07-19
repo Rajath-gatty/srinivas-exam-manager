@@ -59,9 +59,14 @@ a {
   text-decoration: none;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--main-bg);
-  overflow-y: scroll;
+  /* overflow-y: auto;
+  scroll-behavior: smooth; */
 }
 
 .flex {

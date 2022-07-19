@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from "@mui/material";
+import { CircularProgress, TextField,FormControl,InputLabel,Select,MenuItem } from "@mui/material";
 import { HiPlus } from "react-icons/hi";
 import { HiMinus } from "react-icons/hi";
 import { useState,useRef,useEffect} from "react";
@@ -24,6 +24,9 @@ const AdminTimeTable = () => {
     const [timetables,setTimetables] = useState([]);
     const [loading,setLoading] = useState(true);
     const [semFilter,setSemFilter] = useState([]);
+    const [classList,setClassList] = useState([]);
+    const [selectedClass,setSelectedClass] = useState('');
+
     const courseRef = useRef();
     const semesterRef = useRef();
 
@@ -188,6 +191,23 @@ const AdminTimeTable = () => {
                             error={semesterError?true:false}
                             helperText={semesterError}
                             />
+
+                            <FormControl className="SelectMenu Mr">
+                                <InputLabel>Class Batch</InputLabel>
+                                <Select
+                                label="Class Batch"
+                                placeholder="Class Batch" 
+                                size="small"
+                                type="number"
+                                required
+                                >
+                                {classList.map((opt) => (
+                                    <MenuItem key={opt} value={opt}>
+                                    {opt}
+                                    </MenuItem>
+                                ))}
+                                </Select>
+                            </FormControl>
                             </div>
                             <table className="admin-form-table-wrapper">
                                 <thead className="thead">
