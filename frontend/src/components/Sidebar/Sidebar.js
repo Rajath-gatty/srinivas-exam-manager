@@ -29,7 +29,7 @@ const textSlide = {
 
 const Sidebar = () => {
   const [profAnimation,setProfAnimation] = useState(false);
-  const [open,setOpen] = useState(true);
+  const [open,setOpen] = useState(false);
 
   const { role, user,serverUrl } = useContextData();
   const location = useLocation();
