@@ -15,7 +15,8 @@ import Coding from "./NavIcons/Coding.svg";
 import SemMarks from "./NavIcons/SemMarks.svg";
 
 import SrinivasLogo from "./SrinivasLogo.svg";
-import SimsLogo from "./Srinivas_University_logo.webp";
+import SEMSLogo from "./SEMSLogo.webp";
+import Chancellor from "./chancellor.webp";
 
 // Illustrations
 import EvaluatorReg from "./Registration/examcord_reg.svg";
@@ -47,6 +48,8 @@ export {
     Indent,
     Coding,
     SemMarks,
+    ForgotPassword,
     NoDataSvg,
-    SimsLogo
+    SEMSLogo,
+    Chancellor
 }

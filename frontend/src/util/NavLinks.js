@@ -35,13 +35,18 @@ export const NavLinks = [
         icon: Courses,
       },
       {
+        title: "Classrooms",
+        icon: Indent,
+        path: "/classrooms"
+      },
+      {
         title: "Users",
         icon: Users,
         subMenu: [
-          {
-            title: "Student",
-            path: "/users/student",
-          },
+          // {
+          //   title: "Student",
+          //   path: "/users/classrooms",
+          // },
           {
             title: "Faculty",
             path: "/users/faculty",
@@ -80,12 +85,12 @@ export const NavLinks = [
         title: "Attendance / Marks",
         path: "/attendance",
         icon: InternalMarks
+      },   
+      {
+        title: "Classrooms",
+        path: "/classrooms",
+        icon: InternalMarks
       },
-      // {
-      //   title: "Internal Marks",
-      //   path: "/internal",
-      //   icon: InternalMarks
-      // },
       // {
       //   title: "Semester Marks",
       //   path: "/semester",
@@ -102,13 +107,18 @@ export const NavLinks = [
         icon: Dashboard,
       },
       {
+        title: "Classrooms",
+        icon: Indent,
+        path: "/classrooms"
+      },
+      {
         title: "Users",
         icon: Users,
         subMenu: [
-          {
-            title: "Student",
-            path: "/users/student",
-          },
+          // {
+          //   title: "Student",
+          //   path: "/users/classrooms",
+          // },
           {
             title: "Faculty",
             path: "/users/faculty",

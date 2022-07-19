@@ -4,7 +4,7 @@ import App from './App';
 import ContextProvider from "./Context/Context";
 import axios from "axios";
 
-axios.defaults.baseURL = 'https://exam-manager-backend.herokuapp.com/';
+ axios.defaults.baseURL = 'https://exam-manager-backend.herokuapp.com/';
 // axios.defaults.baseURL = 'http://localhost:8080';
 
 const rootElement = document.getElementById("root");

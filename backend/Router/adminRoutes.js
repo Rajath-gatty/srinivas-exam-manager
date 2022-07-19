@@ -38,8 +38,8 @@ router.post('/department/new-department',isAuth,[
 ],adminController.postNewDepartment);
 
 router.get('/courses',isAuth,adminController.getCourses);
-
 router.post('/course-details',isAuth,adminController.getCourseDetails);
+router.post('/courses/subjects/remove',isAuth,adminController.removeCourseSubjects);
 
 router.get('/departments',isAuth,adminController.getDepartments);
 

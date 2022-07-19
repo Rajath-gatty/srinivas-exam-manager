@@ -87,27 +87,6 @@
    font-size: 1.1em;
 }
 
-.btn-green {
-    background-color: white;
-    color: #4CAF50;
-    border: 2px solid #4CAF50;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 1.5em;
-    padding: 0.5em 1.5em;
-}
-
-.btn-red {
-    background-color: white;
-    color: #db4747;
-    border: 2px solid #db4747;
-    padding: 0.5em 1.5em;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 1.5em;
-
-}
-
 .approval {
     color: #4CAF50;
 }

@@ -49,12 +49,28 @@ exports.getSemesters = async(req,res) => {
   }
 }
 
+exports.getUserCount = async (req,res) => {
+  const deptId = req.deptId;
+  const sql = `SELECT 'faculty' as user , COUNT(*) as count FROM faculty where dept_id=${deptId}
+  UNION
+  SELECT 'staff' , COUNT(*) FROM staff where dept_id=${deptId}
+  UNION
+  SELECT 'student', COUNT(*) FROM student where dept_id=${deptId}`;
+  const result = await db.execute(sql);
+  res.set('Cache-Control','private, max-age=3600').send(result[0]);
+}
+
 exports.getAllStudent = async (req,res) => {
   const deptId = req.deptId;
   const courseName = req.body.courseValue;
   const semester = req.body.semester;
+  const {classId} = req.body;
+
   let sql;
-  if(courseName&&semester) {
+  if(classId){ 
+    sql = `select regno,first_name,last_name,course_name,joining_year,student.semester,eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and class_id=${classId}`;
+  }
+  else if(courseName&&semester) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and semester=${semester} and student.status='approved' order by regno`;
   } else if(courseName) {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and student.status='approved' order by regno`;
@@ -135,10 +151,14 @@ exports.getSemFilteredStudent = async(req,res) => {
 }
 
 exports.getStudentByID = async(req,res) => {
-  const {query} = req.body;
+  const {query, classId} = req.body;
   const deptId = req.deptId;
-
-  let sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
+  let sql;
+  if(classId) {
+    sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.class_id=${classId} and student.regno LIKE '${query}%'`;
+  } else {
+    sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
+  }
   try{
     const result = await db.execute(sql);
     res.send(result[0]);
@@ -171,8 +191,7 @@ exports.PostFacultySubjects = (req,res) => {
       res.send('Inserted!')
   } catch(err) {
       console.log(err);
-  }
-         
+  } 
 }
 
 exports.getFacultySubject = async(req,res) => {
@@ -278,8 +297,57 @@ exports.postResetPassword = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 5);
       const finalResult = await db.execute(`update ${result.role} set password='${hashedPassword}' where dept_id=${result.deptId} and ${result.columnId}=?`,[result.id]);
       console.log(finalResult);
-      res.json({ sucess: true });
+      res.json({ success: true });
   } catch (err) {
       res.status(500).json({ error: 'Link Expired!' });
   }
 };
+
+exports.postCreateClassroom = async (req, res) => {
+  const { className, batch, course, semester, color } = req.body;
+  const deptId = req.deptId;
+  try {
+    const result = await db.execute(`select name from classroom where name='${className}' and dept_id=${deptId}`);
+    if(result[0].length>0) {
+      return res.status(422).json({ error: "Classroom Name already used!" });
+    }
+
+    const sql = `insert into classroom(name,batch,course_id,dept_id,semester,color) values(?,?,(select course_id from course where course_name=?),?,?,?)`;
+    await db.execute(sql,[className,batch,course,deptId,semester,color]);
+    res.send({ success: true });
+  } catch (err) {
+      res.status(500).json({ error: err.message });
+  }
+};
+
+exports.postAddStudentToClass = async (req, res) => {
+  const { className, batch, course, semester } = req.body.ClassData;
+  const { selectedStudents } = req.body;
+  const students = selectedStudents.map(std=>std.regno);
+  const deptId = req.deptId;
+
+  try {
+    const classId = await db.execute(`select class_id from classroom where name=? and batch=? and course_id=(select course_id from course where course_name=?) and dept_id=? and semester=?`,[className,batch,course,deptId,semester]);
+    const classId1 = classId[0][0].class_id;
+    console.log(students);
+    const sql = `update student set class_id='${classId1}' where regno in (?)`;
+    const result = await db.query(sql,[students]);
+    console.log(result);
+
+    res.send({ success: true });
+  } catch (err) {
+      res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getClassroom = async(req,res) => {
+  const deptId = req.deptId;
+  try{
+    const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
+    const result = await db.execute(sql);
+    res.send(result[0]);
+  } catch(err) {
+      console.log(err);
+      res.status(500).send(err);
+  }
+}

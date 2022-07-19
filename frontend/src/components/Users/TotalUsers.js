@@ -11,13 +11,13 @@ import { FaSearch } from "react-icons/fa";
 import {VscFilePdf} from "react-icons/vsc"
 import { toast } from 'react-toastify';
 import fileDownload from "js-file-download";
-import Modal from "../UI/Modal/Modal";
-import {IoMdClose} from "react-icons/io";
+// import Modal from "../UI/Modal/Modal";
+// import {IoMdClose} from "react-icons/io";
 
 const TotalUsers = ({type}) => {
   const [users, setUsers] = useState([]);
   const [semFilter,setSemFilter] = useState([]);
-  const[sem,setSem] = useState("");
+  const [sem,setSem] = useState("");
   const [course, setCourse] = useState("");
   const [loading,setLoading] = useState(false);
   const [btnLoading,setBtnLoading] = useState(false);
@@ -35,7 +35,6 @@ const TotalUsers = ({type}) => {
         const result = await axios.post(`/users/${type}`)
         setUsers(result.data);
         setLoading(false);
-        console.log(result)
       } catch(err) {
         console.log(err);
       }

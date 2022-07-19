@@ -37,6 +37,7 @@ const Student = () => {
   const [passErr, setPassErr] = useState(false);
   const [errors, setErrors] = useState([]);
 
+  const semester = ["1", "2", "3", "4", "5", "6"];
   const DegreeYear = [
      2015, 2016,
     2017, 2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027
@@ -90,6 +91,7 @@ const Student = () => {
   const gEmailRef = useRef();
   const departmentRef = useRef();
   const courseRef = useRef();
+  const semesterRef = useRef();
   const joiningYearRef = useRef();
 
   const handleFormSubmit = async (e) => {
@@ -131,6 +133,7 @@ const Student = () => {
       gEmail: gEmailRef.current?.value || "",
       department: departmentRef.current.value,
       course: courseRef.current.value,
+      semester: semesterRef.current.value,
       joiningYear: joiningYearRef.current.value
     };
     const formData = new FormData();
@@ -637,6 +640,27 @@ const Student = () => {
                 </Select>
                 <FormHelperText error>{errors.find((err) => err.param === "course")?.msg}</FormHelperText>
               </FormControl>
+              
+              <FormControl className="SelectInput" fullWidth>
+                <InputLabel>Semester</InputLabel>
+                <Select
+                  label="Semester"
+                  placeholder="Semester"
+                  defaultValue=""
+                  size="small"
+                  inputRef={semesterRef}
+                  fullWidth
+                  error={errors.some((err) => err.param === "semester")}
+                  // fullwidth="true"
+                >
+                  {semester.map((opt) => (
+                    <MenuItem key={opt} value={opt}>
+                      {opt}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText error>{errors.find((err) => err.param === "semester")?.msg}</FormHelperText>
+              </FormControl>
 
               <FormControl className="SelectInput" fullWidth>
                 <InputLabel>Joining Academic Year</InputLabel>
@@ -686,7 +710,7 @@ const Student = () => {
                   <img src={fileUrl} alt=""/>
               </div>
           </div>
-          <input className="btn mt-2" type="submit" value="Register" />
+          <input className="btn mt-1" type="submit" value="Register" />
 
           <div className="to-login mb-1">
             <p>Already have an account ?</p>

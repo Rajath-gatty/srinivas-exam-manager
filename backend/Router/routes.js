@@ -6,6 +6,8 @@ router.get('/departments',routeContoller.getDepartments);
 router.post('/courses',routeContoller.getCourses);
 router.post('/semesters',routeContoller.getSemesters);
 
+router.get('/dashboard/users/count',isAuth,routeContoller.getUserCount);
+
 router.post('/users/student',isAuth,routeContoller.getAllStudent);
 router.post('/users/faculty',isAuth,routeContoller.getAllFaculty);
 router.post('/users/staff',isAuth,routeContoller.getAllStaff);
@@ -22,5 +24,9 @@ router.post('/faculty/subjects/delete',isAuth,routeContoller.removeFacultySubjec
 
 router.post('/forgot-password',routeContoller.postForgotPassword);
 router.post('/reset-password',routeContoller.postResetPassword);
+
+router.post('/classroom/create',isAuth,routeContoller.postCreateClassroom);
+router.post('/classroom/add-student',isAuth,routeContoller.postAddStudentToClass);
+router.get('/classroom',isAuth,routeContoller.getClassroom);
 
 module.exports = router;

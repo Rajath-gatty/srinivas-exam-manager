@@ -1,8 +1,9 @@
 import { BiX, BiCheck } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
 
-const UserList = ({ data, type, updateEligibility, index }) => {
-
+const UserList = ({ data, type, updateEligibility, index, showEligible, showCheckbox, checkBoxValue, HandleSelectedUser,disableCurStudent }) => {
+  const disablestd = disableCurStudent?.includes(data.regno);
   let eligible = data.eligibility;
   let UserID = "";
   if(type === "student")
@@ -16,9 +17,17 @@ const UserList = ({ data, type, updateEligibility, index }) => {
 
   let showDOJ = true;
   if(type!=="student" || type !=="exam_coord") showDOJ = false;
-  
-  return (
-    <tr className="users-table-row">
+
+  // console.log(data)
+  return ( 
+    <tr className="users-table-row" style={{backgroundColor:checkBoxValue&&disablestd?'#fafafa':checkBoxValue?'var(--light-primary)':disablestd&&'#fafafa'}}>
+      {showCheckbox && <td className="CreateClass-UserCheckbox">
+        <Checkbox 
+        className="student-disabled-checkbox"
+        disabled={disablestd} 
+        checked={disablestd?true:checkBoxValue} 
+        onChange={(e)=>{HandleSelectedUser(e.target.checked,data,index)}}/>
+      </td>}
       <td>{UserID.uid}</td>
       <td>{data.first_name +" "+ data.last_name}</td>
       {type!=="student" && <td>{data.email}</td>}
@@ -33,13 +42,13 @@ const UserList = ({ data, type, updateEligibility, index }) => {
         </Link>
       </td>}
 
-      <td className="users-details">
+      {!showCheckbox && <td className="users-details">
         <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID }} >
           View
         </Link>
-      </td>
+      </td>}
 
-      {type==="student" && 
+      {type==="student" && showEligible && 
         <td className="flex"> 
           {!eligible ? 
               <div className="users-eligibleBtn flex" onClick={()=>{updateEligibility(index, true, data.regno);}}>

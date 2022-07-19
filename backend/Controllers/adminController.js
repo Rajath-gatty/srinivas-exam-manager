@@ -3,18 +3,36 @@ const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
 exports.postNewCourse = async (req, res) => {
-    const { duration, name, semesters } = req.body;
+    const { duration, name, semesters, edit } = req.body;
+    const totalSemesters = semesters.length;
     const deptId = req.deptId;
     const err = validationResult(req).errors;
     if (err.length > 0) {
         return res.status(400).send(err);
     }
-    const totalSemesters = semesters.length;
+    if(edit === true) {
+      db.execute(`select course_id from course where course_name='${name}'`)
+      .then(async([result]) => {
+        const courseRes = `update course set course_sem=? where course_id=${result[0].course_id}`;
+        await db.execute(courseRes,[totalSemesters])
+        semesters.forEach(sem => {
+            sem.subjects.forEach(sub => {
+                const semSql = `insert ignore into semester(dept_id,course_id,sem_name,subj_name,subj_code,i_a,credits) values(?,?,?,?,?,?,?)`;
+                return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code,sub.ia,sub.credits])
+            })
+        })
+    })
+    .then(() => {
+        res.send('Course subjects Updated!');
+    })
+    .catch((err) => res.status(500).send(err))
+    } else {
     const checkCourse = await db.execute(`select course_name from course where course_name='${name}'`);
     if (checkCourse[0].length > 0) {
         return res.status(403).send('course Already exists');
     }
     const courseSql = 'insert into course(dept_id,course_name,course_duration,course_sem) values(?,?,?,?)';
+
     db.execute(courseSql, [deptId, name, duration, totalSemesters])
         .then(() => {
             return db.execute(`select course_id from course where course_name='${name}'`)
@@ -22,18 +40,39 @@ exports.postNewCourse = async (req, res) => {
         .then(([result]) => {
             semesters.forEach(sem => {
                 sem.subjects.forEach(sub => {
-                    const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code) values(?,?,?,?,?)`;
-                    return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code])
+                    const semSql = `insert into semester(dept_id,course_id,sem_name,subj_name,subj_code,i_a,credits) values(?,?,?,?,?,?,?)`;
+                    return db.execute(semSql, [deptId, result[0].course_id, sem.semName, sub.name, sub.code,sub.ia,sub.credits])
                 })
             })
         })
         .then((result) => {
-            res.status(200).send({ success: true, result })
+            res.status(200).send('Course Added!')
         })
         .catch(err => {
             console.log(err);
             res.status(500).send({ success: false, err });
         })
+    }
+}
+
+exports.removeCourseSubjects = async(req,res) => {
+    const {subjects,courseId} = req.body;
+    let totalSem = req.body.totalSem-1;
+    console.log(totalSem,courseId);
+    try {
+    if(totalSem>=0) {
+        const sql = `update course set course_sem=? where course_id=${courseId}`;
+        const courseRes = await db.execute(sql,[totalSem]);
+        console.log(courseRes);
+    }
+    const sql = `delete from semester where subj_code in (?)`;
+    const result = await db.query(sql,[subjects]);
+    // console.log(result);
+    res.send('Success');
+    } catch(err) {
+        console.log(err);
+        res.status(500).send(err);
+    }
 }
 
 exports.postNewDepartment = async (req, res) => {
@@ -79,7 +118,7 @@ exports.getCourses = async (req, res) => {
     const deptId = req.deptId;
     try {
         const result = await db.execute(`select course_id,course_name,course_sem,course_duration from course where dept_id=${deptId}`);
-        res.send(result[0]);
+        res.set('Cache-Control','public, max-age=30').send(result[0]);
     } catch (err) {
         console.log(err);
         res.status(404).send({ success: false });
@@ -89,7 +128,7 @@ exports.getCourses = async (req, res) => {
 exports.getCourseDetails = async (req, res) => {
     const deptId = req.deptId;
     try {
-        const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name from semester where dept_id=${deptId} AND course_id=${req.body.courseId} order by sem_name`);
+        const result = await db.execute(`select sem_id,sem_name,subj_code,subj_name,i_a,credits from semester where dept_id=${deptId} AND course_id=${req.body.courseId} order by sem_name`);
         res.send(result[0]);
     } catch (err) {
         console.log(err);

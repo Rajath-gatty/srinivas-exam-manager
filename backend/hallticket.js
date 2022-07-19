@@ -1,5 +1,3 @@
-const path = require('path');
-// const imagePath = path.join(__dirname,'uploads');
 
 module.exports = (studentArr,timetable,courseName) => {
 
@@ -100,6 +98,7 @@ module.exports = (studentArr,timetable,courseName) => {
                 bold:true,
                 margin:[0,100,30,20]
             },
-        }
+        },
+        compress:false
     };
 }

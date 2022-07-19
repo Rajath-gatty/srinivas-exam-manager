@@ -1,0 +1,142 @@
+.dashboard-container {
+    width: 100%;
+    margin: 2em 2em 0 2em;
+}
+
+/* .dashboard-heading {
+
+} */
+
+.title {
+    font-family: serif;
+    color: rgb(50, 39, 122);
+    font-weight: 900;
+}
+
+.logo-img {
+    padding-right: 2em;
+    margin-top: -1em;
+    height: 90px;
+    width: 90px;
+}
+
+.college {
+    margin-top: 2em;
+    border-radius: 4px;
+}
+
+.college-header{
+    gap: 1em;
+    margin-top: -20em;
+}
+
+.college-header .college-data {
+    background-color: bisque;
+}
+
+.calender-main {
+    background-color: rgb(40, 137, 255);
+    max-width: 300px;
+}
+
+.header-title {
+    padding-top: 6px;
+}
+
+.college-text {
+    padding: 1em 2em;
+}
+
+.college-text p {
+    color: #685206;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 24px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.header-text {
+    color: darkslateblue;
+    padding-top: 1em;
+}
+
+.description {
+    background-color: rgb(143, 143, 188);
+    padding: 1em 2em;
+    margin: 2em 0;
+}
+
+.photo {
+    float: left;
+    width: 130px;
+    height: 130px;
+    padding-right: 1em;
+}
+
+.head-title {
+    color: white;
+}
+
+.highlight-title {
+    color: white
+}
+
+.personInfo{
+    color: #fff;
+}
+
+.personInfo .Name{
+    font-size: 1em;
+}
+
+.personInfo .post{
+    font-size: 0.9em;
+}
+
+.personInfo p{
+    margin-top: 0.2em;
+}
+
+.footer{
+    background-color: var(--primary-color);
+    padding: 2em;
+    border-radius: 2px;
+}
+
+.footer-left .college-title{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #fff;
+}
+
+.footer-left p{
+    color: #fff;
+    font-size: 1em;
+}
+
+.footer-left p>span{
+    font-size: 1.1em;
+    color: rgb(219, 219, 219);
+}
+
+.footer-right{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5em;
+}
+
+.footer-right .Devs{
+    font-size: 1.3em;
+    color: #fff;
+}
+
+.footer-right .DevName{
+    color: #fff;
+    padding: 0.2em 0;
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+}

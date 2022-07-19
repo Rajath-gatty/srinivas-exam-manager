@@ -16,6 +16,10 @@
   /* --grey-bg: #f4f4ff; */
   --grey-bg: #f1f1f1;
   --dark-grey: #5b5b5b;
+
+  /* main-bg affects Filter background */
+  --main-bg:rgb(252, 252, 252); 
+
   --strong-red: #e21717;
   --strong-green: #4dc514;
   --red: #d54747;
@@ -43,8 +47,21 @@
   font-family: "Lato", sans-serif;
 }
 
+table {
+  background-color: #fff;
+}
+
+label {
+  background: transparent;
+}
+
 a {
   text-decoration: none;
+}
+
+body {
+  background-color: var(--main-bg);
+  overflow-y: scroll;
 }
 
 .flex {
@@ -61,6 +78,7 @@ a {
   border-radius: 4px;
   cursor: pointer;
   justify-self: left;
+  font-size: 1em;
 }
 
 .btn:disabled {
@@ -75,7 +93,8 @@ a {
   border-radius: 4px;
   padding: 0.5em 1em;
   transition: 200ms ease-in-out;
-  background-color: var(--white);
+  /* background-color: var(--white); */
+  background: transparent;
   cursor: pointer;
 }
 
@@ -90,8 +109,20 @@ a {
   border: 1px solid var(--strong-green);
   border-radius: 4px;
   padding: 0.5em 1em;
-  background-color: var(--white);
+  background-color: transparent;
   cursor: pointer;
+}
+
+.btn-green {
+  text-decoration: none;
+  color: var(--strong-green);
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  background-color: var(--strong-green);
+  color: var(--white);
+  outline: none;
+  border: none;
 }
 
 .btn-outlined-green:hover {
@@ -132,9 +163,9 @@ a {
 }
 
 /* MUI Select Label fix  */
- .MuiFormControl-root .MuiInputLabel-root {
-  background-color: var(--white) !important;
-}
+ /* .MuiFormControl-root .MuiInputLabel-root { */
+  /* background-color: var(--white) !important; */
+/* } */
 
 .MuiFormControl-root .MuiInputLabel-root[data-shrink="true"] {
   top: 0 !important;
@@ -147,6 +178,9 @@ a {
 }
 
 /* Utility Classes */
+.m-1 {
+  margin:0.5em;
+}
 .mt-1 {
   margin-top: 1em;
 }

@@ -54,7 +54,7 @@ const FacultySubjects = () => {
       setSelectedSubject(selectedSubject.filter((e) => e.subj_code !== data.subj_code));
     }
   };
- console.log(subjects);
+
   useEffect(() => {
     const fetchSubjects = async() => {
       try {
@@ -63,7 +63,6 @@ const FacultySubjects = () => {
           semester:selectedSemester
         }
         const result = await axios.get(`/faculty/current-subjects/${facultyId}`,data);
-        console.log(result.data);
         setSelectedSubject(result.data);
         setSubjectLoading(false);
       } catch(err) {
@@ -72,7 +71,7 @@ const FacultySubjects = () => {
       }
     }
     fetchSubjects();
-  })
+  },[])
 
   const handleCourseChange = async(e) => {
     const courseName = e.target.value;

@@ -1,8 +1,49 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "SEM",
+  "name": "Srinivas Exam Manager",
+  "icons": [
+    {
+      "src": "Icons/48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "Icons/72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "Icons/96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "Icons/128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "Icons/192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "Icons/384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "Icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "id": "/",
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "display_override":["window-controls-overlay"],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "description": "Srinivas Exam Management Software. Developed by Chirag, Rajath Gatty, V Jeevan Kumar, Siddharth KM"
 }
