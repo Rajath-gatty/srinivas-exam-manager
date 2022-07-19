@@ -1,6 +1,6 @@
 import "./Create.css";
 import {useState,useEffect,useRef} from 'react';
-import {useNavigate,useLocation} from 'react-router-dom';
+import {useNavigate,useLocation,Link} from 'react-router-dom';
 import {toast} from 'react-toastify';
 import Back from '../../../UI/Back/Back';
 import {
@@ -16,6 +16,8 @@ import Filter from "../../../UI/Filter/Filter";
 import { useContextData } from "../../../../hooks/useContextData";
 import {useFetchCourses} from "../../../../hooks/useFetchCourses";
 import {CircularProgress} from "@mui/material";
+import { TbTrashX } from "react-icons/tb";
+import { HiMinus, HiPlus } from "react-icons/hi";
 
 const Create = () => {
   const [users, setUsers] = useState([]);
@@ -32,6 +34,8 @@ const Create = () => {
   const batchRef = useRef();
   const courseRef = useRef();
   const semRef = useRef();
+
+  const scrollToRef = useRef();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,8 +103,8 @@ const Create = () => {
     }
 
     try {
-      const result = await axios.post(`/classroom/create`,ClassData);
-      console.log(result.data.success);
+      if(!location.state?.edit)
+        var result = await axios.post(`/classroom/create`,ClassData);
       if(result.data.success)
         var result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
 
@@ -187,6 +191,23 @@ const Create = () => {
     }
   }
 
+  const handleRemoveStudent = async(regno) => {
+    try {
+      const data = {
+        regno,
+        classId:location.state.classInfo.class_id
+      }
+      console.log(data);
+       await axios.post('/classroom/remove-student',data);
+      setCurStudents(prevState => {
+        const newState =  [...prevState];
+        return newState.filter(std=> std!==regno);
+      })
+    } catch(err) {
+      console.log(err);
+    }
+  }
+  console.log(curStudents)
   return (
     <div className="CreateClass-container">
       <Back top="-1em" left="0"/>
@@ -260,17 +281,64 @@ const Create = () => {
           {selectedStudents.length>0 &&
             <h3 className="mt-1" style={{color:'var(--text-color)'}}>Selected Students : {selectedStudents.length}</h3>}
           
-          <div className="classroom-submitBtn mt-1">
-            <button type="submit" className="btn-green flex">
-              {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
-            </button>
-              
+          <div className="classroom-btn-wrapper flex gap-2">
+            <div className="classroom-submitBtn mt-1">
+              <button type="submit" className="btn-green flex">
+                {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
+              </button> 
+            </div>
+    
+            {location.state?.edit && <div className="classroom-submitBtn mt-1" onClick={()=>{
+                window.scrollTo({
+                  top:scrollToRef.current.offsetTop,
+                  behavior:'smooth',
+                })
+              }}>
+              <button className="btn-outlined-green flex gap-1">
+                <HiPlus size={20}/>
+              <span>Add Students</span>
+              </button>
+            </div>}
           </div>
+
         </form>
         </div>
+        {location.state?.edit&&<div className="current-students-container">
+          <h2>Current Students</h2>
+        <table className="users-table-wrapper">
+        <thead className="thead">
+          <tr className="classroom-student-select-header">
+            <th>RegNo</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Batch</th>
+            <th>Semester</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            {users.filter(user => curStudents.includes(user.regno))
+            .map(std => {
+             return <tr className="users-table-row" key={std.regno}>
+                <td>{std.regno}</td>
+                <td>{std.first_name}</td>
+                <td>{std.course_name}</td>
+                <td>{std.joining_year}</td>
+                <td>{std.semester}</td>
+                <td>{<HiMinus 
+                onClick={()=>handleRemoveStudent(std.regno)}
+                style={{cursor:'pointer'}} 
+                color="var(--strong-red)" 
+                size={20}
+                />}</td>
+              </tr>
+            })}
+        </tbody>
+      </table>
+        </div>}
         </div>
 
-        <div className="CreateClass-SelectUsers">
+        <div ref={scrollToRef} className="CreateClass-SelectUsers" id="add-students">
           <h2>Add Students</h2>
           <StudentList 
           showCheckbox 
@@ -285,6 +353,19 @@ const Create = () => {
           disableCurStudent={curStudents}
           />
         </div>
+
+        {location.state?.edit && 
+          <div className="Delete-class">
+            <h2>Delete Class</h2>
+            <p><span>Enter the following text to Confirm : </span>Delete {classInfo.name}</p>
+            <div className="Delete-form">
+              <input type="text" placeholder={"Delete "+classInfo.name}/>
+              <div className="btn-outlined-red flex gap-sm">
+                <TbTrashX color="inherit" size={20}/> <span>Delete</span>
+              </div>
+            </div>
+          </div>
+        }
     </div>
   )
 }
