@@ -34,7 +34,7 @@ const Create = () => {
   const batchRef = useRef();
   const courseRef = useRef();
   const semRef = useRef();
-
+  const deleteClassRef = useRef();
   const scrollToRef = useRef();
 
   const navigate = useNavigate();
@@ -211,7 +211,12 @@ const Create = () => {
       console.log(err);
     }
   }
-  console.log('Cur Student',curStudents);
+
+  const handleDeleteClass = async() => {
+
+    console.log(deleteClassRef.current?.value);
+  }
+
   return (
     <div className="CreateClass-container">
       <Back top="-1em" left="0"/>
@@ -363,8 +368,8 @@ const Create = () => {
             <h2>Delete Class</h2>
             <p><span>Enter the following text to Confirm : </span>Delete {classInfo.name}</p>
             <div className="Delete-form">
-              <input type="text" placeholder={"Delete "+classInfo.name}/>
-              <div className="btn-outlined-red flex gap-sm">
+              <input type="text" placeholder={"Delete "+classInfo.name} ref={deleteClassRef}/>
+              <div className="btn-outlined-red flex gap-sm" onClick={handleDeleteClass}>
                 <TbTrashX color="inherit" size={20}/> <span>Delete</span>
               </div>
             </div>
