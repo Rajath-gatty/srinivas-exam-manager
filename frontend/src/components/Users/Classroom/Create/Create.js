@@ -18,6 +18,7 @@ import {useFetchCourses} from "../../../../hooks/useFetchCourses";
 import {CircularProgress} from "@mui/material";
 import { TbTrashX } from "react-icons/tb";
 import { HiMinus, HiPlus } from "react-icons/hi";
+import {TbArrowBigUpLines,TbArrowBigDownLines} from "react-icons/tb";
 
 const Create = () => {
   const [users, setUsers] = useState([]);
@@ -105,15 +106,18 @@ const Create = () => {
     }
 
     try {
-      if(!location.state?.edit)
+      let msg= 'Student added successfully'
+      if(!location.state?.edit){
         var result = await axios.post(`/classroom/create`,ClassData);
+        msg = 'Classroom created successfully'
+      }
       if(result?.data.success||location.state?.edit) {
-        var result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
+        const result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
         console.log(result2);
       }
 
       setBtnLoading(false);
-      toast.success('Classroom created successfully',{autoClose:3000});
+      toast.success(msg,{autoClose:3000});
       navigate('/classrooms');
     } catch(err) {
       setBtnLoading(false);
@@ -207,14 +211,61 @@ const Create = () => {
         const newState =  [...prevState];
         return newState.filter(std=> std!==regno);
       })
+      setCheckBoxValues(prevState => {
+        const newArr = [...prevState];
+        users.forEach((std,index)=>{
+          if(std.regno===regno)
+          newArr[index]=false;
+        })
+        return newArr;
+      })
+      toast.success('Student removed successfully');
     } catch(err) {
+      toast.error('Error removing student');
       console.log(err);
     }
   }
 
   const handleDeleteClass = async() => {
+    const value = deleteClassRef.current?.value;
+    if(value !== "Delete "+classInfo.name) {
+      toast.error('Text does not match!',{position:'bottom-right'});
+      return;
+    }
+    else{
+      try {
+        setBtnLoading(true);
+        await axios.post('/classroom/delete',{classId:classInfo.class_id});
+        toast.success('Classroom Deleted Successfully!');
+        navigate('/classrooms');
+      } catch(err) {
+        setBtnLoading(false);
+        toast.error('Error deleting classroom!');
+        console.log(err);
+      }
+    }
+  }
 
-    console.log(deleteClassRef.current?.value);
+  const handlePromote = async() => {
+    try {
+     await axios.post(`/classroom/promote`,{classId:classInfo.class_id,courseId:classInfo.course_id});
+      toast.success('Classroom Promoted to new semester!');
+    } catch(err) {
+      console.log(err);
+      toast.error('Error promoting classroom!');
+      setLoading(false);
+    }
+  }
+
+  const handleDemote = async() => {
+    try {
+      await axios.post(`/classroom/demote`,{classId:classInfo.class_id});
+      toast.success(`Classroom Demoted to ${classInfo.semester-1}`);
+    } catch(err) {
+      console.log(err);
+      toast.error('Error Demoting classroom!');
+      setLoading(false);
+    }
   }
 
   return (
@@ -291,21 +342,33 @@ const Create = () => {
             <h3 className="mt-1" style={{color:'var(--text-color)'}}>Selected Students : {selectedStudents.length}</h3>}
           
           <div className="classroom-btn-wrapper flex gap-2">
-            <div className="classroom-submitBtn mt-1">
-              <button type="submit" className="btn-green flex">
-                {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
-              </button> 
+            <div className="flex gap-2">
+              <div className="classroom-submitBtn mt-1">
+                <button type="submit" className="btn-green flex">
+                  {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
+                </button> 
+              </div>
+      
+              {location.state?.edit && <div className="classroom-submitBtn mt-1" onClick={()=>{
+                  window.scrollTo({
+                    top:scrollToRef.current.offsetTop,
+                    behavior:'smooth',
+                  })
+                }}>
+                <div className="btn-outlined-green flex gap-sm">
+                  <HiPlus size={20}/>
+                  <span>Add Students</span>
+                </div>
+              </div>}
             </div>
-    
-            {location.state?.edit && <div className="classroom-submitBtn mt-1" onClick={()=>{
-                window.scrollTo({
-                  top:scrollToRef.current.offsetTop,
-                  behavior:'smooth',
-                })
-              }}>
-              <div className="btn-outlined-green flex gap-1">
-                <HiPlus size={20}/>
-              <span>Add Students</span>
+            
+            {location.state?.edit && <div className="classroom-promote mt-1 flex gap-1" >
+              <div className="btn flex gap-sm" onClick={handlePromote}>
+                <TbArrowBigUpLines size={20} fill="#fff"/>
+                <span>Promote Class</span>
+              </div>
+              <div className="btn-outlined-red demote" title="Demote Classroom semester" onClick={handleDemote}>
+                <TbArrowBigDownLines size={20} fill="var(--strong-red)"/>
               </div>
             </div>}
           </div>
@@ -334,12 +397,14 @@ const Create = () => {
                 <td>{std.course_name}</td>
                 <td>{std.joining_year}</td>
                 <td>{std.semester}</td>
-                <td>{<HiMinus 
-                onClick={()=>handleRemoveStudent(std.regno,i)}
-                style={{cursor:'pointer'}} 
-                color="var(--strong-red)" 
-                size={20}
-                />}</td>
+                <td><div className="current-students-delete">
+                  <HiMinus 
+                  onClick={()=>handleRemoveStudent(std.regno,i)}
+                  style={{cursor:'pointer'}} 
+                  color="var(--strong-red)" 
+                  size={20}
+                  />
+                </div></td>
               </tr>
             })}
         </tbody>
@@ -369,9 +434,10 @@ const Create = () => {
             <p><span>Enter the following text to Confirm : </span>Delete {classInfo.name}</p>
             <div className="Delete-form">
               <input type="text" placeholder={"Delete "+classInfo.name} ref={deleteClassRef}/>
-              <div className="btn-outlined-red flex gap-sm" onClick={handleDeleteClass}>
+              {!btnLoading ? <div className="btn-outlined-red flex gap-sm" onClick={handleDeleteClass}>
                 <TbTrashX color="inherit" size={20}/> <span>Delete</span>
               </div>
+              : <CircularProgress size={16} color={"inherit"} />}
             </div>
           </div>
         }

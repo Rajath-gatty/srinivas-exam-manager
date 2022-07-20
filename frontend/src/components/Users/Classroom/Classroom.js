@@ -7,6 +7,7 @@ import {useFetchCourses} from "../../../hooks/useFetchCourses";
 import {useContextData} from "../../../hooks/useContextData";
 import axios from "axios";
 import {CircularProgress} from "@mui/material";
+import NoData from "../../UI/NoData/NoData";
 
 const Classroom = () => {
   const [classes, setClasses] = useState([]);
@@ -112,8 +113,9 @@ const Classroom = () => {
         })}
       </div>
       : <div style={{marginTop:200}} className="flex"><CircularProgress size={45}/></div>}
+    {!loading&&filteredClass.length<=0&&<NoData text="No classrooms Found!"/>}
     </div>
   )
 }
 
-export default Classroom
+export default Classroom;

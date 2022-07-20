@@ -28,7 +28,9 @@ router.post('/reset-password',routeContoller.postResetPassword);
 router.post('/classroom/create',isAuth,routeContoller.postCreateClassroom);
 router.post('/classroom/add-student',isAuth,routeContoller.postAddStudentToClass);
 router.post('/classroom/remove-student',isAuth,routeContoller.postRemoveStudent);
-router.post('/classroom/delete',isAuth,routeContoller.deleteClassroom);
+router.post('/classroom/promote',isAuth,routeContoller.postPromoteClassroom);
+router.post('/classroom/demote',isAuth,routeContoller.postDemoteClassroom);
+router.post('/classroom/delete',isAuth,routeContoller.postDeleteClassroom);
 router.get('/classroom',isAuth,routeContoller.getClassroom);
 
 module.exports = router;

@@ -343,19 +343,81 @@ exports.postAddStudentToClass = async (req, res) => {
 exports.postRemoveStudent = async(req,res) => {
   const { regno,classId } = req.body;
   const sql = `update student set class_id=null where class_id='${classId}' and regno=?`;
-    const result = await db.query(sql,[regno]);
+    const result = await db.execute(sql,[regno]);
     console.log(result);
     res.send({ success: true });
 }
 
-exports.deleteClassroom = async(req,res) => {
-  const {classId} = req.body.classId;
-  try {
-     await db.execute('delete from classroom where class_id=?',[classId]);
-    res.send({success:true});
-  } catch(err) {
-    console.log(err);
-  }
+exports.postDeleteClassroom = (req,res) => {
+  const {classId} = req.body;
+    const sql = `update student set class_id=null where class_id=?`;
+      db.query(sql,[classId])
+      .then(()=>{
+        return db.execute('delete from classroom where class_id=?',[classId]);
+      })
+      .then(()=>{
+        res.send({success:true});
+      })
+      .catch(err=>{
+        console.log(err);
+        res.status(500).send({success:false})
+      })
+}
+
+exports.postPromoteClassroom = (req,res) => {
+  const {classId,courseId} = req.body;
+  let totalSem=null;
+  let curSem=null;
+  
+  db.execute('select course_sem from course where course_id=?',[courseId])
+  .then((res1)=>{
+    totalSem = res1[0][0].course_sem;
+   return db.execute('select semester from classroom where class_id=?',[classId])
+  })
+  .then((res2)=>{
+    curSem = res2[0][0].semester;
+    if(curSem+1>=totalSem) throw new Error("Semester limit reached!");
+    const sql = `update classroom set semester=semester+1 where class_id=?`;
+    return db.execute(sql,[classId])
+  })
+    .then(()=>{
+      return db.execute(`update student set semester=semester+1 where class_id=?`,[classId]);
+    })
+    .then(()=>{
+      res.send({success:true});
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(501).send(err);
+    })
+}
+
+exports.postDemoteClassroom = (req,res) => {
+  const {classId} = req.body;
+  let totalSem=null;
+  let curSem=null;
+
+  db.execute('select course_sem from course where course_id=?',[courseId])
+  .then((res1)=>{
+    totalSem = res1[0][0].course_sem;
+    return db.execute('select semester from clasroom where class_id=?',[classId])
+  })
+  .then((res2)=>{
+    curSem = res2[0][0].semester;
+    if(curSem+1>=totalSem) throw new Error("Semester limit reached!");
+    const sql = `update classroom set semester=semester-1 where class_id=?`;
+   return db.execute(sql,[classId])
+  })
+    .then(()=>{
+      return db.execute(`update student set semester=semester-1 where class_id=?`,[classId]);
+    })
+    .then(()=>{
+      res.send({success:true});
+    })
+    .catch(err=>{
+      console.log(err);
+      res.status(500).send(err);
+    })
 }
 
 exports.getClassroom = async(req,res) => {

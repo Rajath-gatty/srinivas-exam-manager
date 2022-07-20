@@ -82,7 +82,8 @@
 }
 
 .CreateClass-container .Delete-class{
-  background-color: rgba(221, 25, 25, 0.05);
+  /* background-color: rgba(221, 25, 25, 0.05); */
+  background-color: #fff;
   border-radius: 5px;
   box-shadow: 1px 3px 6px 0px rgba(214, 214, 214, 0.5);
   margin-top: 1em;
@@ -90,7 +91,7 @@
 } 
 
 .CreateClass-container .Delete-class h2{
-  color: var(--text-color);
+  color: var(--strong-red);
 }
 
 .CreateClass-container .Delete-class p{
@@ -120,6 +121,10 @@
   color: #ccc;
 }
 
+.CreateClass-container .Delete-class .Delete-form .btn-outlined-red{
+  width: 110px;
+}
+
 .CreateClass-container .current-students-container h2{
   color: var(--text-color);
 }
@@ -129,6 +134,21 @@
   margin-top: 1em;
 }
 
-/* .CreateClass-container .classroom-btn-wrapper span {
-  font-size: 1em;
-} */
+.CreateClass-container .current-students-container .current-students-delete svg{
+  padding: 0.2em;
+  border-radius: 100%; 
+  transition: 0.2s ease-in-out;
+}
+
+.CreateClass-container .current-students-container .current-students-delete svg:hover{
+  background-color: var(--strong-red);
+  color: #fff !important;
+}
+
+.CreateClass-container .classroom-btn-wrapper {
+  justify-content: space-between;
+}
+
+.CreateClass-container .classroom-promote .demote:hover svg{
+  fill: #fff;
+}

@@ -31,8 +31,7 @@ const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, e
       <InputLabel>{label}</InputLabel>
       <Select
         label="Department"
-        defaultValue=""
-        value={value}
+        defaultValue={value}
         placeholder={label}
         size="small"
         onChange={selectFunction}
