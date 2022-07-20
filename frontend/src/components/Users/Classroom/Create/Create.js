@@ -106,18 +106,18 @@ const Create = () => {
     }
 
     try {
-      let msg= 'Student added successfully'
       if(!location.state?.edit){
-        var result = await axios.post(`/classroom/create`,ClassData);
-        msg = 'Classroom created successfully'
-      }
-      if(result?.data.success||location.state?.edit) {
-        const result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
-        console.log(result2);
+        let result = await axios.post(`/classroom/create`,ClassData);
+        toast.success('Classroom created successfully!',{autoClose:3000});
+        if(result?.data.success) {
+          await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
+        }
+      } else {
+        await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
+        toast.success('Classroom updated successfully');
       }
 
       setBtnLoading(false);
-      toast.success(msg,{autoClose:3000});
       navigate('/classrooms');
     } catch(err) {
       setBtnLoading(false);
@@ -250,9 +250,10 @@ const Create = () => {
     try {
      await axios.post(`/classroom/promote`,{classId:classInfo.class_id,courseId:classInfo.course_id});
       toast.success('Classroom Promoted to new semester!');
+      navigate('/classrooms');
     } catch(err) {
       console.log(err);
-      toast.error('Error promoting classroom!');
+      toast.error('Error semester limit reached!');
       setLoading(false);
     }
   }
@@ -260,10 +261,11 @@ const Create = () => {
   const handleDemote = async() => {
     try {
       await axios.post(`/classroom/demote`,{classId:classInfo.class_id});
-      toast.success(`Classroom Demoted to ${classInfo.semester-1}`);
+      toast.success(`Classroom Demoted to semester${classInfo.semester-1}`);
+      navigate('/classrooms');
     } catch(err) {
       console.log(err);
-      toast.error('Error Demoting classroom!');
+      toast.error('Semester limit reached!');
       setLoading(false);
     }
   }

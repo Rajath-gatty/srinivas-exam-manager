@@ -331,7 +331,7 @@ exports.postAddStudentToClass = async (req, res) => {
     const classId = await db.execute(`select class_id from classroom where name=? and batch=? and course_id=(select course_id from course where course_name=?) and dept_id=? and semester=?`,[className,batch,course,deptId,semester]);
     const classId1 = classId[0][0].class_id;
     console.log(students);
-    const sql = `update student set class_id='${classId1}' where regno in (?)`;
+    const sql = `update student set class_id=${classId1} where regno in (?)`;
     const result = await db.query(sql,[students]);
     console.log(result);
     res.send({ success: true });
@@ -376,7 +376,7 @@ exports.postPromoteClassroom = (req,res) => {
   })
   .then((res2)=>{
     curSem = res2[0][0].semester;
-    if(curSem+1>=totalSem) throw new Error("Semester limit reached!");
+    if(curSem>=totalSem) throw new Error("Semester limit reached!");
     const sql = `update classroom set semester=semester+1 where class_id=?`;
     return db.execute(sql,[classId])
   })
@@ -388,23 +388,18 @@ exports.postPromoteClassroom = (req,res) => {
     })
     .catch(err=>{
       console.log(err);
-      res.status(501).send(err);
+      res.status(500).send(err);
     })
 }
 
 exports.postDemoteClassroom = (req,res) => {
   const {classId} = req.body;
-  let totalSem=null;
   let curSem=null;
 
-  db.execute('select course_sem from course where course_id=?',[courseId])
-  .then((res1)=>{
-    totalSem = res1[0][0].course_sem;
-    return db.execute('select semester from clasroom where class_id=?',[classId])
-  })
+   db.execute('select semester from classroom where class_id=?',[classId])
   .then((res2)=>{
     curSem = res2[0][0].semester;
-    if(curSem+1>=totalSem) throw new Error("Semester limit reached!");
+    if(curSem<=1) throw new Error("Semester limit reached!");
     const sql = `update classroom set semester=semester-1 where class_id=?`;
    return db.execute(sql,[classId])
   })
