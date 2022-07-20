@@ -361,7 +361,7 @@ exports.deleteClassroom = async(req,res) => {
 exports.getClassroom = async(req,res) => {
   const deptId = req.deptId;
   try{
-    const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
+    const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student right join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
     const result = await db.execute(sql);
     res.send(result[0]);
   } catch(err) {

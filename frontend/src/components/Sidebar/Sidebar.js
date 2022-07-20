@@ -81,7 +81,6 @@ const Sidebar = () => {
     height:'100vh',
     overflowY:'auto',
     width:270,
-    position:'fixed',
     top:0,
     overflowX:'hidden',
     borderRight:'none',

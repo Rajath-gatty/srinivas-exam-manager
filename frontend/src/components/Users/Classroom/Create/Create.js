@@ -62,6 +62,8 @@ const Create = () => {
   useEffect(() => {
     if(location.state?.edit) {
       setCurStudents(students);
+      setCourse(classInfo.course_name);
+      setSem(classInfo.semester);
       users.forEach((std,i) => {
         if(students.includes(std.regno)) {
           setCheckBoxValues(prevState => {
@@ -105,16 +107,18 @@ const Create = () => {
     try {
       if(!location.state?.edit)
         var result = await axios.post(`/classroom/create`,ClassData);
-      if(result.data.success)
+      if(result?.data.success||location.state?.edit) {
         var result2 = await axios.post(`/classroom/add-student`,{ClassData,selectedStudents});
+        console.log(result2);
+      }
 
       setBtnLoading(false);
       toast.success('Classroom created successfully',{autoClose:3000});
       navigate('/classrooms');
     } catch(err) {
       setBtnLoading(false);
-      toast.error(err.response.data.error,{autoClose:3000});
       console.log(err);
+      // toast.error(err.response.data.error,{autoClose:3000});
     }
   }
 
@@ -191,7 +195,7 @@ const Create = () => {
     }
   }
 
-  const handleRemoveStudent = async(regno) => {
+  const handleRemoveStudent = async(regno,i) => {
     try {
       const data = {
         regno,
@@ -207,7 +211,7 @@ const Create = () => {
       console.log(err);
     }
   }
-  console.log(curStudents)
+  console.log('Cur Student',curStudents);
   return (
     <div className="CreateClass-container">
       <Back top="-1em" left="0"/>
@@ -294,10 +298,10 @@ const Create = () => {
                   behavior:'smooth',
                 })
               }}>
-              <button className="btn-outlined-green flex gap-1">
+              <div className="btn-outlined-green flex gap-1">
                 <HiPlus size={20}/>
               <span>Add Students</span>
-              </button>
+              </div>
             </div>}
           </div>
 
@@ -318,7 +322,7 @@ const Create = () => {
         </thead>
         <tbody>
             {users.filter(user => curStudents.includes(user.regno))
-            .map(std => {
+            .map((std,i) => {
              return <tr className="users-table-row" key={std.regno}>
                 <td>{std.regno}</td>
                 <td>{std.first_name}</td>
@@ -326,7 +330,7 @@ const Create = () => {
                 <td>{std.joining_year}</td>
                 <td>{std.semester}</td>
                 <td>{<HiMinus 
-                onClick={()=>handleRemoveStudent(std.regno)}
+                onClick={()=>handleRemoveStudent(std.regno,i)}
                 style={{cursor:'pointer'}} 
                 color="var(--strong-red)" 
                 size={20}
