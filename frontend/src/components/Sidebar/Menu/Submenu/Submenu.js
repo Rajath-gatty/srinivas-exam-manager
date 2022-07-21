@@ -1,28 +1,23 @@
-import { IoIosArrowForward } from "react-icons/io";
 import { NavLink } from "react-router-dom";
+import { useEffect, useRef} from "react";
+import { IoIosArrowForward } from "react-icons/io";
 
-const SubMenu = ({
-  title,
-  icon,
-  subMenu,
-  showMenu,
-  toggleDropdown,
-  setSubNavActive,
-  onOpen
-}) => {
+const SubMenu = ({title,icon,subMenu,showMenu,toggleDropdown,setSubNavActive,onOpen,notify}) => {
+  const notifyRef = useRef();
 
-  //Notify when Approval Request is Pending
-  let contextNotif = true;//should get data from contextData
-  const NotifyEle = document.querySelectorAll("[data-notify]");
-  NotifyEle.forEach(itm=>{
-    var spanEle = itm.getElementsByTagName('span')[0].textContent;
-    if(contextNotif){
-      if(spanEle==="Approval" || spanEle==="Payments")
-        itm.setAttribute("data-notify","active")
-      else
-        itm.setAttribute("data-notify","inactive")
+  useEffect(() => {
+    let menuName = notifyRef.current.childNodes[1].textContent;
+    if(notify.student || notify.faculty){
+      console.log(menuName)
+      if(menuName==="Approval") notifyRef.current.attributes["data-notify"].nodeValue = "active-drop";
     }
-  })
+    if(notify.payment){
+      console.log(menuName)
+      if(menuName==="Payments") notifyRef.current.attributes["data-notify"].nodeValue = "active-drop";
+    }
+  }, [notify]);
+
+
 
   return (
     <div className="multiLink flex">
@@ -32,8 +27,12 @@ const SubMenu = ({
             ? "dropdownLink flex active-arrow"
             : "dropdownLink flex"
         }
+        ref={notifyRef}
         data-notify="inactive"
-        onClick={(evt) => toggleDropdown(evt)}
+        onClick={(evt) => {
+          toggleDropdown(evt); 
+          notifyRef.current.attributes["data-notify"].nodeValue = "inactive";
+          }}
       >
         <img src={icon} alt={title} width="20px" />
         <span>{title}</span>

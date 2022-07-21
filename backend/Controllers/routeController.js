@@ -426,3 +426,21 @@ exports.getClassroom = async(req,res) => {
       res.status(500).send(err);
   }
 }
+
+exports.postSidebarNotify = async (req,res) => {
+  const { user } = req.body;
+  const deptId = req.deptId;
+  let sql;
+
+  if(user==="admin"){
+    sql = `SELECT 'staff' as title, COUNT(*) as count FROM staff where dept_id=${deptId} and status="pending"`;
+  } else{
+    sql = `SELECT 'faculty'  as title, COUNT(*) as count FROM faculty where dept_id=${deptId} and status="pending"
+    UNION
+    SELECT 'student', COUNT(*) FROM student where dept_id=${deptId} and status="pending"
+    UNION
+    SELECT 'payment', COUNT(*) FROM payment where dept_id=${deptId} and status="pending"`;
+  }
+  const result = await db.execute(sql);
+  res.set('Cache-Control','private, max-age=3600').send({role:user, result:result[0]});
+}
