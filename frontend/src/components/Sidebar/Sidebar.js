@@ -108,7 +108,6 @@ const Sidebar = () => {
       anchor={"left"} 
       variant="temporary"
       className="sidebar-drawer" 
-      ModalProps={{keepMounted:true}}
       onClose={() => setOpen(false)}
       sx={{
         display: { xs: 'block', sm: 'none' },

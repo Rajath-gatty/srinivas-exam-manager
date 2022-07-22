@@ -67,6 +67,7 @@ body {
   background-color: var(--main-bg);
   /* overflow-y: auto;
   scroll-behavior: smooth; */
+  font-size: 93%;
 }
 
 .flex {
