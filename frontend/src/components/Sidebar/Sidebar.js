@@ -8,6 +8,7 @@ import {motion} from "framer-motion";
 import { useState, useEffect} from "react";
 import { Drawer, List, SwipeableDrawer} from "@mui/material";
 import { FiMenu } from "react-icons/fi";
+import axios from "axios";
 
 const profAvatar = {
   stop: {
@@ -33,7 +34,30 @@ const Sidebar = () => {
 
   const { role, user,serverUrl } = useContextData();
   const location = useLocation();
-  // console.log(user);
+
+  const [notify, setNotify] = useState([]);
+  useEffect(() => {
+    if(["admin","staff"].includes(role)) {
+      const fetchNotify = async () => {
+        try {
+            const result = await axios.post("/sidebar/notify",{user:role});
+            result.data.result.forEach(notify => {
+              if(notify.count > 0){
+                let newState = {};
+                newState[notify.title] = true;
+                setNotify(prevState => {
+                  return {...prevState, ...newState}
+                });
+              }
+            })
+          } catch (error) {
+            console.log(error);
+          }
+      }
+      fetchNotify();
+    }	  
+  }, [role]);
+
   const handleprofileAnimation = () => {
     setProfAnimation(true);
   }
@@ -70,7 +94,7 @@ const Sidebar = () => {
       </div>
       <div className="sidebar-nav flex">
         <List>
-          <SidebarNav role={role} onOpen={setOpen}/>
+          <SidebarNav role={role} onOpen={setOpen} notify={notify}/>
         </List>
       </div>
       </>

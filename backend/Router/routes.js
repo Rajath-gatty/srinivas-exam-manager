@@ -7,6 +7,7 @@ router.post('/courses',routeContoller.getCourses);
 router.post('/semesters',routeContoller.getSemesters);
 
 router.get('/dashboard/users/count',isAuth,routeContoller.getUserCount);
+router.post('/sidebar/notify',isAuth,routeContoller.postSidebarNotify);
 
 router.post('/users/student',isAuth,routeContoller.getAllStudent);
 router.post('/users/faculty',isAuth,routeContoller.getAllFaculty);
