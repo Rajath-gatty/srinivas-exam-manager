@@ -151,10 +151,12 @@ exports.getSemFilteredStudent = async(req,res) => {
 }
 
 exports.getStudentByID = async(req,res) => {
-  const {query, classId} = req.body;
+  const {query, classId,courseName,semester} = req.body;
   const deptId = req.deptId;
   let sql;
-  if(classId) {
+  if(courseName&&semester) {
+    sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.semester='${semester}' and student.regno LIKE '${query}%'`;
+  } else if(classId) {
     sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.class_id=${classId} and student.regno LIKE '${query}%'`;
   } else {
     sql=`select course_name,eligibility,first_name,last_name,regno,joining_year,semester from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and student.regno LIKE '${query}%'`;
@@ -417,10 +419,12 @@ exports.postDemoteClassroom = (req,res) => {
 
 exports.getClassroom = async(req,res) => {
   const deptId = req.deptId;
+
   try{
     const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student right join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
     const result = await db.execute(sql);
     res.send(result[0]);
+
   } catch(err) {
       console.log(err);
       res.status(500).send(err);
@@ -431,7 +435,6 @@ exports.postSidebarNotify = async (req,res) => {
   const { user } = req.body;
   const deptId = req.deptId;
   let sql;
-
   if(user==="admin"){
     sql = `SELECT 'staff' as title, COUNT(*) as count FROM staff where dept_id=${deptId} and status="pending"`;
   } else{

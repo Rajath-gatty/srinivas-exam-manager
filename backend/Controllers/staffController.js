@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const hallTicketTemplate = require('../hallticket');
+const { Worker } = require('worker_threads');
 
 exports.getStudentApproveList = async(req,res) => {
     const {courseName} = req.body;
@@ -110,35 +111,18 @@ exports.postRejectFaculty = async(req,res) => {
 }
 
 exports.generateBulkHallticket = async(req,res) => {
-    const {semester,courseName,classId} = req.body;
-    try {
-        const start = Date.now();
-        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where class_id=? and eligibility=1 order by regno`;
-        const [result] = await db.execute(sql,[classId]);
+    const worker = new Worker(path.join(__dirname,'..','hallticketWorker.js'),{workerData:req.body});
 
-        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved' order by exam_date`;
-        const [timetable] = await db.execute(timetableSql);
-        const fonts = {
-          Times: {
-              normal: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman.ttf'),
-              bold: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold.ttf'),
-              italics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-italic.ttf'),
-              bolditalics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
-            },
-        }
-        const pdf = new Pdfmake(fonts);
-        const gzip = zlib.createGzip();
-        const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable,courseName),{});
+    worker.on('message',data => {
         res.set('content-encoding','gzip');
-        doc.pipe(gzip).pipe(res);
-	    doc.end();
-
-        const end = Date.now();
-        const total = end-start;
-        console.log(total+'ms');
-    } catch(err) {
+        zlib.gzip(data,{level:6},(err,zip)=>{
+            res.send(zip);
+        })
+    })
+    worker.on('error',(err)=> {
         console.log(err);
-    }
+    })
+    worker.on('exit',()=>console.log(`process exited on thread ${worker.threadId}`))
 }
 
 exports.setStudentEligibility = async(req,res) => {

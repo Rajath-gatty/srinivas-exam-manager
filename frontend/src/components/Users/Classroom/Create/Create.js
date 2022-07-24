@@ -427,6 +427,8 @@ const Create = () => {
           checkBoxValues={checkBoxValues}
           setCheckBoxValues={setCheckBoxValues}
           disableCurStudent={curStudents}
+          course={course}
+          semester={sem}
           />
         </div>
 

@@ -150,7 +150,6 @@ const Student = () => {
         const result = await axios.post("/registration/student",formData);
         setErrors([]);
         setPassErr(false);
-        console.log(result);
         
         toast.success("User Registered Successfully!", {
           isLoading: false, 
@@ -160,8 +159,8 @@ const Student = () => {
 
           navigate("/login");  
       } catch (err) {
-        setErrors(err.response.data.err);
         console.log(err);
+        setErrors(err.response.data.err);
 
         toast.error("Fill all the required fields!", {
           isLoading: false, 
@@ -704,6 +703,7 @@ const Student = () => {
                     error={fileErr.length>0}
                     helperText={fileErr}
                     onChange={(e) => handleFile(e)}
+                    required
                   />
                   <FormHelperText>max size 4MB supported types JPEG, JPG and PNG</FormHelperText>
                   </div>

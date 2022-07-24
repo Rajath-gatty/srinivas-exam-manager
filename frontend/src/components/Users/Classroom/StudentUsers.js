@@ -76,7 +76,8 @@ const StudentUsers = () => {
         classId:class_id
       }
       console.log(data);
-      const result = await axios.post('staff/halltickets',data,{responseType:"blob"});
+      const result = await axios.post('staff/halltickets',data,{responseType:'blob'});
+      console.log(result.data);
       const blob = new Blob([result.data], { type: 'application/pdf' });
       const objectUrl = window.URL.createObjectURL(blob);
       const uid = (Math.random() + 1).toString(36).substring(2);

@@ -67,7 +67,7 @@ const Profile = () => {
           </div> */}
 
           <div className="logout flex">
-            <div onClick={handleLogout} className="logout-btn flex">
+            <div onClick={handleLogout} className="btn-outlined-red gap-sm flex">
               <BiLogOut size={20} />
               <span>Logout</span>
             </div>

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 exports.postStudent = async (req, res) => {
   const data = req.body;
-  const imagePath = `/studentProfiles/${req.file.filename}`;
+  const imagePath = `/studentProfiles/${req.file.filename}`; 
 
   try {
     const hashedPassword = await bcrypt.hash(data.password, 4);

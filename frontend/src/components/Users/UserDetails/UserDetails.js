@@ -14,7 +14,7 @@ const UserDetails = () => {
   const location = useLocation();
   const {type, userId} = location.state;
 
-  // console.log(user)
+  console.log(location.state)
 
   useEffect(()=>{
     setLoading(true);

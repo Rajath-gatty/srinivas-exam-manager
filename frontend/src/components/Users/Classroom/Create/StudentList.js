@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
 import Back from "../../../UI/Back/Back";
 
-const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading,disableCurStudent}) => {
+const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading,disableCurStudent,course,semester}) => {
   const showEligible = hideEligible ? false:true;
 
   const handleSearch = async(e) => {
@@ -20,7 +20,7 @@ const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxVal
     cancelToken = source.token;
     try {
       setLoading(true);
-      const result = await axios.post(`/users/student/search`,{query},{cancelToken:cancelToken});
+      const result = await axios.post(`/users/student/search`,{query,courseName:course,semester},{cancelToken:cancelToken});
       if(result.data.length>0) {
         setUsers(result.data);
       }
