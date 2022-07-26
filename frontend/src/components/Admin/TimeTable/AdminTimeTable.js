@@ -15,7 +15,7 @@ import { useFetchCourses } from "../../../hooks/useFetchCourses";
 import { toast } from "react-toastify";
 
 const AdminTimeTable = () => {
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [inputFields, setInputFields] = useState([
         { subjectName: '', subjectCode: '', examDate: '', examTime: '' }
     ])

@@ -7,12 +7,12 @@ const SubMenu = ({title,icon,subMenu,showMenu,toggleDropdown,setSubNavActive,onO
 
   useEffect(() => {
     let menuName = notifyRef.current.childNodes[1].textContent;
+    
     if(notify.student || notify.faculty){
-      console.log(menuName)
       if(menuName==="Approval") notifyRef.current.attributes["data-notify"].nodeValue = "active-drop";
     }
+
     if(notify.payment){
-      console.log(menuName)
       if(menuName==="Payments") notifyRef.current.attributes["data-notify"].nodeValue = "active-drop";
     }
   }, [notify]);
