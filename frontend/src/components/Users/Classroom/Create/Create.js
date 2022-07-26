@@ -81,8 +81,12 @@ const Create = () => {
     setLoading(true);
     setUsers([]);
     const fetchUsers = async() => {
+      const data = {
+        courseValue:classInfo?classInfo.course_name:course,
+        semester:classInfo?classInfo.semester:sem
+      }
       try {
-        const result = await axios.post(`/users/student/`,{courseValue:course,semester:sem});
+        const result = await axios.post(`/users/student/`,data);
         setUsers(result.data);
         setCheckBoxValues(new Array(result.data.length).fill(false));
         setLoading(false);

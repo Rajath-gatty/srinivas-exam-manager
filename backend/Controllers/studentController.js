@@ -94,12 +94,7 @@ exports.getStudentTimetable = async(req,res) => {
 exports.generateHallTicket = async(req,res) => {
     const deptId = req.deptId;
     const timetable = req.body.timetable;
-    let stdId;
-    if(req.userId) {
-      stdId = req.userId;
-    } else {
-      stdId = req.body.regno;
-    }
+    const stdId = req.userId;
 
     const fonts = {
       Times: {
@@ -115,17 +110,17 @@ exports.generateHallTicket = async(req,res) => {
       const [result] = await db.execute(`select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where student.dept_id=? and regno=? and eligibility=1`,[deptId,stdId]);
 
       const pdf = new Pdfmake(fonts);
-      fs.readFile(`./pdfs/${stdId}.pdf`, 'utf8', (err, data) => {
-        if (!err) {
-          res.download(`./pdfs/${stdId}.pdf`);
-        } else {
+      // fs.readFile(`./pdfs/${stdId}.pdf`, 'utf8', (err, data) => {
+        // if (!err) {
+        //   res.download(`./pdfs/${stdId}.pdf`);
+        // } else {
           const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable),{});
           doc.end();
           doc.pipe(res);
-        }
-      })
+      //   }
+      // })
       const end = Date.now();
-      console.log(end-start+'ms');
+      console.log('Student hallticket ',end-start+'ms');
     } catch(err) {
       res.status(400).send(err);
       console.log(err);
@@ -137,7 +132,6 @@ exports.generateHallTicket = async(req,res) => {
     const {semester,courseId,regno} = req.body;
     try {
       const result = await db.execute(`select id,subj_name,subj_code,marks,attendence from marks_attendence where course_id=${courseId} and semester=${semester} and regno='${regno}'`);
-      console.log(result[0]);
       res.send(result[0]);
     } catch(err) {
       res.send(err);

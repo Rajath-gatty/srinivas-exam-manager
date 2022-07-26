@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import {FormControl,InputLabel,Select,MenuItem,FormHelperText} from "@mui/material";
 import "./Filter.css";
 
-const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, error=false, required=false, helperText, handleCourseChange, handleSemesterChange,handleSubjectChange, handleDeptChange,width="12em"},ref) => {
+const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, error=false, required=false, helperText='', handleCourseChange, handleSemesterChange,handleSubjectChange, handleDeptChange,width="12em"},ref) => {
   const filters = ['course','department','semester','subject'];
   const selectedFilter = filters.find(item => item===filter);
   let name;
@@ -42,7 +42,7 @@ const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, e
         disabled={disabled}
       >
         {value?<MenuItem value={value}>{value}</MenuItem>
-        :data.map((opt,i) => {
+        :data.length>0&&data.map((opt,i) => {
         return <MenuItem key={Math.random()+Date.now()} value={selectedFilter==='semester'?i+1:opt[name]}>
             {selectedFilter==='semester'?i+1:opt[name]}
           </MenuItem>

@@ -65,15 +65,15 @@ exports.getAllStudent = async (req,res) => {
   const courseName = req.body.courseValue;
   const semester = req.body.semester;
   const {classId} = req.body;
-
+ 
   let sql;
   if(classId){ 
     sql = `select regno,first_name,last_name,course_name,joining_year,student.semester,eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and class_id=${classId}`;
   }
   else if(courseName&&semester) {
-    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and semester=${semester} and student.status='approved' order by regno`;
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.semester=${semester} and student.status='approved' order by regno`;
   } else if(courseName) {
-    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course_name='${courseName}' and student.status='approved' order by regno`;
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course.course_name='${courseName}' and student.status='approved' order by regno`;
   } else {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and status='approved' order by regno`;
   }

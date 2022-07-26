@@ -15,7 +15,7 @@ import { useFetchCourses } from "../../../hooks/useFetchCourses";
 import { toast } from "react-toastify";
 
 const AdminTimeTable = () => {
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState(true);
     const [inputFields, setInputFields] = useState([
         { subjectName: '', subjectCode: '', examDate: '', examTime: '' }
     ])
@@ -23,7 +23,7 @@ const AdminTimeTable = () => {
     const [semesterError,setSemesterError] = useState('');
     const [timetables,setTimetables] = useState([]);
     const [loading,setLoading] = useState(true);
-    const [semFilter,setSemFilter] = useState([]);
+    const [semFilter,setSemFilter] = useState([1,2,3,4,5]);
     const [classList,setClassList] = useState([]);
     const [selectedClass,setSelectedClass] = useState('');
 
@@ -56,8 +56,13 @@ const AdminTimeTable = () => {
         values.splice(index, 1);
         setInputFields(values);
     }
+    
+      const handleCourseChange = (e) => {
+        const courseValue = e.target.value;
+        fetchSemesters(courseValue);
+      }
 
-    const fetchSemesters = async (courseName) => {
+      const fetchSemesters = async (courseName) => {
         try {
           const resp = await axios.post('/semesters',{courseName});
           const data = await resp?.data;
@@ -68,10 +73,9 @@ const AdminTimeTable = () => {
             console.log(error);
         }
       };
-    
-      const handleCourseChange = (e) => {
-        const courseValue = e.target.value;
-        fetchSemesters(courseValue);
+
+      const handleSemesterChange = () => {
+
       }
 
     useEffect(() => {
@@ -128,7 +132,7 @@ const AdminTimeTable = () => {
             console.log(err);
         }
     }
-
+    console.log(filterCourses);
     return (
         <>
             <div className="admin-timetable-main">
@@ -172,7 +176,8 @@ const AdminTimeTable = () => {
                             <form onSubmit={handleSubmit}>
                             <div className="select-box ">
 
-                            <Filter width="80%" 
+                            <Filter 
+                            width="80%" 
                             data={filterCourses} 
                             filter="course" 
                             label="Choose Course"
@@ -187,12 +192,13 @@ const AdminTimeTable = () => {
                             data={semFilter} 
                             filter="semester" 
                             label="Choose Semester"
+                            handleSemesterChange={handleSemesterChange}
                             ref={semesterRef}
                             error={semesterError?true:false}
                             helperText={semesterError}
                             />
 
-                            <FormControl className="SelectMenu Mr">
+                            <FormControl className="admin-timetable-classList-menu">
                                 <InputLabel>Class Batch</InputLabel>
                                 <Select
                                 label="Class Batch"
@@ -201,11 +207,12 @@ const AdminTimeTable = () => {
                                 type="number"
                                 required
                                 >
-                                {classList.map((opt) => (
+                                {/* {classList.map((opt) => (
                                     <MenuItem key={opt} value={opt}>
                                     {opt}
                                     </MenuItem>
-                                ))}
+                                ))} */}
+                                <MenuItem value="Hello">Hello</MenuItem>
                                 </Select>
                             </FormControl>
                             </div>

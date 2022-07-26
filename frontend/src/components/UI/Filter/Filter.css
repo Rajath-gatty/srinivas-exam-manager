@@ -16,7 +16,7 @@
 }
 
 .filter-comp .filterSearch-SelectInput label {
-  background-color: var(--main-bg);
+  background-color: rgb(253, 253, 253);
   padding-right: 0.3em;
   top: -0.5em;
 }
