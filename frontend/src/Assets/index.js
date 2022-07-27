@@ -13,6 +13,7 @@ import Attendance from "./NavIcons/Attendance.svg";
 import Indent from "./NavIcons/Indent.svg";
 import Coding from "./NavIcons/Coding.svg";
 import SemMarks from "./NavIcons/SemMarks.svg";
+import Classroom from "./NavIcons/Classroom.svg";
 
 import SrinivasLogo from "./SrinivasLogo.svg";
 import SEMSLogo from "./SEMSLogo.webp";
@@ -51,5 +52,6 @@ export {
     ForgotPassword,
     NoDataSvg,
     SEMSLogo,
-    Chancellor
+    Chancellor,
+    Classroom
 }

@@ -219,3 +219,25 @@ body {
 .Toastify__toast-body{
   text-align: center;
 }
+
+/* Custom ScrollBar */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  /* background-color: rgba(128, 128, 128, 0.1); */
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(30, 137, 245, 1);
+  /* background: var(--primary-gradient); */
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(30, 137, 245, 0.8);
+}

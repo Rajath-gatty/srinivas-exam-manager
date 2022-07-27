@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval, Courses, Calender, InternalMarks, Attendance, Payment, Indent, Application, Coding, SemMarks } from "../Assets";
+import { Dashboard, Users, Approval, Classroom, Courses, Calender, InternalMarks, Attendance, Payment, Indent, Application, Coding, SemMarks } from "../Assets";
 
 export const NavLinks = [
   {
@@ -36,7 +36,7 @@ export const NavLinks = [
       },
       {
         title: "Classrooms",
-        icon: Indent,
+        icon: Classroom,
         path: "/classrooms"
       },
       {
@@ -89,7 +89,7 @@ export const NavLinks = [
       {
         title: "Classrooms",
         path: "/classrooms",
-        icon: InternalMarks
+        icon: Classroom
       },
       // {
       //   title: "Semester Marks",
@@ -108,7 +108,7 @@ export const NavLinks = [
       },
       {
         title: "Classrooms",
-        icon: Indent,
+        icon: Classroom,
         path: "/classrooms"
       },
       {

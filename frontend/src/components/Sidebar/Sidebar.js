@@ -111,7 +111,7 @@ const Sidebar = () => {
     boxShadow:'1px 0px 10px rgba(0, 0, 0, 0.1)'}
 
   return (
-    <div className="sidebar" style={{width:window.innerWidth>600&&350}}>
+    <div className="sidebar" style={{width:window.innerWidth>600&&340}}>
       <Drawer 
       open={open}
       anchor={"left"} 
