@@ -4,7 +4,7 @@
     left: 0;
     bottom: 0;
     right: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.2);
     z-index: 10000;
 }
 
@@ -14,10 +14,20 @@
     left: 50%;
     transform: translate(-50%,-50%);
     padding: 2em;
-    background: var(--white);
+    background-color: rgba(255, 255, 255, 0.2);
+    /* background: var(--white); */
     border-radius: 10px;
     z-index: 10001;
     max-height: 550px;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.modal-content-wrapper *{
+    background-color: transparent !important;
+}
+
+.modal-content-wrapper .filter-comp *{
+    background-color: rgba(255, 255, 255, 0.5) !important;
+
 }
