@@ -1,22 +1,26 @@
 import "./Navbar.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {SrinivasLogo} from "../../Assets";
+import {FiArrowLeft} from "react-icons/fi"
+
 const Navbar = () => {
-return (
-    <nav className="nav">
-        <div className="container">
-            <div className="nav-wrapper">
-                <div className="nav-header">
-                    <img src={SrinivasLogo} className="header-img" alt="Srinivas Logo" />
-                    <h2 className="hdng">Srinivas Exam Manager</h2>
-                </div>
-                <div className="nav-links">
-                    <Link to="/">Login</Link>
+    const navigate = useNavigate();
+
+    return (
+        <nav className="nav">
+            <div className="nav-logo flex">
+                <img width="50px" src={SrinivasLogo} alt="Login SVG" />
+                <h1>Srinivas Exam Manager</h1>
+            </div>
+
+            <div className="nav-back">
+                <div onClick={() => navigate(-1)} className="nav-btn flex">
+                    <FiArrowLeft size={20}/>
+                    <span>Back</span>
                 </div>
             </div>
-        </div>
-    </nav>
-)
+        </nav>
+    )
 }
 
 export default Navbar;

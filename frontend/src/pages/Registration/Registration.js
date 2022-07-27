@@ -9,7 +9,7 @@ const Registration = () => {
     <>
       <Navbar />
       <div className="registration-container">
-        <h1>Register</h1>
+        <h1>User Registration</h1>
         <div className="registration-wrapper">
           <Link to="student">
             <div className="registration-card">

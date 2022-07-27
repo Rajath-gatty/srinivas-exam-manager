@@ -7,6 +7,7 @@ import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import Navbar from "../../../components/Navbar/Navbar";
 
 const ForgotPassword = () => {
     const [enteredEmail,setEnteredEmail] = useState('');
@@ -33,22 +34,10 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgotPassword-container">
-        <div className="forgotPassword-Header flex">
-            <div className="forgotPassword-logo flex">
-                <img width="50px" src={SrinivasLogo} alt="Login SVG" />
-                <h1>Srinivas Exam Manager</h1>
-            </div>
-
-            <div className="forgotPassword-back">
-                <button className="flex" onClick={()=>navigate(-1)}>
-                    <FiArrowLeft size={25}/>
-                    <span>Back</span>
-                </button> 
-            </div>
-        </div>
+        <Navbar />
 
         <div className="forgotPassword-Img flex">
-            <img src={ForgotPasswordSvg} alt="Page NotFound" width="400px" height="400px" />
+            <img src={ForgotPasswordSvg} alt="Page NotFound" width="350px" height="350px" />
             {!isReset ? <form className="forgotPassword-form" onSubmit={handleFormSubmit}>
                 <label htmlFor="resetEmail">Enter your Email ID</label>
                 <div className="forgotPassword-input flex">
