@@ -6,6 +6,7 @@ import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { CircularProgress } from "@mui/material";
+import Navbar from "../../../components/Navbar/Navbar";
 
 const ResetPassword = () => {
     const [newPassword,setNewPassword] = useState('');
@@ -16,19 +17,24 @@ const ResetPassword = () => {
 
     const handleFormSubmit = async (e) =>{
         e.preventDefault();
+        if(!newPassword) {
+            toast.error("Enter a Valid Password !");
+            return;
+        } 
+        
         setLoading(true);
         if(newPassword === confirmPassword){
-        try {
-            const result = await axios.post('/reset-password',{password:newPassword,token:resetId});
-            console.log(result);
-            setLoading(false);
-            toast.success("Password changed successfully");
-            navigate('/login');
-        } catch(err) {
-            setLoading(false);
-            console.log(err);
-            toast.error(err.response.data.error + "!");
-        }
+            try {
+                const result = await axios.post('/reset-password',{password:newPassword,token:resetId});
+                console.log(result);
+                setLoading(false);
+                toast.success("Password changed successfully");
+                navigate('/login');
+            } catch(err) {
+                setLoading(false);
+                console.log(err);
+                toast.error(err.response.data.error + "!");
+            }
         }else{
             setLoading(false);
             toast.error("Passwords do not match!");
@@ -37,19 +43,7 @@ const ResetPassword = () => {
 
   return (
     <div className="forgotPassword-container flex">
-        <div className="forgotPassword-Header flex">
-            <div className="forgotPassword-logo flex">
-                <img width="50px" src={SrinivasLogo} alt="Login SVG" />
-                <h1>Srinivas Exam Manager</h1>
-            </div>
-
-            <div className="forgotPassword-back">
-                <button className="flex" onClick={()=>navigate("/")}>
-                    <FiArrowLeft size={25}/>
-                    <span>Home</span>
-                </button> 
-            </div>
-        </div>
+        <Navbar />
 
         <form className="resetPassword-form flex" onSubmit={handleFormSubmit}>
             <span className="title">Create New Password</span>

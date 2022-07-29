@@ -19,16 +19,21 @@ const ForgotPassword = () => {
 
     const handleFormSubmit = async(e) => {
         e.preventDefault();
-        setLoading(true);
-        try {
-            const result = await axios.post('/forgot-password',{role:user,email:enteredEmail});
-            console.log(result);
-            setIsReset(true);
-            setLoading(false);
-        } catch(err) {
-            setLoading(false);
-            console.log(err);
-            toast.error(err.response.data.error + "!");
+        
+        if(enteredEmail){
+            setLoading(true);
+            try {
+                const result = await axios.post('/forgot-password',{role:user,email:enteredEmail});
+                console.log(result);
+                setIsReset(true);
+                setLoading(false);
+            } catch(err) {
+                setLoading(false);
+                console.log(err);
+                toast.error(err.response.data.error + "!");
+            }
+        }else{
+            toast.error("Enter a Valid Email !")
         }
     }
 
