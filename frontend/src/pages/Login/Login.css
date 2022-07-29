@@ -18,10 +18,7 @@
   justify-content: center;
   align-items: center;
   color: #fff;
-}
-
-.login-logo h1 {
-  margin-left: 0.5em;
+  gap: 0.5em;
 }
 
 .login-form {
@@ -207,3 +204,67 @@ input:focus .input-group {
   margin-right: 2em;
 }
 /* Development Role Change */
+
+/* MOBILE CSS */
+@media (max-width: 395px){
+  .login-art{
+    display: none;
+  }
+
+  .login-form{
+    /* max-height: 100vh; */
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .login-form .login-logo{
+    display: flex !important;
+    color: var(--primary-color);
+    margin: 1em 2em;
+    margin-top: 2em;
+    white-space: nowrap;
+  }
+  
+  .login-form .login-logo img{
+    filter: brightness(0) saturate(100%) invert(44%) sepia(93%) saturate(522%) hue-rotate(170deg) brightness(94%) contrast(105%);
+  }
+
+  .login-hdng{
+    position: relative;
+    top: auto;
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  .login-userSelectContain{
+    margin: 0;
+    gap: 4em;
+  }
+
+  .login-userSelect{
+    flex-direction: column;
+  }
+
+  .to-register{
+    margin-bottom: 4em;
+  }
+
+  .login-form form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .login-backBtn{
+    position: relative;
+    left: 0;
+    margin-bottom: 2em;
+    justify-content: flex-start;
+  }
+
+  .form-control .input-group input{
+    width: 280px !important;
+  }
+
+  
+}
