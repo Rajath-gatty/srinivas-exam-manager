@@ -84,7 +84,7 @@ export const NavLinks = [
       {
         title: "Attendance / Marks",
         path: "/attendance",
-        icon: InternalMarks
+        icon: Attendance,
       },   
       {
         title: "Classrooms",
