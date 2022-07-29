@@ -1,58 +1,37 @@
 .notFound-container{
     background-color: #fff;
-    height: 100vh;
+    flex-direction: column;
+    margin: 0 2em;
 }
 
-.notFound-logo{
-    color: var(--primary-color);
-    font-size: 1em;
-    gap: 0.5em;
-    position: absolute;
-    top: 2em;
-    left: 2em;
-}
-
-.notFound-logo img{
-    filter: brightness(0) saturate(100%) invert(44%) sepia(93%) saturate(522%) hue-rotate(170deg) brightness(94%) contrast(105%);
-}
-
-.notFound-back{
-    position: absolute;
-    top: 3em;
-    right: 5em;
-}
-
-.notFound-back a{
-    gap: 0.2em;
-    font-size: 1.1em;
-    color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    border-radius: 4px;
-    padding: 0.5em 0.8em;
-    transition: 0.2s ease-in-out;
-}
-
-.notFound-back a:hover{
-    color: #fff;
-    background-color: var(--primary-color);
+.notFound-container .nav{
+    width: 100%;
+    top: 0;
 }
 
 .notFound-Img{
     background-color: rgba(255, 255, 255, 1);
-    width: 300px;
+    width: 500px;
     aspect-ratio: 1/1;
-    padding: 2em;
+    margin-top: -2em;
     border-radius: 50%;
     gap: 2em;
-    flex: column;
+    flex-direction: column;
 }
 
 .notFound-container .notFound-Img h3 {
-    position: absolute;
-    top: 530px;
-    left: 50%;
-    transform: translateX(-50%);
     color: rgb(99, 99, 99);
     font-size: 2em;
+    margin-top: -2em;
 }
 
+/* MOBILE CSS */
+@media (max-width: 395px){
+    .notFound-container{
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+}
