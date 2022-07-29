@@ -26,7 +26,7 @@
 }
 
 /* MOBILE CSS */
-@media (max-width: 395px){
+@media (max-width: 534px){
     .notFound-container{
         flex-direction: column;
         width: 100%;

@@ -236,7 +236,7 @@
 }
 
 /* MOBILE CSS */
-@media (max-width: 395px) {
+@media (max-width: 534px) {
     .dashboard-header{
         font-size: 0.8em;
     }

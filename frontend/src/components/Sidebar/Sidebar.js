@@ -125,7 +125,7 @@ const Sidebar = () => {
       >
       {drawer}
     </Drawer>
-    {window.innerWidth<396&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
+    {window.innerWidth<535&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
     <SwipeableDrawer 
       open={open} 
       onOpen={() => setOpen(true)} 

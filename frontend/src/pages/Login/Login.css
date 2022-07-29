@@ -206,7 +206,7 @@ input:focus .input-group {
 /* Development Role Change */
 
 /* MOBILE CSS */
-@media (max-width: 395px){
+@media (max-width: 534px){
   .login-art{
     display: none;
   }
