@@ -33,3 +33,35 @@
     color: #fff;
     background-color: var(--primary-color);
 }
+
+/* MOBILE CSS */
+@media (max-width: 395px){
+    .nav{
+        width: 100%;
+        flex-direction: column;
+        margin: 1.5em 0;
+    }
+
+    .nav-logo{
+        white-space: nowrap;
+        margin: 1em 0;
+    }
+
+    .nav-back{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 4em;
+        margin-right: 2em;
+    }
+
+    .nav-back .nav-btn{
+        border: none;
+        color: var(--text-color);
+    }
+
+    .nav-back .nav-btn:hover{
+        background: none;
+        color: var(--text-color);
+    }
+}
