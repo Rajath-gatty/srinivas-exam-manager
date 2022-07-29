@@ -5,6 +5,14 @@
   /* box-sizing: border-box; */
 }
 
+/* CSS BUG TESTING CODE */
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */
+/* CSS BUG TESTING CODE */
+
 :root {
   --primary-gradient: linear-gradient(180deg, #2f98ff 0%, #004586 100%);
   --secondary-gradient: linear-gradient(180deg, #2f98ff 0%, #016fd6 100%);
@@ -218,6 +226,13 @@ body {
 /* Toastify Custom CSS */
 .Toastify__toast-body{
   text-align: center;
+}
+
+@media (max-width: 395px){
+  .Toastify__toast-container{
+    transform: scale(0.85) !important;
+    margin-bottom: 3em !important;
+  }
 }
 
 /* Custom ScrollBar */

@@ -23,6 +23,7 @@ const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, e
         // id = 'sem_id';
         name = '';
         selectFunction = handleSemesterChange;
+        // if(data.length===0 && value==="") value = "Select Course First";
   }
 
   return (

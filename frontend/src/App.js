@@ -176,6 +176,7 @@ function App() {
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
                 <Route path="internal" element={<InternalMarks />} />
                 <Route path="semester" element={<SemesterMarks />} />
+                <Route path="/classrooms/create" element={<CreateClass />} />
               </Route>
 
               {/* Student Access*/}
