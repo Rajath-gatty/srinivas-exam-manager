@@ -111,7 +111,7 @@ const Sidebar = () => {
     boxShadow:'1px 0px 10px rgba(0, 0, 0, 0.1)'}
 
   return (
-    <div className="sidebar" style={{minWidth:window.innerWidth>600&&270}}>
+    <div className="sidebar">
       <Drawer 
       open={open}
       anchor={"left"} 
@@ -125,7 +125,7 @@ const Sidebar = () => {
       >
       {drawer}
     </Drawer>
-    {window.innerWidth<600&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
+    {window.innerWidth<396&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
     <SwipeableDrawer 
       open={open} 
       onOpen={() => setOpen(true)} 
