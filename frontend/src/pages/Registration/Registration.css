@@ -197,3 +197,54 @@
 .upload-photo {
   width: 325px;
 }
+
+/* MOBILE CSS */
+@media (max-width: 395px){
+  .registration-container h1{
+    margin: 0;
+  }
+  .registration-wrapper{
+    flex-direction: column;
+    margin-bottom: 5em;
+  }
+
+  .registration-wrapper .registration-card img{
+    width: 100px;
+  }
+
+  .student-form,
+  .faculty-form,
+  .staff-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1em;
+    row-gap: 2em;
+    margin-top: 2.5em;
+  }
+
+  .dob-wrapper{
+    margin-top: 1em;
+  }
+
+  .radio-container,.textarea,.upload-photo {
+    width: 100%;
+  }
+
+  .faculty-form #radio-label,
+  .staff-form #radio-label{
+    left: 0 !important;
+  }
+
+  .register-btn{
+    width: 100%;
+    padding: 1em;
+  }
+
+  .to-login{
+    margin-top: 2em;
+    justify-content: center;
+  }
+}

@@ -130,7 +130,7 @@ const Faculty = () => {
       <div className="form-wrapper">
         <h2>Faculty Registration</h2>
         <form onSubmit={handleFormSubmit}>
-          <div className="student-form">
+          <div className="faculty-form">
             <TextField
               label="First Name"
               variant="outlined"
@@ -308,7 +308,7 @@ const Faculty = () => {
               helperText={errors.find((err) => err.param === "pincode")?.msg}
             />
 
-            <FormControl className="SelectInput">
+            <FormControl className="SelectInput" fullWidth>
               <InputLabel>Department</InputLabel>
               <Select
                 label="Department"

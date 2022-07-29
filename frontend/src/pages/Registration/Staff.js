@@ -123,7 +123,7 @@ const Staff = () => {
         <div className="form-wrapper">
           <h2>Staff Registration</h2>
           <form onSubmit={handleFormSubmit}>
-            <div className="student-form">
+            <div className="staff-form">
               <TextField
                 label="First Name"
                 variant="outlined"
@@ -167,13 +167,13 @@ const Staff = () => {
               <Dob 
               ref={dobRef}
               error={errors.some(err=>err.param==='dob')}
-            helperText={errors.find(err=>err.param==='dob')?.msg}
+              helperText={errors.find(err=>err.param==='dob')?.msg}
               />
   
               <RadioInput 
               setGender={setGender}
               error={errors.some(err=>err.param==='gender')}
-            helperText={errors.find(err=>err.param==='gender')?.msg}
+              helperText={errors.find(err=>err.param==='gender')?.msg}
             />
   
               <TextField
@@ -309,7 +309,7 @@ const Staff = () => {
                 inputRef={cPasswordRef}
               />
   
-                <FormControl className="SelectInput">
+                <FormControl className="SelectInput" fullWidth>
                   <InputLabel>Department</InputLabel>
                   <Select
                     label="Department"

@@ -589,6 +589,7 @@ const Student = () => {
                     size="small"
                     type="email"
                     inputRef={gEmailRef}
+                    fullWidth
                   />
                 </div>
               </div>
@@ -599,7 +600,7 @@ const Student = () => {
             <h3 className="sub-hdng">Admission Details</h3>
             <div className="sub-details student-form">
               {/* Raw Component used to trigger SwitchCourse */}
-              <FormControl className="SelectInput">
+              <FormControl className="SelectInput" fullWidth>
                 <InputLabel>Department</InputLabel>
                 <Select
                   label="Department"
@@ -710,7 +711,7 @@ const Student = () => {
                   <img src={fileUrl} alt=""/>
               </div>
           </div>
-          <input className="btn mt-1" type="submit" value="Register" />
+          <input className="register-btn btn mt-1" type="submit" value="Register" />
 
           <div className="to-login mb-1">
             <p>Already have an account ?</p>
