@@ -53,6 +53,7 @@
   ],
   "id": "/",
   "start_url": ".",
+  "launch_handler": { "route_to": "existing-client-navigate" },
   "display": "standalone",
   "display_override":["window-controls-overlay"],
   "theme_color": "#ffffff",
