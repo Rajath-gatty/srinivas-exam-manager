@@ -22,7 +22,7 @@ const Classroom = () => {
     setLoading(true);
     const fetchClasses = async () => {
       try {
-        const result = await axios.get(`/classroom`);
+        const result = await axios.post(`/classroom`,{});
         setClasses(result.data);
         setLoading(false);
       } catch (error) {

@@ -176,7 +176,7 @@ function App() {
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
                 <Route path="internal" element={<InternalMarks />} />
                 <Route path="semester" element={<SemesterMarks />} />
-                <Route path="/classrooms/create" element={<CreateClass />} />
+                {/* <Route path="/classrooms/create" element={<CreateClass />} /> */}
               </Route>
 
               {/* Student Access*/}
@@ -227,9 +227,7 @@ function App() {
                 {/* <Route path="users/student/:userId" element={<UserDetails />} /> */}
                 <Route path="users/faculty/:userId" element={<UserDetails />} />
                 <Route path="users/staff/:userId" element={<UserDetails />} />
-
                 <Route path="/users/faculty/subjects/:facultyId" element={<FacultySubjects />} />
-                <Route path="/classrooms/create" element={<CreateClass />} />
               </Route>
 
               {/* Exam Coordinator Access */}
@@ -249,6 +247,7 @@ function App() {
                 <Route path="/classrooms" element={<Classroom />} />
                 <Route path="/classrooms/student" element={<StudentUsers />} />
                 <Route path="/classrooms/student/:userId" element={<UserDetails />} />
+                <Route path="/classrooms/create" element={<CreateClass />} />
               </Route>
 
               {/*Common Protected Routes */}

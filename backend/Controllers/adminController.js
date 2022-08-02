@@ -218,19 +218,37 @@ exports.postRejectStaff = async (req, res) => {
     }
 }
 
-exports.postNewTimeTable = (req, res) => {
-    const { courseName, semester, timetable, tId } = req.body;
+exports.postNewTimeTable = async(req, res) => {
+    const { courseName, semester, timetable, tId, classId } = req.body;
     const deptId = req.deptId;
 
-    const sql = `insert into timetable(dept_id,course_id,semester,t_id,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?,?)`;
     try {
+        const duplicate = await db.execute(`select count(class_id) as count from timetable where class_id="${classId}"`)
+        if(duplicate[0][0].count > 0){
+            return res.status(400).send('Timetable already exists');
+        }
+
+        const sql = `insert into timetable(dept_id,course_id,semester,class_id,t_id,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?,?,?)`;
         timetable.forEach(async ({ subjectName, subjectCode, examDate, examTime }) => {
-            await db.execute(sql, [deptId, courseName, semester, tId, subjectName, subjectCode, examDate, examTime, 'pending']);
+            await db.execute(sql, [deptId, courseName, semester,classId, tId, subjectName, subjectCode, examDate, examTime, 'pending']);
         })
         res.status(200).send({ success: true, result: 'Inserted Successfully' });
     } catch (err) {
         console.log(err);
-        res.status(500).send({ success: false })
+        res.status(500).send('Something went wrong!');
+    }
+}
+
+exports.deleteTimetable = async (req, res) => {
+    const {id} = req.body;
+    const sql = `delete from timetable where t_id='${id}'`;
+
+    try {
+        await db.query(sql);
+        res.status(200).send({success: true, result: 'Deleted Successfully'});
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Something went wrong!');
     }
 }
 

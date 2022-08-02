@@ -5,7 +5,6 @@
 
 .admin-timetable-main .admin-timetable-header {
     display: flex;
-    max-width: 700px;
     justify-content: space-between;
 }
 
@@ -164,6 +163,10 @@
 .admin-timetable-classList-menu label{
     padding-right: 0.3em;
     top: -0.5em;
+}
+
+.MuiModal-root {
+    z-index: 10005 !important;
 }
 
 .approved {color: var(--strong-green);}

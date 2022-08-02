@@ -228,6 +228,10 @@ body {
   text-align: center;
 }
 
+.Toastify__toast-container{
+  z-index: 10010 !important;
+}
+
 @media (max-width: 534px){
   .Toastify__toast-container{
     transform: scale(0.85) !important;
@@ -246,13 +250,14 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(30, 137, 245, 1);
+  /* background-color: rgba(30, 137, 245, 1); */
   /* background: var(--primary-gradient); */
+  background-color: var(--light-grey);
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(30, 137, 245, 0.8);
-}
+/* ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--light-grey);
+} */

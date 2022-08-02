@@ -23,7 +23,8 @@ const AdminTimeTable = () => {
     const [semesterError,setSemesterError] = useState('');
     const [timetables,setTimetables] = useState([]);
     const [loading,setLoading] = useState(true);
-    const [semFilter,setSemFilter] = useState([1,2,3,4,5]);
+    const [semFilter,setSemFilter] = useState([]);
+    const [courseName,setCourseName] = useState('');
     const [classList,setClassList] = useState([]);
     const [selectedClass,setSelectedClass] = useState('');
 
@@ -59,6 +60,7 @@ const AdminTimeTable = () => {
     
       const handleCourseChange = (e) => {
         const courseValue = e.target.value;
+        setCourseName(courseValue);
         fetchSemesters(courseValue);
       }
 
@@ -66,7 +68,6 @@ const AdminTimeTable = () => {
         try {
           const resp = await axios.post('/semesters',{courseName});
           const data = await resp?.data;
-          console.log(data);
           const semData = new Array(data.course_sem).fill('');
           setSemFilter(semData);
         } catch (error) {
@@ -74,8 +75,15 @@ const AdminTimeTable = () => {
         }
       };
 
-      const handleSemesterChange = () => {
-
+      const handleSemesterChange = async(e) => {
+        try {
+            const resp = await axios.post('/classroom',{courseName,semester:e.target.value});
+            const data = await resp?.data;
+            setClassList(data);
+            console.log(data);
+          } catch (error) {
+              console.log(error);
+          }
       }
 
     useEffect(() => {
@@ -119,6 +127,7 @@ const AdminTimeTable = () => {
         const data = {
             courseName: course,
             semester: semester,
+            classId:selectedClass,
             tId:tId,
             timetable: inputFields
         }
@@ -126,13 +135,36 @@ const AdminTimeTable = () => {
             if(course&&semester) {
                 const promise = axios.post('/admin/timetable/new',data);
                 const result = await promise;
+                toast.success("TimeTable Uploaded Successfully")
                 console.log(result);
+                setLoading(true);
+                setShowModal(false);
+                const res = await axios.get('admin/timetables');
+                setTimetables(res.data);
+                setLoading(false);
             }
         } catch(err) {
-            console.log(err);
+                toast.error(err.response.data)
+                console.log(err);
         }
     }
-    console.log(filterCourses);
+
+    const deleteTimetable = async(id)=> {
+        try {
+            const resp = await axios.post('admin/timetable/delete',{id});
+            const data = await resp?.data;
+            setTimetables(prevState => {
+                const newArr = [...prevState];
+                const updatedState = newArr.filter(tbl => tbl.t_id!==id);
+                return updatedState; 
+            })
+            toast.success('Deleted Successfully!')
+          } catch (error) {
+              console.log(error);
+              toast.error(error.response.data);
+          }
+    }
+
     return (
         <>
             <div className="admin-timetable-main">
@@ -153,6 +185,7 @@ const AdminTimeTable = () => {
                             <th>Total Subjects</th>
                             <th>Created At</th>
                             <th>Approval</th>
+                            <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,6 +193,7 @@ const AdminTimeTable = () => {
                                 return <AdminTimeTableList
                                 key={item.t_id} 
                                 item={item}
+                                deleteTimetable={deleteTimetable}
                                 />
                             })}
                         </tbody>
@@ -205,14 +239,16 @@ const AdminTimeTable = () => {
                                 placeholder="Class Batch" 
                                 size="small"
                                 type="number"
+                                defaultValue=""
                                 required
+                                onChange={(e)=>setSelectedClass(e.target.value)}
                                 >
-                                {/* {classList.map((opt) => (
-                                    <MenuItem key={opt} value={opt}>
-                                    {opt}
+                                {classList.map((opt) => (
+                                    <MenuItem key={opt.class_id} value={opt.class_id}>
+                                    {opt.name}
                                     </MenuItem>
-                                ))} */}
-                                <MenuItem value="Hello">Hello</MenuItem>
+                                ))}
+                                {/* <MenuItem value="Hello">Hello</MenuItem> */}
                                 </Select>
                             </FormControl>
                             </div>

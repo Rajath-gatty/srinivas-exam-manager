@@ -71,6 +71,7 @@ router.post('/approve/staff/:id',isAuth,adminController.postApproveStaff);
 router.post('/reject/staff/:id',isAuth,adminController.postRejectStaff);
 
 router.post('/timetable/new',isAuth,adminController.postNewTimeTable);
+router.post('/timetable/delete',isAuth,adminController.deleteTimetable);
 router.get('/timetables',isAuth,adminController.getTimetables);
 
 module.exports = router;

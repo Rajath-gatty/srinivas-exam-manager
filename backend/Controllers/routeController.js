@@ -419,9 +419,14 @@ exports.postDemoteClassroom = (req,res) => {
 
 exports.getClassroom = async(req,res) => {
   const deptId = req.deptId;
-
+  const {courseName,semester} = req.body;
   try{
-    const sql = `select classroom.*,course_name,count(student.class_id) as total_students from student right join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
+    let sql;
+    if(courseName&&semester) {
+      sql = `select name,class_id from classroom where course_id=(select course_id from course where course_name='${courseName}') and semester=${semester}`;
+    } else {
+      sql = `select classroom.*,course_name,count(student.class_id) as total_students from student right join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
+    }
     const result = await db.execute(sql);
     res.send(result[0]);
 
