@@ -11,6 +11,7 @@ const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
     const [loading,setLoading] = useState(false);
     const {user} = useContextData();
+    console.log(user);
     const semester = user.semester;
     const courseId = user.courseId;
     
@@ -18,7 +19,7 @@ const StudentTimeTable = () => {
         const fetchTimetables = async () => {
             try {
                 setLoading(true);
-                const result = await axios.post('/student/timetable',{semester, courseId});
+                const result = await axios.post('/student/timetable',{semester, courseId,classId:user.classId});
                 setTimetable(result.data);
                 setLoading(false);
             } catch(err) {
@@ -32,7 +33,7 @@ const StudentTimeTable = () => {
     const handleHallticket = async () =>{
         if(user.eligibility){
             try {
-                const result = await axios.post('student/hallticket',{timetable},{responseType:"blob"});
+                const result = await axios.post('student/hallticket',{classId:user.classId},{responseType:"blob"});
                 fileDownload(result.data,`${user.first_name+'-'+user.last_name}-SEM-${user.semester}-hallticket.pdf`);
                 const blob = new Blob([result.data], { type: 'application/pdf' });
                 const objectUrl = window.URL.createObjectURL(blob);

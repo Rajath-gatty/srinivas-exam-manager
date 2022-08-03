@@ -1,9 +1,9 @@
 const db = require('../db');
-const Pdfmake = require("pdfmake");
-const hallTicketTemplate = require('../hallticket');
 const fs = require('fs');
 const path = require('path');
 const {validationResult} = require('express-validator');
+const zlib = require('zlib');
+const { Worker } = require('worker_threads');
 
 exports.getStudentSubjects = async(req,res) => {
   const {semester,courseId} = req.body;
@@ -78,12 +78,12 @@ exports.postRepeaterPayment = async(req,res) => {
 }
 
 exports.getStudentTimetable = async(req,res) => {
-    const {semester,courseId} = req.body;
+    const {classId} = req.body;
     const deptId = req.deptId;
 
     try{
-        let sql = `select subj_code,subj_name,exam_date,exam_time from timetable where dept_id=? and course_id=? and semester=? and status='approved'`;
-       const result = await db.execute(sql,[deptId,courseId,semester]);
+        let sql = `select subj_code,subj_name,exam_date,exam_time from timetable where dept_id=? and class_id=? and status='approved'`;
+       const result = await db.execute(sql,[deptId,classId]);
        res.send(result[0]);
     } catch(err) {
         res.status(500).send(err);
@@ -92,39 +92,23 @@ exports.getStudentTimetable = async(req,res) => {
 }
 
 exports.generateHallTicket = async(req,res) => {
-    const deptId = req.deptId;
-    const timetable = req.body.timetable;
     const stdId = req.userId;
+    const worker = new Worker(path.join(__dirname,'..','hallticketWorker.js'),{workerData:{
+      staff:false,
+      body:req.body,
+      regno:stdId
+  }});
 
-    const fonts = {
-      Times: {
-          normal: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman.ttf'),
-          bold: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold.ttf'),
-          italics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-italic.ttf'),
-          bolditalics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
-        },
-    }
-  ;
-    try {
-      const start = Date.now();
-      const [result] = await db.execute(`select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where student.dept_id=? and regno=? and eligibility=1`,[deptId,stdId]);
-
-      const pdf = new Pdfmake(fonts);
-      // fs.readFile(`./pdfs/${stdId}.pdf`, 'utf8', (err, data) => {
-        // if (!err) {
-        //   res.download(`./pdfs/${stdId}.pdf`);
-        // } else {
-          const doc = pdf.createPdfKitDocument(hallTicketTemplate(result,timetable),{});
-          doc.end();
-          doc.pipe(res);
-      //   }
-      // })
-      const end = Date.now();
-      console.log('Student hallticket ',end-start+'ms');
-    } catch(err) {
-      res.status(400).send(err);
+  worker.on('message',data => {
+      res.set('content-encoding','gzip');
+      zlib.gzip(data,{level:6},(err,zip)=>{
+          res.send(zip);
+      })
+  })
+  worker.on('error',(err)=> {
       console.log(err);
-    }
+  })
+  worker.on('exit',()=>console.log(`process exited on thread ${worker.threadId}`))
   }
 
   exports.getStudentInternalMarks = async(req,res) => {

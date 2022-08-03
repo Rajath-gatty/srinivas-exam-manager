@@ -5,13 +5,21 @@ const Pdfmake = require('pdfmake');
 const path = require('path');
 const generateHallticket =  async(callback) => {
     try {
-        const {semester,classId,courseName} = workerData;
+        const staff = workerData.staff;
+        const {classId} = workerData.body;
 
         const start1 = Date.now();
-        const sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where class_id=? and eligibility=1 order by regno`;
-        const [result] = await db.execute(sql,[classId]);
-    
-        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where course_id=(select course_id from course where course_name='${courseName}') and semester='${semester}' and status='approved' `;
+        let sql,courseName,regno;
+        if(staff) {
+             courseName = workerData.body.courseName;
+
+             sql = `select regno,first_name,last_name,dept_name,semester,image_path from student join department on student.dept_id=department.dept_id where class_id=${classId} and eligibility=1 order by regno`;
+        } else {
+            regno = workerData.regno;
+            sql = `select regno,first_name,last_name,dept_name,course_name,semester,image_path from student join course on student.course_id=course.course_id join department on course.dept_id=department.dept_id where regno='${regno}' and eligibility=1`
+        }
+        const [result] = await db.execute(sql);    
+        const timetableSql = `select subj_name,subj_code,exam_date,exam_time from timetable where class_id=${classId} and status='approved' `;
         const [timetable] = await db.execute(timetableSql);
 
         const end1 = Date.now();
@@ -40,18 +48,18 @@ const generateHallticket =  async(callback) => {
             callback(result2);
         });
 
-        doc.end();
-                           
+        doc.end();                  
         const end = Date.now();
         const total = end-start;
         console.log('Hallticket ',total+'ms');
         console.log('Total ',end-start1+'ms');
-
         } catch(err) {
         console.log(err);
+        process.exit(0);
     }
 }
 
 generateHallticket(function (binary) {
         parentPort.postMessage(binary);
+        process.exit(0);
 });

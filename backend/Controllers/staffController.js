@@ -1,9 +1,7 @@
 const db = require('../db');
-const Pdfmake = require('pdfmake');
 const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
-const hallTicketTemplate = require('../hallticket');
 const { Worker } = require('worker_threads');
 
 exports.getStudentApproveList = async(req,res) => {
@@ -111,7 +109,10 @@ exports.postRejectFaculty = async(req,res) => {
 }
 
 exports.generateBulkHallticket = async(req,res) => {
-    const worker = new Worker(path.join(__dirname,'..','hallticketWorker.js'),{workerData:req.body});
+    const worker = new Worker(path.join(__dirname,'..','hallticketWorker.js'),{workerData:{
+        body:req.body,
+        staff:true
+    }});
 
     worker.on('message',data => {
         res.set('content-encoding','gzip');
