@@ -169,8 +169,8 @@
     z-index: 10005 !important;
 }
 
-.approved {color: var(--strong-green);}
-.rejected {color: var(--strong-red);}
+.Approved {color: var(--strong-green);}
+.Rejected {color: var(--strong-red);}
 .field-error {
     color: var(--strong-red);
     margin-top: 1em;

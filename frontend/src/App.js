@@ -32,13 +32,13 @@ import Create from "./components/Admin/Course/Create/Create";
 import CourseDetails from "./components/Admin/Course/CourseDetails/CourseDetails";
 import InternalMarks from "./components/Faculty/InternalMarks/InternalMark";
 import SemesterMarks from "./components/Faculty/SemesterMarks/SemesterMarks";
-import IndentRegular from "./components/Staff/Indent/IndentRegular";
-import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
+// import IndentRegular from "./components/Staff/Indent/IndentRegular";
+// import IndentRepeater from "./components/Staff/Indent/IndentRepeater";
 import PaymentsRegular from "./components/Staff/Payments/PaymentsRegular/PaymentsRegular";
 // import PaymentsRepeater from "./components/Staff/Payments/PaymentsRepeater/PaymentsRepeater";
 import ApplicationRegular from "./components/Student/Application/ApplicationRegular";
 import ApplicationRepeater from "./components/Student/Application/ApplicationRepeater";
-import Promote from "./components/Staff/Promote/Promote";
+// import Promote from "./components/Staff/Promote/Promote";
 
 import Profile from "./pages/Profile/Profile";
 import PaymentsRegularApproval from "./components/Staff/Payments/PaymentsRegular/PaymentsRegularApproval";

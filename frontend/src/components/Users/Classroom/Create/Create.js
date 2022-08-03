@@ -75,7 +75,7 @@ const Create = () => {
         }
       })
     }
-  },[users])
+  },[users,classInfo,location.state,students])
   
   useEffect(() => {
     setLoading(true);
@@ -95,7 +95,7 @@ const Create = () => {
       }
     }
     fetchUsers();
-  },[course,sem]);
+  },[course,sem,classInfo]);
 
   const HandleCreateClass = async (e) =>{
     e.preventDefault();

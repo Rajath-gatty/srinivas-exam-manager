@@ -152,7 +152,8 @@ const AdminTimeTable = () => {
     const deleteTimetable = async(id)=> {
         try {
             const resp = await axios.post('admin/timetable/delete',{id});
-            const data = await resp?.data;
+            console.log(resp?.data);
+            // const data = await resp?.data;
             setTimetables(prevState => {
                 const newArr = [...prevState];
                 const updatedState = newArr.filter(tbl => tbl.t_id!==id);

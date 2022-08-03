@@ -28,7 +28,7 @@ const StudentTimeTable = () => {
             }
         }
         fetchTimetables();
-    },[])
+    },[courseId,semester,user.classId])
 
     const handleHallticket = async () =>{
         if(user.eligibility){
