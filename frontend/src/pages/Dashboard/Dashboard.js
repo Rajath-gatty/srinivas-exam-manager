@@ -15,7 +15,7 @@ import StudentDash from "../../components/Dashboard/StudentDash"
 const Dashboard = () => {
   const { role } = useContextData();
   return (
-    <div className='dashboard-container'>
+    <div className='dashboard-container flex'>
       <div className="dashboard-header flex">
         <img src={SrinivasLogo} alt="SIMSLogo" width="60px" height="auto" />
         <h1>SRINIVAS UNIVERSITY</h1>

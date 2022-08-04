@@ -2,6 +2,7 @@
     width: 100%;
     position: relative;
     overflow-x: hidden;
+    flex-direction: column;
 }
 
 .dashboard-header{
@@ -184,6 +185,7 @@
 /* DASHBOARD STATS STYLE */
 .dashboard-stats{
     min-height: 7.5rem;
+    min-width: 800px;
     margin: 2em 8em;
     margin-top: 3em;
     padding: 0.5em 0;
@@ -245,14 +247,20 @@
     }
 
     .dashboard-stats{
-        margin: 1.5em;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
+        min-width:0;
+        margin: 0 2em;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        width: fit-content;
+        transform: scale(0.75);
     }
 
     .dashboard-statsItem{
         transform: scale(0.8);
+    }
+
+    .dashboard-AboutTitle{
+        margin-top: 1em;
     }
 
     .dashboard-chancellor{
