@@ -10,11 +10,9 @@ import axios from "axios";
 const UserDetails = () => {
   const [userData,setUserData] = useState([]);
   const [loading,setLoading] = useState(true);
-  const {serverUrl, user} = useContextData();
+  const {serverUrl} = useContextData();
   const location = useLocation();
   const {type, userId} = location.state;
-
-  console.log(location.state)
 
   useEffect(()=>{
     setLoading(true);
@@ -40,7 +38,7 @@ const UserDetails = () => {
         <div className="userinfo-profile flex">
           <div className="userinfo-avatar flex">
             {!userData.image_path?<FaUserCircle color="var(--light-grey)" size={70} />:
-            <img className="userinfo-details-img" src={serverUrl+userData.image_path} />}
+            <img className="userinfo-details-img" src={serverUrl+userData.image_path} alt="Profile" />}
           </div>
 
           <div className="userinfo-title flex">

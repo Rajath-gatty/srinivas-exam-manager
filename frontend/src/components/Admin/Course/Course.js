@@ -15,7 +15,6 @@ const Course = () => {
           try {
               setLoading(true);
               const result = await axios.get('/admin/courses');
-              console.log(result);
               setLoading(false);
               setCourses(result.data);
           } catch(err) {
