@@ -1,6 +1,6 @@
 const express = require('express');
-const spdy = require('spdy');
-const fs = require('fs');
+// const spdy = require('spdy');
+// const fs = require('fs');
 const cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -31,13 +31,13 @@ app.use(routes);
 app.use(registrationRoutes);
 
 const PORT = process.env.PORT||8080;
-// app.listen(PORT);
-spdy
-    .createServer({
-        key: fs.readFileSync('./server.key'),
-        cert: fs.readFileSync('./server.crt')
-    }, app)
-    .listen(PORT, (err) => {
-        if (err) {
-            throw new Error(err);
-        }});
+app.listen(PORT);
+// spdy
+//     .createServer({
+//         key: fs.readFileSync('./server.key'),
+//         cert: fs.readFileSync('./server.crt')
+//     }, app)
+//     .listen(PORT, (err) => {
+//         if (err) {
+//             throw new Error(err);
+//         }});
