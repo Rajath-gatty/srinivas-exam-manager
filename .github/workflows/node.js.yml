@@ -10,8 +10,8 @@ on:
     branches: [ "main" ]
     
 defaults:
-  run: |
-    cd backend
+  run:
+    working-directory: ./backend
 
 jobs:
   build:
