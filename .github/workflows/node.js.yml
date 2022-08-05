@@ -10,12 +10,11 @@ on:
     branches: [ "main" ]
     
 defaults:
-  run: |
-    cd backend
+  run:
+    working-directory: ./srinivas-exam-manager/backend
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     strategy:
@@ -28,6 +27,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
+        working-directory: ./backend
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm install
