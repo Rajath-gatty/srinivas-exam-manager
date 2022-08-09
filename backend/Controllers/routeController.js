@@ -49,6 +49,19 @@ exports.getSemesters = async(req,res) => {
   }
 }
 
+exports.getSubjects = async(req,res) => {
+  const {courseName, classroomName} = req.body;
+
+  try {
+    const sql = `select subj_name from semester join course on semester.course_id=course.course_id join classroom on semester.sem_name=classroom.semester where course.course_name='${courseName}' and classroom.name='${classroomName}'`;
+    const [result] = await db.execute(sql);
+    console.log(result);
+    res.send(result);
+  } catch(err) {
+      res.status(500).send(err);
+  }
+}
+
 exports.getUserCount = async (req,res) => {
   const deptId = req.deptId;
   const sql = `SELECT 'faculty' as user , COUNT(*) as count FROM faculty where dept_id=${deptId}
@@ -87,7 +100,13 @@ exports.getAllStudent = async (req,res) => {
 
 exports.getAllFaculty = async(req,res) => {
   const deptId = req.deptId;
-   let sql=`select faculty_id,email,first_name, last_name,joining_year from faculty where faculty.dept_id=${deptId} and status='approved' order by faculty_id`;
+  const {subject} = req.body;
+  let sql;
+  if(subject) {
+     sql=`select faculty_subjects.faculty_id,email,first_name, last_name,joining_year from faculty_subjects join faculty on faculty_subjects.faculty_id=faculty.faculty_id where subj_name='${subject}' order by faculty_subjects.faculty_id`;
+  } else {
+    sql=`select faculty_id,email,first_name, last_name,joining_year from faculty where faculty.dept_id=${deptId} and status='approved' order by faculty_id`;
+  }
   try{
     const result = await db.execute(sql);
     res.send(result[0]);
@@ -424,6 +443,9 @@ exports.getClassroom = async(req,res) => {
     let sql;
     if(courseName&&semester) {
       sql = `select name,class_id from classroom where course_id=(select course_id from course where course_name='${courseName}') and semester=${semester}`;
+    }
+    else if(courseName){
+      sql = `select name,class_id from classroom where course_id=(select course_id from course where course_name='${courseName}')`;
     } else {
       sql = `select classroom.*,course_name,count(student.class_id) as total_students from student right join classroom on student.class_id=classroom.class_id join course on classroom.course_id=course.course_id where classroom.dept_id=${deptId} group by classroom.class_id;`;
     }

@@ -2,66 +2,47 @@ import { useState, useEffect } from "react";
 import "./AssignFaculty.css";
 import { FiCheck } from "react-icons/fi";
 import Back from "../../../UI/Back/Back";
-import SelectInput from "../../../UI/SelectInput";
+import axios from "axios";
+import Filter from "../../../UI/Filter/Filter";
+import { useFetchCourses } from "../../../../hooks/useFetchCourses";
+import {
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
+import { useContextData } from "../../../../hooks/useContextData";
 // import { AssignFacultyList } from "./AssignFacultyList";
 
 const AssignFaculty = () => {
-  var CourseValues = ["BCA", "MCA", "BBA", "MBA", "BCom", "MCom"];
-  var SemValues = ["I Sem", "II Sem", "III Sem", "IV Sem", "V Sem"];
-  var BundleValues = ["19BCA1001", "19BCA1002", "19BCA1003", "19BCA1004"];
-
-  var userData = [
-    {
-      profile:
-        "https://images.unsplash.com/photo-1649937479025-fc25252bb7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDAwNTB8MHwxfHNlYXJjaHwxN3x8YW5pbWV8ZW58MHwyfHx8MTY1MzU5MzI1MA&ixlib=rb-1.2.1&q=80&w=400&fm=webp",
-      regno: "3SU19SA011",
-      name: "John Doe",
-      course: "BCA",
-      semester: "V Sem",
-      bundle: "19BCA1001",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1649937479025-fc25252bb7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDAwNTB8MHwxfHNlYXJjaHwxN3x8YW5pbWV8ZW58MHwyfHx8MTY1MzU5MzI1MA&ixlib=rb-1.2.1&q=80&w=400&fm=webp",
-      regno: "3SU19SA012",
-      name: "John Doe",
-      course: "BCA",
-      semester: "V Sem",
-      bundle: "19BCA1001",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1649937479025-fc25252bb7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDAwNTB8MHwxfHNlYXJjaHwxN3x8YW5pbWV8ZW58MHwyfHx8MTY1MzU5MzI1MA&ixlib=rb-1.2.1&q=80&w=400&fm=webp",
-      regno: "3SU19SA013",
-      name: "John Doe",
-      course: "BCA",
-      semester: "V Sem",
-      bundle: "19BCA1001",
-    },
-    {
-      profile:
-        "https://images.unsplash.com/photo-1649937479025-fc25252bb7dc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDAwNTB8MHwxfHNlYXJjaHwxN3x8YW5pbWV8ZW58MHwyfHx8MTY1MzU5MzI1MA&ixlib=rb-1.2.1&q=80&w=400&fm=webp",
-      regno: "3SU19SA014",
-      name: "John Doe",
-      course: "BCA",
-      semester: "V Sem",
-      bundle: "19BCA1001",
-    },
-  ];
-
-  // var EvaluatorList = [
-  //   {
-  //     BCA: [],
-  //     MCA: [],
-  //     BBA: [],
-  //     MBA: [],
-  //     BCom: [],
-  //     MCom: [],
-  //   },
-  // ];
-
   const [assignEvaluator, setAssignEvaluator] = useState([]);
+  const [faculty, setFaculty] = useState([]);
+  const [courseName, setCourseName] = useState('');
+  const [classroomFilter, setClassroomFilter] = useState([]);
+  const [selectedClassroom, setSelectedClassroom] = useState('');
+  const [subjectFilter,setSubjectFilter] = useState([]);
+  const [selectedSubject,setSelectedSubject] = useState('');
+  const [bundleFilter,setbundleFilter] = useState([]);
+  const [selectedBundle,setSelectedBundle] = useState('');
 
+  const {user:{deptId}} = useContextData();
+  const filterCourses = useFetchCourses(deptId);
+
+  useEffect(() =>{
+    const fetchFaculty = async () =>{
+      try{
+        const result = await axios.post("/users/faculty",{subject:selectedSubject});
+        console.log(result.data);
+        setFaculty(result.data);
+      }
+      catch(err){
+        console.log(err);
+      }
+    }
+    fetchFaculty();
+  },[selectedSubject]);
+  
   const ActiveOrder = (e) => {
     e.preventDefault();
     var currBtn = e.target;
@@ -131,18 +112,91 @@ const AssignFaculty = () => {
       currBtn.style.backgroundColor = "var(--primary-color)";
     }
   }
-  console.table(assignEvaluator);
+
+  const handleCourseChange = async(e) => {
+    const courseValue = e.target.value;
+    fetchClassrooms(courseValue);
+    setCourseName(courseValue);
+  }
+
+  const fetchClassrooms = async(courseName) =>{
+    try {
+      const resp = await axios.post('/classroom',{courseName});
+      const data = await resp?.data;
+      setClassroomFilter(data);
+    } catch (error) {
+        console.log(error);
+    }
+  }
+
+  const handleClassroomChange = async(e) => {
+    const classroomName = e.target.value;
+    setSelectedClassroom(classroomName);
+    try {
+      const resp = await axios.post('/subjects',{courseName,classroomName});
+      const data = await resp?.data;
+      console.log(data);
+      setSubjectFilter(data);
+    } catch (error) {
+        console.log(error);
+    }
+  }
+  
+  const handleSubjectChange = async(e) => {
+    const subject = e.target.value;
+    setSelectedSubject(subject);
+    console.log(subject);
+    try {
+      const resp = await axios.post('/bundlenumber',{classroomName:selectedClassroom,subject:selectedSubject});
+      const data = await resp?.data;
+      setbundleFilter(data);
+    } catch (error) {
+        console.log(error);
+    }
+  }
 
   return (
     <div className="assignEvaluator-container">
-      <Back />
+      <Back top="1em" left="0" />
 
       <div className="assign-Filters">
-        <SelectInput label="Select Course" options={CourseValues} />
-        <SelectInput label="Select Semester" options={SemValues} />
-        <SelectInput label="Select Bundle" options={BundleValues} />
+        <div className="filter-list flex gap-2">
+          <Filter
+            data={filterCourses} 
+            label="Filter By Course" 
+            filter="course" 
+            handleCourseChange={handleCourseChange}
+          />
 
-        <button className="assign-confirm">
+          <FormControl style={{width:"12em", top:"-0.1em"}} className="filterSearch-SelectInput">
+              <InputLabel>Filter by Classroom</InputLabel>
+              <Select
+                label="Classroom"
+                placeholder="Filter by Classroom" 
+                defaultValue=""
+                size="small"
+                type="text"
+                required
+                fullWidth
+                onChange={handleClassroomChange}
+              >
+                {classroomFilter.map((opt) => (
+                  <MenuItem key={opt.name} value={opt.name}>
+                    {opt.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+          <Filter
+            data={subjectFilter} 
+            label="Filter By Subject" 
+            filter="subject" 
+            handleSubjectChange={handleSubjectChange}
+          />
+        </div>
+
+        <button className="btn flex gap-sm">
           <FiCheck color="#fff" size={20} /> <span>Confirm</span>
         </button>
       </div>
@@ -153,36 +207,24 @@ const AssignFaculty = () => {
             <th></th>
             <th>Reg No.</th>
             <th>Name</th>
-            <th>Course</th>
-            <th>Semester</th>
-            <th>Bundle</th>
+            <th>Email</th>
             <th>Evaluator Order</th>
           </tr>
         </thead>
         <tbody>
-          {userData.map((data) => {
+          {faculty.map((data) => {
             return (
-              <tr key={data.regno} className="assignFaculty-row">
+              <tr key={data.faculty_id} className="assignFaculty-row">
                 <td>
-                  <div className="assignFaculty-avatar">
-                    <img
-                      src={data.profile}
-                      alt="Avatar"
-                      width="40px"
-                      height="40px"
-                    />
-                  </div>
                 </td>
-                <td>{data.regno}</td>
-                <td>{data.name}</td>
-                <td>{data.course}</td>
-                <td>{data.semester}</td>
-                <td>{data.bundle}</td>
+                <td>{data.faculty_id}</td>
+                <td>{data.first_name +" "+ data.last_name}</td>
+                <td>{data.email}</td>
                 <td>
                   <div className="EvaluatorOrder">
                     <button
                       value="1"
-                      data-id={data.regno}
+                      data-id={data.faculty_id}
                       data-value="1"
                       onClick={ActiveOrder}
                     >
@@ -190,7 +232,7 @@ const AssignFaculty = () => {
                     </button>
                     <button
                       value="2"
-                      data-id={data.regno}
+                      data-id={data.faculty_id}
                       data-value="2"
                       onClick={ActiveOrder}
                     >
@@ -198,7 +240,7 @@ const AssignFaculty = () => {
                     </button>
                     <button
                       value="3"
-                      data-id={data.regno}
+                      data-id={data.faculty_id}
                       data-value="3"
                       onClick={ActiveOrder}
                     >

@@ -5,6 +5,7 @@ const isAuth = require('../middleware/isAuth');
 router.get('/departments',routeContoller.getDepartments);
 router.post('/courses',routeContoller.getCourses);
 router.post('/semesters',routeContoller.getSemesters);
+router.post('/subjects',routeContoller.getSubjects);
 
 router.get('/dashboard/users/count',isAuth,routeContoller.getUserCount);
 router.post('/sidebar/notify',isAuth,routeContoller.postSidebarNotify);

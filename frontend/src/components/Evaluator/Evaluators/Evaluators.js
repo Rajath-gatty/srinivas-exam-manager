@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 import "./Evaluators.css";
 import EvaluatorsList from "./EvaluatorsList";
 
@@ -32,8 +25,7 @@ const Evaluators = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <EvaluatorsList></EvaluatorsList>
-
+                    <EvaluatorsList />
                 </tbody>
             </table>
         </div>
