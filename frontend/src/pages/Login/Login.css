@@ -31,6 +31,24 @@
   background-color: #fff;
 }
 
+.login-admin{
+  color: var(--primary-color);
+  padding: 0.5em 1em;
+  font-weight: bold;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 2em;
+  right: 2.5em;
+  gap: 0.3em;
+  border-radius: 4px;
+  transition: 0.2s ease-in-out;
+}
+
+.login-admin:hover{
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
 .login-hdng {
   color: var(--dark-grey);
   margin-bottom: 3rem;
@@ -217,7 +235,7 @@ input:focus .input-group {
     overflow: hidden;
   }
 
-  .login-form .login-logo{
+  .login-form .login-mlogo{
     display: flex !important;
     color: var(--primary-color);
     margin: 1em 2em;

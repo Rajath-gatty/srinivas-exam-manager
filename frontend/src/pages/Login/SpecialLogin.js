@@ -101,6 +101,11 @@ const SpecialLogin = () => {
 
       {/* Login Form */}
       <div className="login-form">
+        <div className="login-backBtn flex" onClick={()=>{navigate("/login")}}>
+          <FiArrowLeft color="var(--text-color)" size={25}/>
+          <span>Back</span>
+        </div>
+
         <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelect">

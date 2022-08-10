@@ -1,7 +1,8 @@
 import { Link,useNavigate} from "react-router-dom";
 import { useState, useEffect, useRef} from "react";
-import { FiMail, FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
 import {MdAlternateEmail} from "react-icons/md";
+import {RiShieldUserLine} from "react-icons/ri";
 
 import "./Login.css";
 import { SrinivasLogo, LoginSvg } from "../../Assets";
@@ -108,10 +109,15 @@ const Login = ({from}) => {
 
       {/* Login Form */}
       <div className="login-form">
-        <div className="login-logo" style={{display:"none !important"}}>
+        <div className="login-mlogo" style={{display:"none"}}>
           <img width="50px" height="auto" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
+
+        <Link to="/special" className="login-admin flex" title="Admin Login">
+          <RiShieldUserLine size={25}/>
+          <span>Admin</span>
+        </Link>
 
         <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 

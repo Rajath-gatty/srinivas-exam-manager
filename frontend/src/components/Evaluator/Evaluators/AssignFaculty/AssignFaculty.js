@@ -6,7 +6,6 @@ import axios from "axios";
 import Filter from "../../../UI/Filter/Filter";
 import { useFetchCourses } from "../../../../hooks/useFetchCourses";
 import {
-  TextField,
   FormControl,
   Select,
   MenuItem,
