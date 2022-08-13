@@ -55,7 +55,6 @@ exports.getSubjects = async(req,res) => {
   try {
     const sql = `select subj_name from semester join course on semester.course_id=course.course_id join classroom on semester.sem_name=classroom.semester where course.course_name='${courseName}' and classroom.name='${classroomName}'`;
     const [result] = await db.execute(sql);
-    console.log(result);
     res.send(result);
   } catch(err) {
       res.status(500).send(err);
@@ -77,16 +76,16 @@ exports.getAllStudent = async (req,res) => {
   const deptId = req.deptId;
   const courseName = req.body.courseValue;
   const semester = req.body.semester;
-  const {classId} = req.body;
+  const {classId,edit} = req.body;
  
   let sql;
   if(classId){ 
     sql = `select regno,first_name,last_name,course_name,joining_year,student.semester,eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and class_id=${classId}`;
   }
   else if(courseName&&semester) {
-    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.semester=${semester} and student.status='approved' order by regno`;
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility, class_id from student join course on student.course_id=course.course_id where student.dept_id=${deptId} and course.course_name='${courseName}' and student.semester=${semester} and student.status='approved' order by regno`;
   } else if(courseName) {
-    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course.course_name='${courseName}' and student.status='approved' order by regno`;
+    sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and course.course_name='${courseName}' and student.status='approved' and class_id is null order by regno`;
   } else {
     sql=`select regno, first_name, last_name, course_name, joining_year, semester, eligibility from student join course on student.course_id=course.course_id where student.dept_id = ${deptId} and status='approved' order by regno`;
   }
@@ -95,6 +94,7 @@ exports.getAllStudent = async (req,res) => {
     res.send(result[0]);
   }catch(err){
     res.status(500).send(err);
+    console.log(err);
   }
 }
 
@@ -351,10 +351,8 @@ exports.postAddStudentToClass = async (req, res) => {
   try {
     const classId = await db.execute(`select class_id from classroom where name=? and batch=? and course_id=(select course_id from course where course_name=?) and dept_id=? and semester=?`,[className,batch,course,deptId,semester]);
     const classId1 = classId[0][0].class_id;
-    console.log(students);
     const sql = `update student set class_id=${classId1} where regno in (?)`;
     const result = await db.query(sql,[students]);
-    console.log(result);
     res.send({ success: true });
   } catch (err) {
       res.status(500).json({ error: err.message });
@@ -365,7 +363,6 @@ exports.postRemoveStudent = async(req,res) => {
   const { regno,classId } = req.body;
   const sql = `update student set class_id=null where class_id='${classId}' and regno=?`;
     const result = await db.execute(sql,[regno]);
-    console.log(result);
     res.send({ success: true });
 }
 

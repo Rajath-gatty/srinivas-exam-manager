@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import Checkbox from "@mui/material/Checkbox";
 import Back from "../../../UI/Back/Back";
 
-const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users,loading,disableCurStudent,course,semester}) => {
+const StudentUsers = ({hideEligible, showCheckbox,HandleSelectedUser,checkBoxValues,setCheckBoxValues,setUsers,setLoading,users=[],loading,disableCurStudent,course,semester}) => {
   const showEligible = hideEligible ? false:true;
 
   const handleSearch = async(e) => {

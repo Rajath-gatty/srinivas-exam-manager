@@ -30,6 +30,7 @@ const Create = () => {
   const [selectedStudents,setSelectedStudents] = useState([]);
   const [checkBoxValues,setCheckBoxValues] = useState([]);
   const [curStudents,setCurStudents] = useState([]);
+  const [curUsers,setCurUsers] = useState([]);
 
   const classNameRef = useRef();
   const batchRef = useRef();
@@ -83,11 +84,14 @@ const Create = () => {
     const fetchUsers = async() => {
       const data = {
         courseValue:classInfo?classInfo.course_name:course,
-        semester:classInfo?classInfo.semester:sem
+        semester:classInfo?classInfo.semester:sem,
+        edit:classInfo?true:false
       }
       try {
         const result = await axios.post(`/users/student/`,data);
-        setUsers(result.data);
+        console.log(result.data);
+        setCurUsers(location.state?.edit && result.data.filter(std => std.class_id === classInfo.class_id));
+        setUsers(location.state?.edit ? result.data.filter(std => std.class_id === null):result.data);
         setCheckBoxValues(new Array(result.data.length).fill(false));
         setLoading(false);
       } catch(err) {
@@ -395,8 +399,7 @@ const Create = () => {
           </tr>
         </thead>
         <tbody>
-            {users.filter(user => curStudents.includes(user.regno))
-            .map((std,i) => {
+            {curUsers.map((std,i) => {
              return <tr className="users-table-row" key={std.regno}>
                 <td>{std.regno}</td>
                 <td>{std.first_name}</td>
