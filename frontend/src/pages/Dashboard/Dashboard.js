@@ -2,7 +2,7 @@ import "./Dashboard.css";
 import {SrinivasLogo, SEMSLogo, Chancellor} from "../../Assets"
 import {BsGlobe, BsInstagram, BsLinkedin, BsGithub} from "react-icons/bs"
 import {FaFacebook, FaTwitter, FaYoutube} from "react-icons/fa"
-import {SiGooglescholar} from "react-icons/si"
+// import {SiGooglescholar} from "react-icons/si"
 import { useContextData } from "../../hooks/useContextData"
 
 import SuperDash from "../../components/Dashboard/SuperDash"
@@ -47,10 +47,10 @@ const Dashboard = () => {
               <div className="footer-details">
                 <h3>SRINIVAS UNIVERSITY</h3>
                 <p><span>Address : </span><br />
-                  VR3R+78H, SRINIVAS UNIVERSITY CITY CAMPUS,<br />
+                  &emsp; VR3R+78H, SRINIVAS UNIVERSITY CITY CAMPUS,
                   Pandeshwar, Mangaluru, Karnataka 575001
                 </p>
-                <p><span>Phone : </span><br />0824 244 1022</p>
+                <p><span>Phone : </span><br />&emsp; 0824 244 1022</p>
               </div>
             </div>
 
@@ -65,18 +65,18 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard-footerRight">
-            <div className="footer-devs">
               <h3>Developed By:</h3>
+            <div className="footer-devs">
               <a href='https://github.com/ChiragChrg' target="_blank" rel="noopener noreferrer"> <BsGithub/> Chirag</a>
               <a href='https://github.com/Rajath-gatty' target="_blank" rel="noopener noreferrer"> <BsGithub/> Rajath Gatty</a>
               <a href='https://github.com/naveej' target="_blank" rel="noopener noreferrer"> <BsGithub/> V Jeevan Kumar</a>
               <a href='https://github.com/siddharthkm121' target="_blank" rel="noopener noreferrer"> <BsGithub/> Siddharth KM</a>
             </div>
 
-            <div className="footer-guide">
+            {/* <div className="footer-guide">
               <h3>Under the Guidance of:</h3>
               <a href='https://scholar.google.co.in/citations?user=7XbB_3EAAAAJ&hl=en' target="_blank" rel="noopener noreferrer" className='DevName'> <SiGooglescholar/> Prof. Shridhar Acharya P</a>
-            </div>
+            </div> */}
           </div>
         </div>
 

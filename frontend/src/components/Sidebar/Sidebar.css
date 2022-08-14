@@ -1,11 +1,26 @@
-.ham-menu-icon {
+/* .ham-menu-icon {
   position: relative;
-  top: 1.4em;
+  top: 1em;
   left: 0.7em;
-  color: rgb(95, 95, 95);
+  color: var(--text-color);
   cursor: pointer;
   z-index: 10;
+} */
+
+.ham-menu-icon {
+  width: 100vw;
+  height: 3em;
+  position: relative;
+  top: -3em;
+  z-index: 10;
+  background-color: red;
 }
+
+.ham-menu-icon svg{
+  margin-top: 0.2em;
+  margin-left: 0.5em;
+}
+
 
 .sidebar{
   min-width: 270px;

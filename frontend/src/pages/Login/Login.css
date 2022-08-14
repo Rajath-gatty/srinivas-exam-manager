@@ -230,21 +230,32 @@ input:focus .input-group {
   }
 
   .login-form{
-    /* max-height: 100vh; */
+    min-height: 100vh;
     height: 100%;
     overflow: hidden;
+    justify-content: flex-start;
   }
 
   .login-form .login-mlogo{
     display: flex !important;
+    align-items: center;
+    gap: 0.5em;
     color: var(--primary-color);
     margin: 1em 2em;
-    margin-top: 2em;
+    margin-top: 1.5em;
     white-space: nowrap;
   }
   
-  .login-form .login-logo img{
+  .login-form .login-mlogo img{
     filter: brightness(0) saturate(100%) invert(44%) sepia(93%) saturate(522%) hue-rotate(170deg) brightness(94%) contrast(105%);
+  }
+
+  .login-form .login-admin{
+    position: relative;
+    top: 0.5em;
+    right: 0;
+    color: #fff;
+    background-color: var(--primary-color);
   }
 
   .login-hdng{
@@ -252,6 +263,7 @@ input:focus .input-group {
     top: auto;
     font-size: 1.5em;
     margin: 0;
+    margin-top: 1.5em;
   }
 
   .login-userSelectContain{

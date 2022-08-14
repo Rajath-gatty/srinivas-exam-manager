@@ -7,7 +7,7 @@ import { Link, useLocation } from "react-router-dom";
 import {motion} from "framer-motion";
 import { useState, useEffect} from "react";
 import { Drawer, List, SwipeableDrawer} from "@mui/material";
-import { FiMenu } from "react-icons/fi";
+import { HiMenu } from "react-icons/hi";
 import axios from "axios";
 
 const profAvatar = {
@@ -60,6 +60,7 @@ const Sidebar = () => {
 
   const handleprofileAnimation = () => {
     setProfAnimation(true);
+    setOpen(false);
   }
 
   useEffect(() => {
@@ -125,7 +126,12 @@ const Sidebar = () => {
       >
       {drawer}
     </Drawer>
-    {window.innerWidth<535&&<FiMenu size={30} className="ham-menu-icon" onClick={()=>setOpen(true)}/>}
+
+    {/* Ham Nav Icon */}
+    {window.innerWidth<535 && <div className="ham-menu-icon">
+      <HiMenu size={40} color="var(--text-color)" onClick={()=>setOpen(true)}/>
+    </div>}
+
     <SwipeableDrawer 
       open={open} 
       onOpen={() => setOpen(true)} 

@@ -94,7 +94,7 @@ const Login = ({from}) => {
       {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
-          <img width="50px" height="auto" src={SrinivasLogo} alt="Login SVG" />
+          <img width="50px" height="58px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
@@ -110,14 +110,14 @@ const Login = ({from}) => {
       {/* Login Form */}
       <div className="login-form">
         <div className="login-mlogo" style={{display:"none"}}>
-          <img width="50px" height="auto" src={SrinivasLogo} alt="Login SVG" />
+          <img width="40px" height="46px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
-        <Link to="/special" className="login-admin flex" title="Admin Login">
+        {!loginUser && <Link to="/special" className="login-admin flex" title="Admin Login">
           <RiShieldUserLine size={25}/>
           <span>Admin</span>
-        </Link>
+        </Link>}
 
         <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
