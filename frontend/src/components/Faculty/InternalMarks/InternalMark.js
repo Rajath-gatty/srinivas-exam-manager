@@ -1,5 +1,4 @@
 import "./InternalMarks.css";
-import "./InternalList";
 import InternalList from "./InternalList";
 import FilterSearch from "../../UI/FilterSearch/FilterSearch";
 import { toast } from "react-toastify";

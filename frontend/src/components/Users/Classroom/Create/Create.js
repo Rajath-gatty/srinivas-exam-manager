@@ -89,7 +89,6 @@ const Create = () => {
       }
       try {
         const result = await axios.post(`/users/student/`,data);
-        console.log(result.data);
         setCurUsers(location.state?.edit && result.data.filter(std => std.class_id === classInfo.class_id));
         setUsers(location.state?.edit ? result.data.filter(std => std.class_id === null):result.data);
         setCheckBoxValues(new Array(result.data.length).fill(false));

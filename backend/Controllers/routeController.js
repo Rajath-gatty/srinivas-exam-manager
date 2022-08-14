@@ -158,8 +158,15 @@ exports.getUserDetails = async(req,res) => {
 exports.getSemFilteredStudent = async(req,res) => {
   const semester = req.body.semester;
   const courseName = req.body.courseName;
+  const className = req.body.className;
 
-  let sql=`select course_name,eligibility,first_name,last_name,joining_year,regno,image_path,semester from student join course on student.course_id=course.course_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester}`;
+  let sql;
+  if(className) {
+    sql=`select course_name,eligibility,first_name,last_name,joining_year,regno,image_path,semester from student join course on student.course_id=course.course_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=(select semester from classroom where name='${className}')`;
+  }else{
+    sql=`select course_name,eligibility,first_name,last_name,joining_year,regno,image_path,semester from student join course on student.course_id=course.course_id where student.course_id=(select course_id from course where course_name='${courseName}') and student.semester=${semester}`;
+  }
+  
   try{
     const result = await db.execute(sql);
     res.send(result[0]);
