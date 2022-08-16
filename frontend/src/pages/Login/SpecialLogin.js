@@ -101,12 +101,17 @@ const SpecialLogin = () => {
 
       {/* Login Form */}
       <div className="login-form">
-        <div className="login-backBtn flex" onClick={()=>{navigate("/login")}}>
-          <FiArrowLeft color="var(--text-color)" size={25}/>
-          <span>Back</span>
+        <div className="login-mlogo" style={{display:"none"}}>
+          <img width="40px" height="46px" src={SrinivasLogo} alt="Login SVG" />
+          <h1>Srinivas Exam Manager</h1>
         </div>
 
-        <h1 className="login-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
+        {!loginUser && <div className="slogin-backBtn flex" onClick={()=>{navigate("/login")}}>
+          <FiArrowLeft color="var(--text-color)" size={25}/>
+          <span>Back</span>
+        </div>}
+
+        <h1 className="slogin-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
         {!loginUser ? <div className="login-userSelect">
           <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
@@ -162,7 +167,7 @@ const SpecialLogin = () => {
           </div>
           {errors&&<div style={{color:'red',fontSize:'0.8em'}}>{errors}</div>}
           <div className="forgot-pass">
-            <Link to="/forgotpassword">Forgot Password ?</Link>
+            <Link to="/forgotpassword" state={{user:loginUser}}>Forgot Password ?</Link>
           </div>
           <div className="form-controls">
           <button type="submit" className="login-submit btn">{loading?<CircularProgress color="inherit" size={20}/>:'Login'}</button>

@@ -266,6 +266,14 @@ input:focus .input-group {
     margin-top: 1.5em;
   }
 
+  .slogin-hdng{
+    position: relative;
+    top: auto;
+    font-size: 1.5em;
+    margin: 1em;
+    color: var(--text-color);
+  }
+
   .login-userSelectContain{
     margin: 0;
     gap: 4em;
@@ -289,6 +297,14 @@ input:focus .input-group {
     position: relative;
     left: 0;
     margin-bottom: 2em;
+    justify-content: flex-start;
+  }
+
+  .slogin-backBtn{
+    position: relative;
+    top: 0;
+    left: -9em;
+    margin: 1em 0;
     justify-content: flex-start;
   }
 
