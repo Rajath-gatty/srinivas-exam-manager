@@ -82,7 +82,6 @@ const SemesterMarks = () => {
       const updatedResult = result.data.map(item => {
         return {
           regno: item.regno,
-          attendance: '',
           mark: ''
         }
       })
@@ -93,7 +92,6 @@ const SemesterMarks = () => {
       setLoading(false);
     }
   }
-
 
   const handleMarkChange = (index, value) => {
     setMarkAttendance(state => {
@@ -121,7 +119,7 @@ const SemesterMarks = () => {
     try {
       const data = {
         courseName: course,
-        semester: selectedClassroom,
+        classroomName: selectedClassroom,
         subjectName: selectedSubject,
         subjectCode: facultySubjects.map(obj => {
           if (obj.subj_name === selectedSubject) {
@@ -132,7 +130,7 @@ const SemesterMarks = () => {
         studentDetails: markAttendance
       }
       const result = await toast.promise(
-        axios.post("/faculty/marksattendance/add", data),
+        axios.post("/faculty/semestermark", data),
         {
           pending: 'Loading ...',
           success: 'Added Successfully!',

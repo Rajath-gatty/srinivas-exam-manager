@@ -34,3 +34,29 @@ exports.postMarksAttendance = async(req,res) => {
         console.log(err);
     }
 }
+
+exports.postSemesterMark = (req,res) => {
+    const deptId = req.deptId;
+    const facultyId = req.userId;
+    const {courseName,classroomName,subjectName,subjectCode,studentDetails} = req.body;
+    const uid = (Math.random() + 1).toString(25).substring(2);
+    try {
+        studentDetails.forEach(async(std)=> {
+            await db.execute('insert ignore into semester_marks(dept_id,course_id,class_id,classroom_id,semester,regno,subj_name,subj_code,marks,faculty_id) values(?,(select course_id from course where course_name=?),(select class_id from classroom where name=?),?,(select semester from classroom where name=?),?,?,?,?,?)',[deptId,courseName,classroomName,uid,classroomName,std.regno,subjectName,subjectCode,std.mark,facultyId])
+        })
+        res.send('success');
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+exports.postFetchClassroomMarks = (req,res) => {
+    const deptId = req.deptId;
+    const facultyId = req.userId;
+    try {
+       const result = db.execute('select ')
+        res.send('success');
+    } catch(err) {
+        console.log(err);
+    }
+}

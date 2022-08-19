@@ -50,8 +50,7 @@ router.post(
     check("birthDistrict").trim().notEmpty().withMessage("Birth District cannot be empty").isAlpha().withMessage("value must be characters"),
     check("country").trim().notEmpty().withMessage("Country cannot be empty").isAlpha().withMessage("value must be characters"),
     check("pincode").trim().isLength({ min: 6, max: 6 }).withMessage("Enter valid pincode"),
-    check("password").trim().isStrongPassword({ minLength: 8, minLowercase: 1,minUppercase: 1, minNumbers: 1, minSymbols: 1
-  }).withMessage("Password must contain At least 8 characters the more characters the better, mixture of both uppercase and lowercase letters, mixture of letters and numbers, inclusion of at least one special character, e.g., ! @ # ? "),
+    check("password").trim().isLength({min:5}).withMessage("Password must contain At least 8 characters the more characters the better, mixture of both uppercase and lowercase letters, mixture of letters and numbers, inclusion of at least one special character, e.g., ! @ # ? "),
     check("fatherName").trim().notEmpty().withMessage("Father name cannot be empty"),
     check("fatherOccupation").trim().notEmpty().withMessage("Father Occupation cannot be empty").isAlpha().withMessage("value must be characters"),
     check("fatherPhone").trim().isLength({ min: 10, max: 10 }).withMessage("Enter valid Phone number"),

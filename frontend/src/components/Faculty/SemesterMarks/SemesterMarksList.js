@@ -12,12 +12,11 @@ const SemesterMarksList = ({data,serverUrl,handleMarkChange,markAttendance,index
             <td>{data.first_name+' '+data.last_name}</td>
             <td>{data.semester}</td>
             <td className="attendance-textfield"><TextField
-            value={markAttendance[index]?.mark}
+            value={markAttendance[index]?.mark?markAttendance[index].mark:""}
             onChange={(e)=>{handleMarkChange(index,e.target.value,data.regno)}}
                 variant="outlined"
                 type="number"
                 size="small"></TextField></td>
-
         </tr>
 
     )
