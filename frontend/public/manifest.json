@@ -57,5 +57,6 @@
   "display_override":["window-controls-overlay"],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
-  "description": "Srinivas Exam Management Software. Developed by Chirag, Rajath Gatty, V Jeevan Kumar, Siddharth KM"
+  "orientation": "any",
+  "description": "Srinivas Exam Manager is a management software. It is used to generate Examination Halltickets and produce Result Markscard. Developed by Chirag, Rajath Gatty, V Jeevan Kumar, Siddharth KM"
 }
