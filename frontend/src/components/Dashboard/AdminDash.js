@@ -5,10 +5,12 @@ import { FaUserGraduate } from "react-icons/fa";
 import { FaChalkboardTeacher } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa";
 import CountUp from 'react-countup';
+import { toast } from 'react-toastify';
+import {useContextData} from '../../hooks/useContextData';
 
 const AdminDash = () => {
   const [count,setCount] = useState(0);
-
+  const { setRole, setToken, setUser } = useContextData();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,7 +22,15 @@ const AdminDash = () => {
         },{})
         setCount(result);
       } catch(err) {
-        console.log(err);
+        //Unauthorized Access Error 401
+        if(err.response.status === 401){
+          toast.error("Session Expired!");
+          localStorage.removeItem("user");
+          setToken('');
+          setRole('');
+          setUser({});
+          navigate('/login');
+        }else console.log(err);
       }
     }
     FetchUsersCount();
