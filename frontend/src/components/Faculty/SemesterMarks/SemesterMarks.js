@@ -8,6 +8,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { CircularProgress,FormControl,InputLabel,MenuItem,Select } from "@mui/material";
 import NoData from "../../UI/NoData/NoData";
+import Back from "../../UI/Back/Back";
 
 const SemesterMarks = () => {
   const [students, setStudents] = useState([]);
@@ -146,6 +147,7 @@ const SemesterMarks = () => {
 
   return (
     <div className="semesterMark-attendance-main flex">
+      <Back left="0" top="1.5em" />
       <div className="semesterMark-attendance-Header flex">
         <div className="semesterMark-attendance-SubjTitile" style={{ visibility: !selectedSubject.length > 0 ? 'hidden' : 'visible' }}>
           <h4>Code : <span>{facultySubjects.map(obj => {

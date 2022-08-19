@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./SemesterMarks.css";
 import { HiPlus } from "react-icons/hi";
 import {CircularProgress} from "@mui/material";
-import {NoDataSvg} from "../../../Assets";
+import NoData from "../../UI/NoData/NoData";
 
 const SemesterList = () => {
   const [loading, setLoading] = useState(true);
@@ -14,10 +14,10 @@ const SemesterList = () => {
     <div className="semesterList-container">
       <div className="semesterList-header flex">
         <h1>Semester Marks</h1>
-        <div className="semesterList-create btn flex gap-sm" onClick={()=>navigate("/semester")}>
+        <Link to="./new" className="semesterList-create btn flex gap-sm">
           <HiPlus size={20} />
           <span>New</span>
-        </div>
+        </Link>
       </div>
 
       {loading ? <table className="semesterList-table">
@@ -45,11 +45,8 @@ const SemesterList = () => {
         </tbody>
       </table>
       : <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
-      
-      {!loading && semList.length === 0 && <div className="flex">
-      <img src={NoDataSvg} alt="No Data Found" />
-        <h2>No Semester Marks Found</h2>
-      </div>}
+
+      {!semList.length > 0 && <NoData text="No Records Found!" />}
     </div>
   )
 }

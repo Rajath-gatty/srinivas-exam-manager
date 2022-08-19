@@ -175,8 +175,8 @@ function App() {
 
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
-                <Route path="semester" element={<SemesterMarks />} />
-                <Route path="semesterlist" element={<SemesterList />} />
+                <Route path="semester/new" element={<SemesterMarks />} />
+                <Route path="semester" element={<SemesterList />} />
                 {/* <Route path="/classrooms/create" element={<CreateClass />} /> */}
               </Route>
 
