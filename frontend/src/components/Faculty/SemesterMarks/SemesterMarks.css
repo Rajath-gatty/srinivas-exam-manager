@@ -105,6 +105,7 @@
 .semesterList-container{
   width: 100%;
   margin: 2em;
+  position: relative;
 }
 
 .semesterList-header{
@@ -126,4 +127,26 @@
   background: var(--grey-bg) !important;
 }
 
+.semesterList-table .semesterList-rows{
+  border: 1px solid var(--grey-bg);
+  text-align: center;
+}
+
+.semesterList-table .semesterList-rows td{
+  padding: 1em 0.75em;
+  color: var(--text-color);
+  font-size: 0.9em;
+}
+
+.semesterList-table .semesterList-rows td a{
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
 /* SEMESTER LIST CSS */
+
+.semMarkDisplay-subjInfo{
+  flex-direction: column;
+  gap: 0.5em;
+  color: var(--primary-color);
+}

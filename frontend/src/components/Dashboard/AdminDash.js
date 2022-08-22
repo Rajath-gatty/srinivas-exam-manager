@@ -30,7 +30,9 @@ const AdminDash = () => {
           setRole('');
           setUser({});
           navigate('/login');
-        }else console.log(err);
+        }else {
+          console.log(err);
+        }
       }
     }
     FetchUsersCount();

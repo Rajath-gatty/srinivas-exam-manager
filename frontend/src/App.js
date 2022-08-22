@@ -67,6 +67,7 @@ import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SemMarkDisplay from "./components/Faculty/SemesterMarks/SemMarkDisplay";
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -175,8 +176,9 @@ function App() {
 
               {/* Faculty Access*/}
               <Route element={<ProtectedRoute allowedRole={["faculty"]} />}>
-                <Route path="semester/new" element={<SemesterMarks />} />
                 <Route path="semester" element={<SemesterList />} />
+                <Route path="semester/new" element={<SemesterMarks />} />
+                <Route path="semester/marks/:id" element={<SemMarkDisplay/>}/>
                 {/* <Route path="/classrooms/create" element={<CreateClass />} /> */}
               </Route>
 

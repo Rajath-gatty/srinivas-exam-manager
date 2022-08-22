@@ -35,7 +35,7 @@ exports.postMarksAttendance = async(req,res) => {
     }
 }
 
-exports.postSemesterMark = (req,res) => {
+exports.postSemesterMark = async (req,res) => {
     const deptId = req.deptId;
     const facultyId = req.userId;
     const {courseName,classroomName,subjectName,subjectCode,studentDetails} = req.body;
@@ -50,13 +50,26 @@ exports.postSemesterMark = (req,res) => {
     }
 }
 
-exports.postFetchClassroomMarks = (req,res) => {
-    const deptId = req.deptId;
+exports.postFetchClassroomMarks = async(req,res) => {
     const facultyId = req.userId;
     try {
-       const result = db.execute('select ')
-        res.send('success');
+       const result = await db.execute("select classroom_id as id,course_name,semester,subj_name,subj_code,date_format(convert_tz(created_at,@@session.time_zone,'+05:30'),'%d %b-%Y') created_at from semester_marks as s join course on s.course_id=course.course_id where faculty_id=? group by classroom_id;",[facultyId]);
+    res.send(result[0]);
     } catch(err) {
         console.log(err);
     }
 }
+
+exports.postFetchStudentSemMarks = async(req,res) => {
+    const facultyId = req.userId;
+    const classroomId = req.body.classroomId;
+    console.log(facultyId,classroomId);
+    try {
+       const result = await db.execute("select id,semester_marks.regno,first_name,last_name,semester_marks.semester,subj_name,marks from semester_marks join student on semester_marks.regno=student.regno where faculty_id=? and classroom_id=?;",[facultyId,classroomId]);
+       console.log(result[0]);
+        res.send(result[0]);
+    } catch(err) {
+        console.log(err);
+    }
+}
+

@@ -35,7 +35,7 @@
   --black: #333;
   --light-primary: rgba(31, 143, 255, 0.1);
   --light-red: rgba(226, 23, 23, 0.555);
-  --light-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+  --light-shadow: 0px 2px 6px 0px rgb(243 243 243);
 
   --svg-red: invert(27%) sepia(93%) saturate(7486%) hue-rotate(357deg)
     brightness(97%) contrast(114%);
