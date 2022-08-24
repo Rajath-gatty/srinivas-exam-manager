@@ -7,7 +7,8 @@ import Navbar from "../../components/Navbar/Navbar";
 const Registration = () => {
   return (
     <>
-      <Navbar />
+      <Navbar to="/login" />
+      
       <div className="registration-container">
         <h1>User Registration</h1>
         <div className="registration-wrapper">
