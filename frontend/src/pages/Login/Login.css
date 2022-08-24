@@ -29,6 +29,11 @@
   align-items: center;
   justify-content: center;
   background-color: #fff;
+  position: relative;
+}
+
+.login-form.special{
+  height: 100vh;
 }
 
 .login-admin{
@@ -50,6 +55,14 @@
 }
 
 .login-hdng {
+  color: var(--dark-grey);
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  position: absolute;
+  top: 3.5rem;
+}
+
+.slogin-hdng {
   color: var(--dark-grey);
   margin-bottom: 3rem;
   font-size: 2rem;
@@ -173,7 +186,17 @@ input:focus .input-group {
 .login-backBtn{
   position: absolute;
   top: 2em;
-  left: 53%;
+  left: 2em;
+  gap: 0.2em;
+  color: var(--text-color);
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+.slogin-backBtn{
+  position: absolute;
+  top: 2em;
+  left: 2em;
   gap: 0.2em;
   color: var(--text-color);
   font-size: 1.1em;
@@ -195,6 +218,10 @@ input:focus .input-group {
   gap: 2em;
   position: relative;
   top: 2em;
+}
+
+.login-userSelect.special{
+  margin-bottom: 5.9em;
 }
 
 .login-userBox{

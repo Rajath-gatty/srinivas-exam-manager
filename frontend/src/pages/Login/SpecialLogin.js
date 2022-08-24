@@ -100,7 +100,7 @@ const SpecialLogin = () => {
       </div>
 
       {/* Login Form */}
-      <div className="login-form">
+      <div className="login-form special">
         <div className="login-mlogo" style={{display:"none"}}>
           <img width="40px" height="46px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
@@ -113,7 +113,7 @@ const SpecialLogin = () => {
 
         <h1 className="slogin-hdng">{loginUser ? "Login as "+loginUser.charAt(0).toUpperCase() + loginUser.slice(1) : "Select Login User"}</h1>
 
-        {!loginUser ? <div className="login-userSelect">
+        {!loginUser ? <div className="login-userSelect special">
           <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
               <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Super Admin</h3>
