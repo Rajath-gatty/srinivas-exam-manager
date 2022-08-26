@@ -6,6 +6,7 @@ import { useState } from "react";
 import { CircularProgress } from "@mui/material";
 import { useEffect } from "react";
 import { useContextData } from "../../../hooks/useContextData";
+import NoData from "../../UI/NoData/NoData";
 
 const AttendanceStudent = () => {
 const [MarkData,setMarkData] = useState([]);
@@ -15,7 +16,17 @@ const {user} = useContextData();
 const [selectedSemester,setSelectedSemester] = useState(user.semester);
 
 useEffect(() => {
+  const fetchSemesters = async () => {
+    try {
+      const semData = new Array(user.semester).fill('');
+      console.log(semData);
+      setSemFilter(semData);
+    } catch (error) {
+        console.log(error);
+    }
+  }
   fetchSemesters();
+  
   const fetchMarks = async() => {
     const data = {
       courseId:user.courseId,
@@ -31,17 +42,7 @@ useEffect(() => {
     }
   }
   fetchMarks();
-},[selectedSemester])
-
-const fetchSemesters = async () => {
-  try {
-    const semData = new Array(user.semester).fill('');
-    console.log(semData);
-    setSemFilter(semData);
-  } catch (error) {
-      console.log(error);
-  }
-}
+},[selectedSemester, user])
 
 const handleSemesterChange = (e) => {
   setSelectedSemester(e.target.value);
@@ -77,7 +78,9 @@ const handleSemesterChange = (e) => {
               />
             })}
           </tbody>
-        </table>:<div style={{marginTop:50}} className="flex"><CircularProgress thickness={4}/></div>}
+        </table>: <div style={{marginTop:50}} className="flex"><CircularProgress thickness={4}/></div>}
+
+        {!loading && MarkData[0] === undefined ? <NoData text={"No Records Found"} /> : null}
       </div>
     </div>
   );

@@ -6,12 +6,13 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import {toast} from "react-toastify";
+import NoData from "../../../components/UI/NoData/NoData";
 
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
     const [loading,setLoading] = useState(false);
+    const [btnLoading,setBtnLoading] = useState(false);
     const {user} = useContextData();
-    console.log(user);
     const semester = user.semester;
     const courseId = user.courseId;
     
@@ -31,6 +32,7 @@ const StudentTimeTable = () => {
     },[courseId,semester,user.classId])
 
     const handleHallticket = async () =>{
+        setBtnLoading(true);
         if(user.eligibility){
             try {
                 const result = await axios.post('student/hallticket',{classId:user.classId},{responseType:"blob"});
@@ -39,28 +41,32 @@ const StudentTimeTable = () => {
                 const objectUrl = window.URL.createObjectURL(blob);
                 console.log(result.data);
                 window.open(objectUrl);
-                setLoading(false);
+                setBtnLoading(false);
             } catch(err) {
                 console.log(err);
-                setLoading(false);
+                setBtnLoading(false);
             }
         }else{
             toast.error("User Not Eligible!")
         }
     }
-    
+
     return (
         <div className="student-timetable-container">
             <div className="timetable-header flex">
                 <h1>Time Table</h1>
                 <div className="btn-outlined flex" onClick={handleHallticket}>
+                {!btnLoading ? 
+                    <>
                     <HiDownload size={25}/>
                     <span>Download Hall Ticket</span>
-                </div>
+                    </>
+                : <div className="flex" style={{width:"145px", height:"25px"}}><CircularProgress color="inherit" thickness={3} size={25} /></div>}
+                </div> 
             </div>
 
             <div className="attendance-main-box">
-                <table className="timetable-table">
+                {!loading ? <table className="timetable-table">
                     <thead className="thead">
                         <tr>
                             <th>SubjectName</th>
@@ -69,7 +75,7 @@ const StudentTimeTable = () => {
                             <th>Time</th>
                         </tr>
                     </thead>
-                    {!loading && <tbody>
+                    <tbody>
                         {timetable.map(obj =>{
                             return(<tr className="timetable-row" key={Math.random()+Date.now()+obj.subj_code}>
                                 <td>{obj.subj_name}</td>
@@ -78,9 +84,10 @@ const StudentTimeTable = () => {
                                 <td>{obj.exam_time}</td>
                             </tr>)
                         })}
-                    </tbody>}
-                </table> 
-                {loading && <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
+                    </tbody>
+                </table> : <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
+                
+                {!loading && timetable.length === 0 ? <NoData /> : null}
             </div>
         </div>
     );
