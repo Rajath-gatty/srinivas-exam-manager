@@ -63,6 +63,8 @@ import Classroom from "./components/Users/Classroom/Classroom";
 import StudentUsers from "./components/Users/Classroom/StudentUsers";
 import CreateClass from "./components/Users/Classroom/Create/Create";
 
+import CodingSheet from "./components/Admin/CodingSheet/CodingSheet";
+
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
@@ -136,6 +138,7 @@ function App() {
                 />
                 <Route path="users/examcoordinator" element={<TotalUsers type="examcoordinator" />} />
                 <Route path="users/examcoordinator/:userId" element={<UserDetails />} />
+                <Route path="codingsheet" element={<CodingSheet />} />
               </Route>
 
               {/* Staff Access*/}

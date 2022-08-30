@@ -1,0 +1,144 @@
+.codingSheet-attendance-main {
+    flex-direction: column;
+    margin: 0 2em;
+    margin-bottom: 5em;
+    width: 100%;
+    position: relative;
+  }
+  
+  .codingSheet-attendance-main .filter-wrapper .search-input::placeholder {
+    color: var(--light-grey);
+  }
+  
+  .codingSheet-attendance-table-wrapper .attendance-textfield {
+    width: 150px;
+  }
+  
+  .codingSheet-attendance-table-wrapper {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 1em;
+    box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
+  }
+  
+  /* .attendance-table-wrapper .attendance-table-row {} */ 
+  
+  .codingSheet-attendance-table-wrapper .thead th {
+    padding: 0.75em;
+    font-size: 0.9em;
+    background: var(--grey-bg);
+  }
+  
+  .codingSheet-attendance-table-wrapper td {
+    padding: 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+  }
+  
+  .codingSheet-attendance-table-wrapper .profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .codingSheet-attendance-table-wrapper .attendance-table-row {
+    border: 1px solid var(--grey-bg);
+  }
+  
+  .codingSheet-attendance-avatar-wrapper a {
+    cursor: pointer;
+  }
+  
+  .codingSheet-attendance-Header{
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 3.5em;
+  }
+  
+  
+  .codingSheet-attendance-SubjTitile{
+    margin-right: 5em; 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+  
+  .codingSheet-attendance-SubjTitile h4{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+  
+  .codingSheet-attendance-SubjTitile h4 span{
+    color: var(--primary-color);
+    margin-left: 0.5em;
+    font-size: 1.1em;
+  }
+  
+  .codingSheet-attendance-Filters{
+    gap: 1em;
+  }
+  
+  .codingSheet-attendance-submit{
+    width: 100%;
+    position: relative;
+  }
+  
+  .codingSheet-attendance-submit .btn{
+    position: absolute;
+    right: 2em;
+    margin-top: 2em;
+  }
+  
+  
+  /* SEMESTER LIST CSS */
+  .codingSheet-container{
+    width: 100%;
+    margin: 2em;
+    position: relative;
+  }
+  
+  .codingSheet-header{
+    justify-content: space-between;
+    color: var(--primary-color)
+  }
+  
+  .codingSheet-table{
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+    margin-top: 2.5em;
+    box-shadow: var(--light-shadow);
+  }
+  
+  .codingSheet-table th{
+    color: var(--dark-grey);
+    padding: 0.75em;
+    background: var(--grey-bg) !important;
+  }
+  
+  .codingSheet-table .codingSheet-rows{
+    border: 1px solid var(--grey-bg);
+    text-align: center;
+  }
+  
+  .codingSheet-table .codingSheet-rows td{
+    padding: 1em 0.75em;
+    color: var(--text-color);
+    font-size: 0.9em;
+  }
+  
+  .codingSheet-table .codingSheet-rows td a{
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+  
+  /* SEMESTER LIST CSS */
+  
+  .semMarkDisplay-subjInfo{
+    flex-direction: column;
+    gap: 0.5em;
+    color: var(--primary-color);
+  }

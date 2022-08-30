@@ -66,4 +66,4 @@ const SemesterList = () => {
   )
 }
 
-export default SemesterList
+export default SemesterList;

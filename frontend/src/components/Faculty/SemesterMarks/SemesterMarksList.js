@@ -1,16 +1,12 @@
 import { TextField } from "@mui/material";
 import { FaUserCircle } from "react-icons/fa";
 
-const SemesterMarksList = ({data,serverUrl,handleMarkChange,markAttendance,index}) => {
+const SemesterMarksList = ({data,handleMarkChange,markAttendance,index}) => {
     return (
         <tr className="attendance-table-row">
-            <td className="attendance-avatar-wrapper">
-                {!data.image_path?<FaUserCircle color="var(--light-grey)" size={25} />:
-                <img src={serverUrl+data.image_path} className="profile-img" width="100px" alt=""/>}
-            </td>
-            <td>{data.regno}</td>
-            <td>{data.first_name+' '+data.last_name}</td>
+            <td>1</td>
             <td>{data.semester}</td>
+            <td>46734536</td>
             <td className="attendance-textfield"><TextField
             value={markAttendance[index]?.mark?markAttendance[index].mark:""}
             onChange={(e)=>{handleMarkChange(index,e.target.value,data.regno)}}
@@ -18,7 +14,6 @@ const SemesterMarksList = ({data,serverUrl,handleMarkChange,markAttendance,index
                 type="number"
                 size="small"></TextField></td>
         </tr>
-
     )
 }
 

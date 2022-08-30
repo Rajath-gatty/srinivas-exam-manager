@@ -79,7 +79,8 @@ const StudentTimeTable = () => {
                             </tr>)
                         })}
                     </tbody>}
-                </table> 
+                </table>
+                {timetable.length<=0&&<p style={{marginTop:'1rem',textAlign:'center'}}>No timetable uploaded</p>}
                 {loading && <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
             </div>
         </div>

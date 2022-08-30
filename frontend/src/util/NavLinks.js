@@ -66,6 +66,11 @@ export const NavLinks = [
         title: "Staff Approval",
         path: "approve/staff",
         icon: Approval
+      },
+      {
+        title: "Coding Sheet",
+        path: "codingsheet",
+        icon: SemMarks
       }
     ],
   },

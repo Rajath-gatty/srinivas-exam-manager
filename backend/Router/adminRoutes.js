@@ -41,6 +41,9 @@ router.get('/courses',isAuth,adminController.getCourses);
 router.post('/course-details',isAuth,adminController.getCourseDetails);
 router.post('/courses/subjects/remove',isAuth,adminController.removeCourseSubjects);
 
+router.post('/subjects',isAuth,adminController.fetchSubjects);
+router.post('/codingsheet',isAuth,adminController.postCodingSheet);
+
 router.get('/departments',isAuth,adminController.getDepartments);
 
 router.get('/examcoordinators',isAuth,adminController.getExamCoordinators);

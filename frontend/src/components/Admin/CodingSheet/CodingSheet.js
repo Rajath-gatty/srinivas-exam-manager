@@ -1,5 +1,4 @@
-import "./SemesterMarks.css";
-import SemesterMarksList from "./SemesterMarksList";
+import "./CodingSheet.css";
 import { toast } from "react-toastify";
 import Filter from "../../UI/Filter/Filter";
 import { useFetchCourses } from "../../../hooks/useFetchCourses";
@@ -9,6 +8,8 @@ import axios from 'axios';
 import { CircularProgress,FormControl,InputLabel,MenuItem,Select } from "@mui/material";
 import NoData from "../../UI/NoData/NoData";
 import Back from "../../UI/Back/Back";
+import CodingSheetList from "./CodingSheetList";
+import { FiCheck } from "react-icons/fi";
 
 const SemesterMarks = () => {
   const [students, setStudents] = useState([]);
@@ -20,12 +21,11 @@ const SemesterMarks = () => {
   const [selectedSubject, setSelectedSubject] = useState(false);
   const [markAttendance, setMarkAttendance] = useState([]);
 
-  const { user, serverUrl } = useContextData();
+  const { user,serverUrl } = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
 
-  const fetchFacultySubjects = async (className) => {
+  const fetchSubjects = async (className) => {
     const data = {
-      facultyId: user.id,
       courseName: course,
       className:className
     }
@@ -57,6 +57,7 @@ const SemesterMarks = () => {
       );
       console.log(result);
       setClassroomFilter(result.data);
+      setStudents([]);
     } catch (error) {
       console.log(error);
     }
@@ -64,9 +65,11 @@ const SemesterMarks = () => {
 
   const handleClassroomChange = async (e) => {
     setSelectedClassroom(e.target.value);
-    fetchFacultySubjects(e.target.value);
+    fetchSubjects(e.target.value);
     setSelectedSubject([]);
-  }
+    setStudents([]);
+    setFacultySubjects([]);
+}
 
   const handleSubjectChange = async (e) => {
     setSelectedSubject(e.target.value);
@@ -83,7 +86,7 @@ const SemesterMarks = () => {
       const updatedResult = result.data.map(item => {
         return {
           regno: item.regno,
-          mark: ''
+          coding: ''
         }
       })
       setMarkAttendance(updatedResult);
@@ -97,7 +100,7 @@ const SemesterMarks = () => {
   const handleMarkChange = (index, value) => {
     setMarkAttendance(state => {
       const newState = [...state];
-      newState[index].mark = value;
+      newState[index].coding = value;
       return [...newState];
     })
   }
@@ -105,7 +108,7 @@ const SemesterMarks = () => {
   const HandleAttendanceSubmit = async () => {
     let flag=0;
     markAttendance.forEach(sub => {
-      if(sub.mark==='') {
+      if(sub.coding==='') {
         return flag=1;
       }
       return flag;
@@ -131,7 +134,7 @@ const SemesterMarks = () => {
         studentDetails: markAttendance
       }
       const result = await toast.promise(
-        axios.post("/faculty/semestermark", data),
+        axios.post("/admin/codingsheet", data),
         {
           pending: 'Loading ...',
           success: 'Added Successfully!',
@@ -146,10 +149,10 @@ const SemesterMarks = () => {
   }
 
   return (
-    <div className="semesterMark-attendance-main flex">
+    <div className="codingSheet-attendance-main flex">
       <Back left="0" top="1.5em" />
-      <div className="semesterMark-attendance-Header flex">
-        <div className="semesterMark-attendance-SubjTitile" style={{ visibility: !selectedSubject.length > 0 ? 'hidden' : 'visible' }}>
+      <div className="codingSheet-attendance-Header flex">
+        <div className="codingSheet-attendance-SubjTitile" style={{ visibility: !selectedSubject.length > 0 ? 'hidden' : 'visible' }}>
           <h4>Code : <span>{facultySubjects.map(obj => {
             if (obj.subj_name === selectedSubject)
               return obj.subj_code;
@@ -157,7 +160,7 @@ const SemesterMarks = () => {
           <h4>Subject : <span>{selectedSubject}</span></h4>
         </div>
 
-        <div className="semesterMark-attendance-Filters flex">
+        <div className="codingSheet-attendance-Filters flex">
           <Filter
             filter="course"
             label="Select Course"
@@ -192,39 +195,37 @@ const SemesterMarks = () => {
         </div>
       </div>
 
-      <table className="semesterMark-attendance-table-wrapper">
+      <table className="codingSheet-attendance-table-wrapper">
         <thead className="thead">
           <tr>
-            <th>Sl No.</th>
+            <th>Profile</th>
+            <th>RegNo.</th>
+            <th>Name</th>
             <th>Semester</th>
             <th>Coding Sheet No.</th>
-            <th>Semester Marks</th>
           </tr>
         </thead>
         <tbody>
-          {/* {students.map((student, i) => {
-            return <SemesterMarksList
+          {students.map((student, i) => {
+            return <CodingSheetList
               key={student.regno}
               data={student}
               index={i}
+              serverUrl={serverUrl}
               markAttendance={markAttendance}
               handleMarkChange={handleMarkChange}
             />
-          })} */}
-          <SemesterMarksList
-            key={Date.now()+Math.random()}
-            data={{semester:2}}
-            index={1}
-            markAttendance={markAttendance}
-            handleMarkChange={handleMarkChange}
-          />
+          })}
         </tbody>
       </table>
       {!students.length > 0 && <NoData text="No Students Found!" />}
       {loading && <div style={{ marginTop: 40, marginBottom: 40 }} className="flex"><CircularProgress thickness={4} /></div>}
       {selectedSubject.length > 0 && students.length > 0 &&
-        <div className="semesterMark-attendance-submit">
-          <button onClick={HandleAttendanceSubmit}>Submit</button>
+        <div className="codingSheet-attendance-submit">
+          <div className="btn flex gap-sm" onClick={HandleAttendanceSubmit}>
+            <FiCheck size={20} color="inherit" />
+            <span>Submit</span>
+          </div>
         </div>}
     </div>
   );

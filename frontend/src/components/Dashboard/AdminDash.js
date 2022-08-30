@@ -67,4 +67,4 @@ const AdminDash = () => {
   )
 }
 
-export default AdminDash
+export default AdminDash;
