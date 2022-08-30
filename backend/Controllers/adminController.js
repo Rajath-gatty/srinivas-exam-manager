@@ -136,6 +136,27 @@ exports.getCourseDetails = async (req, res) => {
     }
 }
 
+exports.fetchSubjects = async (req,res) => {
+    const {className,courseName} = req.body;
+    const deptId = req.deptId;
+    try {
+        const sql = `select sem_id,subj_name,subj_code from semester where dept_id=${deptId} and course_id=(select course_id from course where course_name='${courseName}') and sem_name=(select semester from classroom where name='${className}')`;
+        const result = await db.execute(sql);
+        res.send(result[0]);
+    } catch (err) {
+        console.log(err);
+        res.status(404).send({ success: false });
+    }
+}
+
+exports.postCodingSheet = async (req,res) => {
+    const {classroomName,courseName,subjectName,studentDetails} = req.body;
+    console.log(studentDetails);
+    const [result] = await db.execute(`select class_id,course_id from classroom where name=?`,[classroomName]);
+    const result2 = await db.query('insert into coding_sheet(dept_id,course_id,class_id,regno,coding_sheet) values(?,?,?,?,?)')
+    res.send('success');
+}
+
 exports.postNewCoordinator = async (req, res) => {
     const { departmentName, firstName, lastName, dob, email, gender, address, phone, password } = req.body;
     const err = validationResult(req).errors;
