@@ -708,7 +708,7 @@ const Student = () => {
                   />
                   <FormHelperText>max size 4MB supported types JPEG, JPG and PNG</FormHelperText>
                   </div>
-                  <img src={fileUrl} alt=""/>
+                  <img src={fileUrl} alt="Upload Preview"/>
               </div>
           </div>
           <input className="register-btn btn mt-1" type="submit" value="Register" />

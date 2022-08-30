@@ -5,12 +5,12 @@ import {FaFacebook, FaTwitter, FaYoutube} from "react-icons/fa"
 // import {SiGooglescholar} from "react-icons/si"
 import { useContextData } from "../../hooks/useContextData"
 
-import SuperDash from "../../components/Dashboard/SuperDash"
+// import SuperDash from "../../components/Dashboard/SuperDash"
 import AdminDash from "../../components/Dashboard/AdminDash"
-import CoordDash from "../../components/Dashboard/CoordDash"
+// import CoordDash from "../../components/Dashboard/CoordDash"
 // import StaffDash from "../../components/Dashboard/StaffDash"
 // import FacultyDash from "../../components/Dashboard/FacultyDash"
-import StudentDash from "../../components/Dashboard/StudentDash"
+// import StudentDash from "../../components/Dashboard/StudentDash"
 
 const Dashboard = () => {
   const { role } = useContextData();
@@ -21,10 +21,12 @@ const Dashboard = () => {
         <h1>SRINIVAS UNIVERSITY</h1>
       </div>
 
-      {role === 'superadmin' ? <SuperDash/> :
+      {role === 'admin' || role === 'staff' || role === 'faculty' ? <AdminDash/> : null }
+
+      {/* {role === 'superadmin' ? <SuperDash/> :
       role === 'examcoord' ? <CoordDash/> :
       role === 'admin' || role === 'staff' || role === 'faculty' ? <AdminDash/> 
-      : <StudentDash/>}
+      : <StudentDash/>} */}
 
       <div className="dashboard-AboutTitle">About Srinivas University</div>
       <div className="dashboard-suInfo flex">

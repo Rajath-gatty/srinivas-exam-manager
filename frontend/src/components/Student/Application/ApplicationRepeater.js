@@ -32,6 +32,7 @@ const ApplicationRepeater = () => {
 
   const {user} = useContextData();
   const semesterArr = new Array(user.semester).fill('');
+  const feePerSubject = 100;
 
   const bankRef = useRef();
   const accountRef = useRef();
@@ -56,7 +57,8 @@ const ApplicationRepeater = () => {
       setSelectedSubject(selectedSubject.filter((e) => e.sem_id !== data.sem_id));
     }
   };
-  const TotalFee = 200 * selectedSubject.length;
+
+  let TotalFee = feePerSubject * selectedSubject.length;
 
   useEffect(() => {
     const fetchSubjects = async() => {
@@ -207,7 +209,7 @@ const ApplicationRepeater = () => {
             return (
               <div key={subject.sem_id} className="selected-subject-list">
                 <span>{subject.subj_name}</span>
-                <span>Rs.200</span>
+                <span>Rs.{feePerSubject}</span>
               </div>
             );
           })}

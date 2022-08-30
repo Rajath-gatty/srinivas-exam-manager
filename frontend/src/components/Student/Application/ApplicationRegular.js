@@ -18,6 +18,7 @@ const ApplicationRegular = () => {
   const [fileUrl,setFileUrl] = useState('');
   const [errors,setErrors] = useState([]);
   const [showModal,setShowModal] = useState(false);
+  const feeAmount = 1000;
 
   const {user} = useContextData();
   const bankRef = useRef();
@@ -139,7 +140,7 @@ const ApplicationRegular = () => {
       </div>
 
       <div className="application-total">
-        <span>Total Amount</span> <span>Rs.1600</span>
+        <span>Total Amount</span> <span>Rs.{feeAmount}</span>
       </div>
         <button onClick={() => setShowModal(true)} className="application-submit">Apply</button>
     </div>
