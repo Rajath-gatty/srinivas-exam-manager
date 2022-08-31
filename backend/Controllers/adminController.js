@@ -150,10 +150,18 @@ exports.fetchSubjects = async (req,res) => {
 }
 
 exports.postCodingSheet = async (req,res) => {
-    const {classroomName,courseName,subjectName,studentDetails} = req.body;
+    const {classroomName,subjectName,studentDetails} = req.body;
+    const deptId =  req.deptId;
     console.log(studentDetails);
-    const [result] = await db.execute(`select class_id,course_id from classroom where name=?`,[classroomName]);
-    const result2 = await db.query('insert into coding_sheet(dept_id,course_id,class_id,regno,coding_sheet) values(?,?,?,?,?)')
+    try {
+        const [result] = await db.execute(`select class_id,course_id from classroom where name=?`,[classroomName]);
+        studentDetails.forEach(async (std) => {
+            await db.query('insert into coding_sheet(dept_id,course_id,class_id,regno,coding_sheet,subj_name) values(?,?,?,?,?,?)',[deptId,result[0].course_id,result[0].class_id,std.regno,std.coding,subjectName])
+        })
+    } catch(err) {
+        console.log(err);
+        res.status(500).send('Something went wrong');
+    }
     res.send('success');
 }
 

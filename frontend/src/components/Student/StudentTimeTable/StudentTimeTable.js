@@ -66,7 +66,7 @@ const StudentTimeTable = () => {
             </div>
 
             <div className="attendance-main-box">
-                {!loading ? <table className="timetable-table">
+                {!loading && <table className="timetable-table">
                     <thead className="thead">
                         <tr>
                             <th>SubjectName</th>
@@ -84,8 +84,8 @@ const StudentTimeTable = () => {
                                 <td>{obj.exam_time}</td>
                             </tr>)
                         })}
-                    </tbody>}
-                </table> 
+                    </tbody>
+                </table>}
                 {loading && <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
             </div>
         </div>

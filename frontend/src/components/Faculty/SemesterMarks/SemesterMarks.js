@@ -72,7 +72,8 @@ const SemesterMarks = () => {
     setSelectedSubject(e.target.value);
     const data = {
       courseName: course,
-      className: selectedClassroom
+      className: selectedClassroom,
+      subjectName:e.target.value
     }
 
     try {
@@ -202,22 +203,22 @@ const SemesterMarks = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {students.map((student, i) => {
+          {students.map((student, i) => {
             return <SemesterMarksList
-              key={student.regno}
+              key={student.id}
               data={student}
               index={i}
               markAttendance={markAttendance}
               handleMarkChange={handleMarkChange}
             />
-          })} */}
-          <SemesterMarksList
+          })}
+          {/* <SemesterMarksList
             key={Date.now()+Math.random()}
             data={{semester:2}}
             index={1}
             markAttendance={markAttendance}
             handleMarkChange={handleMarkChange}
-          />
+          /> */}
         </tbody>
       </table>
       {!students.length > 0 && <NoData text="No Students Found!" />}
