@@ -1,3 +1,12 @@
+.faculty-sub{
+    position: relative;
+    margin: 2em;
+}
+
+.faculty-sub .application-repeater-header{
+    margin-top: 3em;
+}
+
 .faculty-current-sub-hdng {
     width: 100%;
     padding: 0.75em 0em;

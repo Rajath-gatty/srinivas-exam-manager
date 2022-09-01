@@ -54,7 +54,7 @@
   .codingSheet-attendance-Header{
     width: 100%;
     justify-content: space-between;
-    margin-top: 3.5em;
+    margin-top: 2em;
   }
   
   
@@ -133,6 +133,13 @@
   .codingSheet-table .codingSheet-rows td a{
     text-decoration: none;
     color: var(--primary-color);
+  }
+
+  .attendance-textfield .codingSheet-input input:disabled {
+    /* color: rgb(83, 83, 83) !important; */
+    -webkit-text-fill-color: rgb(124, 124, 124) !important;
+    background-color: rgba(245, 245, 245, 0.8) !important;
+    text-align: center;
   }
   
   /* SEMESTER LIST CSS */

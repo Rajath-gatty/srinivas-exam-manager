@@ -9,6 +9,7 @@ import axios from "axios";
 import Filter from "../../UI/Filter/Filter";
 import { useFetchCourses } from "../../../hooks/useFetchCourses";
 import { toast } from "react-toastify";
+import Back from "../../UI/Back/Back";
 
 const FacultySubjects = () => {
   const [selectedSemester, setSelectedSemester] = useState(false);
@@ -125,7 +126,8 @@ const FacultySubjects = () => {
 }
 
   return (
-    <div className="application-repeater flex">
+    <div className="faculty-sub application-repeater flex">
+    <Back top="0" left={"0em"}/>
       <div className="application-repeater-header">
           <h1 style={{color:'#333'}}>{location.state.name}</h1>
       </div>
@@ -177,7 +179,7 @@ const FacultySubjects = () => {
           return ( 
           <div key={sub.subj_code} className="application-row">
           <div className="subject-checkbox">
-            <Checkbox 
+            <Checkbox
             value={sub.sem_id}  
             defaultChecked={selectedSubject.find(item=>item.subj_code===sub.subj_code)&&true} onChange={(e) =>{AddSubject(e,updatedSub)}} 
             /> 

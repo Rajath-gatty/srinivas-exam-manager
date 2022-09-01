@@ -7,7 +7,6 @@ import { useState } from "react";
 import axios from 'axios';
 import { CircularProgress,FormControl,InputLabel,MenuItem,Select } from "@mui/material";
 import NoData from "../../UI/NoData/NoData";
-import Back from "../../UI/Back/Back";
 import CodingSheetList from "./CodingSheetList";
 import { FiCheck } from "react-icons/fi";
 
@@ -73,9 +72,12 @@ const SemesterMarks = () => {
 
   const handleSubjectChange = async (e) => {
     setSelectedSubject(e.target.value);
+    setStudents([]);
     const data = {
       courseName: course,
-      className: selectedClassroom
+      className: selectedClassroom,
+      subjectName: e.target.value,
+      getCodingSheet: true
     }
 
     try {
@@ -150,7 +152,6 @@ const SemesterMarks = () => {
 
   return (
     <div className="codingSheet-attendance-main flex">
-      <Back left="0" top="1.5em" />
       <div className="codingSheet-attendance-Header flex">
         <div className="codingSheet-attendance-SubjTitile" style={{ visibility: !selectedSubject.length > 0 ? 'hidden' : 'visible' }}>
           <h4>Code : <span>{facultySubjects.map(obj => {
@@ -214,6 +215,7 @@ const SemesterMarks = () => {
               serverUrl={serverUrl}
               markAttendance={markAttendance}
               handleMarkChange={handleMarkChange}
+              selectedSubject={selectedSubject}
             />
           })}
         </tbody>
