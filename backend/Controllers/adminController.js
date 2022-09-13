@@ -283,7 +283,7 @@ exports.deleteTimetable = async (req, res) => {
 
 exports.getTimetables = async (req, res) => {
     const deptId = req.deptId;
-    const sql = `select course_name,t_id,semester,count(subj_name) as total_subjects,date_format(convert_tz(created_at,@@session.time_zone,'+05:30'),'%d %b-%Y %l:%i %p') created_at,status from timetable join course on timetable.course_id=course.course_id where timetable.dept_id=${deptId} group by t_id order by created_at desc;`;
+    const sql = `select name as class_name,course_name,t_id,timetable.semester,count(subj_name) as total_subjects,date_format(convert_tz(created_at,@@session.time_zone,'+05:30'),'%d %b-%Y %l:%i %p') created_at,status from timetable join course on timetable.course_id=course.course_id join classroom on timetable.class_id=classroom.class_id where timetable.dept_id=${deptId} group by t_id order by created_at desc;`;
     try {
         const result = await db.execute(sql);
         res.status(200).send(result[0]);

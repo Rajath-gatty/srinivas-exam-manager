@@ -6,7 +6,6 @@ import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import {toast} from "react-toastify";
-import NoData from "../../../components/UI/NoData/NoData";
 
 const StudentTimeTable = () => {
     const [timetable, setTimetable] = useState([]);
@@ -55,7 +54,7 @@ const StudentTimeTable = () => {
         <div className="student-timetable-container">
             <div className="timetable-header flex">
                 <h1>Time Table</h1>
-                <div className="btn-outlined flex" onClick={handleHallticket}>
+                <div className={`${timetable.length<=0?'hallticket-disabled':'btn-outlined'} flex`} onClick={handleHallticket}>
                 {!btnLoading ? 
                     <>
                     <HiDownload size={25}/>
@@ -87,6 +86,7 @@ const StudentTimeTable = () => {
                     </tbody>
                 </table>}
                 {loading && <div style={{marginTop:140}} className="flex"><CircularProgress thickness={4}/></div>}
+                {!loading&&timetable.length<=0&&<h2 style={{marginTop:50,color:'#ccc'}} className="flex">Timetable not Uploaded</h2>}
             </div>
         </div>
     );

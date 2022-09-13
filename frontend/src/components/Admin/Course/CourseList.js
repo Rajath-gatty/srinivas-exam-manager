@@ -6,7 +6,7 @@ const CourseList = ({name,duration,totalSem,courseId}) => {
                 <td>{name}</td>
                 <td>{duration} years</td>
                 <td>{totalSem} Semesters</td>
-                <td><Link to={'/courses/course-details/'+courseId}>view</Link></td>
+                <td><Link to={'/courses/course-details/'+courseId} state={{courseName:name}}>view</Link></td>
                 <td>
                     <Link to="/courses/new-course"
                     state={{

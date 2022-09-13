@@ -115,13 +115,16 @@ exports.generateBulkHallticket = async(req,res) => {
     }});
 
     worker.on('message',data => {
+        if(typeof data==='string') {
+            return res.status(201).send(data);
+        }
         res.set('content-encoding','gzip');
         zlib.gzip(data,{level:6},(err,zip)=>{
             res.send(zip);
         })
     })
     worker.on('error',(err)=> {
-        console.log(err);
+        res.send('No Timetable Found')
     })
     worker.on('exit',()=>console.log(`process exited on thread ${worker.threadId}`))
 }

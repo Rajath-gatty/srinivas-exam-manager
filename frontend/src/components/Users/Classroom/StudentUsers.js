@@ -75,9 +75,13 @@ const StudentUsers = () => {
         semester:sem,
         classId:class_id
       }
-      console.log(data);
       const result = await axios.post('staff/halltickets',data,{responseType:'blob'});
-      console.log(result.data);
+      setBtnLoading(false);
+      if(result.status===201) {
+         return toast.error('No timetable Found', {
+          autoClose: 3000, 
+        });
+      }
       const blob = new Blob([result.data], { type: 'application/pdf' });
       const objectUrl = window.URL.createObjectURL(blob);
       const uid = (Math.random() + 1).toString(36).substring(2);

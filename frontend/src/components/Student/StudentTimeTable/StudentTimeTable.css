@@ -37,6 +37,17 @@
     font-size: 0.9em;
 }
 
+.student-timetable-container .hallticket-disabled {
+    border: 1px solid #ccc;
+    color: #ccc;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    /* background-color: var(--white); */
+    background: transparent;
+    pointer-events: none;
+}
+
 .timetable-table .timetable-row td {
     padding: 1.25em 0em;
 }

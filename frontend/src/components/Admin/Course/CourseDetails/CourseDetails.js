@@ -2,7 +2,7 @@ import "./CourseDetails.css";
 import Back from "../../../UI/Back/Back";
 import CourseDetailsTable from "./CourseDetailsTable";
 import { useEffect,useState} from "react";
-import {useParams} from "react-router-dom";
+import {useParams,useLocation} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
 import axios from "axios";
 
@@ -10,7 +10,8 @@ const  CourseDetails = () => {
     const [semDetails,setSemDetails] = useState([]);
     const [loading,setLoading] = useState(false);
     const param = useParams();
-
+    const location = useLocation();
+    console.log(location)
     useEffect(() => {
         const fetchCourses = async () => {
             const reqData = {
@@ -72,7 +73,7 @@ const  CourseDetails = () => {
         <div className="course-details-header">
             <Back/>
             <div className="course-details-content">
-                <h2>BCA</h2>
+                <h2>{location.state.courseName}</h2>
             </div>
         </div>
         {!loading?<div className="course-details-table-wrapper">

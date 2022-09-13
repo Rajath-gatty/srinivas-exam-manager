@@ -183,6 +183,7 @@ const AdminTimeTable = () => {
                             <tr>
                             <th>Course</th>
                             <th>Semester</th>
+                            <th>Class Name</th>
                             <th>Total Subjects</th>
                             <th>Created At</th>
                             <th>Approval</th>
