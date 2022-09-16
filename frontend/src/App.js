@@ -174,7 +174,6 @@ function App() {
                 </Route>
                 <Route path="/exam-attendance" element={<ExamAttendance />} />
                 {/* <Route path="/promote" element={<Promote />} /> */}
-  
               </Route>
 
               {/* Faculty Access*/}

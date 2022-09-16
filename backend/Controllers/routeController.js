@@ -485,3 +485,19 @@ exports.postSidebarNotify = async (req,res) => {
   const result = await db.execute(sql);
   res.set('Cache-Control','private, max-age=3600').send({role:user, result:result[0]});
 }
+
+exports.pushSubscribe = async (req,res) => {
+  const {sub, data} = req.body;
+  
+  let sql;
+  try{
+    sql = `select * from notification`; 
+    const [res] = await db.execute(sql);
+    // sql = `insert into notification (email, role, subscription) values (?, ?, ?)`;
+    // const res = await db.execute(sql,[data.email, data.role, sub]);
+    // console.log(res[0]);
+    res.send(resul)
+  } catch(err) {
+    console.log(err);
+  }
+}

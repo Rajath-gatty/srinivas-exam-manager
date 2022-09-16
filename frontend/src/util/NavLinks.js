@@ -140,25 +140,25 @@ export const NavLinks = [
           },
         ],
       },
-      {
-        title: "Indent",
-        icon: Indent,
-        subMenu: [
-          {
-            title: "Regular",
-            path: "/indent/regular",
-          },
-          {
-            title: "Repeater",
-            path: "/indent/repeater",
-          },
-        ],
-      },
-      {
-        title: "Attendance",
-        icon: Indent,
-        path: "/exam-attendance"
-      },
+      // {
+      //   title: "Indent",
+      //   icon: Indent,
+      //   subMenu: [
+      //     {
+      //       title: "Regular",
+      //       path: "/indent/regular",
+      //     },
+      //     {
+      //       title: "Repeater",
+      //       path: "/indent/repeater",
+      //     },
+      //   ],
+      // },
+      // {
+      //   title: "Attendance",
+      //   icon: Indent,
+      //   path: "/exam-attendance"
+      // },
       {
         title: "Payments",
         icon: Payment,

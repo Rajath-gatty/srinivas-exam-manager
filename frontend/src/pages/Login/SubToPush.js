@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SubToPush = async () => {
+const SubToPush = async (data) => {
     const pubKey = 'BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g';
     
     //urlbase64ToUint8Array
@@ -31,13 +31,15 @@ const SubToPush = async () => {
             applicationServerKey: urlBase64ToUint8Array(pubKey)
         })
         console.log('subscribed');
-
+        
         //Save browser Push Notification Endpoint to DB
-        // try{
-        //     await axios.post('/pushsubscribe', sub);
-        // } catch(err) {
-        //     console.log(err);
-        // }
+        try{
+            const res = await axios.post('/pushsubscribe', {sub, data}); 
+            console.log(res);
+            console.log(sub);
+        } catch(err) {
+            console.log(err);
+        }
     } else {
         console.log('permission denied');
     } 
