@@ -13,6 +13,7 @@ import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
 import {toast} from "react-toastify";
+import SubToPush from "./SubToPush";
 
 const Login = ({from}) => {
   const [emailfocus, setEmailFocus] = useState(false);
@@ -74,6 +75,8 @@ const Login = ({from}) => {
         user:result.data.user
       }
       localStorage.setItem("user",JSON.stringify(userData));
+
+      await SubToPush();
 
       //If navigated to Login from another page 
       // redirect to that page after login

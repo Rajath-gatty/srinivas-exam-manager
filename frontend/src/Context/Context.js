@@ -5,6 +5,7 @@ export const Context = React.createContext();
 const ContextProvider = (props) => {
   const [serverUrl] = useState('https://exam-manager-backend.herokuapp.com');
   // const [serverUrl] = useState('http://localhost:8080');
+  // const [pubKey] = useState('BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g');
   const [role, setRole] = useState('');
   const [user, setUser] = useState({});
   const [token, setToken] = useState('');

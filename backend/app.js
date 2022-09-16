@@ -6,6 +6,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const webpush = require('web-push');
 
 const registrationRoutes = require('./Router/registrationRoutes');
 const adminRoutes = require('./Router/adminRoutes');
@@ -29,6 +30,17 @@ app.use('/faculty',facultyRoutes);
 app.use('/student',studentRoutes);
 app.use(routes);
 app.use(registrationRoutes);
+
+// Push Notification Secret Key Stored in .env file
+const vapidKeys = {
+    publicKey: 'BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g',
+    privateKey: 'z7HFKYrtRyeUO_1T4BnWYUZiHQo-fdbIYl7ZdBLZS4Y'
+}
+webpush.setVapidDetails(
+    'mailto: sims@sem.com',
+    vapidKeys.publicKey,
+    vapidKeys.privateKey
+)
 
 const PORT = process.env.PORT||8080;
 app.listen(PORT);
