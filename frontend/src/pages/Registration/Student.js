@@ -151,13 +151,24 @@ const Student = () => {
         setErrors([]);
         setPassErr(false);
         
+        navigate("/login");
         toast.success("User Registered Successfully!", {
           isLoading: false, 
           autoClose: 3000, 
           closeOnClick: true,
           draggable: true });
-
-          navigate("/login");  
+        
+        //Sending Push Notification to Staff
+        try{
+          const pushData = {
+            sendTo: "staff",
+            body: "New Student Registered"
+          }
+          const res = await axios.post('/pushsendnotification', pushData); 
+          console.log(res.data);
+        } catch(err) {
+            console.log(err);
+        }
       } catch (err) {
         console.log(err);
         setErrors(err.response.data.err);

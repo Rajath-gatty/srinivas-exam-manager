@@ -106,6 +106,18 @@ const Faculty = () => {
           autoClose: 3000, 
           closeOnClick: true,
           draggable: true });
+
+        //Sending Push Notification to Staff
+        try{
+          const pushData = {
+            sendTo: "staff",
+            body: "New Faculty Registered"
+          }
+          const res = await axios.post('/pushsendnotification', pushData); 
+          console.log(res.data);
+        } catch(err) {
+            console.log(err);
+        }
       } catch (err) {
         if(!err.response.data) {
           return setErrors([]);

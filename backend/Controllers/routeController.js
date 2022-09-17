@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const emailTemplate = require('../emailTemplate');
 const bcrypt = require('bcrypt');
 const sgMail = require('@sendgrid/mail');
+const webpush = require('web-push');
 
 exports.getDepartments = async(req,res) => { 
     try {
@@ -488,16 +489,69 @@ exports.postSidebarNotify = async (req,res) => {
 
 exports.pushSubscribe = async (req,res) => {
   const {sub, data} = req.body;
-  
+  const browserAuth = sub.keys;
+
   let sql;
   try{
-    sql = `select * from notification`; 
-    const [res] = await db.execute(sql);
-    // sql = `insert into notification (email, role, subscription) values (?, ?, ?)`;
-    // const res = await db.execute(sql,[data.email, data.role, sub]);
-    // console.log(res[0]);
-    res.send(resul)
+    const [query] = await db.execute(`select * from notification`);
+    // console.log(query);
+
+    //If subscription already exists, update it
+    let existingSub = false;
+    for(let i=0; i<query.length; i++){
+      if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email===data.email){
+        existingSub = true;
+        break;
+      }
+      else if(query[i].email===data.email && query[i].auth!==browserAuth.auth && query[i].p256dh!==browserAuth.p256dh){
+        console.log("Updating Subscription of Existing user");
+        existingSub = true;
+        sql = `update notification set subscription=?,auth=?,p256dh=? where email=?`;
+        await db.execute(sql,[sub,browserAuth.auth,browserAuth.p256dh,data.email]);
+        break;
+      } 
+      else if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email!==data.email){
+        console.log("Updating Email of Existing Subscription");
+        existingSub = true;
+        sql = `update notification set email=? where auth=? and p256dh=?`;
+        await db.execute(sql,[data.email, browserAuth.auth, browserAuth.p256dh]);
+        break;
+      } else { 
+        console.log("Next Obj");
+      }
+    };
+    // res.send(query);
+
+    //If subscription doesnt exist, add it to the database
+    if(!existingSub){
+      console.log("New subscription");
+      sql = `insert into notification (email, role, subscription, auth, p256dh) values (?, ?, ?, ?, ?)`;
+      await db.execute(sql, [data.email, data.role, sub, browserAuth.auth, browserAuth.p256dh]);
+    }
+  
+    res.send({success:true});
   } catch(err) {
+    res.status(500).send(err);
     console.log(err);
   }
 }
+
+exports.pushSendNotification = async (req,res) => {
+  const {pushData} = req.body;
+  console.log(pushData);
+
+  try{
+    let sql = `select subscription from notification where role="${pushData.sendTo}"`;
+    const [result] = await db.execute(sql);
+    console.log(result)
+    
+    for(let i = 0; i < result.length; i++) {
+      let sub = result[i].subscription;
+      const payload = JSON.stringify(pushData);
+      webpush.sendNotification(sub, payload).catch(err => console.error(err));
+    } 
+  } catch(err) {
+    res.status(500).send(err);
+    console.log(err);
+  }
+} 

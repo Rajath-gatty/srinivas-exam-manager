@@ -35,8 +35,7 @@ const SubToPush = async (data) => {
         //Save browser Push Notification Endpoint to DB
         try{
             const res = await axios.post('/pushsubscribe', {sub, data}); 
-            console.log(res);
-            console.log(sub);
+            console.log(res.data);
         } catch(err) {
             console.log(err);
         }

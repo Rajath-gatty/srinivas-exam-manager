@@ -37,7 +37,7 @@ const Login = ({from}) => {
 
   const {setRole,setUser,setToken} = useContextData();
   const navigate = useNavigate();
-  
+
   const passRef = useRef();
   useEffect(() => {
     if(passRef.current)
