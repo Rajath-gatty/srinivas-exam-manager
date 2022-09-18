@@ -1,15 +1,15 @@
 .profile-container {
   position: relative;
   width: 100%;
-  margin-right: 2em;
-  flex-direction: column;
-  justify-content: space-evenly;
+  overflow: hidden;
+  /* flex-direction: column;
+  justify-content: space-evenly; */
 }
 
 .profile-head {
-  justify-content: space-around;
   width: 100%;
   position: relative;
+  justify-content: space-around;
   margin-top: 6em;
 }
 
@@ -74,19 +74,13 @@
 
 .profile-userDetails-ReadOnly,
 .profile-userDetails {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  /* display: grid;
-  grid-template-columns: repeat(1, 1fr); */
   gap: 1em;
-  margin-top: 2em;
-  width: 750px;
+  flex-direction: column;
+  margin: 0 10%;
+  margin-top: 4em;
 }
 
 .profile-row {
-  /* display: flex;
-  justify-content: space-evenly; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -94,6 +88,7 @@
   padding: 0.5em 1em;
   border-radius: 5px;
   width: 100%;
+  min-width: fit-content;
 }
 
 .profile-row label {

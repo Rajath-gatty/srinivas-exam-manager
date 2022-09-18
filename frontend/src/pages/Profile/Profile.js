@@ -22,7 +22,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container flex">
+    <div className="profile-container">
       <Back />
 
       <motion.div
@@ -78,7 +78,7 @@ const Profile = () => {
       <motion.div
         initial={{ opacity: 0, scale: 0.9, transition: { duration: 2 } }}
         animate={{ opacity: 1, scale: 1 }}
-        className="profile-userDetails-ReadOnly"
+        className="profile-userDetails-ReadOnly flex"
         // className={
         //   allowEdit ? "profile-userDetails" : "profile-userDetails-ReadOnly"
         // }
