@@ -543,7 +543,7 @@ exports.pushSendNotification = async (req,res) => {
   try{
     let sql = `select subscription from notification where role="${pushData.sendTo}"`;
     const [result] = await db.execute(sql);
-    console.log(result)
+    console.log("Sending Notifications to : ", result)
     
     for(let i = 0; i < result.length; i++) {
       let sub = result[i].subscription;
