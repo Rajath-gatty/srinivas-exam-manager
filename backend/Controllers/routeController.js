@@ -498,23 +498,24 @@ exports.pushSubscribe = async (req,res) => {
 
     //If subscription already exists, update it
     let existingSub = false;
+    let subEmail = data.email.toLowerCase();
     for(let i=0; i<query.length; i++){
-      if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email===data.email){
+      if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email===subEmail){
         existingSub = true;
         break;
       }
-      else if(query[i].email===data.email && query[i].auth!==browserAuth.auth && query[i].p256dh!==browserAuth.p256dh){
+      else if(query[i].email===subEmail && query[i].auth!==browserAuth.auth && query[i].p256dh!==browserAuth.p256dh){
         console.log("Updating Subscription of Existing user");
         existingSub = true;
         sql = `update notification set subscription=?,auth=?,p256dh=? where email=?`;
-        await db.execute(sql,[sub,browserAuth.auth,browserAuth.p256dh,data.email]);
+        await db.execute(sql,[sub,browserAuth.auth,browserAuth.p256dh,subEmail]);
         break;
       } 
-      else if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email!==data.email){
+      else if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email!==subEmail){
         console.log("Updating Email of Existing Subscription");
         existingSub = true;
         sql = `update notification set email=?,role=? where auth=? and p256dh=?`;
-        await db.execute(sql,[data.email, data,role, browserAuth.auth, browserAuth.p256dh]);
+        await db.execute(sql,[subEmail, data.role, browserAuth.auth, browserAuth.p256dh]);
         break;
       } else { 
         console.log("Next Obj");
@@ -526,7 +527,7 @@ exports.pushSubscribe = async (req,res) => {
     if(!existingSub){
       console.log("New subscription");
       sql = `insert into notification (email, role, subscription, auth, p256dh) values (?, ?, ?, ?, ?)`;
-      await db.execute(sql, [data.email, data.role, sub, browserAuth.auth, browserAuth.p256dh]);
+      await db.execute(sql, [subEmail, data.role, sub, browserAuth.auth, browserAuth.p256dh]);
     }
   
     res.send({success:true});
@@ -538,7 +539,7 @@ exports.pushSubscribe = async (req,res) => {
 
 exports.pushSendNotification = async (req,res) => {
   const {sendTo, body} = req.body;
-
+  
   try{
     let sql = `select subscription from notification where role="${sendTo}"`;
     const [result] = await db.execute(sql);
