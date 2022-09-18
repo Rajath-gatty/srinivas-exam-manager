@@ -20,7 +20,7 @@ const SemesterMarks = () => {
   const [selectedSubject, setSelectedSubject] = useState(false);
   const [markAttendance, setMarkAttendance] = useState([]);
 
-  const { user, serverUrl } = useContextData();
+  const { user } = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
 
   const fetchFacultySubjects = async (className) => {

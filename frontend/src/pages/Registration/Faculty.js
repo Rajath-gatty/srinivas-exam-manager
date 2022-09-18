@@ -136,20 +136,6 @@ const Faculty = () => {
     }
   };
 
-  const TestPush = async () => {
-    //Sending Push Notification to Staff
-    try{
-      const pushData = {
-        sendTo: "staff",
-        body: "New Faculty Registered"
-      }
-      const res = await axios.post('/pushsendnotification', pushData); 
-      console.log(res.data);
-    } catch(err) {
-        console.log(err);
-    }
-  }
-
   return (
     <div>
       <Navbar />

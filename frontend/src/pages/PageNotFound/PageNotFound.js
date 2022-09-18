@@ -1,8 +1,8 @@
 import "./PageNotFound.css";
-import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
+// import SrinivasLogo from "../../Assets/SrinivasLogo.svg";
 import NotFound from "../../Assets/notFound.gif";
-import {Link} from "react-router-dom";
-import {FiArrowLeft} from "react-icons/fi";
+// import {Link} from "react-router-dom";
+// import {FiArrowLeft} from "react-icons/fi";
 import Navbar from "../../components/Navbar/Navbar";
 
 const PageNotFound = () => {

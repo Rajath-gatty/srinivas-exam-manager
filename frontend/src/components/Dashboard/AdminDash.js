@@ -36,7 +36,7 @@ const AdminDash = () => {
       }
     }
     FetchUsersCount();
-  }, [])
+  }) 
 
   return (
     <div className="dashboard-stats">

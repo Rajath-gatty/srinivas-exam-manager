@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./SemesterMarks.css";
 import { HiPlus } from "react-icons/hi";
 import {CircularProgress} from "@mui/material";
@@ -9,7 +9,7 @@ import axios from "axios";
 const SemesterList = () => {
   const [loading, setLoading] = useState(true);
   const [semList, setSemList] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(()=>{
     const fetchData = async () => {

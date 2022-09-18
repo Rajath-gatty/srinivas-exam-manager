@@ -72,7 +72,7 @@ const FacultySubjects = () => {
       }
     }
     fetchSubjects();
-  },[])
+  },[course, selectedSemester, facultyId])
 
   const handleCourseChange = async(e) => {
     const courseName = e.target.value;

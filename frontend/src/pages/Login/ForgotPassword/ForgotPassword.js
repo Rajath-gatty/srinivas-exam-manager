@@ -1,9 +1,9 @@
 import "./ForgotPassword.css"
 import { useState } from "react";
-import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
+// import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
 import {ForgotPassword as ForgotPasswordSvg} from "../../../Assets";
-import {useNavigate, useLocation} from "react-router-dom";
-import {FiArrowLeft} from "react-icons/fi";
+import {useLocation} from "react-router-dom";
+// import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { CircularProgress } from "@mui/material";
@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     const [enteredEmail,setEnteredEmail] = useState('');
     const [isReset,setIsReset] = useState(false);
     const [loading,setLoading]= useState(false);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const location = useLocation();
     const {user} = location.state;
 

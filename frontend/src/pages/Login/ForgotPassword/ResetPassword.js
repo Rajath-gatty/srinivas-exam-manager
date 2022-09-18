@@ -1,8 +1,8 @@
 import "./ForgotPassword.css"
 import { useState } from "react";
-import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
+// import SrinivasLogo from "../../../Assets/SrinivasLogo.svg";
 import {useNavigate, useParams} from "react-router-dom";
-import {FiArrowLeft} from "react-icons/fi";
+// import {FiArrowLeft} from "react-icons/fi";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { CircularProgress } from "@mui/material";
