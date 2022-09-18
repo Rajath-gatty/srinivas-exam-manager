@@ -11,7 +11,7 @@ self.addEventListener("activate", event => {});
 self.addEventListener('push', (e) => {
     const data = e.data.json();
     self.registration.showNotification("Srinivas Exam Manager", {
-      body: data.body,
+      body: data,
       icon: './Icons/144.png'
     });
 });

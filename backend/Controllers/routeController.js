@@ -513,8 +513,8 @@ exports.pushSubscribe = async (req,res) => {
       else if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email!==data.email){
         console.log("Updating Email of Existing Subscription");
         existingSub = true;
-        sql = `update notification set email=? where auth=? and p256dh=?`;
-        await db.execute(sql,[data.email, browserAuth.auth, browserAuth.p256dh]);
+        sql = `update notification set email=?,role=? where auth=? and p256dh=?`;
+        await db.execute(sql,[data.email, data,role, browserAuth.auth, browserAuth.p256dh]);
         break;
       } else { 
         console.log("Next Obj");
@@ -537,17 +537,16 @@ exports.pushSubscribe = async (req,res) => {
 }
 
 exports.pushSendNotification = async (req,res) => {
-  const {pushData} = req.body;
-  console.log(pushData);
+  const {sendTo, body} = req.body;
 
   try{
-    let sql = `select subscription from notification where role="${pushData.sendTo}"`;
+    let sql = `select subscription from notification where role="${sendTo}"`;
     const [result] = await db.execute(sql);
-    console.log("Sending Notifications to : ", result)
+    console.log(`Sending Notifications to : ${sendTo}`);
     
     for(let i = 0; i < result.length; i++) {
       let sub = result[i].subscription;
-      const payload = JSON.stringify(pushData);
+      const payload = JSON.stringify(body);
       webpush.sendNotification(sub, payload).catch(err => console.error(err));
     } 
   } catch(err) {

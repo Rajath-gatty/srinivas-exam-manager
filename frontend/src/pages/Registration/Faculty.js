@@ -136,11 +136,25 @@ const Faculty = () => {
     }
   };
 
+  const TestPush = async () => {
+    //Sending Push Notification to Staff
+    try{
+      const pushData = {
+        sendTo: "staff",
+        body: "New Faculty Registered"
+      }
+      const res = await axios.post('/pushsendnotification', pushData); 
+      console.log(res.data);
+    } catch(err) {
+        console.log(err);
+    }
+  }
+
   return (
     <div>
       <Navbar />
       <div className="form-wrapper">
-        <h2>Faculty Registration</h2>
+        <h2 onClick={TestPush}>Push Faculty Registration</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="faculty-form">
             <TextField
