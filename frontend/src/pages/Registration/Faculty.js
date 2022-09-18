@@ -154,7 +154,7 @@ const Faculty = () => {
     <div>
       <Navbar />
       <div className="form-wrapper">
-        <h2 onClick={TestPush}>Push Faculty Registration</h2>
+        <h2>Faculty Registration</h2>
         <form onSubmit={handleFormSubmit}>
           <div className="faculty-form">
             <TextField
