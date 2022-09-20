@@ -130,13 +130,13 @@ const Approval = ({type}) => {
   return (
     <div className="approval-main content">
       <div className="approve-main-header">
-      <h1 className="approve-list-header">{type.charAt(0).toUpperCase() + type.slice(1)} Approval</h1>
-      {type==='student'&&<Filter 
-      data={filterCourses} 
-      filter="course" 
-      label="Filter by Course"
-      handleCourseChange={handleCourseChange}
-      />}
+        <h1 className="approve-list-header">{type.charAt(0).toUpperCase() + type.slice(1)} Approval</h1>
+        {type==='student'&&<Filter 
+        data={filterCourses} 
+        filter="course" 
+        label="Filter by Course"
+        handleCourseChange={handleCourseChange}
+        />}
       </div>
 
       <table className="approve-list-wrapper">

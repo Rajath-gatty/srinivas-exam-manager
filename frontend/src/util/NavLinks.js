@@ -217,11 +217,11 @@ export const NavLinks = [
         path: "/",
         icon: Dashboard,
       },
-      {
-        title: "Coding Sheet",
-        path: "/coding",
-        icon: Coding,
-      },
+      // {
+      //   title: "Coding Sheet",
+      //   path: "/coding",
+      //   icon: Coding,
+      // },
       {
         title: "Attendance Statement",
         path: "/attendance-statement",

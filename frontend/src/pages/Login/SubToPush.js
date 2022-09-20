@@ -3,9 +3,8 @@ import axios from 'axios';
 const SubToPush = async (data) => {
     const pubKey = 'BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g';
     
-    //urlbase64ToUint8Array
+    //urlbase64ToUint8Array converter
     const urlBase64ToUint8Array = (base64String) => {
-        console.log('subscribing');
         const padding = '='.repeat((4 - base64String.length % 4) % 4);
         const base64 = (base64String + padding)
             .replace(/\-/g, '+')
@@ -20,17 +19,13 @@ const SubToPush = async (data) => {
         return outputArray;
     }
 
-    console.log('check sw ready');
     const reg = await navigator.serviceWorker.ready;
-    console.log('sw ready, to subscribe');
     const permission = await Notification.requestPermission();
     if (permission === 'granted') {
-        console.log(permission);
         const sub = await reg.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(pubKey)
         })
-        console.log('subscribed');
         
         //Save browser Push Notification Endpoint to DB
         try{
