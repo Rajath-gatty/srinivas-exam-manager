@@ -62,14 +62,14 @@ import FacultySubjects from "./components/Staff/FacultySubjects/FacultySubjects"
 import Classroom from "./components/Users/Classroom/Classroom";
 import StudentUsers from "./components/Users/Classroom/StudentUsers";
 import CreateClass from "./components/Users/Classroom/Create/Create";
-
 import CodingSheet from "./components/Admin/CodingSheet/CodingSheet";
+import SemMarkDisplay from "./components/Faculty/SemesterMarks/SemMarkDisplay";
 
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SemMarkDisplay from "./components/Faculty/SemesterMarks/SemMarkDisplay";
+import Pwa from "./util/Pwa";
 
 function App() {
   const { setRole, setUser, setToken, token } = useContextData();
@@ -97,7 +97,9 @@ function App() {
       setLoading(false);
     }
     setLoading(false);
+    Pwa();
   }, [setToken, setRole, setUser])
+
 
   return (
     <ThemeProvider theme={theme}>

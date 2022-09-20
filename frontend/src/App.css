@@ -232,6 +232,24 @@ body {
   z-index: 10010 !important;
 }
 
+/* PWA Install Btn */
+.PwaContainer{
+  justify-content: space-evenly;
+  gap: 3em;
+  color: #000;
+}
+
+.PwaContainer .PwaBtn{
+  border: none;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-size: 1em;
+  padding: 0.2em 0.6em;
+  gap: 0.5em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 @media (max-width: 534px){
   .section {
     display: flex;
