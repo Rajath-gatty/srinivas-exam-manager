@@ -537,19 +537,22 @@ exports.pushSubscribe = async (req,res) => {
 }
 
 exports.pushSendNotification = async (req,res) => {
-  const {pushData} = req.body;
-  console.log(pushData);
-
+  const {sendTo,body} = req.body;
+  console.log("Req Body: ",req.body);
+  // console.log("Data: ",pushData);
+ 
   try{
-    let sql = `select subscription from notification where role="${pushData.sendTo}"`;
+    let sql = `select subscription from notification where role="${sendTo}"`;
     const [result] = await db.execute(sql);
     console.log(result)
     
     for(let i = 0; i < result.length; i++) {
       let sub = result[i].subscription;
-      const payload = JSON.stringify(pushData);
+      const payload = JSON.stringify(body);
       webpush.sendNotification(sub, payload).catch(err => console.error(err));
     } 
+
+    console.log("Sending Push Notification");
   } catch(err) {
     res.status(500).send(err);
     console.log(err);

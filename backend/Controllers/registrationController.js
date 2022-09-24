@@ -1,14 +1,35 @@
 const { validationResult } = require("express-validator");
+const {BlobServiceClient, StorageSharedKeyCredential} = require("@azure/storage-blob");
+const sharp = require('sharp');
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
+const account=process.env.AZURE_ACCOUNT_NAME;
+const accountKey=process.env.AZURE_API_KEY;
+const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
+const blobServiceClient = new BlobServiceClient(
+`https://${account}.blob.core.windows.net`,
+sharedKeyCredential
+);
+// const containerClient = blobServiceClient.getContainerClient('student-profiles');
+
 exports.postStudent = async (req, res) => {
   const data = req.body;
-  const imagePath = `/studentProfiles/${req.file.filename}`; 
+  // const imagePath = `/studentProfiles/${req.file.filename}`; 
 
   try {
-    const hashedPassword = await bcrypt.hash(data.password, 4);
+  const optImg = await sharp(req.file.buffer)
+            .webp({ quality: 20 })
+            .resize({ width: 864, height: 524, fit: sharp.fit.cover })
+            .toBuffer();
+  const containerClient = blobServiceClient.getContainerClient('student-profiles');
+  const uid = `${(Math.random() + 1).toString(36).substring(2)}.webp`;
+  const blockBlobClient = containerClient.getBlockBlobClient(uid);
+  await blockBlobClient.uploadData(optImg);
+  const imagePath = `https://${account}.blob.core.windows.net/studentProfiles/${uid}`;
+
+  const hashedPassword = await bcrypt.hash(data.password, 4);
 
     const result = await db.execute(
       "insert into student(regno,first_name,last_name,gender,dob,email,phone,address,blood_group,caste,aadhar_no,religion,birth_place,birth_district,country,identity_mark,pincode,password,f_name,f_occupation,f_phone,f_email,m_name,m_occupation,m_phone,m_email,g_name,g_occupation,g_phone,g_email,dept_id,course_id,image_path,joining_year,role,status,semester,eligibility) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,(select dept_id from department where dept_name=?),(select course_id from course where course_name=?),?,?,?,?,?,?)",

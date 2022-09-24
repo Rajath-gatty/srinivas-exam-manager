@@ -9,9 +9,9 @@ const validate = (req,res,next) => {
   const err = validationResult(req).errors;
   if (err.length > 0) {
      res.status(400).send({ success: false, err });
-     if(req.file) {
-      fs.unlink(req.file.path,(err)=>console.log(err));
-     }
+    //  if(req.file) {
+    //   fs.unlink(req.file.path,(err)=>console.log(err));
+    //  }
      return;
   }
   next();

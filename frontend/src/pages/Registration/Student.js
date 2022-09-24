@@ -40,7 +40,7 @@ const Student = () => {
   const semester = ["1", "2", "3", "4", "5", "6"];
   const DegreeYear = [
      2015, 2016,
-    2017, 2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027
+    2017, 2018, 2019, 2020, 2021,2022,2023,2024,2025,2026,2027,2028,2029
   ];
 
   const departments = useFetchDepartment();
@@ -148,10 +148,11 @@ const Student = () => {
     } else {
       try {
         const result = await axios.post("/registration/student",formData);
+
         setErrors([]);
         setPassErr(false);
         
-        navigate("/login");
+        // navigate("/login");
         toast.success("User Registered Successfully!", {
           isLoading: false, 
           autoClose: 3000, 
@@ -171,7 +172,9 @@ const Student = () => {
         }
       } catch (err) {
         console.log(err);
-        setErrors(err.response.data.err);
+        if(err.response.status===400) {
+          setErrors(err?.response?.data?.err);
+        }
 
         toast.error("Fill all the required fields!", {
           isLoading: false, 
@@ -219,8 +222,8 @@ const Student = () => {
               inputRef={firstNameRef}
               fullWidth
               required
-              error={errors.some((err) => err.param === "firstName")}
-              helperText={errors.find((err) => err.param === "firstName")?.msg}
+              error={errors?.some((err) => err.param === "firstName")}
+              helperText={errors?.find((err) => err.param === "firstName")?.msg}
             />
 
             <TextField
