@@ -64,11 +64,11 @@ exports.getSubjects = async(req,res) => {
 
 exports.getUserCount = async (req,res) => {
   const deptId = req.deptId;
-  const sql = `SELECT 'faculty' as user , COUNT(*) as count FROM faculty where dept_id=${deptId}
+  const sql = `SELECT 'faculty' as user , COUNT(*) as count FROM faculty where dept_id=${deptId} and status='approved'
   UNION
-  SELECT 'staff' , COUNT(*) FROM staff where dept_id=${deptId}
+  SELECT 'staff' , COUNT(*) FROM staff where dept_id=${deptId} and status='approved'
   UNION
-  SELECT 'student', COUNT(*) FROM student where dept_id=${deptId}`;
+  SELECT 'student', COUNT(*) FROM student where dept_id=${deptId} and status='approved'`;
   const result = await db.execute(sql);
   res.set('Cache-Control','private, max-age=3600').send(result[0]);
 }
