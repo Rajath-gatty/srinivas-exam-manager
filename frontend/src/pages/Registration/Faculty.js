@@ -98,7 +98,6 @@ const Faculty = () => {
         setErrors([]);
         setPassErr(false);
 
-        navigate("/login");
         toast.update(loader, { 
           render: "User Registered Successfully!", 
           type: "success", 
@@ -118,6 +117,8 @@ const Faculty = () => {
         } catch(err) {
             console.log(err);
         }
+        
+        navigate("/login");
       } catch (err) {
         if(!err.response.data) {
           return setErrors([]);

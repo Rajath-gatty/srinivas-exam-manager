@@ -94,7 +94,6 @@ const Staff = () => {
         setErrors([]);
         setPassErr(false);
 
-        navigate("/login");
         toast.update(loader, { 
           render: "User Registered Successfully!", 
           type: "success", 
@@ -114,6 +113,8 @@ const Staff = () => {
         } catch(err) {
             console.log(err);
         }
+        
+        navigate("/login");
       } catch(err) {
         setErrors(err.response.data.err);
         console.log(err.response.data.err);

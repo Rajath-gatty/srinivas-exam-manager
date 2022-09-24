@@ -6,7 +6,7 @@ import { useParams,useLocation} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./ApprovalDetailsView.css";
 import { CircularProgress } from "@mui/material";
-import { useContextData } from "../../hooks/useContextData";
+// import { useContextData } from "../../hooks/useContextData";
 
 const StudentApprovalView = () => {
   const [details,setDetails] = useState({});
@@ -18,7 +18,7 @@ const StudentApprovalView = () => {
   const navigate = useNavigate();
   const params = useParams(); 
   const location = useLocation();
-  const {serverUrl} = useContextData();
+  // const {serverUrl} = useContextData();
 
   // const ApproveBtn = document.querySelector(".green");
   // const RejectBtn = document.querySelector(".red");

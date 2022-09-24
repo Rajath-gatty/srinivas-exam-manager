@@ -9,7 +9,7 @@ const account=process.env.AZURE_ACCOUNT_NAME;
 const accountKey=process.env.AZURE_API_KEY;
 const sharedKeyCredential = new StorageSharedKeyCredential(account, accountKey);
 const blobServiceClient = new BlobServiceClient(
-`https://${account}.blob.core.windows.net`,
+`https://${account}.blob.core.windows.net`, 
 sharedKeyCredential
 );
 // const containerClient = blobServiceClient.getContainerClient('student-profiles');
@@ -19,9 +19,7 @@ exports.postStudent = async (req, res) => {
   // const imagePath = `/studentProfiles/${req.file.filename}`; 
 
   try {
-  const optImg = await sharp(req.file.buffer)
-            .webp({ quality: 20 })
-            .toBuffer();
+  const optImg = await sharp(req.file.buffer).webp({ quality: 20 }).toBuffer();
   const containerClient = blobServiceClient.getContainerClient('student-profiles');
   const uid = `${(Math.random() + 1).toString(36).substring(2)}.webp`;
   const blockBlobClient = containerClient.getBlockBlobClient(uid);

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContextData } from "../../../hooks/useContextData";
+// import { useContextData } from "../../../hooks/useContextData";
 
 const ApprovaList = (props) => {
  const {name,regno,joiningYear,courseName,type,facultyId,staffId,imageUrl,handleApprove,handleReject} = props;
 
- const {serverUrl} = useContextData();
+//  const {serverUrl} = useContextData();
 
   let UserID = "";
   if(type === "student")

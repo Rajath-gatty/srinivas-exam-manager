@@ -501,6 +501,7 @@ exports.pushSubscribe = async (req,res) => {
     let subEmail = data.email.toLowerCase();
     for(let i=0; i<query.length; i++){
       if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email===subEmail){
+        console.log("Subscription already exists");
         existingSub = true;
         break;
       }
