@@ -52,7 +52,7 @@ const StudentApprovalView = () => {
         </div>
         <div className="approve-user-avatar flex">
           {type==='student'?
-          <img src={serverUrl+details.image_path} className="details-profile-img" alt="" />
+          <img src={details.image_path} className="details-profile-img" alt="" />
           :<FaUserCircle color="var(--light-grey)" size={70}/>}
         </div>
 

@@ -10,7 +10,7 @@ import { useContextData } from "../../hooks/useContextData";
 
 const Profile = () => {
   // const [allowEdit, setAllowEdit] = useState(false);
-  const { setRole, setToken, setUser, user, serverUrl } = useContextData();
+  const { setRole, setToken, setUser, user } = useContextData();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -33,7 +33,7 @@ const Profile = () => {
         <div className="profile-userinfo gap-2 flex">
           <div className="profile-avatar  flex">
            {user.imagePath ? <div className="profileImg-container">
-              <img className="profile-info-img" src={serverUrl+user.imagePath}  alt="avatar" />
+              <img className="profile-info-img" src={user.imagePath}  alt="avatar" />
             </div>
             :
             <FaUserCircle color="var(--light-grey)" size={70} />

@@ -17,7 +17,7 @@ const ApprovaList = (props) => {
   return (
     <tr className="approve-table-row">
       {type==='student'&&<td className="approve-avatar-wrapper">
-      <img src={serverUrl+imageUrl} className="approval-profile-img" alt="profile" width="40px" height="40px"/>
+      <img src={imageUrl} className="approval-profile-img" alt="profile" width="40px" height="40px"/>
       </td>}
       <td>{name}</td>
       {type==='student'&&<td>{UserID.uid}</td>}

@@ -21,13 +21,12 @@ exports.postStudent = async (req, res) => {
   try {
   const optImg = await sharp(req.file.buffer)
             .webp({ quality: 20 })
-            .resize({ width: 864, height: 524, fit: sharp.fit.cover })
             .toBuffer();
   const containerClient = blobServiceClient.getContainerClient('student-profiles');
   const uid = `${(Math.random() + 1).toString(36).substring(2)}.webp`;
   const blockBlobClient = containerClient.getBlockBlobClient(uid);
   await blockBlobClient.uploadData(optImg);
-  const imagePath = `https://${account}.blob.core.windows.net/studentProfiles/${uid}`;
+  const imagePath = `https://${account}.blob.core.windows.net/student-profiles/${uid}`;
 
   const hashedPassword = await bcrypt.hash(data.password, 4);
 
