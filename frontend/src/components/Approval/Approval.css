@@ -7,7 +7,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 800px;
+    width: 100%;
+    margin: 1em 0;
 }
 
 .approval-main .approve-main-header .SelectInput {
@@ -26,8 +27,9 @@
 
 .approval-main .approve-list-header {
     color: var(--primary-color);
-    margin-bottom: 1em;
-    margin-top: 1em;
+    width: 100%;
+    /* margin-bottom: 1em;
+    margin-top: 1em; */
 }
 
 .approval-main .back-btn .back-btn-text {

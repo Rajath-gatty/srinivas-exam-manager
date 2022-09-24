@@ -9,7 +9,7 @@ import {
   FormHelperText
 } from "@mui/material";
 import "./Application.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useContextData } from "../../../hooks/useContextData";
 import axios from "axios";
 import Modal from "../../UI/Modal/Modal";
@@ -76,7 +76,7 @@ const ApplicationRepeater = () => {
       }
     }
     fetchSubjects();
-  },[selectedSemester])
+  },[selectedSemester, user])
 
 
   const handleSemesterChange = async(e) => {

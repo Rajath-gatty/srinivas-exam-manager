@@ -17,13 +17,13 @@ const AdminDash = () => {
     const FetchUsersCount = async() => {
       try {
         const res = await axios.get(`/dashboard/users/count`);
-       const result = res.data.reduce((acc,cur) => {
+        const result = res.data.reduce((acc,cur) => {
           return Object.assign(acc,acc[cur.user]=cur.count);
         },{})
         setCount(result);
       } catch(err) {
         //Unauthorized Access Error 401
-        if(err.response.status === 401){
+        if(err?.response?.status === 401){
           toast.error("Session Expired!");
           localStorage.removeItem("user");
           setToken('');
@@ -36,7 +36,7 @@ const AdminDash = () => {
       }
     }
     FetchUsersCount();
-  }, [])
+  },[]) 
 
   return (
     <div className="dashboard-stats">

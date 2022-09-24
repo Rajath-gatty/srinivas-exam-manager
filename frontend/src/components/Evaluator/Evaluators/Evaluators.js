@@ -7,12 +7,13 @@ import { HiPlus } from "react-icons/hi";
 const Evaluators = () => {
     return (
         <div className="eval-main">
-            <Link to="/evaluators/assign">
-                <button className="eval-button">
+            <div className="eval-header">
+                <h1>Evaluators</h1>
+                <Link to="/evaluators/assign" className="eval-button flex gap-sm">
                     <HiPlus size={20} />
-                    <span>AssignFaculty</span>
-                </button>
-            </Link>
+                    <span>Assign Faculty</span>
+                </Link>
+            </div>
 
             <table className="eval-table-wrapper">
                 <thead className="thead">

@@ -1,6 +1,6 @@
 import { Link,useNavigate} from "react-router-dom";
 import { useState, useEffect, useRef} from "react";
-import { FiMail, FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
 import {MdAlternateEmail} from "react-icons/md";
 
 import "./Login.css";
@@ -11,6 +11,7 @@ import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
 import {toast} from "react-toastify";
+import SubToPush from "./SubToPush";
 
 const SpecialLogin = () => {
   const [emailfocus, setEmailFocus] = useState(false);
@@ -72,6 +73,9 @@ const SpecialLogin = () => {
         user:result.data.user
       }
       localStorage.setItem("user",JSON.stringify(userData));
+
+      await SubToPush({email:email, role:loginUser}); //subscribing to push notification
+
       navigate('/');
       setLoading(false);
     } catch(err) {

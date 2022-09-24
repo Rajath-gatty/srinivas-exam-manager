@@ -9,9 +9,10 @@
 
 .departments-header{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     margin: 1.5em 0;
+    color: var(--primary-color);
 }
 
 .departments-form {

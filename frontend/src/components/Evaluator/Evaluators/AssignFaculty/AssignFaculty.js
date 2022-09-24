@@ -22,8 +22,8 @@ const AssignFaculty = () => {
   const [selectedClassroom, setSelectedClassroom] = useState('');
   const [subjectFilter,setSubjectFilter] = useState([]);
   const [selectedSubject,setSelectedSubject] = useState('');
-  const [bundleFilter,setbundleFilter] = useState([]);
-  const [selectedBundle,setSelectedBundle] = useState('');
+  // const [bundleFilter,setbundleFilter] = useState([]);
+  // const [selectedBundle,setSelectedBundle] = useState('');
 
   const {user:{deptId}} = useContextData();
   const filterCourses = useFetchCourses(deptId);
@@ -67,7 +67,7 @@ const AssignFaculty = () => {
 
       //Toggle same order of different row
       if(item.id !== currId && item.order === currBtn.value){
-        var similarBtn = document.querySelectorAll("[data-value=" + '"' + currBtn.value + `"` + "]");
+        var similarBtn = document.querySelectorAll(`[data-value="${currBtn.value}"]`);
         similarBtn.forEach((btn) => {
           btn.removeAttribute("style");
         });
@@ -84,7 +84,7 @@ const AssignFaculty = () => {
 
       //Toggle different order of different row
       if(item.id !== currId && item.order !== currBtn.value){
-        var similarBtn = document.querySelectorAll("[data-value=" + '"' + currBtn.value + `"` + "]");
+        // var similarBtn = document.querySelectorAll(`[data-value="${currBtn.value}"]`);
         similarBtn.forEach((btn) => {
           btn.removeAttribute("style");
         });
@@ -148,7 +148,8 @@ const AssignFaculty = () => {
     try {
       const resp = await axios.post('/bundlenumber',{classroomName:selectedClassroom,subject:selectedSubject});
       const data = await resp?.data;
-      setbundleFilter(data);
+      console.log(data);
+      // setbundleFilter(data);
     } catch (error) {
         console.log(error);
     }

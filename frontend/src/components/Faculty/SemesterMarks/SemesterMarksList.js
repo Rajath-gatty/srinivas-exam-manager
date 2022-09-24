@@ -1,5 +1,5 @@
 import { TextField } from "@mui/material";
-import { FaUserCircle } from "react-icons/fa";
+// import { FaUserCircle } from "react-icons/fa";
 
 const SemesterMarksList = ({data,handleMarkChange,markAttendance,index}) => {
     return (

@@ -148,7 +148,7 @@ const Student = () => {
     } else {
       try {
         const result = await axios.post("/registration/student",formData);
-
+        console.log(result);
         setErrors([]);
         setPassErr(false);
         

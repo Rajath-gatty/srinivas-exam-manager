@@ -25,7 +25,7 @@ const SemMarkDisplay = () => {
             }
           }
           fetchData();
-    },[])
+    },[params.id])
 
   return (
     <div className="semesterList-container">

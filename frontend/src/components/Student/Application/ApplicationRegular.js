@@ -50,7 +50,7 @@ const ApplicationRegular = () => {
     }
 
     fetchSubjects();
-  },[])
+  },[user])
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];

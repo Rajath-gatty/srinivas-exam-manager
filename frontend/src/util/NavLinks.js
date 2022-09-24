@@ -1,4 +1,4 @@
-import { Dashboard, Users, Approval, Classroom, Courses, Calender, InternalMarks, Attendance, Payment, Indent, Application, Coding, SemMarks } from "../Assets";
+import { Dashboard, Users, Approval, Classroom, Courses, Calender, Attendance, Payment, Application, Coding, SemMarks } from "../Assets";
 
 export const NavLinks = [
   {
@@ -217,11 +217,11 @@ export const NavLinks = [
         path: "/",
         icon: Dashboard,
       },
-      {
-        title: "Coding Sheet",
-        path: "/coding",
-        icon: Coding,
-      },
+      // {
+      //   title: "Coding Sheet",
+      //   path: "/coding",
+      //   icon: Coding,
+      // },
       {
         title: "Attendance Statement",
         path: "/attendance-statement",

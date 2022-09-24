@@ -76,7 +76,7 @@ const Login = ({from}) => {
       }
       localStorage.setItem("user",JSON.stringify(userData));
 
-      await SubToPush({email:email, role:loginUser});
+      await SubToPush({email:email, role:loginUser}); //subscribing to push notification
 
       //If navigated to Login from another page 
       // redirect to that page after login

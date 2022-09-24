@@ -30,10 +30,7 @@ const Examcoordinator = () => {
   return (
     <div className="departments-container">
       <div className="departments-header">
-        {/* <form className="departments-form flex">
-          <FaSearch color="var(--light-grey)" size={20} />
-          <input type="text" placeholder="Search" />
-        </form> */}
+        <h1>Exam Coordinators</h1>
 
        <Link to="/examcoordinator/create">
         <button className="create-department flex">

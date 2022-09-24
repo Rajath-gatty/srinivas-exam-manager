@@ -2,16 +2,21 @@
     width: 100%;
 }
 
+.eval-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-color);
+}
+
 .eval-button {
-    background-color: rgb(0, 140, 255);
-    color: aliceblue;
-    float: right;
-    width: 12%;
-    height: 2.5em;
+    text-decoration: none;
+    border: none;
+    background-color: var(--primary-color);
+    color: #fff;
     border-radius: 4px;
-    font-size: 15px;
-    border-color: rgb(0, 140, 255);
-    margin-bottom: 2em;
+    padding: 0.5em;
 }
 
 .eval-main {

@@ -109,16 +109,17 @@ const Create = () => {
                   subjects:[{name:cur.subj_name,code:cur.subj_code,ia:cur.i_a,credits:cur.credits}]
               })
           }
-      return acc;
-  },[])
-  const data = {
-    courseName:location.state.courseName,
-    duration:location.state.duration,
-    semesters:newArr
-  }
-  editCourse(data);
-  setLoading(false);
-  
+            return acc;
+        },[]);
+
+        const data = {
+          courseName:location.state.courseName,
+          duration:location.state.duration,
+          semesters:newArr
+        }
+        editCourse(data);
+        setLoading(false);
+        
       } catch(err) {
         console.log(err);
         setLoading(false);
@@ -127,7 +128,7 @@ const Create = () => {
     if(location.state?.edit) {
       fetchCourseDetails();
     }
-  },[])
+  },[location.state])
 
   const addSem = (e) => {
     e.preventDefault();
