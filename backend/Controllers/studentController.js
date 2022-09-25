@@ -5,6 +5,8 @@ const {validationResult} = require('express-validator');
 const zlib = require('zlib');
 const { Worker } = require('worker_threads');
 const {containerClient} = require('../azureStorage');
+const Pdfmake = require('pdfmake');
+const hallTicketTemplate = require('../hallticket');
 
 exports.getStudentSubjects = async(req,res) => {
   const {semester,courseId} = req.body;
@@ -112,10 +114,44 @@ exports.generateHallTicket = async(req,res) => {
   }});
 
   worker.on('message',data => {
-      res.set('content-encoding','gzip');
-      zlib.gzip(data,{level:6},(err,zip)=>{
-          res.send(zip);
-      })
+    console.log(data);
+    try {
+        const fonts = {
+            Times: {
+                normal: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman.ttf'),
+                bold: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold.ttf'),
+                italics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-italic.ttf'),
+                bolditalics: path.join(__dirname,'..','fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
+            },
+        }
+        console.log('fonts',fonts);
+        const pdf = new Pdfmake(fonts);
+        console.log('pdf',pdf);
+        const doc =  pdf.createPdfKitDocument(hallTicketTemplate(data.result,data.timetable,data.courseName),{});
+
+        const chunks=[];
+        doc.on('data', (chunk) =>{
+            chunks.push(chunk);
+        });
+
+        doc.on('end', function () {
+            const result2 = Buffer.concat(chunks);
+            //  callback(result2);
+            res.set('content-encoding','gzip');
+            zlib.gzip(result2,{level:6},(err,zip)=>{
+                res.send(zip);
+            })
+        });
+
+        doc.end();
+    } catch(err) {
+        console.log(err);
+    }
+// }
+// res.set('content-encoding','gzip');
+// zlib.gzip(data,{level:6},(err,zip)=>{
+//     res.send(zip);
+// })
   })
   worker.on('error',(err)=> {
       console.log(err);

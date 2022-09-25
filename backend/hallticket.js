@@ -1,6 +1,6 @@
 
 module.exports = (studentArr,timetable,courseName) => {
-
+    console.log("Hall Ticket Triggered");
     const contentBody = (regno,first_name,last_name,dept_name,course_name,semester,image_path,index) =>[
         {
         margin:[120,0,0,0],
@@ -55,14 +55,17 @@ module.exports = (studentArr,timetable,courseName) => {
                   }
               },
               {
-                 table: {
-                    margin:[50,50,50,50],
-                    body:[
-                        [{image:`./uploads/${image_path}`,width:100,margin:[10,0,0,0]}],
-                        [{text:'Candidates \nSignature',alignment:'center',bold:true,margin:[0,40,0,0]}]
-                    ]
-                 },
-                 layout:'noBorders'
+                //  table: {
+                //     margin:[50,50,50,50],
+                //     body:[
+                //         [{images:{profile:image_path},margin:[10,0,0,0]}],
+                //         [{text:'Candidates \nSignature',alignment:'center',bold:true,margin:[0,40,0,0]}]
+                //     ]
+                //  },
+                //  layout:'noBorders'
+                images: {
+                    profile:image_path
+                }
               }
           ]
       },

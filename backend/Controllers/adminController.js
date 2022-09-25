@@ -254,7 +254,7 @@ exports.postNewTimeTable = async(req, res) => {
     try {
         const duplicate = await db.execute(`select count(class_id) as count from timetable where class_id="${classId}"`)
         if(duplicate[0][0].count > 0){
-            return res.status(400).send('Timetable already exists');
+            return res.status(400).send('Timetable already exists, Delete previous TimeTable for this class');
         }
 
         const sql = `insert into timetable(dept_id,course_id,semester,class_id,t_id,subj_name,subj_code,exam_date,exam_time,status) values(?,(select course_id from course where course_name=?),?,?,?,?,?,?,?,?)`;

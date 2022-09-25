@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {IoMdClose} from "react-icons/io";
 import NoData from "../../UI/NoData/NoData";
+import {toast } from "react-toastify";
 
 const ExamcordTimeTable = () => {
     const [modal, setModal] = useState(false);
@@ -56,6 +57,7 @@ const ExamcordTimeTable = () => {
                 return state.filter(item => item.t_id!==id);
             });
             setLoading(false);
+            toast.success("Timetable Approved");
         } catch(err) {
             console.log(err);
             setLoading(false);
@@ -70,6 +72,7 @@ const ExamcordTimeTable = () => {
                 return state.filter(item => item.t_id!==id);
             });
             setLoading(false);
+            toast.error("Timetable Rejected");
         } catch(err) {
             console.log(err);
             setLoading(false);
@@ -104,7 +107,8 @@ const ExamcordTimeTable = () => {
                                 <td><button className="open-modal" onClick={() => toggleModal(item.t_id)}> view</button></td>
                                 <td className="approval">                                            
                                     <div className="flex approve-table-btn-wrapper gap-1">
-                                        <button onClick={()=>handleApprove(item.t_id)} className="btn-outlined-green" >Approve</button><button onClick={()=>handleReject(item.t_id)}className="btn-outlined-red">Reject</button>
+                                        <button onClick={()=>handleApprove(item.t_id)} className="btn-outlined-green" >Approve</button>
+                                        <button onClick={()=>handleReject(item.t_id)}className="btn-outlined-red">Reject</button>
                                     </div>
                                 </td>
                             </tr>

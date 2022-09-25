@@ -18,8 +18,8 @@ exports.postStudent = async (req, res) => {
   const data = req.body; 
 
   try {
-  const optImg = await sharp(req.file.buffer).resize(200).webp({ quality: 20 }).toBuffer();
-  const uid = `${(Math.random() + 1).toString(36).substring(2)}.webp`;
+  const optImg = await sharp(req.file.buffer).resize(200).jpeg({quality:40}).toBuffer();
+  const uid = `${(Math.random() + 1).toString(36).substring(2)}.jpeg`;
   const client = containerClient();
   const blockBlobClient = client.getBlockBlobClient(uid);
   await blockBlobClient.uploadData(optImg);
