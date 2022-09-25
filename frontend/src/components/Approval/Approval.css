@@ -1,6 +1,6 @@
 .approval-main {
     width: 100%;
-    margin: 0em 3em;
+    margin: 2em;
 }
 
 .approval-main .approve-main-header {
@@ -8,7 +8,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin: 1em 0;
+    margin-bottom: 1em;
 }
 
 .approval-main .approve-main-header .SelectInput {
