@@ -38,6 +38,7 @@ const Menu = ({link, showMenu, setSubNavActive, setNavLinkActive, toggleDropdown
               ref={notifyRef}
               data-notify="inactive"
               onClick={()=>{notifyRef.current.attributes["data-notify"].nodeValue = "inactive";}}
+              end
               >
               <img src={link.icon} alt={link.title} width="17px" />
               <span>{link.title}</span>
