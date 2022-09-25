@@ -3,6 +3,7 @@ import {HiDownload} from "react-icons/hi";
 
 const  PaymentsList = (props) => {
     const {data,handleApproval,type,handleReciept} = props;
+    console.log(data);
      return(
          <>
          <tr>
@@ -16,10 +17,10 @@ const  PaymentsList = (props) => {
                 <button onClick={() => {handleApproval(data.id,'approve')}} className="btn-outlined-green">Approve</button>
                 <button onClick={() => {handleApproval(data.id,'reject',data.reciept_path)}}className="btn-outlined-red">Reject</button>
             </td>
-                :<td><button onClick={()=>{handleReciept(data.reciept_path)}} className="btn-outlined download-btn flex">
-                    <HiDownload size={18}/>
-                    <span>Download</span>
-                </button></td>}
+                :<td><a href={data.reciept_path} className="btn-outlined download-btn flex">
+                <HiDownload size={18}/>
+                <span>Download</span>
+            </a></td>}
          </tr>
         </>
      )

@@ -4,6 +4,7 @@ const path = require('path');
 const {validationResult} = require('express-validator');
 const zlib = require('zlib');
 const { Worker } = require('worker_threads');
+const {containerClient} = require('../azureStorage');
 
 exports.getStudentSubjects = async(req,res) => {
   const {semester,courseId} = req.body;
@@ -25,19 +26,25 @@ exports.postRegularPayment = async(req,res) => {
   const file = req.file;
   const deptId = req.deptId;
   const {bank,accno,transaction,date,semester,courseId,studentId,paymentId} = req.body;
-  const recieptPath = `/reciepts/${file.filename}`;
-
   const err = validationResult(req).errors;
   if (err.length > 0) {
     res.status(400).send({ success: false, err });
-    fs.unlink(file.path,(err)=>err&&res.status(500).send('Something went wrong'));
     return;
   }
+
 try {
+    const name = file.originalname.slice(-3);
+    const uid = `${(Math.random() + 1).toString(36).substring(2)}.${name}`;
+    const client = containerClient('reciepts');
+    const blockBlobClient = client.getBlockBlobClient(uid);
+    await blockBlobClient.uploadData(file.buffer);
+    const recieptPath = `https://${process.env.AZURE_ACCOUNT_NAME}.blob.core.windows.net/reciepts/${uid}`;
+
     const sql = `insert into payment(dept_id,course_id,payment_id,regno,semester,bank_name,dop,transaction_id,acc_no,reciept_path,exam_status,status) values(?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const result = db.execute(sql,[deptId,courseId,paymentId,studentId,semester,bank,date,transaction,accno,recieptPath,'regular','pending']);
     res.send(result[0]);
+
   } catch(err) {
     console.log(err)
   }
@@ -47,17 +54,22 @@ exports.postRepeaterPayment = async(req,res) => {
   const file = req.file;
   const deptId = req.deptId;
   const {bank,accno,transaction,date,semester,courseId,studentId,paymentId} = req.body;
-  const recieptPath = `/reciepts/${file.filename}`;
   const repeaterSubjects = JSON.parse(req.body.repeaterSubjects);
 
   const err = validationResult(req).errors;
   if (err.length > 0) {
     res.status(400).send({ success: false, err });
-    fs.unlink(file.path,(err)=>err&&res.status(500).send('Something went wrong'));
     return;
   }
 
   try {
+    const name = file.originalname.slice(-3);
+    const uid = `${(Math.random() + 1).toString(36).substring(2)}.${name}`;
+    const client = containerClient('reciepts');
+    const blockBlobClient = client.getBlockBlobClient(uid);
+    await blockBlobClient.uploadData(file.buffer);
+    const recieptPath = `https://${process.env.AZURE_ACCOUNT_NAME}.blob.core.windows.net/reciepts/${uid}`;
+
     const sql = `insert into payment(dept_id,course_id,payment_id,regno,semester,bank_name,dop,transaction_id,acc_no,reciept_path,exam_status,status) values(?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const sql2 = `insert into repeater_subjects(dept_id,payment_id,subj_name,subj_code) values(?,?,?,?)`;

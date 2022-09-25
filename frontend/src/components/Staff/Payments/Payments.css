@@ -7,6 +7,10 @@
     color: var(--primary-color);
 }
 
+.payments-regular-main .payments-hdng span{
+    color: #000;
+}
+
 .payments-regular-main .payments-wrapper {
     width: 100%;
     border: 1px solid var(--grey-bg);

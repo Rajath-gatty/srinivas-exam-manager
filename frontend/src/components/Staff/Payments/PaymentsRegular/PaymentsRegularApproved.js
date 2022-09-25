@@ -73,9 +73,13 @@ const  PaymentsRegularApproved = ({type}) => {
     }
 
     const handleReciept = async(reciept) => {
-       const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
-       const uid = (Math.random() + 1).toString(36).substring(2);
-       fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
+        try {
+            const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
+            const uid = (Math.random() + 1).toString(36).substring(2);
+            fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
+        } catch(err) {
+            console.log(err);
+        }
     }
 
      return (
@@ -134,10 +138,14 @@ const  PaymentsRegularApproved = ({type}) => {
                         </tr>
                         <tr className="payment-content ">
                             <td className="strong">Reciept</td>
-                            <td><button onClick={()=>{handleReciept(paymentDetails.reciept_path)}} className="btn-outlined download-btn flex">
+                            {/* <td><button onClick={()=>{handleReciept(paymentDetails.reciept_path)}} className="btn-outlined download-btn flex">
                                 <HiDownload size={18}/>
                                 <span>Download</span>
-                            </button></td>
+                            </button></td> */}
+                            <td><a href={paymentDetails.reciept_path} className="btn-outlined download-btn flex">
+                                <HiDownload size={18}/>
+                                <span>Download</span>
+                            </a></td>
                         </tr>
                     </tbody>
                 </table>:<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress thickness={4}/></div>}

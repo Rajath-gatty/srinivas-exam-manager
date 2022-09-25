@@ -106,6 +106,8 @@ const Faculty = () => {
           closeOnClick: true,
           draggable: true });
 
+        navigate("/login");
+
         //Sending Push Notification to Staff
         try{
           const pushData = {
@@ -118,7 +120,6 @@ const Faculty = () => {
             console.log(err);
         }
         
-        navigate("/login");
       } catch (err) {
         if(!err.response.data) {
           return setErrors([]);

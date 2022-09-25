@@ -1,5 +1,9 @@
 const { validationResult } = require("express-validator");
+<<<<<<< HEAD
+const {containerClient} = require('../azureStorage');
+=======
 const {BlobServiceClient, StorageSharedKeyCredential} = require("@azure/storage-blob");
+>>>>>>> e0f07414fdf76ae0960d0837a1fc74e23f2ef4f5
 const sharp = require('sharp');
 const db = require("../db");
 const bcrypt = require("bcrypt");
@@ -15,6 +19,17 @@ sharedKeyCredential
 // const containerClient = blobServiceClient.getContainerClient('student-profiles');
 
 exports.postStudent = async (req, res) => {
+<<<<<<< HEAD
+  const data = req.body; 
+
+  try {
+  const optImg = await sharp(req.file.buffer).resize(200).webp({ quality: 20 }).toBuffer();
+  const uid = `${(Math.random() + 1).toString(36).substring(2)}.webp`;
+  const client = containerClient();
+  const blockBlobClient = client.getBlockBlobClient(uid);
+  await blockBlobClient.uploadData(optImg);
+  const imagePath = `https://${process.env.AZURE_ACCOUNT_NAME}.blob.core.windows.net/student-profiles/${uid}`;
+=======
   const data = req.body;
   // const imagePath = `/studentProfiles/${req.file.filename}`; 
 
@@ -25,6 +40,7 @@ exports.postStudent = async (req, res) => {
   const blockBlobClient = containerClient.getBlockBlobClient(uid);
   await blockBlobClient.uploadData(optImg);
   const imagePath = `https://${account}.blob.core.windows.net/student-profiles/${uid}`;
+>>>>>>> e0f07414fdf76ae0960d0837a1fc74e23f2ef4f5
 
   const hashedPassword = await bcrypt.hash(data.password, 4);
 
@@ -73,6 +89,7 @@ exports.postStudent = async (req, res) => {
     );
     res.status(200).send({ success: true });
   } catch (err) {
+    console.log(err)
     res.status(500).send(err);
   }
 };

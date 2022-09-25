@@ -157,8 +157,10 @@ const Student = () => {
           autoClose: 3000, 
           closeOnClick: true,
           draggable: true });
-        
-          //Sending Push Notification to Staff
+    
+        navigate("/login");
+
+        //Sending Push Notification to Staff
         try{
           const pushData = {
             sendTo: "staff",
@@ -170,7 +172,6 @@ const Student = () => {
           console.log(err);
         }
         
-        navigate("/login");
       } catch (err) {
         console.log(err);
         if(err.response.status===400) {

@@ -165,11 +165,11 @@ export const NavLinks = [
         subMenu: [
           {
             title: "Regular",
-            path: "/payments/regular/approved",
+            path: "/payments/regular/pending",
           },
           {
             title: "Repeater",
-            path: "/payments/repeater/approved",
+            path: "/payments/repeater/pending",
           },
         ],
       },

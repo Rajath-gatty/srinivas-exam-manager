@@ -1,6 +1,6 @@
 import "../Payments.css";
 import {NavLink, Outlet, useLocation} from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import axios from "axios";
 
 const  PaymentsRegular = () => {
@@ -11,7 +11,12 @@ const  PaymentsRegular = () => {
     const loc = location.pathname.split('/');
     loc.shift();
     loc.pop();
-    const hdngName = loc.join('/')==='payments/regular'? 'Payments   (Regular)': 'Payments  (Repeater)';
+    // const hdngName = loc.join('/')==='payments/regular'? `Payments `: 'Payments  (Repeater)';
+    // let hdngName
+    // useEffect(() => {
+    //     hdngName = loc.join('/')==='payments/regular'? true: false;
+    // }, [location.pathname]);
+    const hdngName = loc.join('/')==='payments/regular'? true: false;
     
     const handleCloseModal = () => {
         setShowModal(false);
@@ -31,18 +36,20 @@ const  PaymentsRegular = () => {
 
      return(
          <div className="payments-regular-main">
-             <h2 className="payments-hdng">{hdngName}</h2>
+            <div className="payments-hdng">
+                <h2>Payments : <span>{hdngName ? "Regular" : "Repeater"}</span></h2>
+            </div>
              <div className="payment-tab">
                  <ul className="payment-links-wrapper flex">
-                 <NavLink 
-                 className={(NavData) => NavData.isActive? 'payment-links payment-active':'payment-links' } 
-                 to="approved"
-                 >Approved</NavLink>
-
                 <NavLink 
                  className={(NavData) => NavData.isActive? 'payment-links payment-active': 'payment-links' } 
                  to="pending"
                  >Pending Approval</NavLink>
+
+                 <NavLink 
+                 className={(NavData) => NavData.isActive? 'payment-links payment-active':'payment-links' } 
+                 to="approved"
+                 >Approved</NavLink>
 
                  <div className="slider"></div>
                  </ul>

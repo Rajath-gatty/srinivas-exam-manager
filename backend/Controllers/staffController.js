@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 const { Worker } = require('worker_threads');
+const {containerClient} = require('../azureStorage');
 
 exports.getStudentApproveList = async(req,res) => {
     const {courseName} = req.body;
@@ -47,16 +48,14 @@ exports.postApproveStudent = async(req,res) => {
 exports.postRejectStudent = async(req,res) => {
     const id = req.params.id;
     const imgUrl = req.body.imageUrl;
-    const imagePath = path.join(__dirname,'..','uploads',imgUrl);
+    const [_,img] = imgUrl.split('profiles/');
+
     try {
         const result = await db.execute(`delete from student where regno='${id}'`);
-        fs.unlink(imagePath,(err => {
-            if(err) {
-                console.log(err);
-                throw new Error('Something went wrong');
-            }
-            res.status(200).send({success:true,data:result[0]});
-        }));
+        const client = containerClient();
+        const blockBlobClient = await client.getBlockBlobClient(img);
+        await blockBlobClient.deleteIfExists();
+        res.send({success:true});
     } catch(err) {
         console.log(err);
         res.status(500).send({success:false})
@@ -170,6 +169,7 @@ exports.postPaymentApproval = async(req,res) => {
     const approvalType = req.params.approvalType;
     const pId = req.body.pId;
     const reciept = req.body.reciept;
+
     try {
         let sql;
         if(approvalType==='approve') {
@@ -178,15 +178,12 @@ exports.postPaymentApproval = async(req,res) => {
             res.status(200).send(result[0]);
         } else {
             sql = `delete from payment where dept_id=${deptId} and id=${pId}`;
-            const recieptPath = path.join(__dirname,'..','uploads',reciept);
-            fs.unlink(recieptPath,(async(err) => {
-                if(err) {
-                    throw new Error('Something went wrong');
-                } else {
-                    const result = await db.execute(sql);
-                    res.status(200).send(result[0]);
-                }
-            }))
+            const client = containerClient('reciepts');
+            const recieptName = reciept.split('reciepts/')[1];
+            const blockBlobClient = await client.getBlockBlobClient(recieptName);
+            await blockBlobClient.deleteIfExists();
+            const result = await db.execute(sql);
+            res.status(200).send(result[0]);
         }
     } catch(err) {
         console.log(err);

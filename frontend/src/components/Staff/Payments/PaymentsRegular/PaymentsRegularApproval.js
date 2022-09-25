@@ -142,10 +142,14 @@ const  PaymentsRegularApproval = ({type}) => {
                         </tr>
                         <tr className="payment-content ">
                             <td className="strong">Reciept</td>
-                            <td><button onClick={()=>handleReciept(paymentDetails.reciept_path)} className="btn-outlined download-btn flex">
+                            {/* <td><button onClick={()=>handleReciept(paymentDetails.reciept_path)} className="btn-outlined download-btn flex">
                                 <HiDownload size={18}/>
                                 <span>Download</span>
-                            </button></td>
+                            </button></td> */}
+                                <td><a href={paymentDetails.reciept_path} className="btn-outlined download-btn flex">
+                                <HiDownload size={18}/>
+                                <span>Download</span>
+                            </a></td>
                         </tr>
                     </tbody>
                 </table>:<div style={{marginTop:40,marginBottom:40}} className="flex"><CircularProgress thickness={4}/></div>}

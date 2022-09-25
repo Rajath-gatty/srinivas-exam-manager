@@ -97,7 +97,7 @@ const Approval = ({type}) => {
     try {
       setLoading(true);
       const result = await axios.post(`/${userType}/reject/${type}/${id}`,data);
-      if(result.response.status===200) {
+      if(result.data.success) {
         setApproveList(state => {
           const newState = [...state];
           return newState.filter(item => {

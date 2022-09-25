@@ -101,6 +101,8 @@ const Staff = () => {
           autoClose: 3000, 
           closeOnClick: true,
           draggable: true });
+        
+        navigate("/login");
 
         //Sending Push Notification to Staff
         try{
@@ -114,7 +116,6 @@ const Staff = () => {
             console.log(err);
         }
         
-        navigate("/login");
       } catch(err) {
         setErrors(err.response.data.err);
         console.log(err.response.data.err);

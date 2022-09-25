@@ -17,27 +17,26 @@ self.addEventListener('push', (e) => {
     });
 });
 
-// self.addEventListener("pushsubscriptionchange", (event) => {
-//   let server = "https://localhost:8080";
-//   // let server = "https://localhost:8080";
-//   const pubKey = 'BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g';
+self.addEventListener('pushsubscriptionchange', function(event) {
+  // let serverUrl = "https://exam-manager-backend.herokuapp.com";
+  let serverUrl = "http://localhost:8080";
 
-//   const subscription = navigator.serviceWorker.ready.pushManager
-//     .subscribe(event.oldSubscription.options)
-//     .then((subscription) =>
-//       fetch(`${server}/updatesubscribe`, {
-//         method: "post",
-//         headers: {
-//           "Content-type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           sub: subscription,
-//           auth: subscription.keys.auth,
-//           p256dh: subscription.keys.p256dh,
-//           oldauth: event.oldSubscription.keys.auth,
-//           oldp256dh: event.oldSubscription.keys.p256dh,
-//         }),
-//       }),
-//     );
-//   event.waitUntil(subscription);
-// }, false);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const email = user.email;
+  const role = user.role;
+
+  event.waitUntil(
+    fetch(`${serverUrl}/pushsubscriptionchange`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        old_endpoint: event.oldSubscription ? event.oldSubscription.endpoint : null,
+        new_endpoint: event.newSubscription ? event.newSubscription.endpoint : null,
+        new_p256dh: event.newSubscription ? event.newSubscription.toJSON().keys.p256dh : null,
+        new_auth: event.newSubscription ? event.newSubscription.toJSON().keys.auth : null,
+        email,
+        role
+      })
+    })
+  );
+});
