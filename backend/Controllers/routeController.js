@@ -514,11 +514,7 @@ exports.pushSubscribe = async (req,res) => {
       } 
       else if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh && query[i].email!==subEmail){
         console.log("Updating Email of Existing Subscription");
-<<<<<<< HEAD
         existingSub = true; 
-=======
-        existingSub = true;
->>>>>>> e0f07414fdf76ae0960d0837a1fc74e23f2ef4f5
         sql = `update notification set email=?,role=? where auth=? and p256dh=?`;
         await db.execute(sql,[subEmail, data.role, browserAuth.auth, browserAuth.p256dh]);
         break;
@@ -557,7 +553,6 @@ exports.pushSendNotification = async (req,res) => {
     } 
 
     console.log("Sending Push Notification");
-<<<<<<< HEAD
   } catch(err) {
     res.status(500).send(err);
     console.log(err);
@@ -592,8 +587,6 @@ exports.pushSubscriptionChange = async (req,res) => {
     }
   
     res.send({success:true});
-=======
->>>>>>> e0f07414fdf76ae0960d0837a1fc74e23f2ef4f5
   } catch(err) {
     res.status(500).send(err);
     console.log(err);
