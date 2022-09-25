@@ -18,8 +18,8 @@ self.addEventListener('push', (e) => {
 });
 
 self.addEventListener('pushsubscriptionchange', function(event) {
-  // let serverUrl = "https://exam-manager-backend.herokuapp.com";
-  let serverUrl = "http://localhost:8080";
+  let serverUrl = "https://exam-manager-backend.herokuapp.com";
+  // let serverUrl = "http://localhost:8080";
 
   const user = JSON.parse(localStorage.getItem("user"));
   const email = user.email;
