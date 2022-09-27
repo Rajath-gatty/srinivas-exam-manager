@@ -1,12 +1,12 @@
 const {workerData, parentPort} = require('worker_threads');
-const hallTicketTemplate = require('./hallticket');
+const hallTicketTemplate = require('./hallticket-v1');
 const db = require('./db');
 const Pdfmake = require('pdfmake');
 const path = require('path');
 
 const generateHallticket = async (callback) => {
     try{
-        console.log('workerData', workerData);
+        // console.log('workerData', workerData);
         const staff = workerData.staff;
         const {classId} = workerData.body;
 
@@ -30,7 +30,34 @@ const generateHallticket = async (callback) => {
         if(!timetable.length>0) {
             throw new Error('No timetable Found');
         }
-        callback({result,timetable,courseName})
+        try {
+            const fonts = {
+                Times: {
+                    normal: path.join(__dirname,'fonts','Times-New-Roman','times-new-roman.ttf'),
+                    bold: path.join(__dirname,'fonts','Times-New-Roman','times-new-roman-bold.ttf'),
+                    italics: path.join(__dirname,'fonts','Times-New-Roman','times-new-roman-italic.ttf'),
+                    bolditalics: path.join(__dirname,'fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
+                },
+            }
+            // console.log('fonts',fonts); 
+            const pdf = new Pdfmake(fonts);
+            // console.log('pdf',pdf);
+            const doc =  pdf.createPdfKitDocument(hallTicketTemplate(result,timetable,courseName),{});
+    
+            const chunks=[];
+            doc.on('data', (chunk) =>{
+                chunks.push(chunk);
+            });
+    
+            doc.on('end', function () {
+                const result2 = Buffer.concat(chunks);
+                 callback(result2);
+            });
+    
+            doc.end();
+        } catch(err) {
+            console.log(err);
+        }
 
         // const end1 = Date.now();
         // const total1 = end1-start1;
@@ -50,7 +77,7 @@ const generateHallticket = async (callback) => {
 }
 
 generateHallticket(function (binary) {
-    console.log(binary)
+    // console.log(binary)
     parentPort.postMessage(binary);
     process.exit(0);
 });

@@ -6,7 +6,7 @@ const zlib = require('zlib');
 const { Worker } = require('worker_threads');
 const {containerClient} = require('../azureStorage');
 const Pdfmake = require('pdfmake');
-const hallTicketTemplate = require('../hallticket');
+const hallTicketTemplate = require('../hallticket-v1');
 
 exports.getStudentSubjects = async(req,res) => {
   const {semester,courseId} = req.body;
@@ -114,7 +114,7 @@ exports.generateHallTicket = async(req,res) => {
   }});
 
   worker.on('message',data => {
-    console.log(data);
+    console.log("Worker Data",data);
     try {
         const fonts = {
             Times: {
