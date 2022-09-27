@@ -68,7 +68,6 @@ const StudentUsers = () => {
 
   const handleHallticket = async () =>{
     const {course_name:course,semester:sem,class_id} = location.state;
-    console.log(course,sem,class_id);
      try {
       setBtnLoading(true);
       const data = {

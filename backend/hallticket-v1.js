@@ -2,31 +2,16 @@ const nodeFetch = require('node-fetch');
 
 module.exports = (studentArr,timetable,courseName) => {
     // console.log("YOOO",studentArr,timetable,courseName);
-    const Base64converter = async(image_path) => {
+    const Base64converter = async (item) => {
         console.log("Creating base64 image from url")
-        const res = await nodeFetch(image_path);
-        const result = await res.arrayBuffer();
+        const res = await nodeFetch(item.image_path);
+        const result = await res.buffer();
         const base64 = 'data:image/jpeg;base64,'+result.toString('base64');
-        // console.log("Base",base64);
-        // let base64='';
-        // nodeFetch(image_path)
-        // .then(res => res.buffer())
-        // .then(res => {
-        //     // return res;
-        //     // base64 = 'data:image/jpeg;base64,'+raw;
-        //     // base64 = 'data:image/jpeg;base64,' + result.toString('base64');
-        //     console.log('Result',result)
-        //     let raw = res.toString('base64');
-        //     base64 = `data:image/jpeg;base64,${raw}`;
-        // }) 
-        // console.log("Base64",base64)
-        return base64; 
+        // console.log("Base",base64)
+        return base64;
     }
 
-    const contentBody = (item,buffer,index) =>{
-        console.log('Content Body',buffer);
-        return [
-    // const contentBody = () =>[
+    const contentBody = async (item,index) =>[
         {
         margin:[120,0,0,0],
         table:{
@@ -83,10 +68,10 @@ module.exports = (studentArr,timetable,courseName) => {
                  table: {
                     margin:[50,50,50,50],
                     body:[
-                        [{image:base64,width:100,margin:[10,0,0,0]}],
+                        [{image:await Base64converter(item),width:100,margin:[10,0,0,0]}],
                         [{text:'Candidates \nSignature',alignment:'center',bold:true,margin:[0,40,0,0]}]
-                    ],
-                },
+                    ]
+                 },
                  layout:'noBorders'
               }
           ]
@@ -98,48 +83,7 @@ module.exports = (studentArr,timetable,courseName) => {
           pageBreak: studentArr.length<=index+1?null:'after'
       },
     ]
-}
 
-    
-const GetContent = () => {
-    const StudentData = studentArr.map(async(item,index) => {
-        // const base64 = await Base64converter(item.image_path);
-        // console.log("Base64",base64)
-        // return contentBody(item,base64,index);
-        // let base64='';
-        // const result = await res.arrayBuffer();
-        // Base64converter(item.image_path)
-
-        const res = await nodeFetch(item.image_path);
-        const buffer = await res.buffer();
-        const result = contentBody(item,buffer,index);
-        return result;
-        // .then(res => {
-        //     return res.buffer();
-        // })
-        // .then(buffer => {
-        //    const base64 = 'data:image/jpeg;base64,'+buffer.toString('base64');
-        //     return base64;
-        // })
-        // .then(base64 => {
-        //     console.log("Base64",base64);
-        //     const body = contentBody(item,base64,index);
-        //     result=body;
-        // })
-        // .catch(err => {
-        //     console.log(err)
-        // })
-    });
-    // console.log(StudentData);
-    // let contentBody='';
-    return Promise.all(StudentData)
-    // console.log('Bofy',contentBody);
-    // return contentBody;
-    // console.log(StudentData);
-    // return StudentData;
-}
-// GetContent().then(res=> console.log(res));
-console.log(contentBody());
     const dd = {
         background: function (currentPage, pageSize) {
             return {
@@ -153,12 +97,22 @@ console.log(contentBody());
             },
         pageMargins:[40,40],
         footer: {columns:[{text:' Dean',margin:[40,-30,0,0],bold:true},{text:'Registrar(E)',margin:[0,-30,50,0],bold:true,alignment:'right'}]},
-        content: GetContent().then(res => console.log(res)),
-        images:{
-            profile: 'https://rajath.blob.core.windows.net/student-profiles/k00pr1kn74.jpeg',
-        },
+        content: studentArr.map(async (item,index) => {
+            // const res = 
+        }),
+        // content: [studentArr.map(async(item,index)=>{
+        //     console.log("Creating base64 image from url")
+        //     const res = await nodeFetch(item.image_path);
+        //     const result = await res.buffer();
+        //     const base64 = 'data:image/jpeg;base64,'+result.toString('base64');
+        //     // console.log("Base",base64)
+        //     const content = contentBody(item,base64,index);
+        //     // console.log("content",JSON.stringify(content));
+        //     // console.log("contenT",content);
+        //     return content;
+        // })], 
         defaultStyle: {
-            font:'Times',
+            font:'Times', 
         },
         styles:{
             stdInfo: {
@@ -168,7 +122,6 @@ console.log(contentBody());
         },
         compress:false
     };
-    console.log(dd);
+    console.log("DD",dd);
     return dd;
 }
-
