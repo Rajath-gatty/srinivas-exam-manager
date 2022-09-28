@@ -55,15 +55,15 @@ const Faculty = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const loader = toast.loading("Creating User...");
-    toast.dismiss();
+    // const loader = toast.loading("Creating User...");
+    // toast.dismiss();
 
     const dob = `${dateRef.current.value}-${monthRef.current.value}-${yearRef.current.value}`
     const dobErr = dob.length>=10;
     const facultyData = {
       facultyId: facultyIdRef.current.value,
-      firstName: firstNameRef.current.value,
-      lastName: lastNameRef.current.value,
+      firstName: firstNameRef.current.value.charAt(0).toUpperCase() + firstNameRef.current.value.slice(1),
+      lastName: lastNameRef.current.value?.charAt(0).toUpperCase() + lastNameRef.current.value?.slice(1),
       dob: dobErr && dateFormat(dob, "dd-mm-yyyy"),
       gender: gender,
       email: emailRef.current.value,
@@ -98,9 +98,7 @@ const Faculty = () => {
         setErrors([]);
         setPassErr(false);
 
-        toast.update(loader, { 
-          render: "User Registered Successfully!", 
-          type: "success", 
+        toast.success("User Registered Successfully!", {
           isLoading: false, 
           autoClose: 3000, 
           closeOnClick: true,
@@ -121,15 +119,12 @@ const Faculty = () => {
         }
         
       } catch (err) {
-        if(!err.response.data) {
-          return setErrors([]);
+        console.log(err);
+        if(err.response.status===400) {
+          setErrors(err?.response?.data?.err);
         }
-        setErrors(err.response.data.err);
-        console.log(err.response.data.err);
 
-        toast.update(loader, { 
-          render: "Fill all the required fields!", 
-          type: "error", 
+        toast.error("Fill all the required fields!", {
           isLoading: false, 
           autoClose: 3000, 
           closeOnClick: true,
