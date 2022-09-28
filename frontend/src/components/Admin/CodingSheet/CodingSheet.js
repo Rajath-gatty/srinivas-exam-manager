@@ -20,7 +20,7 @@ const SemesterMarks = () => {
   const [selectedSubject, setSelectedSubject] = useState(false);
   const [markAttendance, setMarkAttendance] = useState([]);
 
-  const { user,serverUrl } = useContextData();
+  const { user } = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
 
   const fetchSubjects = async (className) => {
@@ -212,7 +212,6 @@ const SemesterMarks = () => {
               key={student.regno}
               data={student}
               index={i}
-              serverUrl={serverUrl}
               markAttendance={markAttendance}
               handleMarkChange={handleMarkChange}
               selectedSubject={selectedSubject}
