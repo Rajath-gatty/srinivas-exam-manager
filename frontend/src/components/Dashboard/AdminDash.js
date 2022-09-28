@@ -29,6 +29,7 @@ const AdminDash = () => {
           setToken('');
           setRole('');
           setUser({});
+          // eslint-disable-next-line
           navigate('/login');
         }else {
           console.log(err);

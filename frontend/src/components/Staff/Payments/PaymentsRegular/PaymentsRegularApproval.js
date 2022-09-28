@@ -81,11 +81,11 @@ const  PaymentsRegularApproval = ({type}) => {
         }
     }
 
-    const handleReciept = async(reciept) => {
-        const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
-        const uid = (Math.random() + 1).toString(36).substring(2);
-        fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
-     }
+    // const handleReciept = async(reciept) => {
+    //     const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
+    //     const uid = (Math.random() + 1).toString(36).substring(2);
+    //     fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
+    //  }
 
      return (
          <>

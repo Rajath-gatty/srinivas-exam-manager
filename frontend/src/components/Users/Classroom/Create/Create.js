@@ -98,7 +98,7 @@ const Create = () => {
       }
     }
     fetchUsers();
-  },[course,sem,classInfo]);
+  },[course,sem,classInfo,location.state]);
 
   const HandleCreateClass = async (e) =>{
     e.preventDefault();
