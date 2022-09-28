@@ -25,7 +25,7 @@ const  PaymentsRegularApproval = ({type}) => {
             try {
                 const result = await axios.get(`/staff/payments/pending/${type}`);
                 setPayments(result.data);
-                console.log(result.data);
+                // console.log(result.data);
                 setLoading(false);
             } catch(err) {
                 console.log(err);

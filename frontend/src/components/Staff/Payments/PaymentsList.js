@@ -3,7 +3,7 @@ import {HiDownload} from "react-icons/hi";
 
 const  PaymentsList = (props) => {
     const {data,handleApproval,type} = props;
-    console.log(data);
+    // console.log(data);
      return(
          <>
          <tr>

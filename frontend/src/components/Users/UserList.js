@@ -44,7 +44,7 @@ const UserList = ({ data, type, updateEligibility, index, showEligible, showChec
       </td>}
 
       {!showCheckbox && <td className="users-details">
-        <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID }} >
+        <Link to={`./${UserID.uid}`} state={{type:type, userId:UserID, course:data.course_name, semester:data.semester}} >
           View
         </Link>
       </td>}
