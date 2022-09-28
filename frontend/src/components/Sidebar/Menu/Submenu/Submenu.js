@@ -39,7 +39,7 @@ const SubMenu = ({title,icon,subMenu,showMenu,toggleDropdown,setSubNavActive,onO
         <IoIosArrowForward size={18} className="sidebar-arrow" />
       </div>
       {showMenu.find((item) => item.text === title).state && (
-        <div className="dropdown">
+        <div className="dropdown flex">
           {subMenu.map((subLinks) => {
             return (
               <NavLink

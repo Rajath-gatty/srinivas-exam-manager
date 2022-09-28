@@ -80,8 +80,10 @@
 
 .approval-main .approve-list-wrapper .approval-profile-img {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin: 0.25em 0em;
+    object-fit: cover;
 }
 
 .approval-main .approve-list-wrapper .approve-list-avatar {

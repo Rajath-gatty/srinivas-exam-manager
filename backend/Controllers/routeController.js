@@ -559,36 +559,36 @@ exports.pushSendNotification = async (req,res) => {
   }
 } 
 
-//Update on Subscription Change
-exports.pushSubscriptionChange = async (req,res) => {
-  const {old_endpoint, new_endpoint, new_auth, new_p256dh, email, role} = req.body;
-  const browserAuth = old_endpoint.keys;
+//Update on Subscription Change: Works Only on Firefox, so commented
+// exports.pushSubscriptionChange = async (req,res) => {
+//   const {old_endpoint, new_endpoint, new_auth, new_p256dh, email, role} = req.body;
+//   const browserAuth = old_endpoint.keys;
 
-  consol.log(old_endpoint, new_endpoint, new_auth, new_p256dh);
-  console.log(browserAuth);
+//   consol.log("Subscription ONChange Update");
+
+//   try{
+//     await db.execute(`delete from notification where email=?`,[email]); 
+
+//     let sql = `insert into notification (email, role, subscription, auth, p256dh) values (?, ?, ?, ?, ?)`;
+//     await db.execute(sql, [email, role, new_endpoint, new_auth, new_p256dh]);
+  
+//     res.send({success:true});
+//   } catch(err) {
+//     res.status(500).send(err);
+//     console.log(err);
+//   }
+// } 
+
+exports.pushUnsubscribe = async (req,res) => {
+  const {email} = req.body;
 
   try{
-    const [query] = await db.execute(`select * from notification`);
-    // console.log(query);
+    const sql = `delete from notification where email=?`;
+    await db.execute(sql, [email]);
 
-    let existingSub = false;
-    for(let i=0; i<query.length; i++){
-      if(query[i].auth===browserAuth.auth && query[i].p256dh===browserAuth.p256dh){
-        console.log("Onchange Subscription already exists");
-        existingSub = true;
-        break;
-      }
-    };
-
-    if(!existingSub){
-      console.log("New Onchange subscription");
-      sql = `insert into notification (email, role, subscription, auth, p256dh) values (?, ?, ?, ?, ?)`;
-      await db.execute(sql, [email, role, new_endpoint, new_auth, new_p256dh]);
-    }
-  
-    res.send({success:true});
+    console.log("Unsubscribed ", email);
   } catch(err) {
-    res.status(500).send(err);
     console.log(err);
+    res.status(500).send(err);
   }
-} 
+}
