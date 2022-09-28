@@ -7,7 +7,7 @@ import { useState,useEffect } from "react";
 import {CircularProgress} from "@mui/material";
 import axios from "axios";
 import NoData from "../../../UI/NoData/NoData";
-import fileDownload from "js-file-download";
+// import fileDownload from "js-file-download";
 
 const  PaymentsRegularApproval = ({type}) => {
     const [payments,setPayments] = useState([]);
