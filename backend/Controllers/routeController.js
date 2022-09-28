@@ -580,6 +580,7 @@ exports.pushSendNotification = async (req,res) => {
 // } 
 
 exports.pushUnsubscribe = async (req,res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const {email} = req.body;
 
   try{

@@ -1,4 +1,4 @@
-const nodeFetch = require('node-fetch');
+// const nodeFetch = require('node-fetch');
 
 module.exports = (studentArr,timetable,courseName) => {
 
