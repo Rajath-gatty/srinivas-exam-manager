@@ -21,7 +21,7 @@ import {toast} from "react-toastify";
 
 const ApplicationRepeater = () => {
   const [selectedSemester, setSelectedSemester] = useState("");
-  const [loading,setLoading] = useState(true);
+  // const [loading,setLoading] = useState(true);
   const [subjects,setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState([]);
   const [photo,setPhoto] = useState('');
@@ -69,10 +69,10 @@ const ApplicationRepeater = () => {
         }
         const result = await axios.post('/student/application/subjects',data);
         setSubjects(result.data);
-        setLoading(false);
+        // setLoading(false);
       } catch(err) {
         console.log(err);
-        setLoading(false);
+        // setLoading(false);
       }
     }
     fetchSubjects();
@@ -86,8 +86,9 @@ const ApplicationRepeater = () => {
       semester:e.target.value
     }
     try {
-      const result = await axios.post('/student/application/subjects',data);
-      console.log(result);
+      // const result = 
+      await axios.post('/student/application/subjects',data);
+      // console.log(result);
     } catch(err) {
       console.log(err);
     }
@@ -163,22 +164,22 @@ const ApplicationRepeater = () => {
   return (
     <div className="application-repeater flex">
       <div className="application-repeater-header">
-      <h2>Choose Repeater Semester</h2>
-      <div className="application-selector flex">
-        <FormControl className="select-sem">
-          <InputLabel>Select Semester</InputLabel>
-          <Select
-            label="Department"
-            defaultValue=""
-            size="small"
-            onChange={handleSemesterChange}
-          >
-            {semesterArr.map((_,i) => {
-              return <MenuItem key={i} value={i+1}>{i+1}</MenuItem>
-            })}
-          </Select>
-        </FormControl>
-      </div>
+        <h2>Choose Repeater Semester</h2>
+        <div className="application-selector flex">
+          <FormControl className="select-sem">
+            <InputLabel>Select Semester</InputLabel>
+            <Select
+              label="Department"
+              defaultValue=""
+              size="small"
+              onChange={handleSemesterChange}
+            >
+              {semesterArr.map((_,i) => {
+                return <MenuItem key={i} value={i+1}>{i+1}</MenuItem>
+              })}
+            </Select>
+          </FormControl>
+        </div>
       </div>
       <div className="application-semester">
         {selectedSemester ? 'SEM '+selectedSemester : "Select Semester"}

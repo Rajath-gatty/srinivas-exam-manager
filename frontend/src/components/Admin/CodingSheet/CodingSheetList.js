@@ -6,7 +6,7 @@ const CodingSheetList = ({data,handleMarkChange,selectedSubject,markAttendance,i
         <tr className="attendance-table-row">
             <td className="attendance-avatar-wrapper">
                 {!data.image_path?<FaUserCircle color="var(--light-grey)" size={25} />:
-                <img src={data.image_path} className="profile-img" width="100px" alt=""/>}
+                <img src={data.image_path} className="profile-img" width="100px" alt="Profile"/>}
             </td>
             <td>{data.regno}</td>
             <td>{data.first_name+' '+data.last_name}</td>

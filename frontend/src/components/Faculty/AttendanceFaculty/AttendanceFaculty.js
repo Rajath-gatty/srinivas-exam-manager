@@ -19,7 +19,7 @@ const AttendanceFaculty = () => {
   const [selectedSubject, setSelectedSubject] = useState(false);
   const [markAttendance, setMarkAttendance] = useState([]);
 
-  const { user, serverUrl } = useContextData();
+  const { user } = useContextData();
   const filterCourses = useFetchCourses(user.deptId);
 
   const fetchFacultySubjects = async (sem) => {
@@ -35,7 +35,7 @@ const AttendanceFaculty = () => {
           pending: 'Loading Subject...',
         }
       );
-      console.log(result.data);
+      // console.log(result.data);
       setFacultySubjects(result.data);
     } catch (err) {
       console.log(err);
@@ -54,7 +54,7 @@ const AttendanceFaculty = () => {
           pending: 'Loading Semesters...',
         }
       );
-      console.log(result);
+      // console.log(result);
       const semData = new Array(result.data.course_sem).fill('');
       setSemFilter(semData);
     } catch (error) {
@@ -78,7 +78,7 @@ const AttendanceFaculty = () => {
     try {
       setLoading(true);
       const result = await axios.post("/users/student/semfilter", data);
-      console.log(result.data);
+      // console.log(result.data);
       setStudents(result.data);
       const updatedResult = result.data.map(item => {
         return {
@@ -132,14 +132,15 @@ const AttendanceFaculty = () => {
         semester: selectedSemester,
         subjectName: selectedSubject,
         subjectCode: facultySubjects.map(obj => {
-          if (obj.subj_name === selectedSubject) {
-            console.log(obj.subj_code);
+          if (obj.subj_name === selectedSubject) 
             return obj.subj_code;
-          }
+          else return null; // Just to remove warning
         }).filter(item => item !== undefined)[0],
         studentDetails: markAttendance
       }
-      const result = await toast.promise(
+
+      // const result = 
+      await toast.promise(
         axios.post("/faculty/marksattendance/add", data),
         {
           pending: 'Loading ...',
@@ -148,7 +149,7 @@ const AttendanceFaculty = () => {
         }
       );
       setMarkAttendance([]);
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -161,6 +162,7 @@ const AttendanceFaculty = () => {
           <h4>Code : <span>{facultySubjects.map(obj => {
             if (obj.subj_name === selectedSubject)
               return obj.subj_code;
+            else return null; // Just to remove warning
           })}</span></h4>
           <h4>Subject : <span>{selectedSubject}</span></h4>
         </div>
@@ -204,7 +206,6 @@ const AttendanceFaculty = () => {
               key={student.regno}
               data={student}
               index={i}
-              serverUrl={serverUrl}
               markAttendance={markAttendance}
               handleAttendanceChange={handleAttendanceChange}
               handleMarkChange={handleMarkChange}

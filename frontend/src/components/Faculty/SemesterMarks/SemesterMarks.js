@@ -36,7 +36,7 @@ const SemesterMarks = () => {
           pending: 'Loading Subject...',
         }
       );
-      console.log(result.data);
+      // console.log(result.data);
       setFacultySubjects(result.data);
     } catch (err) {
       console.log(err);
@@ -55,7 +55,7 @@ const SemesterMarks = () => {
           pending: 'Loading Classroom...',
         }
       );
-      console.log(result);
+      // console.log(result);
       setClassroomFilter(result.data);
     } catch (error) {
       console.log(error);
@@ -79,7 +79,7 @@ const SemesterMarks = () => {
     try {
       setLoading(true);
       const result = await axios.post("/users/student/semfilter", data);
-      console.log(result.data);
+      // console.log(result.data);
       setStudents(result.data);
       const updatedResult = result.data.map(item => {
         return {
@@ -124,14 +124,15 @@ const SemesterMarks = () => {
         classroomName: selectedClassroom,
         subjectName: selectedSubject,
         subjectCode: facultySubjects.map(obj => {
-          if (obj.subj_name === selectedSubject) {
-            console.log(obj.subj_code);
+          if (obj.subj_name === selectedSubject)
             return obj.subj_code;
-          }
+          else return null; // Just to remove warning
         }).filter(item => item !== undefined)[0],
         studentDetails: markAttendance
       }
-      const result = await toast.promise(
+      
+      // const result = 
+      await toast.promise(
         axios.post("/faculty/semestermark", data),
         {
           pending: 'Loading ...',
@@ -140,7 +141,7 @@ const SemesterMarks = () => {
         }
       );
       setMarkAttendance([]);
-      console.log(result);
+      // console.log(result);
     } catch (err) {
       console.log(err);
     }
@@ -154,6 +155,7 @@ const SemesterMarks = () => {
           <h4>Code : <span>{facultySubjects.map(obj => {
             if (obj.subj_name === selectedSubject)
               return obj.subj_code;
+            else return null; // Just to remove warning
           })}</span></h4>
           <h4>Subject : <span>{selectedSubject}</span></h4>
         </div>
