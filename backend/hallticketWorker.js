@@ -1,8 +1,9 @@
 const {workerData, parentPort} = require('worker_threads');
-const hallTicketTemplate = require('./hallticket-v1');
+const hallTicketTemplate = require('./hallticket');
 const db = require('./db');
 const Pdfmake = require('pdfmake');
 const path = require('path');
+const nodeFetch = require('node-fetch');
 
 const generateHallticket = async (callback) => {
     try{
@@ -39,36 +40,38 @@ const generateHallticket = async (callback) => {
                     bolditalics: path.join(__dirname,'fonts','Times-New-Roman','times-new-roman-bold-italic.ttf'),
                 },
             }
-            // console.log('fonts',fonts); 
             const pdf = new Pdfmake(fonts);
-            // console.log('pdf',pdf);
-            const doc =  pdf.createPdfKitDocument(hallTicketTemplate(result,timetable,courseName),{});
-    
-            const chunks=[];
-            doc.on('data', (chunk) =>{
-                chunks.push(chunk);
+            console.log(result);
+ 
+            const finalRes = result.map(async(el) => {
+                const res = await nodeFetch(el.image_path);
+                const result1 = await res.buffer();
+                const base64 = 'data:image/jpeg;base64,'+result1.toString('base64');
+                const updatedRes = {...el};
+                updatedRes.base64 = base64;
+                return updatedRes;
+            })
+            const stdData = Promise.all(finalRes);
+
+            stdData.then(data=>{
+                const doc =  pdf.createPdfKitDocument(hallTicketTemplate(data,timetable,courseName),{});
+        
+                const chunks=[];
+                doc.on('data', (chunk) =>{
+                    chunks.push(chunk);
+                });
+        
+                doc.on('end', function () {
+                    const result2 = Buffer.concat(chunks);
+                     callback(result2);
+                });
+        
+                doc.end();
             });
-    
-            doc.on('end', function () {
-                const result2 = Buffer.concat(chunks);
-                 callback(result2);
-            });
-    
-            doc.end();
         } catch(err) {
             console.log(err);
         }
 
-        // const end1 = Date.now();
-        // const total1 = end1-start1;
-        // console.log('query time ',total1+'ms');
-        // const start = Date.now();
-        // console.log('start', start);
-                        
-        // const end = Date.now();
-        // const total = end-start;
-        // console.log('Hallticket ',total+'ms');
-        // console.log('Total ',end-start1+'ms');
     } catch(err) {
         console.log("Catch:",err);
         callback('No timetable Found')
@@ -77,7 +80,6 @@ const generateHallticket = async (callback) => {
 }
 
 generateHallticket(function (binary) {
-    // console.log(binary)
     parentPort.postMessage(binary);
     process.exit(0);
 });
