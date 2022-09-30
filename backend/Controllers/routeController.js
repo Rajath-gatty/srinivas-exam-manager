@@ -488,6 +488,7 @@ exports.postSidebarNotify = async (req,res) => {
 }
 
 exports.pushSubscribe = async (req,res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const {sub, data} = req.body;
   const browserAuth = sub.keys;
 
@@ -539,6 +540,7 @@ exports.pushSubscribe = async (req,res) => {
 }
 
 exports.pushSendNotification = async (req,res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const {sendTo, body} = req.body;
   
   try{
@@ -580,7 +582,7 @@ exports.pushSendNotification = async (req,res) => {
 // } 
 
 exports.pushUnsubscribe = async (req,res) => {
-  // res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   const {email} = req.body;
 
   try{
