@@ -43,6 +43,14 @@
     border: 1px solid var(--grey-bg);
 }
 
-.attendance-header .filter-comp{
-    text-align: right !important;
+.attendance-header{
+    justify-content: space-between;
 }
+
+.attendance-header h2 {
+    color: var(--primary-color)
+}
+
+/* .attendance-header .filter-comp{
+    text-align: right !important;
+} */

@@ -5,10 +5,7 @@ import {MdAlternateEmail} from "react-icons/md";
 import {RiShieldUserLine} from "react-icons/ri";
 
 import "./Login.css";
-import { SrinivasLogo, LoginSvg } from "../../Assets";
-import StudentSvg from "../../Assets/Registration/student_reg.svg";
-import FacultySvg from "../../Assets/Registration/faculty_reg.svg";
-import StaffSvg from "../../Assets/Registration/staff_reg.svg";
+import { SrinivasLogo, LoginSvg, StudentReg, FacultyReg, StaffReg } from "../../Assets";
 import axios from "axios";
 import {useContextData} from "../../hooks/useContextData";
 import { CircularProgress } from "@mui/material";
@@ -127,17 +124,17 @@ const Login = ({from}) => {
         {!loginUser ? <div className="login-userSelectContain flex">
           <div className="login-userSelect">
             <div className="login-userBox" onClick={()=>{setLoginUser("student")}}>
-                <img src={StudentSvg} alt="Student Svg" width="100px" height="100px"/>
+                <img src={StudentReg} alt="Student Svg" width="100px" height="100px"/>
                 <h3>Student</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("faculty")}}>
-                <img src={FacultySvg} alt="Faculty Svg" width="100px" height="100px"/>
+                <img src={FacultyReg} alt="Faculty Svg" width="100px" height="100px"/>
                 <h3>Faculty</h3>
             </div>
 
             <div className="login-userBox" onClick={()=>{setLoginUser("staff")}}>
-                <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
+                <img src={StaffReg} alt="Staff Svg" width="100px" height="100px"/>
                 <h3>Staff</h3>
             </div>
           </div>

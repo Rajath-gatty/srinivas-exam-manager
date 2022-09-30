@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import {FormControl,InputLabel,Select,MenuItem,FormHelperText} from "@mui/material";
 import "./Filter.css";
 
-const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, error=false, required=false, helperText='', handleCourseChange, handleSemesterChange,handleSubjectChange, handleDeptChange,width="12em"},ref) => {
+const  Filter = forwardRef(({data=[], label, filter, value="", noclass=false, disabled=false, error=false, required=false, helperText='', handleCourseChange, handleSemesterChange,handleSubjectChange, handleDeptChange,width="12em"},ref) => {
   const filters = ['course','department','semester','subject'];
   const selectedFilter = filters.find(item => item===filter);
   let name;
@@ -27,7 +27,7 @@ const  Filter = forwardRef(({data=[], label, filter, value="", disabled=false, e
   }
 
   return (
-    <div className="filter-comp selectbox">
+    <div className={noclass?"" : "filter-comp selectbox"}>
     <FormControl style={{width}} className="filterSearch-SelectInput">
       <InputLabel>{label}</InputLabel>
       <Select

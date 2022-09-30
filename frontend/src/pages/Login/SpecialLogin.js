@@ -4,8 +4,7 @@ import { FiLock, FiArrowLeft, FiEye, FiEyeOff } from "react-icons/fi";
 import {MdAlternateEmail} from "react-icons/md";
 
 import "./Login.css";
-import { SrinivasLogo, LoginSvg } from "../../Assets";
-import StaffSvg from "../../Assets/Registration/staff_reg.svg";
+import { SrinivasLogo, LoginSvg, StaffReg } from "../../Assets";
 import axios from "axios";
 
 import {useContextData} from "../../hooks/useContextData";
@@ -90,7 +89,7 @@ const SpecialLogin = () => {
       {/* Login Side Design */}
       <div className="login-art">
         <div className="login-logo">
-          <img width="50px" height="60px" src={SrinivasLogo} alt="Login SVG" />
+          <img width="50px" height="58px" src={SrinivasLogo} alt="Login SVG" />
           <h1>Srinivas Exam Manager</h1>
         </div>
 
@@ -119,17 +118,17 @@ const SpecialLogin = () => {
 
         {!loginUser ? <div className="login-userSelect special">
           <div className="login-userBox" onClick={()=>{setLoginUser("super admin")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
+              <img src={StaffReg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Super Admin</h3>
           </div>
           
           <div className="login-userBox" onClick={()=>{setLoginUser("admin")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
+              <img src={StaffReg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Admin</h3>
           </div>
 
           <div className="login-userBox" onClick={()=>{setLoginUser("exam coord")}}>
-              <img src={StaffSvg} alt="Staff Svg" width="100px" height="100px"/>
+              <img src={StaffReg} alt="Staff Svg" width="100px" height="100px"/>
               <h3>Exam Coord</h3>
           </div>
         </div>

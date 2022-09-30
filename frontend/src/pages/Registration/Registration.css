@@ -123,6 +123,7 @@
   max-width: 800px;
   margin: auto;
   height: 100%;
+  margin-top: 5em;
 }
 
 .registration-container .registration-wrapper {
@@ -136,6 +137,8 @@
 }
 
 .registration-card {
+  width: 10em;
+  height: 12em;
   border: 1px solid var(--primary-color);
   border-radius: 10px;
   padding: 1em 2em;
@@ -160,9 +163,10 @@
   width: 130px;
 }
 
-.registration-wrapper .registration-card h3 {
+.registration-wrapper .registration-card h2 {
   text-align: center;
   margin-top: 0.5em;
+  letter-spacing: 1px;
 }
 
 .to-login {

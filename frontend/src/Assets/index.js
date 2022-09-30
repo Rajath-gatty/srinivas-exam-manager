@@ -21,12 +21,13 @@ import Chancellor from "./chancellor.webp";
 
 // Illustrations
 import EvaluatorReg from "./Registration/examcord_reg.svg";
-import FacultyReg from "./Registration/faculty_reg.webp";
-import StaffReg from "./Registration/staff_reg.webp";
-import StudentReg from "./Registration/student_reg.webp";
+import FacultyReg from "./Registration/faculty_reg.png";
+import StaffReg from "./Registration/staff_reg.png";
+import StudentReg from "./Registration/student_reg.png";
 import LoginSvg from "./undraw_login.svg";
 import NoDataSvg from "./NoData.svg";
 import ForgotPassword from "./ForgotPassword.svg";
+import AdminImg from "./Registration/admin_img.png";
 
 export {
     Application,
@@ -53,5 +54,6 @@ export {
     NoDataSvg,
     SEMSLogo,
     Chancellor,
-    Classroom
+    Classroom,
+    AdminImg
 }

@@ -50,11 +50,13 @@ const handleSemesterChange = (e) => {
 
   return (
     <div className="attendance-filter">
-      <div className="attendance-header">
+      <div className="attendance-header flex">
+        <h2>Attendance / Marks</h2>
         <Filter 
           data={semFilter} 
           label="Filter By Semester" 
           filter="semester" 
+          noclass={true}
           handleSemesterChange={handleSemesterChange}
           />
       </div>
