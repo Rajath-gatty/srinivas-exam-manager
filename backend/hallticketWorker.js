@@ -7,11 +7,9 @@ const nodeFetch = require('node-fetch');
 
 const generateHallticket = async (callback) => {
     try{
-        // console.log('workerData', workerData);
         const staff = workerData.staff;
         const {classId} = workerData.body;
 
-        // const start1 = Date.now();
         let sql,courseName,regno;
         courseName = workerData.body.courseName;
 
@@ -41,7 +39,6 @@ const generateHallticket = async (callback) => {
                 },
             }
             const pdf = new Pdfmake(fonts);
-            console.log(result);
  
             const finalRes = result.map(async(el) => {
                 const res = await nodeFetch(el.image_path);

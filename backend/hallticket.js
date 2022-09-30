@@ -1,5 +1,3 @@
-const nodeFetch = require('node-fetch');
-
 module.exports = (studentArr,timetable,courseName) => {
 
     const contentBody = (item,index) =>{
@@ -61,7 +59,7 @@ module.exports = (studentArr,timetable,courseName) => {
                  table: {
                     margin:[50,50,50,50],
                     body:[
-                        [{image:item.base64,width:100,margin:[10,0,0,0]}],
+                        [{image:item.base64,width:100,height:100,margin:[10,0,0,0]}],
                         [{text:'Candidates \nSignature',alignment:'center',bold:true,margin:[0,40,0,0]}]
                     ],
                 },
