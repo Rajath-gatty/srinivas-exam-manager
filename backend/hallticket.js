@@ -45,7 +45,7 @@ module.exports = (studentArr,timetable,courseName) => {
                //   width:[400],
                   alignment:'center',
                   table:{
-                      widths:[20,'*',110,'*',90],
+                      widths:[20,'*',90,'*',110],
                        body:[
                            [{text:'sl#',margin:[0,5]},{text:'Subject Code',margin:[0,5],style:{bold:true}},{text:'Subject Name',margin:[0,5],style:{bold:true}},{text:'Exam Date',margin:[0,5],style:{bold:true}},{text:'Exam Time',margin:[0,5],style:{bold:true}}],
                            ...timetable.map((item1,i)=> {

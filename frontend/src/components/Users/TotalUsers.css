@@ -88,8 +88,7 @@
 .users-HallticketBtn .hallticket-disabled {
   color: #ccc;
   border: 1px solid #ccc;
-  /* pointer-events: none; */
-  /* cursor: disabled; */
+  cursor: not-allowed;
 }
 
 .users-HallticketBtn .hallticket-disabled:hover{

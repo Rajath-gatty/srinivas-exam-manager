@@ -1,6 +1,6 @@
 import "../TotalUsers.css";
 import "./Classroom.css";
-import {useState,useEffect} from 'react';
+import {useState,useEffect,useRef} from 'react';
 import { useLocation,Link } from "react-router-dom";
 import UserList from "../UserList";
 import {CircularProgress} from "@mui/material";
@@ -20,6 +20,7 @@ const StudentUsers = () => {
   var [loading, setLoading] = useState(false);
   var [users, setUsers] = useState([]);
   const [btnLoading,setBtnLoading] = useState(false);
+  const RefHallticketBtn = useRef();
 
   useEffect(() => {
       setLoading(true);
@@ -29,13 +30,19 @@ const StudentUsers = () => {
           const result = await axios.post(`/users/student/`,{classId});
           setUsers(result.data);
           setLoading(false);
+
+          if(result.data.length === 0){
+            RefHallticketBtn.current.classList.add("hallticket-disabled");
+          } else {
+            RefHallticketBtn.current.classList.remove("hallticket-disabled");
+          }
         } catch (error) {
           setLoading(false);
           console.log(error);
         }
       }
       fetchUsers();
-  },[classInfo])
+  },[classInfo]);
 
   const handleSearch = async(e) => {
     const query = e.target.value.toUpperCase();
@@ -67,6 +74,7 @@ const StudentUsers = () => {
   }
 
   const handleHallticket = async () =>{
+    if(users.length === 0) return;
     const {course_name:course,semester:sem,class_id} = location.state;
      try {
       setBtnLoading(true);
@@ -118,13 +126,13 @@ const StudentUsers = () => {
         </div>
 
         {showEligible &&<div className="users-HallticketBtn flex">
-          {!btnLoading ? <div className="btn-outlined flex" onClick={handleHallticket}>
+          {!btnLoading ? <div className="btn-outlined flex" onClick={handleHallticket} ref={RefHallticketBtn}>
           <VscFilePdf color="currentColor" size={22}/>
             <span>Generate Hall Tickets</span>
           </div> 
           :
           <div className="users-btnLoader flex">
-            <CircularProgress color="inherit" size={25}/>
+            <CircularProgress color="inherit" size={20}/>
           </div>}
         </div>}
           

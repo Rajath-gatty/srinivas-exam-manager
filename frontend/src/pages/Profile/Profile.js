@@ -94,7 +94,7 @@ const Profile = () => {
 
         <div className="profile-row lastname">
           <label>Last Name</label>
-          <input type="text" defaultValue={user.last_name !== "" ? user.last_name : "-"} />
+          <input type="text" defaultValue={user.last_name !== "" ? user.last_name : "- -"} />
         </div>
 
         <div className="profile-row phone">

@@ -196,8 +196,9 @@
 /* DASHBOARD STATS STYLE */
 .dashboard-stats{
     min-height: 7.5rem;
-    min-width: 800px;
-    margin: 2em 8em;
+    max-width: 50rem;
+    width: 100%;
+    margin: 2rem;
     margin-top: 3em;
     padding: 0.5em 0;
     border-radius: 10px;

@@ -17,7 +17,7 @@ import { useContextData } from "../../../../hooks/useContextData";
 import {useFetchCourses} from "../../../../hooks/useFetchCourses";
 import {CircularProgress} from "@mui/material";
 import { TbTrashX } from "react-icons/tb";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { HiMinus } from "react-icons/hi";
 import {TbArrowBigUpLines,TbArrowBigDownLines} from "react-icons/tb";
 
 const Create = () => {
@@ -37,7 +37,6 @@ const Create = () => {
   const courseRef = useRef();
   const semRef = useRef();
   const deleteClassRef = useRef();
-  const scrollToRef = useRef();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -129,6 +128,9 @@ const Create = () => {
     } catch(err) {
       setBtnLoading(false);
       console.log(err);
+      if(err.response.status === 500) {
+        toast.error("No Changes Made");
+      }
       // toast.error(err.response.data.error,{autoClose:3000});
     }
   }
@@ -282,7 +284,10 @@ const Create = () => {
       <Back top="-1em" left="0"/>
       <div className="CreateClass-Main">
         <div className="CreateClass-Header">
-          <h1>{location.state?.edit ? "Update "+classInfo.name : "Create Classroom"}</h1>
+          {location.state?.edit ?
+          <h2>Update : <span>{classInfo.name}</span></h2>
+          : <h2>Create Classroom</h2>
+          }
         </div>
         <div className="CreateClass-form-container">
         <form className="CreateClass-form" onSubmit={HandleCreateClass}>
@@ -357,18 +362,6 @@ const Create = () => {
                   {!btnLoading?(location.state?.edit ? "Update":"Create"):<CircularProgress size={16} color={"inherit"} />}
                 </button> 
               </div>
-      
-              {location.state?.edit && <div className="classroom-submitBtn mt-1" onClick={()=>{
-                  window.scrollTo({
-                    top:scrollToRef.current.offsetTop,
-                    behavior:'smooth',
-                  })
-                }}>
-                <div className="btn-outlined-green flex gap-sm">
-                  <HiPlus size={20}/>
-                  <span>Add Students</span>
-                </div>
-              </div>}
             </div>
             
             {location.state?.edit && <div className="classroom-promote mt-1 flex gap-1" >
@@ -420,7 +413,7 @@ const Create = () => {
         </div>}
         </div>
 
-        <div ref={scrollToRef} className="CreateClass-SelectUsers" id="add-students">
+        <div className="CreateClass-SelectUsers" id="add-students">
           <h2>Add Students</h2>
           <StudentList 
           showCheckbox 
