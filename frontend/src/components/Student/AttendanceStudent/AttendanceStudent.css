@@ -9,7 +9,7 @@
 }
 
 .header {
-    margin-top: 3em;
+    /* margin-top: 3em; */
     padding: 0.5em 0em;
     text-align: center;
     width: 100%;
@@ -41,4 +41,8 @@
 
 .marks-table .attendance-table {
     border: 1px solid var(--grey-bg);
+}
+
+.attendance-header .filter-comp{
+    text-align: right !important;
 }

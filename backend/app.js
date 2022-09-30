@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 const imgPath = path.join(__dirname, 'uploads');
 app.use(express.static(imgPath));
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: '*'}));
 
 app.use('/admin',adminRoutes);
 app.use('/staff',staffRoutes);

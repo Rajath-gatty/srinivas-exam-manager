@@ -55,7 +55,7 @@ const AssignFaculty = () => {
       //Toggle orders of same row
       if (item.id === currId && item.order !== currBtn.value){
         Array.from(allBtns).map((btn) => {
-          btn.removeAttribute("style");
+          return btn.removeAttribute("style");
         });
         console.log("orders of same row");
 

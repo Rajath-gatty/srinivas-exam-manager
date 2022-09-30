@@ -36,7 +36,8 @@ const AdminDash = () => {
       }
     }
     FetchUsersCount();
-  },[]) 
+    // eslint-disable-next-line
+  },[setRole, setToken, setUser]) 
 
   return (
     <div className="dashboard-stats">

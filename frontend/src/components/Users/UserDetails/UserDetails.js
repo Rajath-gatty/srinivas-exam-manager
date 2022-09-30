@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom"
 import { FaUserCircle } from "react-icons/fa";
 import {CircularProgress} from "@mui/material";
-// import {useContextData} from "../../../hooks/useContextData";
 import Back from "../../UI/Back/Back";
 import "./UserDetails.css";
 import axios from "axios";
@@ -10,9 +9,13 @@ import axios from "axios";
 const UserDetails = () => {
   const [userData,setUserData] = useState([]);
   const [loading,setLoading] = useState(true);
-  // const {serverUrl} = useContextData();
   const location = useLocation();
-  const {type, userId} = location.state;
+  // const navigate = useNavigate();
+  const {type, userId, course, semester} = location?.state;
+
+  // if(location.state===null) {
+  //   navigate("/");
+  // }
 
   useEffect(()=>{
     setLoading(true);
@@ -42,8 +45,8 @@ const UserDetails = () => {
           </div>
 
           <div className="userinfo-title flex">
-            <span className="userinfo-name">{userData.first_name +" "+ userData.last_name}</span>
-            <span className="userinfo-data">BCA 3rd Year</span>
+            <h2 className="userinfo-name">{userData.first_name +" "+ userData.last_name}</h2>
+            {type==="student" && <span className="userinfo-data">{course.toUpperCase()+"  "+semester+" Sem"}</span>}
           </div>
         </div>
 

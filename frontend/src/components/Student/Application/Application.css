@@ -76,7 +76,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 750px;
+  width: 800px;
+  padding: 0.5em;
 }
 
 .application-selector {
@@ -85,12 +86,14 @@
 }
 
 .application-selector .select-sem {
-  width: 10em;
+  width: 11em;
   margin-left: 1em;
+  padding: 0 0.25em;
 }
 
 .select-sem label {
   top: -0.5em;
+  background-color: #fff;
 }
 
 .MuiMenuItem-root {

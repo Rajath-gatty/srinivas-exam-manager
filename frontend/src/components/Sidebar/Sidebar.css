@@ -99,9 +99,10 @@
   text-decoration: none;
   padding: 0.5em 0;
   position: relative;
-  justify-content: start !important;
+  justify-content: start;
   padding-left: 20%;
   white-space: nowrap;
+  gap: 1.2em;
   /* background-color: grey; */
 }
 
@@ -111,7 +112,6 @@
 
 .navlink span {
   color: var(--text-color);
-  margin-left: 1em;
   font-size: 1.1em;
 }
 
@@ -145,6 +145,7 @@
   flex-direction: column;
   user-select: none;
   width: 100%;
+  transition: 5s ease-in-out;
 }
 
 .dropdownLink {
@@ -186,6 +187,11 @@
   left: 10.8em;
 }
 
+.dropdown{
+  flex-direction: column;
+  width: 100%;
+}
+
 .dropdown li {
   margin-bottom: 0;
 }
@@ -203,6 +209,7 @@
   color: var(--text-color);
   position: absolute;
   right: 7em;
+  transition: 0.2s ease-in-out;
 }
 
 .aactive img {
@@ -230,10 +237,14 @@
   border-radius: 0 5px 5px 0;
 }
 
+.dropdown .navlink{
+  padding: 0.5em 1em;
+  width: 4em;
+  justify-content: center;
+}
+
 .subActive {
-  width: 100%;
   background-color: var(--light-primary);
-  padding-right: 25%;
   border-radius: 6px;
 }
 

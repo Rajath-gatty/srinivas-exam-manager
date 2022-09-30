@@ -2,8 +2,8 @@ import {HiDownload} from "react-icons/hi";
 // import axios from "axios";
 
 const  PaymentsList = (props) => {
-    const {data,handleApproval,type,handleReciept} = props;
-    console.log(data);
+    const {data,handleApproval,type} = props;
+    // console.log(data);
      return(
          <>
          <tr>

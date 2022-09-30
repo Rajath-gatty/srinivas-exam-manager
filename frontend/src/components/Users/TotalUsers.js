@@ -158,7 +158,7 @@ const TotalUsers = ({type}) => {
 
   return (
     <div className="users-main">
-      {type==='student'&&<div className="users-Filter">
+      {type==='student' ? <div className="users-Filter">
         {/* <form className="users-searchBar flex" onSubmit={HandleSearch}> */}
         <div className="users-searchBar flex">
           <FaSearch color="var(--light-grey)" size={20} />
@@ -190,7 +190,11 @@ const TotalUsers = ({type}) => {
             <CircularProgress color="inherit" size={25}/>
           </div>}
         </div>
-      </div>}
+      </div>
+      : <div className="user-header">
+        <h2>User : <span>{type==="faculty"?"Faculty":"Staff"}</span></h2>
+      </div>
+      }
 
       <table className="users-table-wrapper">
         <thead className="thead">

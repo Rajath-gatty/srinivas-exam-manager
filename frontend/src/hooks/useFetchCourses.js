@@ -15,7 +15,7 @@ export const useFetchCourses = (deptId) => {
       };
   
       fetchData();
-    }, []);
+    }, [deptId]);
   
     return data;
   };

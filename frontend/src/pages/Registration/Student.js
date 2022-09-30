@@ -101,8 +101,8 @@ const Student = () => {
     const dobErr = dob.length >=10;
     const studentData = {
       regno: regnoRef.current.value.toUpperCase(),
-      firstName: firstNameRef.current.value,
-      lastName: lastNameRef.current.value,
+      firstName: firstNameRef.current.value.charAt(0).toUpperCase() + firstNameRef.current.value.slice(1),
+      lastName: lastNameRef.current.value?.charAt(0).toUpperCase() + lastNameRef.current.value?.slice(1),
       dob: dobErr && dateFormat(dob, "dd-mm-yyyy"),
       gender: gender,
       email: emailRef.current.value,
@@ -184,7 +184,6 @@ const Student = () => {
           closeOnClick: true,
           draggable: true });
       }
-      setPassErr(false);
     }
   };
 

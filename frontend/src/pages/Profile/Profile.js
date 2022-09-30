@@ -7,18 +7,22 @@ import { FaUserCircle } from "react-icons/fa";
 import Back from "../../components/UI/Back/Back";
 import { motion } from "framer-motion";
 import { useContextData } from "../../hooks/useContextData";
+import axios from "axios";
 
 const Profile = () => {
   // const [allowEdit, setAllowEdit] = useState(false);
   const { setRole, setToken, setUser, user } = useContextData();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem("user");
     setToken('');
     setRole('');
     setUser({});
     navigate("/login");
+
+    // Unsubscribe from push notifications
+    await axios.post("/pushunsubscribe", {email: user.email});
   }
 
   return (

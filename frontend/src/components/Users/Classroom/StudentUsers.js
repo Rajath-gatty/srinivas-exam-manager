@@ -35,7 +35,7 @@ const StudentUsers = () => {
         }
       }
       fetchUsers();
-  },[])
+  },[classInfo])
 
   const handleSearch = async(e) => {
     const query = e.target.value.toUpperCase();

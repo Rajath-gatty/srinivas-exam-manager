@@ -11,11 +11,19 @@
   position: relative;
 }
 
+.users-main .user-header{
+  color: var(--primary-color);
+}
+
+.users-main .user-header span{
+  color: #000;
+}
+
 .users-table-wrapper {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  margin-top: 1em;
+  margin-top: 1.5em;
   box-shadow: 0px 2px 6px 0px rgb(243, 243, 243);
 }
 

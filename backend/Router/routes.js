@@ -8,7 +8,8 @@ router.post('/semesters',routeContoller.getSemesters);
 router.post('/subjects',routeContoller.getSubjects);
 router.post('/pushsubscribe',routeContoller.pushSubscribe);
 router.post('/pushsendnotification',routeContoller.pushSendNotification);
-router.post('/pushsubscriptionchange',routeContoller.pushSubscriptionChange);
+// router.post('/pushsubscriptionchange',routeContoller.pushSubscriptionChange);
+router.post('/pushunsubscribe',routeContoller.pushUnsubscribe);
 
 router.get('/dashboard/users/count',isAuth,routeContoller.getUserCount);
 router.post('/sidebar/notify',isAuth,routeContoller.postSidebarNotify);

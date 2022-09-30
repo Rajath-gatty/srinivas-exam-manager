@@ -7,7 +7,7 @@ import { useState,useEffect } from "react";
 import {CircularProgress} from "@mui/material";
 import axios from "axios";
 import NoData from "../../../UI/NoData/NoData";
-import fileDownload from "js-file-download";
+// import fileDownload from "js-file-download";
 
 const  PaymentsRegularApproval = ({type}) => {
     const [payments,setPayments] = useState([]);
@@ -25,7 +25,7 @@ const  PaymentsRegularApproval = ({type}) => {
             try {
                 const result = await axios.get(`/staff/payments/pending/${type}`);
                 setPayments(result.data);
-                console.log(result.data);
+                // console.log(result.data);
                 setLoading(false);
             } catch(err) {
                 console.log(err);
@@ -81,11 +81,11 @@ const  PaymentsRegularApproval = ({type}) => {
         }
     }
 
-    const handleReciept = async(reciept) => {
-        const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
-        const uid = (Math.random() + 1).toString(36).substring(2);
-        fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
-     }
+    // const handleReciept = async(reciept) => {
+    //     const result = await axios.post('/staff/payments/reciept',{recieptPath:reciept},{responseType:'blob'});
+    //     const uid = (Math.random() + 1).toString(36).substring(2);
+    //     fileDownload(result.data,`${uid}.${result.data.type.split('/')[1]}`);
+    //  }
 
      return (
          <>

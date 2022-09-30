@@ -19,7 +19,7 @@ useEffect(() => {
   const fetchSemesters = async () => {
     try {
       const semData = new Array(user.semester).fill('');
-      console.log(semData);
+      // console.log(semData);
       setSemFilter(semData);
     } catch (error) {
         console.log(error);
@@ -50,12 +50,14 @@ const handleSemesterChange = (e) => {
 
   return (
     <div className="attendance-filter">
-      <Filter 
-        data={semFilter} 
-        label="Filter By Semester" 
-        filter="semester" 
-        handleSemesterChange={handleSemesterChange}
-        />
+      <div className="attendance-header">
+        <Filter 
+          data={semFilter} 
+          label="Filter By Semester" 
+          filter="semester" 
+          handleSemesterChange={handleSemesterChange}
+          />
+      </div>
       
       <div className="attendance-main-box">
         <div className="header">
