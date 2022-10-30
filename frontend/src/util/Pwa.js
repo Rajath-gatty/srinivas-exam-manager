@@ -31,7 +31,7 @@ const Pwa = () => {
         e.preventDefault();
         deferredPrompt = e;
         toast(<Msg /> , {
-            position: "top-right",
+            position: "top-center",
             autoClose: 5000,
         })
     });
