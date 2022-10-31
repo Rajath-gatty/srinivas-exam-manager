@@ -43,7 +43,7 @@ const ResetPassword = () => {
 
   return (
     <div className="forgotPassword-container">
-        <Navbar to="/forgotpassword" />
+        <Navbar to="/login" />
 
         <form className="resetPassword-form flex" onSubmit={handleFormSubmit}>
             <span className="title">Create New Password</span>
