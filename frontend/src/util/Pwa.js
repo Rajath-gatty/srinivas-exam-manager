@@ -32,9 +32,7 @@ const Pwa = () => {
         deferredPrompt = e;
         toast(<Msg /> , {
             position: "bottom-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
+            autoClose: 3000,
         })
     });
 
