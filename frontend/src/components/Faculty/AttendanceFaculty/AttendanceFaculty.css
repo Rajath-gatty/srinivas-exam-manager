@@ -28,6 +28,14 @@
   background: var(--grey-bg);
 }
 
+/* Table Header Border-radius */
+.faculty-attendance-table-wrapper>.thead>tr>th:first-child{
+  border-radius: 4px 0 0 0;
+}
+.faculty-attendance-table-wrapper>.thead>tr>th:last-child{
+  border-radius: 0 4px 0 0;
+}
+
 .faculty-attendance-table-wrapper td {
   padding: 0.75em;
   color: var(--text-color);
