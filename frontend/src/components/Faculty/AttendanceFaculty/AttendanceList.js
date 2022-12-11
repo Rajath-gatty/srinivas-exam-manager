@@ -11,19 +11,24 @@ const AttendanceList = ({data,handleAttendanceChange,handleMarkChange,markAttend
             <td>{data.regno}</td>
             <td>{data.first_name+' '+data.last_name}</td>
             <td>{data.semester}</td>
-            <td className="attendance-textfield"><TextField
+            <td className="attendance-textfield">
+                <TextField
                 value={markAttendance[index]?.attendance}
                 onChange={(e)=>{handleAttendanceChange(index,e.target.value,data.regno)}}
                 variant="outlined"
                 type="number"
-                size="small"></TextField></td>
-            <td className="attendance-textfield"><TextField
-            value={markAttendance[index]?.mark}
-            onChange={(e)=>{handleMarkChange(index,e.target.value,data.regno)}}
+                autoComplete="off"
+                size="small"/>
+            </td>
+            <td className="attendance-textfield">
+                <TextField
+                value={markAttendance[index]?.mark}
+                onChange={(e)=>{handleMarkChange(index,e.target.value,data.regno)}}
                 variant="outlined"
                 type="number"
-                size="small"></TextField></td>
-
+                autoComplete="off"
+                size="small"/>
+            </td>
         </tr>
 
     )

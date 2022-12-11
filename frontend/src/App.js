@@ -100,7 +100,6 @@ function App() {
     Pwa();
   }, [setToken, setRole, setUser])
 
-
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
