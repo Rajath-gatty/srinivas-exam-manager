@@ -31,8 +31,8 @@ const Pwa = () => {
         e.preventDefault();
         deferredPrompt = e;
         toast(<Msg /> , {
-            position: "top-right",
-            autoClose: 5000,
+            position: "bottom-center",
+            autoClose: 3000,
         })
     });
 
@@ -41,8 +41,8 @@ const Pwa = () => {
         deferredPrompt = null;
         console.log("PWA was installed");
         toast.success("PWA installed 👍", {
-            position: "top-right",
-            autoClose: 8000,
+            position: "bottom-center",
+            autoClose: 5000,
         });
     });
 }

@@ -63,7 +63,7 @@ const handleSemesterChange = (e) => {
       
       <div className="attendance-main-box">
         <div className="header">
-          <h3>SEM {user.semester}</h3>
+          <h3>SEM {selectedSemester}</h3>
         </div>
         {!loading?<table className="marks-table">
           <thead className="thead">
