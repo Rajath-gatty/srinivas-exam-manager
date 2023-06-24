@@ -1,0 +1,59 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: cd backend && npm ci
+    
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: sem-backend
+        
+  deploy:
+    name: Upload Artifact to aws s3
+    needs: build
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Downloading Artifact
+      uses: actions/download-artifact@v2.1.1
+      with:
+        name: sem-backend
+    
+    - name: Deploying to Aws
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: arn:aws:iam::310116418502:role/GithubOIDC-s3fullAccess
+        aws-region: ap-south-1
+    - name: Copy files to the production website with the AWS CLI
+      run: |
+        aws s3 sync . s3://sem-backend-s3
+      
+      
+      
+      
+
