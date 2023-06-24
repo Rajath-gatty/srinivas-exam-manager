@@ -27,13 +27,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: './backend/package-lock.json'
-    - run: npm ci
-#     - run: mkdir -p '/node_modules'
-#     - name: Upload a Build Artifact
-#       uses: actions/upload-artifact@v3.1.2
-#       with:
-#         name: sem
-#         path: ./node_modules
+    - run: npm install
+      name: Zip artifact for deployment
+    - run: zip release.zip ./* -r
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: sem
+        path: release.zip
         
   deploy:
     name: Upload Artifact to aws s3
@@ -51,11 +52,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-#     - name: Downloading Artifact
-#       uses: actions/download-artifact@v2.1.1
-#       with:
-#         name: sem
-#         path: ./node_modules
+    - name: Downloading Artifact
+      uses: actions/download-artifact@v2.1.1
+      with:
+        name: sem
     
     - name: Deploying to Aws
       uses: aws-actions/configure-aws-credentials@v2
