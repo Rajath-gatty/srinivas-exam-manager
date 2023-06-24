@@ -28,12 +28,12 @@ jobs:
         cache: 'npm'
         cache-dependency-path: './backend/package-lock.json'
     - run: npm ci
-    - run: mkdir -p '/node_modules'
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: sem
-        path: ./node_modules
+#     - run: mkdir -p '/node_modules'
+#     - name: Upload a Build Artifact
+#       uses: actions/upload-artifact@v3.1.2
+#       with:
+#         name: sem
+#         path: ./node_modules
         
   deploy:
     name: Upload Artifact to aws s3
@@ -51,11 +51,11 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: Downloading Artifact
-      uses: actions/download-artifact@v2.1.1
-      with:
-        name: sem
-        path: ./node_modules
+#     - name: Downloading Artifact
+#       uses: actions/download-artifact@v2.1.1
+#       with:
+#         name: sem
+#         path: ./node_modules
     
     - name: Deploying to Aws
       uses: aws-actions/configure-aws-credentials@v2
