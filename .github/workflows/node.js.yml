@@ -38,7 +38,7 @@ jobs:
         aws-region: ap-south-1
     - name: Copy files to the production website with the AWS CLI
       run: |
-        aws s3 sync . s3://sem-backend-s3
+        aws s3 cp release.zip s3://sem-backend-s3
         
     permissions:
       id-token: write
