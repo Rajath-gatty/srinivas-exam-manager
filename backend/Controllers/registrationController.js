@@ -1,6 +1,5 @@
 const { validationResult } = require("express-validator");
 const {containerClient} = require('../azureStorage');
-const sharp = require('sharp');
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
@@ -18,7 +17,7 @@ exports.postStudent = async (req, res) => {
   const data = req.body; 
 
   try {
-  const optImg = await sharp(req.file.buffer).resize(200).jpeg({quality:40}).toBuffer();
+  const optImg = req.file.buffer;
   const uid = `${(Math.random() + 1).toString(36).substring(2)}.jpeg`;
   const client = containerClient();
   const blockBlobClient = client.getBlockBlobClient(uid);

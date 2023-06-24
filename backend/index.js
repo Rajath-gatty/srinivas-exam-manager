@@ -1,5 +1,5 @@
 const express = require('express');
-
+const serverless = require("serverless-http");
 const cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 const imgPath = path.join(__dirname, 'uploads');
 app.use(express.static(imgPath));
 app.use(express.json());
-app.use(cors({origin: '*'}));
+// app.use(cors({origin: '*'}));
 
 app.use('/admin',adminRoutes);
 app.use('/staff',staffRoutes);
@@ -41,8 +41,9 @@ webpush.setVapidDetails(
     vapidKeys.privateKey
 )
 
-const PORT = process.env.PORT||8080;
-app.listen(PORT);
+// const PORT = process.env.PORT||8080;
+// app.listen(PORT);
+exports.handler= serverless(app);
 // spdy
 //     .createServer({
 //         key: fs.readFileSync('./server.key'),
