@@ -39,6 +39,10 @@ jobs:
     - name: Copy files to the production website with the AWS CLI
       run: |
         aws s3 sync . s3://sem-backend-s3
+        
+    permissions:
+      id-token: write
+      contents: read
       
       
       
