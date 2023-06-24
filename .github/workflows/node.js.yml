@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: sem-backend
-        path: ./node_modules
+        path: /
         
   deploy:
     name: Upload Artifact to aws s3
