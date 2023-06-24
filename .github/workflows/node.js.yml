@@ -29,10 +29,10 @@ jobs:
         cache-dependency-path: './backend/package-lock.json'
     - run: npm ci
     
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.2
-      with:
-        name: sem-backend
+#     - name: Upload a Build Artifact
+#       uses: actions/upload-artifact@v3.1.2
+#       with:
+#         name: sem-backend
         
   deploy:
     name: Upload Artifact to aws s3
@@ -42,10 +42,10 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-    - name: Downloading Artifact
-      uses: actions/download-artifact@v2.1.1
-      with:
-        name: sem-backend
+#     - name: Downloading Artifact
+#       uses: actions/download-artifact@v2.1.1
+#       with:
+#         name: sem-backend
     
     - name: Deploying to Aws
       uses: aws-actions/configure-aws-credentials@v2
