@@ -35,7 +35,8 @@ jobs:
         role-to-assume: arn:aws:iam::310116418502:role/GithubOIDC-s3fullAccess
         aws-region: ap-south-1
     - name: Copy files to the production website with the AWS CLI
-      run: |
+      run: | 
+        aws s3 rm s3://sem-backend-s3/release.zip
         aws s3 cp release.zip s3://sem-backend-s3
         
     permissions:
