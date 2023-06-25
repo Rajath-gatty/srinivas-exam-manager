@@ -212,6 +212,7 @@ exports.postLogin = async (req, res) => {
           { email: fetchedUser.email, deptId: fetchedUser.dept_id, firstName: fetchedUser.first_name, lastName: fetchedUser.last_name, id: fetchedUser[id] },
           process.env.SECRET_KEY,
         );
+        console.log("JWT token after login",token)
         res.status(200).json({
           token: token,
           user: {
