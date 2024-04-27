@@ -1,7 +1,7 @@
 import "./Dashboard.css";
-import {SrinivasLogo, SEMSLogo, Chancellor} from "../../Assets"
-import {BsGlobe, BsInstagram, BsLinkedin, BsGithub} from "react-icons/bs"
-import {FaFacebook, FaTwitter, FaYoutube} from "react-icons/fa"
+import { SrinivasLogo, SEMSLogo, Chancellor } from "../../Assets"
+import { BsGlobe, BsInstagram, BsLinkedin, BsGithub } from "react-icons/bs"
+import { FaFacebook, FaTwitter, FaYoutube } from "react-icons/fa"
 // import {SiGooglescholar} from "react-icons/si"
 import { useContextData } from "../../hooks/useContextData"
 
@@ -14,6 +14,8 @@ import AdminDash from "../../components/Dashboard/AdminDash"
 
 const Dashboard = () => {
   const { role } = useContextData();
+  const currYear = new Date().getFullYear()
+
   return (
     <div className='dashboard-container flex'>
       <div className="dashboard-header flex">
@@ -21,7 +23,7 @@ const Dashboard = () => {
         <h1>SRINIVAS UNIVERSITY</h1>
       </div>
 
-      {role === 'admin' || role === 'staff' || role === 'faculty' ? <AdminDash/> : null }
+      {role === 'admin' || role === 'staff' || role === 'faculty' ? <AdminDash /> : null}
 
       {/* {role === 'superadmin' ? <SuperDash/> :
       role === 'examcoord' ? <CoordDash/> :
@@ -33,7 +35,7 @@ const Dashboard = () => {
         <img src={SEMSLogo} alt="SEMSLogo" width="100px" height="auto" />
         <p><span></span> Srinivas University, Mangalore, is a Private Research and skill focused University in Mangalore, Karnataka, India established in 2013 by Karnataka State Act. Srinivas University is the flagship of 18 Srinivas Group of Institutions started by A.Shama Rao Foundation, Mangalore, India, a private Charitable Trust founded in 1988 by an Eminent Chartered Accountant A.Raghavendra Rao. A.Shama Rao Foundation has started many professional colleges in Mangalore which include Srinivas Institute of Medical Sciences and Research Center, Srinivas Institute of Dental Sciences, Srinivas Institute of Technology, Srinivas College of Pharmacy, Srinivas Institute of Nursing Sciences, A Shama Rao Nursing School, Srinivas Integrated Campus, Srinivas College of Hotel Management, Vijayalakshmi Institute of Hospitality Sciences, Srinivas First Grade College, Srinivas School of Engineering, Srinivas Institute of Management Studies, Srinivas College of Physiotherapy, Srinivas School of Business, Srinivas School of Management, Srinivas College of Education, Srinivas Institute of Social Work.</p>
       </div>
-      
+
       <div className="dashboard-chancellor flex">
         <img src={Chancellor} alt="SEMSLogo" width="120px" height="auto" />
         <p><span className="chancellor-name">Shri Dr. CA. Raghavendra Rao</span> <br />
@@ -57,22 +59,22 @@ const Dashboard = () => {
             </div>
 
             <div className="footer-links flex">
-              <a id="web" href='https://srinivasuniversity.edu.in/' target="_blank" rel="noopener noreferrer" title="Website"><BsGlobe size={20}/></a>
-              <a id="fb" href='https://www.facebook.com/srinivasuniversityofficial' target="_blank" rel="noopener noreferrer" title="Facebook"><FaFacebook size={20}/></a>
-              <a id="twt" href='https://twitter.com/SrinivasGroup' target="_blank" rel="noopener noreferrer" title="Twitter"><FaTwitter size={20}/></a>
-              <a id="inst" href='https://www.instagram.com/srinivas.university/' target="_blank" rel="noopener noreferrer" title="Instagram"><BsInstagram size={20}/></a>
-              <a id="lnkin" href='https://www.linkedin.com/in/srinivasgroup/' target="_blank" rel="noopener noreferrer" title="LinkedIn"><BsLinkedin size={20}/></a>
-              <a id="yt" href='https://www.youtube.com/channel/UCaCiqp52mEfnA9BG0RA8wcA/featured' target="_blank" rel="noopener noreferrer" title="Youtube"><FaYoutube size={20}/></a>
+              <a id="web" href='https://srinivasuniversity.edu.in/' target="_blank" rel="noopener noreferrer" title="Website"><BsGlobe size={20} /></a>
+              <a id="fb" href='https://www.facebook.com/srinivasuniversityofficial' target="_blank" rel="noopener noreferrer" title="Facebook"><FaFacebook size={20} /></a>
+              <a id="twt" href='https://twitter.com/SrinivasGroup' target="_blank" rel="noopener noreferrer" title="Twitter"><FaTwitter size={20} /></a>
+              <a id="inst" href='https://www.instagram.com/srinivas.university/' target="_blank" rel="noopener noreferrer" title="Instagram"><BsInstagram size={20} /></a>
+              <a id="lnkin" href='https://www.linkedin.com/in/srinivasgroup/' target="_blank" rel="noopener noreferrer" title="LinkedIn"><BsLinkedin size={20} /></a>
+              <a id="yt" href='https://www.youtube.com/channel/UCaCiqp52mEfnA9BG0RA8wcA/featured' target="_blank" rel="noopener noreferrer" title="Youtube"><FaYoutube size={20} /></a>
             </div>
           </div>
 
           <div className="dashboard-footerRight">
-              <h3>Developed By:</h3>
+            <h3>Developed By:</h3>
             <div className="footer-devs">
-              <a href='https://github.com/ChiragChrg' target="_blank" rel="noopener noreferrer"> <BsGithub/> Chirag</a>
-              <a href='https://github.com/Rajath-gatty' target="_blank" rel="noopener noreferrer"> <BsGithub/> Rajath Gatty</a>
-              <a href='https://github.com/naveej' target="_blank" rel="noopener noreferrer"> <BsGithub/> V Jeevan Kumar</a>
-              <a href='https://github.com/siddharthkm121' target="_blank" rel="noopener noreferrer"> <BsGithub/> Siddharth KM</a>
+              <a href='https://github.com/ChiragChrg' target="_blank" rel="noopener noreferrer"> <BsGithub /> Chirag</a>
+              <a href='https://github.com/Rajath-gatty' target="_blank" rel="noopener noreferrer"> <BsGithub /> Rajath Gatty</a>
+              <a href='https://github.com/naveej' target="_blank" rel="noopener noreferrer"> <BsGithub /> V Jeevan Kumar</a>
+              <a href='https://github.com/siddharthkm121' target="_blank" rel="noopener noreferrer"> <BsGithub /> Siddharth KM</a>
             </div>
 
             {/* <div className="footer-guide">
@@ -82,7 +84,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <p className="footer-copyright">&copy; 2022 Srinivas University</p>
+        <p className="footer-copyright">&copy; 2022 - {currYear} Srinivas University</p>
       </div>
     </div>
   )
