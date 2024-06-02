@@ -203,6 +203,7 @@ exports.postLogin = async (req, res) => {
         }
         const [user] = await db.execute(sql);
         // res.send({success:true});
+        console.log(user);
         if (user.length === 0) {
             throw new Error("Invalid email or password");
         } else {
