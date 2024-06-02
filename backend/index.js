@@ -29,9 +29,9 @@ app.use("/faculty", facultyRoutes);
 app.use("/student", studentRoutes);
 app.use(routes);
 app.use(registrationRoutes);
+console.log("Function triggered app triggered ....");
 
 // Push Notification Secret Key Stored in .env file
-
 const vapidKeys = {
     publicKey:
         "BATlyMlNxAlgKzAARIy1TKyrgNIGc7oTpBcHMXCTJdL3HkSDhM0j_LaH40cKKXKfiNAPOxnzGP8bE9c52lGFB-g",
