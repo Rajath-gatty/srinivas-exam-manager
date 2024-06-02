@@ -203,11 +203,11 @@ exports.postLogin = async (req, res) => {
         }
         const [user] = await db.execute(sql);
         // res.send({success:true});
-        console.log(user);
         if (user.length === 0) {
             throw new Error("Invalid email or password");
         } else {
             const fetchedUser = user[0];
+            console.log(fetchedUser.first_name);
             bcrypt.compare(password, fetchedUser.password).then((isEqual) => {
                 if (!isEqual) {
                     return res.status(404).send({
