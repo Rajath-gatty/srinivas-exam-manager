@@ -201,7 +201,9 @@ exports.postLogin = async (req, res) => {
             }
             sql = `select ${id},first_name,last_name,email,password,phone,dept_id,address,role from ${loginType} where email='${email}' and status='approved'`;
         }
+        console.log("code reached heree............");
         const [user] = await db.execute(sql);
+        console.log("code reached heree too ............");
         // res.send({success:true});
         if (user.length === 0) {
             throw new Error("Invalid email or password");
